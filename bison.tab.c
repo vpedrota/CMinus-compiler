@@ -71,9 +71,10 @@
 
 #include <stdio.h>
 int yyerror(char *s);
+static int yylex();
 
 
-#line 77 "bison.tab.c"
+#line 78 "bison.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -513,7 +514,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    28,    28,    29
+       0,    29,    29,    30
 };
 #endif
 
@@ -1300,7 +1301,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1304 "bison.tab.c"
+#line 1305 "bison.tab.c"
 
       default: break;
     }
@@ -1532,10 +1533,10 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 30 "bison/bison.y"
+#line 31 "bison/bison.y"
 
 
-int yylex(){
+static int yylex(){
     return 1;
 }
 

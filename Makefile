@@ -2,6 +2,8 @@
 CC := gcc
 CFLAGS := -c -Wall
 
+all: compilador clean
+
 compilador: bison.tab.o lex.yy.o main.o
 	$(CC) bison.tab.o lex.yy.o main.o
 

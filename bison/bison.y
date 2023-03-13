@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 int yyerror(char *s);
+static int yylex();
 
 %}
 
@@ -29,7 +30,7 @@ prog:
 stmts: IF
 %%
 
-int yylex(){
+static int yylex(){
     return 1;
 }
 

@@ -1,5 +1,4 @@
 %{
-   #include "bison.tab.h"
    #include "globals.h"
    int lineNumber = 0;
 %}

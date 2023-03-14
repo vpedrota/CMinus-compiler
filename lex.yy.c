@@ -442,12 +442,11 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "flex/flex.l"
-#line 3 "flex/flex.l"
-   #include "bison.tab.h"
+#line 2 "flex/flex.l"
    #include "globals.h"
    int lineNumber = 0;
+#line 449 "lex.yy.c"
 #line 450 "lex.yy.c"
-#line 451 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -664,10 +663,10 @@ YY_DECL
 		}
 
 	{
-#line 13 "flex/flex.l"
+#line 11 "flex/flex.l"
 
 
-#line 671 "lex.yy.c"
+#line 670 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -726,40 +725,40 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "flex/flex.l"
+#line 13 "flex/flex.l"
 {return SUM;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "flex/flex.l"
+#line 14 "flex/flex.l"
 {return SUB;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 17 "flex/flex.l"
+#line 15 "flex/flex.l"
 {return MULT;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 18 "flex/flex.l"
+#line 16 "flex/flex.l"
 {return DIV;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 19 "flex/flex.l"
+#line 17 "flex/flex.l"
 {return MOD;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 20 "flex/flex.l"
+#line 18 "flex/flex.l"
 {return EQUAL;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "flex/flex.l"
+#line 20 "flex/flex.l"
 ECHO;
 	YY_BREAK
-#line 763 "lex.yy.c"
+#line 762 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1764,7 +1763,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 22 "flex/flex.l"
+#line 20 "flex/flex.l"
 
 
 int yywrap(){}

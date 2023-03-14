@@ -5,7 +5,7 @@ CFLAGS := -c -Wall
 all: compilador clean
 
 compilador: bison.tab.o lex.yy.o main.o
-	$(CC)  bison.tab.o lex.yy.o main.o
+	$(CC)  bison.tab.o lex.yy.o main.o -o cminus
 
 bison.tab.o: bison/bison.y
 	bison -d -t bison/bison.y 

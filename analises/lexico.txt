@@ -1,1 +1,1 @@
-VOID unknown unknown unknown unknown unknown unknown VOID unknown unknown + = 
+VOID unknown unknown unknown unknown unknown LBRAC VOID RBRAC unknown SUM EQUAL 

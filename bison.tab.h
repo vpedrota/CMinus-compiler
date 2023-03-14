@@ -62,7 +62,9 @@ extern int yydebug;
     LT = 268,
     VOID = 269,
     INT = 270,
-    ERR = 271
+    LBRAC = 271,
+    RBRAC = 272,
+    ERR = 273
   };
 #endif
 

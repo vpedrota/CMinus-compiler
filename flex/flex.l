@@ -18,6 +18,10 @@ whitespace  [ \t\r]+
 "%" {return MOD;}
 "=" {return EQUAL;}
 "void" {return VOID;}
+"int" {return INT;}
+")" {return RBRAC;}
+"(" {return LBRAC;}
+
 . {return ERR;}
 
 %%  
@@ -27,13 +31,19 @@ int yywrap(){}
 void printToken(FILE *output, int token){
    switch (token){
       case SUM: 
-         fprintf(output, "+ "); 
+         fprintf(output, "SUM "); 
          break;
       case EQUAL: 
-         fprintf(output, "= "); 
+         fprintf(output, "EQUAL "); 
          break;
       case VOID: 
          fprintf(output, "VOID "); 
+         break;
+      case LBRAC: 
+         fprintf(output, "LBRAC "); 
+         break;
+      case RBRAC: 
+         fprintf(output, "RBRAC "); 
          break;
       default:
          fprintf(output, "unknown "); 

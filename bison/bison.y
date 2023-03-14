@@ -22,6 +22,9 @@ static int yylex();
 // Escopos
 %token VOID INT
 
+// Demais caracters
+%token LBRAC RBRAC
+
 %token ERR
 
 

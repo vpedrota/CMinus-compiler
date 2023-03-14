@@ -20,10 +20,10 @@ static int yylex();
 %token EQUAL DIF GT LT
 
 // Escopos
-%token VOID INT
+%token VOID INT RETURN ID VIR PV
 
 // Demais caracters
-%token LBRAC RBRAC
+%token LBRAC RBRAC ENDFILE
 
 %token ERR
 

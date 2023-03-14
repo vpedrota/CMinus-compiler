@@ -135,9 +135,14 @@ extern int yydebug;
     LT = 268,
     VOID = 269,
     INT = 270,
-    LBRAC = 271,
-    RBRAC = 272,
-    ERR = 273
+    RETURN = 271,
+    ID = 272,
+    VIR = 273,
+    PV = 274,
+    LBRAC = 275,
+    RBRAC = 276,
+    ENDFILE = 277,
+    ERR = 278
   };
 #endif
 
@@ -462,7 +467,7 @@ union yyalloc
 #define YYLAST   1
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  19
+#define YYNTOKENS  24
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
@@ -471,7 +476,7 @@ union yyalloc
 #define YYNSTATES  5
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   273
+#define YYMAXUTOK   278
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -510,7 +515,7 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18
+      15,    16,    17,    18,    19,    20,    21,    22,    23
 };
 
 #if YYDEBUG
@@ -527,8 +532,9 @@ static const yytype_int8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "IF", "ELSE", "SUM", "SUB", "MULT",
-  "DIV", "MOD", "EQUAL", "DIF", "GT", "LT", "VOID", "INT", "LBRAC",
-  "RBRAC", "ERR", "$accept", "prog", "stmts", YY_NULLPTR
+  "DIV", "MOD", "EQUAL", "DIF", "GT", "LT", "VOID", "INT", "RETURN", "ID",
+  "VIR", "PV", "LBRAC", "RBRAC", "ENDFILE", "ERR", "$accept", "prog",
+  "stmts", YY_NULLPTR
 };
 #endif
 
@@ -538,7 +544,8 @@ static const char *const yytname[] =
 static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
+     275,   276,   277,   278
 };
 # endif
 
@@ -596,13 +603,13 @@ static const yytype_int8 yycheck[] =
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    20,    21,     0
+       0,     3,    25,    26,     0
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    19,    20,    21
+       0,    24,    25,    26
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1304,7 +1311,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1308 "bison.tab.c"
+#line 1315 "bison.tab.c"
 
       default: break;
     }

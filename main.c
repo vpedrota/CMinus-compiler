@@ -23,6 +23,8 @@ int main(int argc, char * argv[]){
     stdin = input;
     scanner();
 
+    // Voltando o ponteiro para o início para realizar a análise sintática
+    fseek(stdin, 0, SEEK_SET);
 
     // Fechando arquivos abertos
     fclose(input);

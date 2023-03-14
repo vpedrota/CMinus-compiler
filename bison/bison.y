@@ -23,6 +23,7 @@ static int yylex();
 %token VOID INT
 
 
+
 %%
 
 prog:

@@ -5,10 +5,10 @@ CFLAGS := -c -Wall
 all: compilador clean
 
 compilador: bison.tab.o lex.yy.o main.o
-	$(CC) bison.tab.o lex.yy.o main.o
+	$(CC)  bison.tab.o lex.yy.o main.o
 
 bison.tab.o: bison/bison.y
-	bison -d bison/bison.y 
+	bison -d -t bison/bison.y 
 	$(CC) -c bison.tab.c
 
 lex.yy.o: flex/flex.l
@@ -18,4 +18,4 @@ lex.yy.o: flex/flex.l
 clean:
 	rm -f bison.tab.o lex.yy.o main.o
 
-.PHONY: clean
+.PHONY: all clean

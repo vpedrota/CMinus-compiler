@@ -1,5 +1,7 @@
 
 %{
+   #include "bison.tab.h"
+   #include "globals.h"
    int lineNumber = 0;
 %}
 
@@ -10,7 +12,14 @@ whitespace  [ \t\r]+
 
 %%
 
+"+" {return SUM;}
+"-" {return SUB;}
+"*" {return MULT;}
+"/" {return DIV;}
+"%" {return MOD;}
+"=" {return EQUAL;}
 
-%%
+
+%%  
 
 int yywrap(){}

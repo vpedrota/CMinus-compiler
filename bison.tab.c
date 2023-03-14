@@ -111,7 +111,7 @@ static int yylex();
 # define YY_YY_BISON_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -514,7 +514,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    29,    29,    30
+       0,    30,    30,    31
 };
 #endif
 
@@ -1533,7 +1533,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 31 "bison/bison.y"
+#line 32 "bison/bison.y"
 
 
 static int yylex(){

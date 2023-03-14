@@ -1,5 +1,6 @@
 %{
    #include "globals.h"
+   #include <string.h>
    int lineNumber = 0;
 %}
 
@@ -16,13 +17,41 @@ whitespace  [ \t\r]+
 "/" {return DIV;}
 "%" {return MOD;}
 "=" {return EQUAL;}
+"void" {return VOID;}
+. {return ERR;}
 
 %%  
 
 int yywrap(){}
 
-int getToken(){
+void printToken(FILE *output, int token){
+   switch (token){
+      case SUM: 
+         fprintf(output, "+ "); 
+         break;
+      case EQUAL: 
+         fprintf(output, "= "); 
+         break;
+      case VOID: 
+         fprintf(output, "VOID "); 
+         break;
+      default:
+         fprintf(output, "unknown "); 
+   }
+}
+
+int getToken(FILE *output){
    int currentToken = yylex();
-   printf("chanmado");
+   printToken(output, currentToken);
    return  currentToken;
+}
+
+void scanner(){
+   FILE *output = fopen("analises/lexico.txt", "w");
+   if(output == NULL){
+      printf("Erro ao fazer analise lexica");
+      exit(1);
+   }
+   while(getToken(output) != EQUAL);
+   fclose(output);
 }

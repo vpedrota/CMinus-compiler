@@ -1,15 +1,2 @@
-void main(void)
-{
-	int fat;
-	int n;
-	fat = 1;
-
-	n = input();
-
-	while(n > 1){
-		fat = fat * n;
-		n = n - 1;
-	}
-
-	output(fat);
-}
+void main(void) +
+=

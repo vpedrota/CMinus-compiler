@@ -22,6 +22,7 @@ static int yylex();
 // Escopos
 %token VOID INT
 
+%token ERR
 
 
 %%

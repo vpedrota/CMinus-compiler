@@ -8,9 +8,23 @@ int main(int argc, char * argv[]){
     if(argc < 2){
         printf("cminus: fatal error: no input files\n");
         printf("compilation terminated.\n");
-        return 0;
+        return 1;
+    }
+
+    // Abrindo arquivo para ser compilado e verificando se ele existe
+    FILE *input = fopen(argv[1], "r");
+    if(input == NULL){
+        printf("cminus: input file not found.\n");
+        return 1;
     }
     
-    //while(getToken() != EQUAL);
+    // como o yylex realiza o scanner da entrada padrão então o arquivo é aberto e seu ponteiro
+    // é passado para o destridor que representa a entrada padrão
+    stdin = input;
+    scanner();
+
+
+    // Fechando arquivos abertos
+    fclose(input);
     return 0;
 }

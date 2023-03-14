@@ -1,3 +1,3 @@
 #include "bison.tab.h"
 
-int getToken();
+void scanner();

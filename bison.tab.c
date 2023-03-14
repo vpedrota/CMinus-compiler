@@ -134,7 +134,8 @@ extern int yydebug;
     GT = 267,
     LT = 268,
     VOID = 269,
-    INT = 270
+    INT = 270,
+    ERR = 271
   };
 #endif
 
@@ -459,7 +460,7 @@ union yyalloc
 #define YYLAST   1
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  16
+#define YYNTOKENS  17
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
@@ -468,7 +469,7 @@ union yyalloc
 #define YYNSTATES  5
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   270
+#define YYMAXUTOK   271
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -507,14 +508,14 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15
+      15,    16
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    30,    30,    31
+       0,    31,    31,    32
 };
 #endif
 
@@ -524,8 +525,8 @@ static const yytype_int8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "IF", "ELSE", "SUM", "SUB", "MULT",
-  "DIV", "MOD", "EQUAL", "DIF", "GT", "LT", "VOID", "INT", "$accept",
-  "prog", "stmts", YY_NULLPTR
+  "DIV", "MOD", "EQUAL", "DIF", "GT", "LT", "VOID", "INT", "ERR",
+  "$accept", "prog", "stmts", YY_NULLPTR
 };
 #endif
 
@@ -535,7 +536,7 @@ static const char *const yytname[] =
 static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270
+     265,   266,   267,   268,   269,   270,   271
 };
 # endif
 
@@ -593,13 +594,13 @@ static const yytype_int8 yycheck[] =
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    17,    18,     0
+       0,     3,    18,    19,     0
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    16,    17,    18
+       0,    17,    18,    19
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1301,7 +1302,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1305 "bison.tab.c"
+#line 1306 "bison.tab.c"
 
       default: break;
     }
@@ -1533,7 +1534,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 32 "bison/bison.y"
+#line 33 "bison/bison.y"
 
 
 static int yylex(){

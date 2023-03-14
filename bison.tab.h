@@ -61,7 +61,8 @@ extern int yydebug;
     GT = 267,
     LT = 268,
     VOID = 269,
-    INT = 270
+    INT = 270,
+    ERR = 271
   };
 #endif
 

@@ -1,4 +1,3 @@
-
 %{
    #include "bison.tab.h"
    #include "globals.h"
@@ -19,7 +18,12 @@ whitespace  [ \t\r]+
 "%" {return MOD;}
 "=" {return EQUAL;}
 
-
 %%  
 
 int yywrap(){}
+
+int getToken(){
+   int currentToken = yylex();
+   printf("chanmado");
+   return  currentToken;
+}

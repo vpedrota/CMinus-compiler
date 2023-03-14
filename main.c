@@ -3,6 +3,6 @@
 #include "globals.h"
 
 int main(){
-    yylex();
+    while(getToken() != 265);
     return 0;
 }

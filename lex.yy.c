@@ -756,7 +756,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "flex/flex.l"
+#line 22 "flex/flex.l"
 ECHO;
 	YY_BREAK
 #line 763 "lex.yy.c"
@@ -1764,8 +1764,14 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 23 "flex/flex.l"
+#line 22 "flex/flex.l"
 
 
 int yywrap(){}
+
+int getToken(){
+   int currentToken = yylex();
+   printf("chanmado");
+   return  currentToken;
+}
 

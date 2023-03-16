@@ -4,14 +4,14 @@ CFLAGS := -c -Wall
 
 all: compilador clean
 
-compilador: bison.tab.o lex.yy.o main.o
-	$(CC)  bison.tab.o lex.yy.o main.o -o cminus
+compilador: lex.yy.o bison.tab.o  main.o
+	$(CC) lex.yy.o bison.tab.o  main.o -o cminus
 
-bison.tab.o: bison/bison.y
+bison.tab.o: bison/bison.y globals.h
 	bison -d -t bison/bison.y 
 	$(CC) -c bison.tab.c
 
-lex.yy.o: flex/flex.l
+lex.yy.o: flex/flex.l globals.h
 	flex flex/flex.l
 	$(CC) -c lex.yy.c
 

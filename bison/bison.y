@@ -1,44 +1,61 @@
 %{
-
+#include "globals.h"
 #include <stdio.h>
 int yyerror(char *s);
-static int yylex();
-
 %}
 
 /*****************************************
     Realizando a declaração dos lexemas
 ******************************************/
 
-// Condidionais
-%token IF ELSE
+// Palavras chave para a linguagem C-
+%token ELSE IF INT RETURN VOID WHILE
 
-// Operações aritméticas
-%token SUM SUB MULT DIV MOD
+// Simbolos especiais
+%token PLUS SUB MULT DIV LT LET GT GET COMP DIF ASSIGN PV VIR LPAR RPAR LCOL RCOL LCHA RCHA
 
-// Operações Lógicas
-%token EQUAL DIF GT LT
+// Marcadores
+%token ID NUM
 
-// Escopos
-%token VOID INT RETURN ID VIR PV
-
-// Demais caracters
-%token LBRAC RBRAC ENDFILE
-
+// Erro
 %token ERR
 
+%%
+
+    programa: declaracao-lista;
+    declaracao-lista: declaracao-lista declaracao | declaracao;
+    declaracao: var-declaracao  | fun-declaracao;
+    var-declaracao: INT ID PV | INT ID LCOL NUM RCOL PV;
+    tipo-especificador: INT | VOID;
+    fun-declaracao: tipo-especificador ID LPAR params RPAR composto-decl;
+    params: param-lista | VOID;
+    param-lista: param-lista PV param | param;
+    param: tipo-especificador ID | tipo-especificador ID LCOL RCOL;
+    composto-decl: LCHA local-declaracoes statement-lista RCHA;
+    local-declaracoes: local-declaracoes var-declaracao  | ;
+    statement-lista: statement-lista statement | ;
+    statement: expressao-decl | composto-decl | selecao-decl | iteracao-decl | retorno-decl;
+    expressao-decl: expressao PV | PV;
+    selecao-decl: IF LPAR expressao RPAR statement | IF LPAR expressao RPAR statement ELSE statement;
+    iteracao-decl: WHILE LPAR expressao RPAR statement;
+    retorno-decl: RETURN PV | RETURN expressao PV;
+    expressao: var ASSIGN expressao | simples-expressao;
+    var: ID | ID LCOL expressao RCOL;
+    simples-expressao: soma-expressao relacional soma-expressao | soma-expressao;
+    relacional: LET | LT | GT | GET | COMP | DIF;
+    soma-expressao: soma-expressao soma termo | termo;
+    soma: PLUS | SUB;
+    termo: termo mult fator | fator;
+    mult: MULT | DIV;
+    fator: LPAR expressao RPAR | var | ativacao | NUM;
+    ativacao: ID LPAR args RPAR;
+    args: arg-lista | ;
+    arg-lista: arg-lista VIR expressao | expressao; 
+
 
 %%
 
-prog:
-    stmts
-stmts: IF
-%%
-
-static int yylex(){
-    return 1;
+int yyerror(char *msg){
+    printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
 }
 
-int yyerror(char *s){
-    return 1;
-}

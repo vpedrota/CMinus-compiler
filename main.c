@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "globals.h"
 
+int lineno = 1;
+
 int main(int argc, char * argv[]){
     
     // Verificando se a quantidade de parâmetros na chamada está correta
@@ -22,9 +24,12 @@ int main(int argc, char * argv[]){
     // é passado para o destridor que representa a entrada padrão
     stdin = input;
     scanner();
-
+   
     // Voltando o ponteiro para o início para realizar a análise sintática
-    fseek(stdin, 0, SEEK_SET);
+    lineno = 1;
+    fseek(stdin, 0, SEEK_SET); 
+    
+    yyparse();
 
     // Fechando arquivos abertos
     fclose(input);

@@ -69,8 +69,8 @@
 #line 1 "bison/bison.y"
 
 #include "globals.h"
-#include <stdio.h>
 int yyerror(char *s);
+static TreeNode *root;
 
 #line 76 "bison.tab.c"
 
@@ -528,13 +528,13 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    26,    26,    27,    27,    28,    28,    29,    29,    30,
-      30,    31,    32,    32,    33,    33,    34,    34,    35,    36,
-      36,    37,    37,    38,    38,    38,    38,    38,    39,    39,
-      40,    40,    41,    42,    42,    43,    43,    44,    44,    45,
-      45,    46,    46,    46,    46,    46,    46,    47,    47,    48,
-      48,    49,    49,    50,    50,    51,    51,    51,    51,    52,
-      53,    53,    54,    54
+       0,    25,    25,    26,    35,    36,    36,    37,    37,    38,
+      38,    39,    40,    40,    41,    41,    42,    42,    43,    44,
+      44,    45,    45,    46,    46,    46,    46,    46,    47,    47,
+      48,    48,    49,    50,    50,    51,    51,    52,    52,    53,
+      53,    54,    54,    54,    54,    54,    54,    55,    55,    56,
+      56,    57,    57,    58,    58,    59,    59,    59,    59,    60,
+      61,    61,    62,    62
 };
 #endif
 
@@ -1393,8 +1393,35 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
+  case 2:
+#line 25 "bison/bison.y"
+                               { root =  yyvsp[0];}
+#line 1400 "bison.tab.c"
+    break;
 
-#line 1398 "bison.tab.c"
+  case 3:
+#line 26 "bison/bison.y"
+                                                  {
+        YYSTYPE t = yyvsp[-1];
+        if(t != NULL){
+            while(t->sibling != NULL) { t = t->sibling;}
+            t->sibling = yyvsp[0];
+            yyval = yyvsp[-1];
+        } else{
+            yyval = yyvsp[0];
+        }
+    }
+#line 1415 "bison.tab.c"
+    break;
+
+  case 4:
+#line 35 "bison/bison.y"
+                   { yyval = yyvsp[0]; }
+#line 1421 "bison.tab.c"
+    break;
+
+
+#line 1425 "bison.tab.c"
 
       default: break;
     }
@@ -1626,7 +1653,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 57 "bison/bison.y"
+#line 64 "bison/bison.y"
 
 
 int yyerror(char *msg){

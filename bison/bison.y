@@ -1,7 +1,7 @@
 %{
 #include "globals.h"
-#include <stdio.h>
 int yyerror(char *s);
+static TreeNode *root;
 %}
 
 /*****************************************
@@ -22,10 +22,19 @@ int yyerror(char *s);
 
 %%
 
-    programa: declaracao-lista;
-    declaracao-lista: declaracao-lista declaracao | declaracao;
-    declaracao: var-declaracao  | fun-declaracao;
-    var-declaracao: INT ID PV | INT ID LCOL NUM RCOL PV;
+    programa: declaracao-lista { root =  $1;};
+    declaracao-lista: declaracao-lista declaracao {
+        YYSTYPE t = $1;
+        if(t != NULL){
+            while(t->sibling != NULL) { t = t->sibling;}
+            t->sibling = $2;
+            $$ = $1;
+        } else{
+            $$ = $2;
+        }
+    } | declaracao { $$ = $1; };
+    declaracao: var-declaracao {$$ = $1}  | fun-declaracao {$$ = $1};
+    var-declaracao: INT ID PV {} | INT ID LCOL NUM RCOL PV {};
     tipo-especificador: INT | VOID;
     fun-declaracao: tipo-especificador ID LPAR params RPAR composto-decl;
     params: param-lista | VOID;
@@ -51,7 +60,6 @@ int yyerror(char *s);
     ativacao: ID LPAR args RPAR;
     args: arg-lista | ;
     arg-lista: arg-lista VIR expressao | expressao; 
-
 
 %%
 

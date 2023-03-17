@@ -29,7 +29,8 @@ int main(int argc, char * argv[]){
     lineno = 1;
     fseek(stdin, 0, SEEK_SET); 
     
-    yyparse();
+    TreeNode* arvore = parse();
+    printf("%s", arvore->nome);
 
     // Fechando arquivos abertos
     fclose(input);

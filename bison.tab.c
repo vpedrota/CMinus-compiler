@@ -68,11 +68,15 @@
 /* First part of user prologue.  */
 #line 1 "bison/bison.y"
 
+#define YYSTYPE TreeNode*
 #include "globals.h"
+#include "arvore.h"
+
 int yyerror(char *s);
 static TreeNode *root;
 
-#line 76 "bison.tab.c"
+
+#line 80 "bison.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -528,13 +532,13 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    25,    25,    26,    35,    36,    36,    37,    37,    38,
-      38,    39,    40,    40,    41,    41,    42,    42,    43,    44,
-      44,    45,    45,    46,    46,    46,    46,    46,    47,    47,
-      48,    48,    49,    50,    50,    51,    51,    52,    52,    53,
-      53,    54,    54,    54,    54,    54,    54,    55,    55,    56,
-      56,    57,    57,    58,    58,    59,    59,    59,    59,    60,
-      61,    61,    62,    62
+       0,    29,    29,    30,    39,    40,    40,    41,    44,    48,
+      48,    49,    50,    50,    51,    51,    52,    52,    53,    54,
+      54,    55,    55,    56,    56,    56,    56,    56,    57,    57,
+      58,    58,    59,    60,    60,    61,    61,    62,    62,    63,
+      63,    64,    64,    64,    64,    64,    64,    65,    65,    66,
+      66,    67,    67,    68,    68,    69,    69,    69,    69,    70,
+      71,    71,    72,    72
 };
 #endif
 
@@ -1394,15 +1398,15 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 25 "bison/bison.y"
+#line 29 "bison/bison.y"
                                { root =  yyvsp[0];}
-#line 1400 "bison.tab.c"
+#line 1404 "bison.tab.c"
     break;
 
   case 3:
-#line 26 "bison/bison.y"
+#line 30 "bison/bison.y"
                                                   {
-        YYSTYPE t = yyvsp[-1];
+        TreeNode* t = yyvsp[-1];
         if(t != NULL){
             while(t->sibling != NULL) { t = t->sibling;}
             t->sibling = yyvsp[0];
@@ -1411,17 +1415,59 @@ yyreduce:
             yyval = yyvsp[0];
         }
     }
-#line 1415 "bison.tab.c"
+#line 1419 "bison.tab.c"
     break;
 
   case 4:
-#line 35 "bison/bison.y"
+#line 39 "bison/bison.y"
                    { yyval = yyvsp[0]; }
-#line 1421 "bison.tab.c"
+#line 1425 "bison.tab.c"
+    break;
+
+  case 5:
+#line 40 "bison/bison.y"
+                               {yyval = yyvsp[0];}
+#line 1431 "bison.tab.c"
+    break;
+
+  case 6:
+#line 40 "bison/bison.y"
+                                                            {yyval = yyvsp[0];}
+#line 1437 "bison.tab.c"
+    break;
+
+  case 7:
+#line 41 "bison/bison.y"
+                              {
+        yyval = alocaNo();
+        yyval->child[0] = yyvsp[-2];
+    }
+#line 1446 "bison.tab.c"
+    break;
+
+  case 8:
+#line 44 "bison/bison.y"
+                                {
+        yyval = alocaNo();
+        yyval->child[0] = yyvsp[-5];
+    }
+#line 1455 "bison.tab.c"
+    break;
+
+  case 9:
+#line 48 "bison/bison.y"
+                            {yyval = alocaNo();}
+#line 1461 "bison.tab.c"
+    break;
+
+  case 10:
+#line 48 "bison/bison.y"
+                                                     {yyval = alocaNo();}
+#line 1467 "bison.tab.c"
     break;
 
 
-#line 1425 "bison.tab.c"
+#line 1471 "bison.tab.c"
 
       default: break;
     }
@@ -1653,10 +1699,15 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 64 "bison/bison.y"
+#line 74 "bison/bison.y"
 
 
 int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
+}
+
+TreeNode* parse(){
+    yyparse();
+    return root;
 }
 

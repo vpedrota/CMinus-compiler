@@ -1,6 +1,9 @@
 
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 #define  ENDFILE 0
 
 // Funções para análise
@@ -22,5 +25,6 @@ typedef struct treeNode {
     char nome[100];
 } TreeNode;
 
-#define YYSTYPE TreeNode*
+TreeNode* parse();
+
 #include "bison.tab.h"

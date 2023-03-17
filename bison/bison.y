@@ -1,7 +1,11 @@
 %{
+#define YYSTYPE TreeNode*
 #include "globals.h"
+#include "arvore.h"
+
 int yyerror(char *s);
 static TreeNode *root;
+
 %}
 
 /*****************************************
@@ -24,7 +28,7 @@ static TreeNode *root;
 
     programa: declaracao-lista { root =  $1;};
     declaracao-lista: declaracao-lista declaracao {
-        YYSTYPE t = $1;
+        TreeNode* t = $1;
         if(t != NULL){
             while(t->sibling != NULL) { t = t->sibling;}
             t->sibling = $2;
@@ -33,9 +37,15 @@ static TreeNode *root;
             $$ = $2;
         }
     } | declaracao { $$ = $1; };
-    declaracao: var-declaracao {$$ = $1}  | fun-declaracao {$$ = $1};
-    var-declaracao: INT ID PV {} | INT ID LCOL NUM RCOL PV {};
-    tipo-especificador: INT | VOID;
+    declaracao: var-declaracao {$$ = $1;}  | fun-declaracao {$$ = $1;};
+    var-declaracao: INT ID PV {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+    } | INT ID LCOL NUM RCOL PV {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+    };
+    tipo-especificador: INT {$$ = alocaNo();} | VOID {$$ = alocaNo();};
     fun-declaracao: tipo-especificador ID LPAR params RPAR composto-decl;
     params: param-lista | VOID;
     param-lista: param-lista PV param | param;
@@ -65,5 +75,10 @@ static TreeNode *root;
 
 int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
+}
+
+TreeNode* parse(){
+    yyparse();
+    return root;
 }
 

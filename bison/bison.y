@@ -46,12 +46,38 @@ static TreeNode *root;
         $$->child[0] = $1;
     };
     tipo-especificador: INT {$$ = alocaNo();} | VOID {$$ = alocaNo();};
-    fun-declaracao: tipo-especificador ID LPAR params RPAR composto-decl;
-    params: param-lista | VOID;
-    param-lista: param-lista PV param | param;
-    param: tipo-especificador ID | tipo-especificador ID LCOL RCOL;
-    composto-decl: LCHA local-declaracoes statement-lista RCHA;
-    local-declaracoes: local-declaracoes var-declaracao  | ;
+    fun-declaracao: tipo-especificador ID {
+        $$ = alocaNo();
+    } LPAR params RPAR composto-decl {
+        $$ = $3;
+        $$->child[0] = $1;
+        $$->child[1] = $5;
+        $$->child[2] = $7;
+    };
+    params: param-lista {$$ = $1;} | VOID {$$ = alocaNo();};
+    param-lista: param-lista PV param {
+        TreeNode* t = $1;
+        if(t != NULL){
+            while(t->sibling != NULL) { t = t->sibling;}
+            t->sibling = $3;
+            $$ = $1;
+        } else{
+            $$ = $2;
+        }
+    } | param {$$ = $1;};
+    param: tipo-especificador ID {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+    } | tipo-especificador ID LCOL RCOL {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+    };
+    composto-decl: LCHA local-declaracoes statement-lista RCHA{
+        $$ = alocaNo();
+        $$->child[0] = $2;
+        $$->child[1] = $3;
+    };
+    local-declaracoes: local-declaracoes var-declaracao  | {$$ = NULL;};
     statement-lista: statement-lista statement | ;
     statement: expressao-decl | composto-decl | selecao-decl | iteracao-decl | retorno-decl;
     expressao-decl: expressao PV | PV;

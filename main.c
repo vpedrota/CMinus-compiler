@@ -31,6 +31,7 @@ int main(int argc, char * argv[]){
     
     TreeNode* arvore = parse();
     printf("%s", arvore->nome);
+    printf("%s", arvore->child[0]->nome);
 
     // Fechando arquivos abertos
     fclose(input);

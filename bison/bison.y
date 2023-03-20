@@ -1,10 +1,15 @@
 %{
+
+// Importação das bibliotecas 
 #define YYSTYPE TreeNode*
 #include "globals.h"
 #include "arvore.h"
 
 int yyerror(char *s);
 static TreeNode *root;
+
+static int savedLineNo;
+static char* savedName;
 
 %}
 
@@ -26,28 +31,39 @@ static TreeNode *root;
 
 %%
 
-    programa: declaracao-lista { root =  $1;};
+    programa: declaracao-lista { root =  $1; };
+
     declaracao-lista: declaracao-lista declaracao {
-        TreeNode* t = $1;
-        if(t != NULL){
-            while(t->sibling != NULL) { t = t->sibling;}
-            t->sibling = $2;
-            $$ = $1;
-        } else{
-            $$ = $2;
-        }
-    } | declaracao { $$ = $1; };
-    declaracao: var-declaracao {$$ = $1;}  | fun-declaracao {$$ = $1;};
+                    TreeNode* t = $1;
+                    if(t != NULL){
+                        while(t->sibling != NULL) { t = t->sibling;}
+                        t->sibling = $2;
+                        $$ = $1;
+                    } else{
+                        $$ = $2;
+                    }
+                    } | declaracao { $$ = $1; };
+
+    declaracao: var-declaracao {$$ = $1;}  
+                | fun-declaracao {$$ = $1;};
+
     var-declaracao: INT ID PV {
-        $$ = alocaNo();
-        $$->child[0] = $1;
-    } | INT ID LCOL NUM RCOL PV {
-        $$ = alocaNo();
-        $$->child[0] = $1;
-    };
+                        $$ = alocaNo();
+                        $$->child[0] = $1;
+                    } 
+                    | INT ID LCOL NUM RCOL PV {
+                        $$ = alocaNo();
+                        $$->child[0] = $1;
+                    };
+
     tipo-especificador: INT {$$ = alocaNo();} | VOID {$$ = alocaNo();};
+
     fun-declaracao: tipo-especificador ID {
-        $$ = alocaNo();
+        $$ = alocaStmt(TypeK);
+        $$->type = VoidK;
+        $2->nodekind = StmtK;
+        strcpy($$->attr.name ,"inteiro");
+
     } LPAR params RPAR composto-decl {
         $$ = $3;
         $$->child[0] = $1;
@@ -77,25 +93,115 @@ static TreeNode *root;
         $$->child[0] = $2;
         $$->child[1] = $3;
     };
-    local-declaracoes: local-declaracoes var-declaracao  | {$$ = NULL;};
-    statement-lista: statement-lista statement | ;
-    statement: expressao-decl | composto-decl | selecao-decl | iteracao-decl | retorno-decl;
-    expressao-decl: expressao PV | PV;
-    selecao-decl: IF LPAR expressao RPAR statement | IF LPAR expressao RPAR statement ELSE statement;
-    iteracao-decl: WHILE LPAR expressao RPAR statement;
-    retorno-decl: RETURN PV | RETURN expressao PV;
-    expressao: var ASSIGN expressao | simples-expressao;
-    var: ID | ID LCOL expressao RCOL;
-    simples-expressao: soma-expressao relacional soma-expressao | soma-expressao;
-    relacional: LET | LT | GT | GET | COMP | DIF;
-    soma-expressao: soma-expressao soma termo | termo;
-    soma: PLUS | SUB;
-    termo: termo mult fator | fator;
-    mult: MULT | DIV;
-    fator: LPAR expressao RPAR | var | ativacao | NUM;
-    ativacao: ID LPAR args RPAR;
-    args: arg-lista | ;
-    arg-lista: arg-lista VIR expressao | expressao; 
+    local-declaracoes: local-declaracoes var-declaracao {
+        TreeNode* t = $1;
+        if(t != NULL){
+            while(t->sibling != NULL) { t = t->sibling;}
+            t->sibling = $2;
+            $$ = $1;
+        } else{
+            $$ = $2;
+        }
+    }  | {$$ = NULL;};
+    statement-lista: statement-lista statement {
+        TreeNode* t = $1;
+        if(t != NULL){
+            while(t->sibling != NULL) { t = t->sibling;}
+            t->sibling = $2;
+            $$ = $1;
+        } else{
+            $$ = $2;
+        }
+    } | {$$ = NULL;};
+    statement: 
+        expressao-decl { $$ = $1; }
+        | composto-decl { $$ = $1; }
+        | selecao-decl { $$ = $1; }
+        | iteracao-decl { $$ = $1; }
+        | retorno-decl { $$ = $1; };
+    expressao-decl: expressao PV { $$ = $1; } | PV { $$ = NULL; };
+    selecao-decl: IF LPAR expressao RPAR statement {
+        $$ = alocaNo();
+        $$->child[0] = $3;
+        $$->child[1] = $5;
+    } 
+    | IF LPAR expressao RPAR statement ELSE statement {
+        $$ = alocaNo();
+        $$->child[0] = $3;
+        $$->child[1] = $5;
+        $$->child[2] = $7;
+    };
+
+    iteracao-decl: WHILE LPAR expressao RPAR statement {
+        $$ = alocaNo();
+        $$->child[0] = $3;
+        $$->child[1] = $5;
+    };
+
+    retorno-decl: RETURN PV {
+        $$ = alocaNo();
+    } | RETURN expressao PV {
+        $$ = alocaNo();
+        $$->child[0] = $2;
+    };
+
+    expressao: var ASSIGN expressao {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+        $$->child[1] = $3;
+    } | simples-expressao { $$ = $1;};
+
+    var: ID {$$ = alocaNo();} | ID {
+        $$ = alocaNo();
+    } LCOL expressao RCOL {
+        $$ = $2;
+        $$->child[0] = $4;
+    };
+
+    simples-expressao: soma-expressao relacional soma-expressao {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+        $$->child[1] = $2;
+        $$->child[2] = $3;
+    }| soma-expressao { $$ = $1; };
+
+    relacional: LET {$$ = alocaNo();} | LT  {$$ = alocaNo();} | GT  {$$ = alocaNo();}| GET {$$ = alocaNo();}| COMP {$$ = alocaNo();}| DIF {$$ = alocaNo();};
+
+    soma-expressao: soma-expressao soma termo {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+        $$->child[1] = $2;
+        $$->child[2] = $3;
+    } | termo { $$ = $1; };
+    soma: PLUS {$$ = alocaNo();}| SUB {$$ = alocaNo();};
+
+    termo: termo mult fator {
+        $$ = alocaNo();
+        $$->child[0] = $1;
+        $$->child[1] = $2;
+        $$->child[2] = $3;
+    }| fator { $$ = $1;};
+
+    mult: MULT {$$ = alocaNo();} | DIV {$$ = alocaNo();};
+
+    fator: LPAR expressao RPAR { $$ = $2; } | var { $$ = $1; } | ativacao { $$ = $1; } | NUM {$$ = alocaNo();};
+
+    ativacao: ID {$$ = alocaNo();} LPAR args RPAR {
+        $$ = $2;
+        $$->child[0] = $4;
+    };
+
+    args: arg-lista { $$ = $1; } | { $$ = NULL; } ;
+    arg-lista: arg-lista VIR expressao {
+        TreeNode* t = $1;
+        if(t != NULL){
+            while(t->sibling != NULL) { t = t->sibling;}
+            t->sibling = $3;
+            $$ = $1;
+        } else{
+            $$ = $3 ;
+        }
+    } | expressao { $$ = $1; }; 
 
 %%
 
@@ -105,6 +211,7 @@ int yyerror(char *msg){
 
 TreeNode* parse(){
     yyparse();
+    printTree(root);
     return root;
 }
 

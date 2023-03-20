@@ -30,8 +30,6 @@ int main(int argc, char * argv[]){
     fseek(stdin, 0, SEEK_SET); 
     
     TreeNode* arvore = parse();
-    printf("%s", arvore->nome);
-    printf("%s", arvore->child[0]->nome);
 
     // Fechando arquivos abertos
     fclose(input);

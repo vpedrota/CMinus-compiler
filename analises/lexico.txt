@@ -7,4 +7,16 @@
 2: INT  
 2: ID, name = b 
 2: PV  
-3: RCHA  
+3: INT  
+3: ID, name = a 
+3: PV  
+4: INT  
+4: ID, name = c 
+4: PV  
+5: ID, name = c 
+5: ASSIGN  
+5: ID, name = a 
+5: PLUS  
+5: ID, name = b 
+5: PV  
+6: RCHA  

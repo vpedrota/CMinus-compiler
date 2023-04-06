@@ -1,3 +1,5 @@
+
+
 %{
 
 // Importação das bibliotecas 
@@ -47,30 +49,74 @@ static char* savedName;
     declaracao: var-declaracao {$$ = $1;}  
                 | fun-declaracao {$$ = $1;};
 
-    var-declaracao: INT ID PV {
-                        $$ = alocaNo();
-                        $$->child[0] = $1;
+    var-declaracao: INT id PV {
+                        $$ = newExpNode(TypeK);
+                        $$->type = IntegerK;
+                        $$->attr.name = "inteiro";
+                        $$->child[0] = $2;
+                        $2->nodekind = StmtK;
+                        $2->kind.stmt = VarK;
+                        $2->type = IntegerK;
                     } 
-                    | INT ID LCOL NUM RCOL PV {
-                        $$ = alocaNo();
-                        $$->child[0] = $1;
+                    | INT id LCOL num RCOL PV {
+                        $$ = newExpNode(TypeK);
+                        $$->type = IntegerK;
+                        $$->attr.name = "inteiro";
+                        $$->child[0] = $2;
+                        $2->nodekind = StmtK;
+                        $2->kind.stmt = VarK;
+                        $2->type = IntegerK; 
+                        $2->attr.len = $4->attr.val;
                     };
 
-    tipo-especificador: INT {$$ = alocaNo();} | VOID {$$ = alocaNo();};
-
-    fun-declaracao: tipo-especificador ID {
-        $$ = alocaStmt(TypeK);
-        $$->type = VoidK;
-        $2->nodekind = StmtK;
-        strcpy($$->attr.name ,"inteiro");
-
-    } LPAR params RPAR composto-decl {
-        $$ = $3;
-        $$->child[0] = $1;
-        $$->child[1] = $5;
-        $$->child[2] = $7;
+    num: NUM {
+        $$ = NULL;
+    }
+    id: ID { 
+      $$ = newExpNode(IdK);
+      $$->attr.name = copyString(yytext);
     };
-    params: param-lista {$$ = $1;} | VOID {$$ = alocaNo();};
+
+    tipo-especificador: INT {
+                            $$ = newExpNode(TypeK);
+                            $$->attr.name = "inteiro";
+                            $$->type = IntegerK;
+                        }
+                        | VOID {
+                            $$ = newExpNode(TypeK);
+                            $$->attr.name = "void";
+                            $$->type = VoidK;
+                        }
+
+    fun-declaracao: INT id LPAR params RPAR composto-decl{
+       $$ = newExpNode(TypeK);
+        $$->type = IntegerK;
+        $$->attr.name = "inteiro";
+        $$->child[0] = $2;
+        $2->child[0] = $4;
+        $2->child[1] = $6;
+        $2->nodekind = StmtK;
+        $2->kind.stmt = FunK;
+        $2->type = IntegerK;
+        $4->type = IntegerK;
+    } | VOID id LPAR params RPAR composto-decl{
+        $$ = newExpNode(TypeK);
+        $$->type = VoidK;
+        $$->attr.name = "void";
+        $$->child[0] = $2;
+        $2->child[0] = $4;
+        $2->child[1] = $6;
+        $2->nodekind = StmtK;
+        $2->kind.stmt = FunK;
+    }
+
+    params: param-lista {$$ = $1;} 
+    | VOID {
+        $$ = newExpNode(TypeK);
+        $$->attr.name = "void";
+        $$->child[0] = NULL; 
+    }
+
     param-lista: param-lista PV param {
         TreeNode* t = $1;
         if(t != NULL){
@@ -78,21 +124,38 @@ static char* savedName;
             t->sibling = $3;
             $$ = $1;
         } else{
-            $$ = $2;
+            $$ = $3;
         }
     } | param {$$ = $1;};
     param: tipo-especificador ID {
-        $$ = alocaNo();
-        $$->child[0] = $1;
+        $$ = newExpNode(TypeK);
+        $$->child[0]= $2;
+        $$->type = $1->type;
+        $$->attr.name = $1->attr.name;
+        $2->nodekind = StmtK;
+        $2->kind.stmt = VarK;
+        $2->type = $1->type;
     } | tipo-especificador ID LCOL RCOL {
-        $$ = alocaNo();
-        $$->child[0] = $1;
-    };
+        $$= newExpNode(TypeK);
+        $$->child[0]= $2;
+        $$->type = $1->type;
+        $$->attr.name = $1->attr.name;
+        $2->nodekind = StmtK;
+        $2->type = $1->type;
+        $2->kind.stmt = VetK;
+    }
+
     composto-decl: LCHA local-declaracoes statement-lista RCHA{
-        $$ = alocaNo();
-        $$->child[0] = $2;
-        $$->child[1] = $3;
-    };
+        TreeNode* t = $2;
+        if(t != NULL){
+            while(t->sibling != NULL)
+            t = t->sibling;
+            t->sibling = $3;
+            $$ = $2;
+        } 
+        else $$ = $3;
+    }
+
     local-declaracoes: local-declaracoes var-declaracao {
         TreeNode* t = $1;
         if(t != NULL){
@@ -102,7 +165,8 @@ static char* savedName;
         } else{
             $$ = $2;
         }
-    }  | {$$ = NULL;};
+    }  | var-declaracao {$$ = $1;}
+
     statement-lista: statement-lista statement {
         TreeNode* t = $1;
         if(t != NULL){
@@ -112,60 +176,93 @@ static char* savedName;
         } else{
             $$ = $2;
         }
-    } | {$$ = NULL;};
+    } | statement {$$ = $1;}
+
     statement: 
-        expressao-decl { $$ = $1; }
-        | composto-decl { $$ = $1; }
-        | selecao-decl { $$ = $1; }
-        | iteracao-decl { $$ = $1; }
-        | retorno-decl { $$ = $1; };
-    expressao-decl: expressao PV { $$ = $1; } | PV { $$ = NULL; };
+        expressao-decl {$$ = $1;}
+        | composto-decl {$$ = $1;}
+        | selecao-decl {$$ = $1;}
+        | iteracao-decl {$$ = $1;}
+        | retorno-decl {$$ = $1;};
+    expressao-decl: expressao PV { $$ = $1; } | PV;
     selecao-decl: IF LPAR expressao RPAR statement {
-        $$ = alocaNo();
+        $$ = newStmtNode(IfK);
         $$->child[0] = $3;
         $$->child[1] = $5;
     } 
     | IF LPAR expressao RPAR statement ELSE statement {
-        $$ = alocaNo();
+        $$ = newStmtNode(IfK);
         $$->child[0] = $3;
         $$->child[1] = $5;
         $$->child[2] = $7;
     };
 
     iteracao-decl: WHILE LPAR expressao RPAR statement {
-        $$ = alocaNo();
+        $$ = newStmtNode(WhileK);
         $$->child[0] = $3;
         $$->child[1] = $5;
     };
 
     retorno-decl: RETURN PV {
-        $$ = alocaNo();
+        $$ = newStmtNode(ReturnK);
     } | RETURN expressao PV {
-        $$ = alocaNo();
+        $$ = newStmtNode(ReturnK);
         $$->child[0] = $2;
     };
 
     expressao: var ASSIGN expressao {
-        $$ = alocaNo();
+        $$ = newStmtNode(AssignK);
+        $$->attr.name = $1->attr.name;
         $$->child[0] = $1;
         $$->child[1] = $3;
     } | simples-expressao { $$ = $1;};
 
-    var: ID {$$ = alocaNo();} | ID {
-        $$ = alocaNo();
-    } LCOL expressao RCOL {
-        $$ = $2;
-        $$->child[0] = $4;
+    var: id { $$ = $1;} 
+    
+    | ID LCOL expressao RCOL {
+        $$ = $1;
+        $$->child[0] = $3;
+        $$->kind.exp = VetK;
+        $$->type = IntegerK;
     };
 
     simples-expressao: soma-expressao relacional soma-expressao {
-        $$ = alocaNo();
+        $$ = $2;
         $$->child[0] = $1;
-        $$->child[1] = $2;
-        $$->child[2] = $3;
+        $$->child[1] = $3;
     }| soma-expressao { $$ = $1; };
 
-    relacional: LET {$$ = alocaNo();} | LT  {$$ = alocaNo();} | GT  {$$ = alocaNo();}| GET {$$ = alocaNo();}| COMP {$$ = alocaNo();}| DIF {$$ = alocaNo();};
+    relacional: LET { 
+        $$ = newExpNode(OpK);
+        $$->attr.op = LET;                            
+		$$->type = BooleanK;
+    } 
+    | LT  {
+        $$ = newExpNode(OpK);
+        $$->attr.op = LT;                            
+		$$->type = BooleanK;
+     
+    } 
+    | GT  {
+        $$ = newExpNode(OpK);
+        $$->attr.op = GT;                            
+		$$->type = BooleanK; 
+    }
+    | GET {
+        $$ = newExpNode(OpK);
+        $$->attr.op = GET;                            
+		$$->type = BooleanK; 
+    }
+    | COMP {
+        $$ = newExpNode(OpK);
+        $$->attr.op = COMP;                            
+		$$->type = BooleanK; 
+    }
+    | DIF {
+        $$ = newExpNode(OpK);
+        $$->attr.op = DIF;                            
+		$$->type = BooleanK;
+    };
 
     soma-expressao: soma-expressao soma termo {
         $$ = alocaNo();
@@ -173,24 +270,41 @@ static char* savedName;
         $$->child[1] = $2;
         $$->child[2] = $3;
     } | termo { $$ = $1; };
-    soma: PLUS {$$ = alocaNo();}| SUB {$$ = alocaNo();};
 
-    termo: termo mult fator {
-        $$ = alocaNo();
-        $$->child[0] = $1;
-        $$->child[1] = $2;
-        $$->child[2] = $3;
-    }| fator { $$ = $1;};
-
-    mult: MULT {$$ = alocaNo();} | DIV {$$ = alocaNo();};
-
-    fator: LPAR expressao RPAR { $$ = $2; } | var { $$ = $1; } | ativacao { $$ = $1; } | NUM {$$ = alocaNo();};
-
-    ativacao: ID {$$ = alocaNo();} LPAR args RPAR {
-        $$ = $2;
-        $$->child[0] = $4;
+    soma: PLUS {
+        $$ = newExpNode(OpK);
+        $$->attr.op = PLUS;  
+    }
+    | SUB {
+        $$ = newExpNode(OpK);
+        $$->attr.op = SUB;  
     };
 
+    termo: termo mult fator {
+        $$ = $2;
+        $$->child[0] = $1;
+        $$->child[1] = $3;
+    } | fator { $$ = $1;};
+
+    mult: MULT {
+        $$ = newExpNode(OpK);
+        $$->attr.op = MULT; 
+    } | DIV {
+        $$ = newExpNode(OpK);
+        $$->attr.op = DIV; 
+    };
+
+    fator: LPAR expressao RPAR { $$ = $2; } 
+    | var { $$ = $1; } 
+    | ativacao { $$ = $1; } 
+    | NUM {$$ = alocaNo();};
+
+    ativacao: id LPAR args RPAR {
+        $$ = $1;
+        $$->child[0] = $3;
+        $$->nodekind = StmtK;
+        $$->kind.stmt = CallK;
+    }
     args: arg-lista { $$ = $1; } | { $$ = NULL; } ;
     arg-lista: arg-lista VIR expressao {
         TreeNode* t = $1;

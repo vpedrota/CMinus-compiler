@@ -20,9 +20,7 @@ extern int yylex();
 
 typedef enum {StmtK,ExpK} NodeKind;
 typedef enum {IfK,WhileK,AssignK,VarK,FunK, CallK, ReturnK} StmtKind;
-typedef enum {OpK, ConstK,IdK, VetK, TypeK} ExpKind;
-
-/* ExpType is used for type checking */
+typedef enum {OpK, ConstK, IdK, VetK, TypeK} ExpKind;
 typedef enum {VoidK,IntegerK,BooleanK} ExpType;
 
 // Nó da árvore
@@ -30,6 +28,7 @@ typedef struct treeNode
    { struct treeNode * child[MAXCHILDREN];
      struct treeNode * sibling;
      int lineno;
+     const char *name;
      NodeKind nodekind;
      union { StmtKind stmt; ExpKind exp;} kind;
      struct { int op;
@@ -37,16 +36,11 @@ typedef struct treeNode
              char name[100];
              int len;
              char * scope; } attr;
-     ExpType type; /* for type checking of exps */
+     ExpType type;
    } TreeNode;
 
 TreeNode* parse();
 
 #include "bison.tab.h"
-
-
-
-
-
 #define MAXCHILDREN 3
 

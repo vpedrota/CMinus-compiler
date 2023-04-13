@@ -12,6 +12,7 @@ static TreeNode *root;
 
 static int savedLineNo;
 static char* savedName;
+static int yylex(void);
 
 %}
 
@@ -57,6 +58,8 @@ static char* savedName;
                         $2->nodekind = StmtK;
                         $2->kind.stmt = VarK;
                         $2->type = IntegerK;
+                        $2->name = savedName;
+                        
                     } 
                     | INT id LCOL num RCOL PV {
                         $$ = newExpNode(TypeK);
@@ -69,9 +72,11 @@ static char* savedName;
                         $2->attr.len = $4->attr.val;
                     };
 
+    // voltar aqui e arrumar
     num: NUM {
         $$ = NULL;
     }
+
     id: ID { 
       $$ = newExpNode(IdK);
       $$->attr.name = copyString(yytext);
@@ -265,10 +270,9 @@ static char* savedName;
     };
 
     soma-expressao: soma-expressao soma termo {
-        $$ = alocaNo();
+        $$ = $2;
         $$->child[0] = $1;
-        $$->child[1] = $2;
-        $$->child[2] = $3;
+        $$->child[1] = $3;
     } | termo { $$ = $1; };
 
     soma: PLUS {
@@ -297,7 +301,7 @@ static char* savedName;
     fator: LPAR expressao RPAR { $$ = $2; } 
     | var { $$ = $1; } 
     | ativacao { $$ = $1; } 
-    | NUM {$$ = alocaNo();};
+    | NUM {$$ = $1;};
 
     ativacao: id LPAR args RPAR {
         $$ = $1;
@@ -323,7 +327,12 @@ int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
 }
 
+static int yylex(void){
+    return getToken();
+}
+
 TreeNode* parse(){
+    printf("%s", savedToken);
     yyparse();
     printTree(root);
     return root;

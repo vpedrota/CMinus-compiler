@@ -1,5 +1,6 @@
 %{
    #include "globals.h"
+   char savedToken[100];
 %}
 
 
@@ -144,7 +145,9 @@ void printToken(FILE *output, int token, char *tokenString){
 
 int getToken(FILE *output){
    int currentToken = yylex();
-   printToken(output, currentToken, yytext);
+   strcpy(savedToken, yytext);
+   printf("%s", savedToken);
+   //printToken(output, currentToken, yytext);
    return  currentToken;
 }
 

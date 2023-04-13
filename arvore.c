@@ -60,22 +60,68 @@ char* copyString(const char *string){
   return str;
 }
 
-void printTree( TreeNode * tree ) {
+void printTree( TreeNode * tree ){
   int i;
   INDENT;
   while (tree != NULL) {
     printSpaces();
-    switch (tree->type) {
-      case IntegerK:
-        printf("Integer");
-        break;
-      case VoidK:
-        printf("Void");
-        break;
-      default:
-        printf("erro");
+    if (tree->nodekind==StmtK)
+    { switch (tree->kind.stmt)
+            {
+            case IfK:
+                printf( "If\n");
+                break;
+            case AssignK:
+                printf( "Atribuicao\n");
+                break;
+            case WhileK:
+                printf( "While\n");
+                break;
+            case VarK:
+                printf( "Variavel %s\n", tree->attr.name);
+                break;
+            case FunK:
+                printf( "Funcao %s\n", tree->attr.name);
+                break;
+            case CallK:
+                printf( "Chamada de Funcao %s \n", tree->attr.name);
+                break;
+            case ReturnK:
+                printf( "Return\n");
+                break;
+
+            default:
+                printf( "No de Declaracao desconhecido\n");
+                break;
+            }
     }
-    printf("%d %s\n", tree->lineno, tree->name);
+    else if (tree->nodekind==ExpK)
+    { switch (tree->kind.exp) {
+        case OpK:
+          printf("Op: ");
+          printToken(tree->attr.op,"\0");
+          break;
+        case ConstK:
+          printf("Const: %d\n",tree->attr.val);
+          break;
+        case IdK:
+          printf("Id: %s\n",tree->attr.name);
+          break;
+        case VetK:
+                printf( "Vetor: %s\n", tree->attr.name);
+                break;
+        //case VetidK:
+        //    printf( "Indice [%d]\n", tree->attr.val);
+        //    break;
+        case TypeK:
+            printf( "Tipo %s\n", tree->attr.name);
+            break;
+        default:
+          printf("No de expressao desconhecido.\n");
+          break;
+      }
+    }
+    else printf("No desconhcido.\n");
     for (i=0;i<MAXCHILDREN;i++)
          printTree(tree->child[i]);
     tree = tree->sibling;

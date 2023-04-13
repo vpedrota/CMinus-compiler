@@ -14,7 +14,8 @@ extern int lineno;
 
 // Funções do flex 
 extern char* yytext;
-extern int yylex();
+extern char savedToken[100];
+//extern int yylex();
 
 #define MAXCHILDREN 3
 
@@ -33,7 +34,7 @@ typedef struct treeNode
      union { StmtKind stmt; ExpKind exp;} kind;
      struct { int op;
              int val;
-             char name[100];
+             char *name;
              int len;
              char * scope; } attr;
      ExpType type;

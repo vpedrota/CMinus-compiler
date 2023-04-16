@@ -59,6 +59,16 @@ whitespace  [ \t\r]+
 
 int yywrap(){}
 
+void printT(int value){
+   switch(value){
+      case GT:
+         printf(">\n");
+         break;
+      default:
+         printf("Erro\n");
+   }
+}
+
 void printToken(FILE *output, int token, char *tokenString){
    switch (token){
       case COMP: 

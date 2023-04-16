@@ -42,6 +42,8 @@ typedef struct treeNode
 
 TreeNode* parse();
 
+void printT(int value);
+
 #include "bison.tab.h"
 #define MAXCHILDREN 3
 

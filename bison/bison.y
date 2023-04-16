@@ -12,7 +12,6 @@ static TreeNode *root;
 
 static int savedLineNo;
 static char* savedName;
-static int yylex(void);
 
 %}
 
@@ -58,8 +57,6 @@ static int yylex(void);
                         $2->nodekind = StmtK;
                         $2->kind.stmt = VarK;
                         $2->type = IntegerK;
-                        $2->name = savedName;
-                        
                     } 
                     | INT id LCOL num RCOL PV {
                         $$ = newExpNode(TypeK);
@@ -74,7 +71,9 @@ static int yylex(void);
 
     // voltar aqui e arrumar
     num: NUM {
-        $$ = NULL;
+        $$ = newExpNode(ConstK);
+        $$->attr.val = atoi(yytext);
+        $$->type = IntegerK;
     }
 
     id: ID { 
@@ -94,7 +93,7 @@ static int yylex(void);
                         }
 
     fun-declaracao: INT id LPAR params RPAR composto-decl{
-       $$ = newExpNode(TypeK);
+        $$ = newExpNode(TypeK);
         $$->type = IntegerK;
         $$->attr.name = "inteiro";
         $$->child[0] = $2;
@@ -122,7 +121,7 @@ static int yylex(void);
         $$->child[0] = NULL; 
     }
 
-    param-lista: param-lista PV param {
+    param-lista: param-lista VIR param {
         TreeNode* t = $1;
         if(t != NULL){
             while(t->sibling != NULL) { t = t->sibling;}
@@ -132,7 +131,7 @@ static int yylex(void);
             $$ = $3;
         }
     } | param {$$ = $1;};
-    param: tipo-especificador ID {
+    param: tipo-especificador id {
         $$ = newExpNode(TypeK);
         $$->child[0]= $2;
         $$->type = $1->type;
@@ -140,7 +139,7 @@ static int yylex(void);
         $2->nodekind = StmtK;
         $2->kind.stmt = VarK;
         $2->type = $1->type;
-    } | tipo-especificador ID LCOL RCOL {
+    } | tipo-especificador id LCOL RCOL {
         $$= newExpNode(TypeK);
         $$->child[0]= $2;
         $$->type = $1->type;
@@ -159,7 +158,16 @@ static int yylex(void);
             $$ = $2;
         } 
         else $$ = $3;
-    }
+    } | LCHA local-declaracoes RCHA //pois podem ser vazio
+              {
+                $$ = $2;
+              }
+              | LCHA statement-lista RCHA //pois podem ser vazio
+              {
+                $$ = $2;
+              }
+              | LCHA RCHA {}            //pois podem ser vazio
+              ;
 
     local-declaracoes: local-declaracoes var-declaracao {
         TreeNode* t = $1;
@@ -222,9 +230,7 @@ static int yylex(void);
         $$->child[1] = $3;
     } | simples-expressao { $$ = $1;};
 
-    var: id { $$ = $1;} 
-    
-    | ID LCOL expressao RCOL {
+    var: id { $$ = $1;} | ID LCOL expressao RCOL {
         $$ = $1;
         $$->child[0] = $3;
         $$->kind.exp = VetK;
@@ -299,9 +305,9 @@ static int yylex(void);
     };
 
     fator: LPAR expressao RPAR { $$ = $2; } 
-    | var { $$ = $1; } 
+    | var {  $$ = $1; } 
     | ativacao { $$ = $1; } 
-    | NUM {$$ = $1;};
+    | num {$$ = $1;};
 
     ativacao: id LPAR args RPAR {
         $$ = $1;
@@ -327,12 +333,8 @@ int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
 }
 
-static int yylex(void){
-    return getToken();
-}
 
 TreeNode* parse(){
-    printf("%s", savedToken);
     yyparse();
     printTree(root);
     return root;

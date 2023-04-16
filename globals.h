@@ -14,8 +14,8 @@ extern int lineno;
 
 // Funções do flex 
 extern char* yytext;
-extern char savedToken[100];
-//extern int yylex();
+
+extern int yylex();
 
 #define MAXCHILDREN 3
 

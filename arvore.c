@@ -98,8 +98,8 @@ void printTree( TreeNode * tree ){
     else if (tree->nodekind==ExpK)
     { switch (tree->kind.exp) {
         case OpK:
-          printf("Op: ");
-          printToken(tree->attr.op,"\0");
+          printf("Op: \n");
+          //printToken(tree->attr.op,"\0");
           break;
         case ConstK:
           printf("Const: %d\n",tree->attr.val);

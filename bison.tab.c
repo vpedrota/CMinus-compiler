@@ -79,10 +79,9 @@ static TreeNode *root;
 
 static int savedLineNo;
 static char* savedName;
-static int yylex(void);
 
 
-#line 86 "bison.tab.c"
+#line 85 "bison.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -479,16 +478,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  11
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   115
+#define YYLAST   138
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  31
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  32
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  66
+#define YYNRULES  69
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  113
+#define YYNSTATES  117
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   285
@@ -538,13 +537,13 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    37,    37,    39,    48,    50,    51,    53,    64,    76,
-      80,    85,    90,    96,   107,   118,   119,   125,   134,   135,
-     143,   153,   164,   173,   175,   184,   187,   188,   189,   190,
-     191,   192,   192,   193,   198,   205,   211,   213,   218,   223,
-     225,   227,   234,   238,   240,   245,   251,   256,   261,   266,
-     272,   276,   278,   282,   287,   291,   293,   296,   301,   302,
-     303,   304,   306,   312,   312,   313,   322
+       0,    36,    36,    38,    47,    49,    50,    52,    61,    73,
+      79,    84,    89,    95,   106,   117,   118,   124,   133,   134,
+     142,   152,   161,   165,   169,   172,   181,   183,   192,   195,
+     196,   197,   198,   199,   200,   200,   201,   206,   213,   219,
+     221,   226,   231,   233,   233,   240,   244,   246,   251,   257,
+     262,   267,   272,   278,   282,   284,   288,   293,   297,   299,
+     302,   307,   308,   309,   310,   312,   318,   318,   319,   328
 };
 #endif
 
@@ -578,7 +577,7 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-66)
+#define YYPACT_NINF (-51)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -592,18 +591,18 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      29,   -12,   -12,    23,    29,   -66,   -66,   -66,   -66,    21,
-      28,   -66,   -66,   -66,    42,    32,    42,   -66,    34,    43,
-      51,    53,   -66,   -66,    52,    59,    66,    49,    48,    63,
-      49,    67,    86,   -66,   -66,   -66,   -66,   -66,   -66,   -12,
-     -66,     9,     6,    72,   -10,    73,   -66,    11,    69,   -66,
-     -66,    74,   -66,    40,   -66,   -66,   -66,   -66,   -66,    77,
-      79,   -66,    71,    -4,   -66,   -66,    11,   -66,    80,    11,
-      76,    11,    11,   -66,   -66,   -66,    11,   -66,   -66,   -66,
-     -66,   -66,   -66,   -66,   -66,    11,    11,   -66,   -66,    11,
-      78,   -66,    81,   -66,    82,   -66,    83,    84,   -66,   -66,
-      55,    -4,   -66,    50,    50,   -66,   -66,    11,    99,   -66,
-     -66,    50,   -66
+      32,    -2,    -2,    41,    32,   -51,   -51,   -51,   -51,    -1,
+     -15,   -51,   -51,   -51,    35,    27,    35,   -51,     9,    -2,
+      57,    43,   -51,   -51,    61,    70,    67,    72,    66,    79,
+      72,    75,     7,   -51,   -51,   -51,   -51,   -51,   -51,    80,
+      -2,   -12,    82,   -51,    25,   -51,    84,   -51,   -51,    83,
+     -51,    40,    55,   -51,   -51,   -51,   -51,   -51,    86,    73,
+     -51,   102,    38,   -51,   -51,    25,    -6,   -51,    93,    25,
+      91,    25,    25,   -51,   -51,    68,   -51,   -51,   -51,    25,
+     -51,   -51,   -51,   -51,   -51,   -51,   -51,   -51,    25,    25,
+     -51,   -51,    25,    98,   -51,    99,   -51,   100,   -51,   101,
+     105,   -51,   -51,   -51,    69,    38,   -51,    81,    81,   -51,
+     -51,    25,   120,   -51,   -51,    81,   -51
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -615,32 +614,32 @@ static const yytype_int8 yydefact[] =
        0,     1,     3,     7,     0,     0,     0,    11,    12,     0,
        0,    15,    18,     9,     0,     0,    19,     0,     0,     0,
        0,     0,     0,    13,    12,    17,     8,    14,    20,     0,
-      23,     0,     0,     0,     0,     0,    32,     0,    10,    61,
-      22,    40,    27,     0,    25,    26,    28,    29,    30,     0,
-      59,    39,    43,    51,    55,    60,     0,    36,     0,     0,
-       0,     0,    64,    21,    24,    31,     0,    52,    53,    45,
-      44,    46,    47,    48,    49,     0,     0,    56,    57,     0,
-       0,    37,     0,    58,     0,    66,     0,    63,    38,    59,
-      42,    50,    54,     0,     0,    41,    62,     0,    33,    35,
-      65,     0,    34
+       0,     0,     0,    35,     0,    24,    10,    26,    64,    43,
+      30,     0,     0,    28,    29,    31,    32,    33,     0,    62,
+      42,    46,    54,    58,    63,     0,     0,    39,     0,     0,
+       0,     0,    67,    22,    25,     0,    23,    27,    34,     0,
+      55,    56,    48,    47,    49,    50,    51,    52,     0,     0,
+      59,    60,     0,     0,    40,     0,    61,     0,    69,     0,
+      66,    21,    41,    62,    45,    53,    57,     0,     0,    44,
+      65,     0,    36,    38,    68,     0,    37
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -66,   -66,   -66,   104,   -30,   -66,     3,   -66,   -66,    87,
-     -66,    85,   -21,   -66,   -66,   -52,   -66,   -66,   -66,   -66,
-     -44,   -65,   -66,   -66,    24,   -66,    25,   -66,    26,   -66,
-     -66,   -66
+     -51,   -51,   -51,   123,   -31,   113,     3,   -51,   -51,   114,
+     -51,   103,   -21,   -51,    78,   -50,   -51,   -51,   -51,   -51,
+     -41,   -37,   -51,   -51,    44,   -51,    45,   -51,    46,   -51,
+     -51,   -51
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     3,     4,     5,     6,    24,    51,    19,     7,    20,
-      21,    22,    52,    41,    53,    54,    55,    56,    57,    58,
-      59,    60,    61,    85,    62,    86,    63,    89,    64,    65,
-      96,    97
+      -1,     3,     4,     5,     6,    48,    49,    19,     7,    20,
+      21,    22,    50,    51,    52,    53,    54,    55,    56,    57,
+      58,    59,    60,    88,    61,    89,    62,    92,    63,    64,
+      99,   100
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -648,34 +647,38 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      68,    74,    40,    70,     9,    10,    33,    87,    88,    37,
-      67,    50,    47,    43,    39,    44,     8,    45,    48,    49,
-      99,    99,    90,    11,    99,    92,    13,    94,    95,    46,
-      15,    47,    98,    47,     1,    32,     2,    48,    49,    48,
-      49,    13,    42,    14,    43,    15,    44,    17,    45,    18,
-      16,   108,   109,    17,    43,    34,    44,   -16,    45,   112,
-      46,    23,    47,   110,    77,    78,    32,    73,    48,    49,
-      46,    26,    47,    28,    27,    32,    32,    29,    48,    49,
-      77,    78,    30,    36,    79,    80,    81,    82,    83,    84,
-      31,    39,    38,    71,    66,    69,    72,    75,    76,    93,
-      91,   103,   111,    25,   104,   107,   106,   105,    12,   100,
-       0,   101,     0,    35,     0,   102
+      68,    47,    77,    70,     9,    10,    33,    16,    67,    37,
+      44,    39,    40,    41,    13,    42,    46,    23,    15,    13,
+      74,    14,    26,    15,    93,    77,     8,    43,    95,    44,
+      97,    98,   -16,    32,    45,    46,    23,     1,   102,     2,
+      17,    11,    18,    66,    39,    40,    41,    44,    42,    90,
+      91,   103,   103,    46,    23,   103,    23,   112,   113,    39,
+      43,    41,    44,    42,    28,   116,    32,    73,    46,    23,
+     114,    17,    39,    34,    41,    43,    42,    44,    80,    81,
+      27,    32,    76,    46,    23,    39,    29,    41,    43,    42,
+      44,    31,    79,    30,    32,   101,    46,    23,    32,    36,
+      38,    43,    65,    44,    69,    72,    78,    32,    71,    46,
+      23,    80,    81,    94,    96,    82,    83,    84,    85,    86,
+      87,   107,   108,   115,   110,   109,   111,    12,    24,    75,
+      25,    35,   104,     0,   105,     0,     0,     0,   106
 };
 
 static const yytype_int8 yycheck[] =
 {
-      44,    53,    32,    47,     1,     2,    27,    11,    12,    30,
-      20,    41,    22,     4,     5,     6,    28,     8,    28,    29,
-      85,    86,    66,     0,    89,    69,    20,    71,    72,    20,
-      24,    22,    76,    22,     5,    26,     7,    28,    29,    28,
-      29,    20,    39,    22,     4,    24,     6,     5,     8,     7,
-      22,   103,   104,     5,     4,     7,     6,    23,     8,   111,
-      20,    29,    22,   107,     9,    10,    26,    27,    28,    29,
-      20,    28,    22,    20,    23,    26,    26,    25,    28,    29,
-       9,    10,    23,    20,    13,    14,    15,    16,    17,    18,
-      24,     5,    25,    24,    22,    22,    22,    20,    19,    23,
-      20,    23,     3,    16,    23,    21,    23,    25,     4,    85,
-      -1,    86,    -1,    28,    -1,    89
+      41,    32,    52,    44,     1,     2,    27,    22,    20,    30,
+      22,     4,     5,     6,    20,     8,    28,    29,    24,    20,
+      51,    22,    19,    24,    65,    75,    28,    20,    69,    22,
+      71,    72,    23,    26,    27,    28,    29,     5,    79,     7,
+       5,     0,     7,    40,     4,     5,     6,    22,     8,    11,
+      12,    88,    89,    28,    29,    92,    29,   107,   108,     4,
+      20,     6,    22,     8,    21,   115,    26,    27,    28,    29,
+     111,     5,     4,     7,     6,    20,     8,    22,     9,    10,
+      23,    26,    27,    28,    29,     4,    25,     6,    20,     8,
+      22,    24,    19,    23,    26,    27,    28,    29,    26,    20,
+      25,    20,    22,    22,    22,    22,    20,    26,    24,    28,
+      29,     9,    10,    20,    23,    13,    14,    15,    16,    17,
+      18,    23,    23,     3,    23,    25,    21,     4,    15,    51,
+      16,    28,    88,    -1,    89,    -1,    -1,    -1,    92
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -684,16 +687,16 @@ static const yytype_int8 yystos[] =
 {
        0,     5,     7,    32,    33,    34,    35,    39,    28,    37,
       37,     0,    34,    20,    22,    24,    22,     5,     7,    38,
-      40,    41,    42,    29,    36,    40,    28,    23,    20,    25,
-      23,    24,    26,    43,     7,    42,    20,    43,    25,     5,
-      35,    44,    37,     4,     6,     8,    20,    22,    28,    29,
-      35,    37,    43,    45,    46,    47,    48,    49,    50,    51,
-      52,    53,    55,    57,    59,    60,    22,    20,    51,    22,
-      51,    24,    22,    27,    46,    20,    19,     9,    10,    13,
-      14,    15,    16,    17,    18,    54,    56,    11,    12,    58,
-      51,    20,    51,    23,    51,    51,    61,    62,    51,    52,
-      55,    57,    59,    23,    23,    25,    23,    21,    46,    46,
-      51,     3,    46
+      40,    41,    42,    29,    36,    40,    37,    23,    21,    25,
+      23,    24,    26,    43,     7,    42,    20,    43,    25,     4,
+       5,     6,     8,    20,    22,    27,    28,    35,    36,    37,
+      43,    44,    45,    46,    47,    48,    49,    50,    51,    52,
+      53,    55,    57,    59,    60,    22,    37,    20,    51,    22,
+      51,    24,    22,    27,    35,    45,    27,    46,    20,    19,
+       9,    10,    13,    14,    15,    16,    17,    18,    54,    56,
+      11,    12,    58,    51,    20,    51,    23,    51,    51,    61,
+      62,    27,    51,    52,    55,    57,    59,    23,    23,    25,
+      23,    21,    46,    46,    51,     3,    46
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -701,11 +704,11 @@ static const yytype_int8 yyr1[] =
 {
        0,    31,    32,    33,    33,    34,    34,    35,    35,    36,
       37,    38,    38,    39,    39,    40,    40,    41,    41,    42,
-      42,    43,    44,    44,    45,    45,    46,    46,    46,    46,
-      46,    47,    47,    48,    48,    49,    50,    50,    51,    51,
-      52,    52,    53,    53,    54,    54,    54,    54,    54,    54,
-      55,    55,    56,    56,    57,    57,    58,    58,    59,    59,
-      59,    59,    60,    61,    61,    62,    62
+      42,    43,    43,    43,    43,    44,    44,    45,    45,    46,
+      46,    46,    46,    46,    47,    47,    48,    48,    49,    50,
+      50,    51,    51,    52,    52,    53,    53,    54,    54,    54,
+      54,    54,    54,    55,    55,    56,    56,    57,    57,    58,
+      58,    59,    59,    59,    59,    60,    61,    61,    62,    62
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -713,11 +716,11 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     1,     1,     1,     3,     6,     1,
        1,     1,     1,     6,     6,     1,     1,     3,     1,     2,
-       4,     4,     2,     1,     2,     1,     1,     1,     1,     1,
-       1,     2,     1,     5,     7,     5,     2,     3,     3,     1,
-       1,     4,     3,     1,     1,     1,     1,     1,     1,     1,
-       3,     1,     1,     1,     3,     1,     1,     1,     3,     1,
-       1,     1,     4,     1,     0,     3,     1
+       4,     4,     3,     3,     2,     2,     1,     2,     1,     1,
+       1,     1,     1,     1,     2,     1,     5,     7,     5,     2,
+       3,     3,     1,     1,     4,     3,     1,     1,     1,     1,
+       1,     1,     1,     3,     1,     1,     1,     3,     1,     1,
+       1,     3,     1,     1,     1,     4,     1,     0,     3,     1
 };
 
 
@@ -1413,13 +1416,13 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 37 "bison/bison.y"
+#line 36 "bison/bison.y"
                                { root =  yyvsp[0]; }
-#line 1419 "bison.tab.c"
+#line 1422 "bison.tab.c"
     break;
 
   case 3:
-#line 39 "bison/bison.y"
+#line 38 "bison/bison.y"
                                                   {
                     TreeNode* t = yyvsp[-1];
                     if(t != NULL){
@@ -1430,29 +1433,29 @@ yyreduce:
                         yyval = yyvsp[0];
                     }
                     }
-#line 1434 "bison.tab.c"
+#line 1437 "bison.tab.c"
     break;
 
   case 4:
-#line 48 "bison/bison.y"
+#line 47 "bison/bison.y"
                                    { yyval = yyvsp[0]; }
-#line 1440 "bison.tab.c"
+#line 1443 "bison.tab.c"
     break;
 
   case 5:
-#line 50 "bison/bison.y"
+#line 49 "bison/bison.y"
                                {yyval = yyvsp[0];}
-#line 1446 "bison.tab.c"
+#line 1449 "bison.tab.c"
     break;
 
   case 6:
-#line 51 "bison/bison.y"
+#line 50 "bison/bison.y"
                                  {yyval = yyvsp[0];}
-#line 1452 "bison.tab.c"
+#line 1455 "bison.tab.c"
     break;
 
   case 7:
-#line 53 "bison/bison.y"
+#line 52 "bison/bison.y"
                               {
                         yyval = newExpNode(TypeK);
                         yyval->type = IntegerK;
@@ -1461,14 +1464,12 @@ yyreduce:
                         yyvsp[-1]->nodekind = StmtK;
                         yyvsp[-1]->kind.stmt = VarK;
                         yyvsp[-1]->type = IntegerK;
-                        yyvsp[-1]->name = savedName;
-                        
                     }
-#line 1468 "bison.tab.c"
+#line 1469 "bison.tab.c"
     break;
 
   case 8:
-#line 64 "bison/bison.y"
+#line 61 "bison/bison.y"
                                               {
                         yyval = newExpNode(TypeK);
                         yyval->type = IntegerK;
@@ -1479,50 +1480,52 @@ yyreduce:
                         yyvsp[-4]->type = IntegerK; 
                         yyvsp[-4]->attr.len = yyvsp[-2]->attr.val;
                     }
-#line 1483 "bison.tab.c"
+#line 1484 "bison.tab.c"
     break;
 
   case 9:
-#line 76 "bison/bison.y"
+#line 73 "bison/bison.y"
              {
-        yyval = NULL;
+        yyval = newExpNode(ConstK);
+        yyval->attr.val = atoi(yytext);
+        yyval->type = IntegerK;
     }
-#line 1491 "bison.tab.c"
+#line 1494 "bison.tab.c"
     break;
 
   case 10:
-#line 80 "bison/bison.y"
+#line 79 "bison/bison.y"
            { 
       yyval = newExpNode(IdK);
       yyval->attr.name = copyString(yytext);
     }
-#line 1500 "bison.tab.c"
+#line 1503 "bison.tab.c"
     break;
 
   case 11:
-#line 85 "bison/bison.y"
+#line 84 "bison/bison.y"
                             {
                             yyval = newExpNode(TypeK);
                             yyval->attr.name = "inteiro";
                             yyval->type = IntegerK;
                         }
-#line 1510 "bison.tab.c"
+#line 1513 "bison.tab.c"
     break;
 
   case 12:
-#line 90 "bison/bison.y"
+#line 89 "bison/bison.y"
                                {
                             yyval = newExpNode(TypeK);
                             yyval->attr.name = "void";
                             yyval->type = VoidK;
                         }
-#line 1520 "bison.tab.c"
+#line 1523 "bison.tab.c"
     break;
 
   case 13:
-#line 96 "bison/bison.y"
+#line 95 "bison/bison.y"
                                                          {
-       yyval = newExpNode(TypeK);
+        yyval = newExpNode(TypeK);
         yyval->type = IntegerK;
         yyval->attr.name = "inteiro";
         yyval->child[0] = yyvsp[-4];
@@ -1533,11 +1536,11 @@ yyreduce:
         yyvsp[-4]->type = IntegerK;
         yyvsp[-2]->type = IntegerK;
     }
-#line 1537 "bison.tab.c"
+#line 1540 "bison.tab.c"
     break;
 
   case 14:
-#line 107 "bison/bison.y"
+#line 106 "bison/bison.y"
                                               {
         yyval = newExpNode(TypeK);
         yyval->type = VoidK;
@@ -1548,28 +1551,28 @@ yyreduce:
         yyvsp[-4]->nodekind = StmtK;
         yyvsp[-4]->kind.stmt = FunK;
     }
-#line 1552 "bison.tab.c"
+#line 1555 "bison.tab.c"
     break;
 
   case 15:
-#line 118 "bison/bison.y"
+#line 117 "bison/bison.y"
                         {yyval = yyvsp[0];}
-#line 1558 "bison.tab.c"
+#line 1561 "bison.tab.c"
     break;
 
   case 16:
-#line 119 "bison/bison.y"
+#line 118 "bison/bison.y"
            {
         yyval = newExpNode(TypeK);
         yyval->attr.name = "void";
         yyval->child[0] = NULL; 
     }
-#line 1568 "bison.tab.c"
+#line 1571 "bison.tab.c"
     break;
 
   case 17:
-#line 125 "bison/bison.y"
-                                      {
+#line 124 "bison/bison.y"
+                                       {
         TreeNode* t = yyvsp[-2];
         if(t != NULL){
             while(t->sibling != NULL) { t = t->sibling;}
@@ -1579,17 +1582,17 @@ yyreduce:
             yyval = yyvsp[0];
         }
     }
-#line 1583 "bison.tab.c"
+#line 1586 "bison.tab.c"
     break;
 
   case 18:
-#line 134 "bison/bison.y"
+#line 133 "bison/bison.y"
               {yyval = yyvsp[0];}
-#line 1589 "bison.tab.c"
+#line 1592 "bison.tab.c"
     break;
 
   case 19:
-#line 135 "bison/bison.y"
+#line 134 "bison/bison.y"
                                  {
         yyval = newExpNode(TypeK);
         yyval->child[0]= yyvsp[0];
@@ -1599,11 +1602,11 @@ yyreduce:
         yyvsp[0]->kind.stmt = VarK;
         yyvsp[0]->type = yyvsp[-1]->type;
     }
-#line 1603 "bison.tab.c"
+#line 1606 "bison.tab.c"
     break;
 
   case 20:
-#line 143 "bison/bison.y"
+#line 142 "bison/bison.y"
                                         {
         yyval= newExpNode(TypeK);
         yyval->child[0]= yyvsp[-2];
@@ -1613,11 +1616,11 @@ yyreduce:
         yyvsp[-2]->type = yyvsp[-3]->type;
         yyvsp[-2]->kind.stmt = VetK;
     }
-#line 1617 "bison.tab.c"
+#line 1620 "bison.tab.c"
     break;
 
   case 21:
-#line 153 "bison/bison.y"
+#line 152 "bison/bison.y"
                                                               {
         TreeNode* t = yyvsp[-2];
         if(t != NULL){
@@ -1628,11 +1631,33 @@ yyreduce:
         } 
         else yyval = yyvsp[-1];
     }
-#line 1632 "bison.tab.c"
+#line 1635 "bison.tab.c"
     break;
 
   case 22:
-#line 164 "bison/bison.y"
+#line 162 "bison/bison.y"
+              {
+                yyval = yyvsp[-1];
+              }
+#line 1643 "bison.tab.c"
+    break;
+
+  case 23:
+#line 166 "bison/bison.y"
+              {
+                yyval = yyvsp[-1];
+              }
+#line 1651 "bison.tab.c"
+    break;
+
+  case 24:
+#line 169 "bison/bison.y"
+                          {}
+#line 1657 "bison.tab.c"
+    break;
+
+  case 25:
+#line 172 "bison/bison.y"
                                                         {
         TreeNode* t = yyvsp[-1];
         if(t != NULL){
@@ -1643,17 +1668,17 @@ yyreduce:
             yyval = yyvsp[0];
         }
     }
-#line 1647 "bison.tab.c"
+#line 1672 "bison.tab.c"
     break;
 
-  case 23:
-#line 173 "bison/bison.y"
+  case 26:
+#line 181 "bison/bison.y"
                         {yyval = yyvsp[0];}
-#line 1653 "bison.tab.c"
+#line 1678 "bison.tab.c"
     break;
 
-  case 24:
-#line 175 "bison/bison.y"
+  case 27:
+#line 183 "bison/bison.y"
                                                {
         TreeNode* t = yyvsp[-1];
         if(t != NULL){
@@ -1664,327 +1689,327 @@ yyreduce:
             yyval = yyvsp[0];
         }
     }
-#line 1668 "bison.tab.c"
-    break;
-
-  case 25:
-#line 184 "bison/bison.y"
-                  {yyval = yyvsp[0];}
-#line 1674 "bison.tab.c"
-    break;
-
-  case 26:
-#line 187 "bison/bison.y"
-                       {yyval = yyvsp[0];}
-#line 1680 "bison.tab.c"
-    break;
-
-  case 27:
-#line 188 "bison/bison.y"
-                        {yyval = yyvsp[0];}
-#line 1686 "bison.tab.c"
+#line 1693 "bison.tab.c"
     break;
 
   case 28:
-#line 189 "bison/bison.y"
-                       {yyval = yyvsp[0];}
-#line 1692 "bison.tab.c"
+#line 192 "bison/bison.y"
+                  {yyval = yyvsp[0];}
+#line 1699 "bison.tab.c"
     break;
 
   case 29:
-#line 190 "bison/bison.y"
-                        {yyval = yyvsp[0];}
-#line 1698 "bison.tab.c"
+#line 195 "bison/bison.y"
+                       {yyval = yyvsp[0];}
+#line 1705 "bison.tab.c"
     break;
 
   case 30:
-#line 191 "bison/bison.y"
-                       {yyval = yyvsp[0];}
-#line 1704 "bison.tab.c"
+#line 196 "bison/bison.y"
+                        {yyval = yyvsp[0];}
+#line 1711 "bison.tab.c"
     break;
 
   case 31:
-#line 192 "bison/bison.y"
-                                 { yyval = yyvsp[-1]; }
-#line 1710 "bison.tab.c"
+#line 197 "bison/bison.y"
+                       {yyval = yyvsp[0];}
+#line 1717 "bison.tab.c"
+    break;
+
+  case 32:
+#line 198 "bison/bison.y"
+                        {yyval = yyvsp[0];}
+#line 1723 "bison.tab.c"
     break;
 
   case 33:
-#line 193 "bison/bison.y"
+#line 199 "bison/bison.y"
+                       {yyval = yyvsp[0];}
+#line 1729 "bison.tab.c"
+    break;
+
+  case 34:
+#line 200 "bison/bison.y"
+                                 { yyval = yyvsp[-1]; }
+#line 1735 "bison.tab.c"
+    break;
+
+  case 36:
+#line 201 "bison/bison.y"
                                                    {
         yyval = newStmtNode(IfK);
         yyval->child[0] = yyvsp[-2];
         yyval->child[1] = yyvsp[0];
     }
-#line 1720 "bison.tab.c"
+#line 1745 "bison.tab.c"
     break;
 
-  case 34:
-#line 198 "bison/bison.y"
+  case 37:
+#line 206 "bison/bison.y"
                                                       {
         yyval = newStmtNode(IfK);
         yyval->child[0] = yyvsp[-4];
         yyval->child[1] = yyvsp[-2];
         yyval->child[2] = yyvsp[0];
     }
-#line 1731 "bison.tab.c"
+#line 1756 "bison.tab.c"
     break;
 
-  case 35:
-#line 205 "bison/bison.y"
+  case 38:
+#line 213 "bison/bison.y"
                                                        {
         yyval = newStmtNode(WhileK);
         yyval->child[0] = yyvsp[-2];
         yyval->child[1] = yyvsp[0];
     }
-#line 1741 "bison.tab.c"
+#line 1766 "bison.tab.c"
     break;
 
-  case 36:
-#line 211 "bison/bison.y"
+  case 39:
+#line 219 "bison/bison.y"
                             {
         yyval = newStmtNode(ReturnK);
     }
-#line 1749 "bison.tab.c"
+#line 1774 "bison.tab.c"
     break;
 
-  case 37:
-#line 213 "bison/bison.y"
+  case 40:
+#line 221 "bison/bison.y"
                             {
         yyval = newStmtNode(ReturnK);
         yyval->child[0] = yyvsp[-1];
     }
-#line 1758 "bison.tab.c"
+#line 1783 "bison.tab.c"
     break;
 
-  case 38:
-#line 218 "bison/bison.y"
+  case 41:
+#line 226 "bison/bison.y"
                                     {
         yyval = newStmtNode(AssignK);
         yyval->attr.name = yyvsp[-2]->attr.name;
         yyval->child[0] = yyvsp[-2];
         yyval->child[1] = yyvsp[0];
     }
-#line 1769 "bison.tab.c"
+#line 1794 "bison.tab.c"
     break;
 
-  case 39:
-#line 223 "bison/bison.y"
+  case 42:
+#line 231 "bison/bison.y"
                           { yyval = yyvsp[0];}
-#line 1775 "bison.tab.c"
+#line 1800 "bison.tab.c"
     break;
 
-  case 40:
-#line 225 "bison/bison.y"
+  case 43:
+#line 233 "bison/bison.y"
             { yyval = yyvsp[0];}
-#line 1781 "bison.tab.c"
+#line 1806 "bison.tab.c"
     break;
 
-  case 41:
-#line 227 "bison/bison.y"
-                             {
+  case 44:
+#line 233 "bison/bison.y"
+                                                 {
         yyval = yyvsp[-3];
         yyval->child[0] = yyvsp[-1];
         yyval->kind.exp = VetK;
         yyval->type = IntegerK;
     }
-#line 1792 "bison.tab.c"
+#line 1817 "bison.tab.c"
     break;
 
-  case 42:
-#line 234 "bison/bison.y"
+  case 45:
+#line 240 "bison/bison.y"
                                                                 {
         yyval = yyvsp[-1];
         yyval->child[0] = yyvsp[-2];
         yyval->child[1] = yyvsp[0];
     }
-#line 1802 "bison.tab.c"
+#line 1827 "bison.tab.c"
     break;
 
-  case 43:
-#line 238 "bison/bison.y"
+  case 46:
+#line 244 "bison/bison.y"
                       { yyval = yyvsp[0]; }
-#line 1808 "bison.tab.c"
+#line 1833 "bison.tab.c"
     break;
 
-  case 44:
-#line 240 "bison/bison.y"
+  case 47:
+#line 246 "bison/bison.y"
                     { 
         yyval = newExpNode(OpK);
         yyval->attr.op = LET;                            
 		yyval->type = BooleanK;
     }
-#line 1818 "bison.tab.c"
+#line 1843 "bison.tab.c"
     break;
 
-  case 45:
-#line 245 "bison/bison.y"
+  case 48:
+#line 251 "bison/bison.y"
           {
         yyval = newExpNode(OpK);
         yyval->attr.op = LT;                            
 		yyval->type = BooleanK;
      
     }
-#line 1829 "bison.tab.c"
+#line 1854 "bison.tab.c"
     break;
 
-  case 46:
-#line 251 "bison/bison.y"
+  case 49:
+#line 257 "bison/bison.y"
           {
         yyval = newExpNode(OpK);
         yyval->attr.op = GT;                            
 		yyval->type = BooleanK; 
     }
-#line 1839 "bison.tab.c"
+#line 1864 "bison.tab.c"
     break;
 
-  case 47:
-#line 256 "bison/bison.y"
+  case 50:
+#line 262 "bison/bison.y"
           {
         yyval = newExpNode(OpK);
         yyval->attr.op = GET;                            
 		yyval->type = BooleanK; 
     }
-#line 1849 "bison.tab.c"
+#line 1874 "bison.tab.c"
     break;
 
-  case 48:
-#line 261 "bison/bison.y"
+  case 51:
+#line 267 "bison/bison.y"
            {
         yyval = newExpNode(OpK);
         yyval->attr.op = COMP;                            
 		yyval->type = BooleanK; 
     }
-#line 1859 "bison.tab.c"
+#line 1884 "bison.tab.c"
     break;
 
-  case 49:
-#line 266 "bison/bison.y"
+  case 52:
+#line 272 "bison/bison.y"
           {
         yyval = newExpNode(OpK);
         yyval->attr.op = DIF;                            
 		yyval->type = BooleanK;
     }
-#line 1869 "bison.tab.c"
+#line 1894 "bison.tab.c"
     break;
 
-  case 50:
-#line 272 "bison/bison.y"
+  case 53:
+#line 278 "bison/bison.y"
                                               {
         yyval = yyvsp[-1];
         yyval->child[0] = yyvsp[-2];
         yyval->child[1] = yyvsp[0];
     }
-#line 1879 "bison.tab.c"
+#line 1904 "bison.tab.c"
     break;
 
-  case 51:
-#line 276 "bison/bison.y"
+  case 54:
+#line 282 "bison/bison.y"
               { yyval = yyvsp[0]; }
-#line 1885 "bison.tab.c"
+#line 1910 "bison.tab.c"
     break;
 
-  case 52:
-#line 278 "bison/bison.y"
+  case 55:
+#line 284 "bison/bison.y"
                {
         yyval = newExpNode(OpK);
         yyval->attr.op = PLUS;  
     }
-#line 1894 "bison.tab.c"
-    break;
-
-  case 53:
-#line 282 "bison/bison.y"
-          {
-        yyval = newExpNode(OpK);
-        yyval->attr.op = SUB;  
-    }
-#line 1903 "bison.tab.c"
-    break;
-
-  case 54:
-#line 287 "bison/bison.y"
-                            {
-        yyval = yyvsp[-1];
-        yyval->child[0] = yyvsp[-2];
-        yyval->child[1] = yyvsp[0];
-    }
-#line 1913 "bison.tab.c"
-    break;
-
-  case 55:
-#line 291 "bison/bison.y"
-              { yyval = yyvsp[0];}
 #line 1919 "bison.tab.c"
     break;
 
   case 56:
-#line 293 "bison/bison.y"
-               {
+#line 288 "bison/bison.y"
+          {
         yyval = newExpNode(OpK);
-        yyval->attr.op = MULT; 
+        yyval->attr.op = SUB;  
     }
 #line 1928 "bison.tab.c"
     break;
 
   case 57:
-#line 296 "bison/bison.y"
+#line 293 "bison/bison.y"
+                            {
+        yyval = yyvsp[-1];
+        yyval->child[0] = yyvsp[-2];
+        yyval->child[1] = yyvsp[0];
+    }
+#line 1938 "bison.tab.c"
+    break;
+
+  case 58:
+#line 297 "bison/bison.y"
+              { yyval = yyvsp[0];}
+#line 1944 "bison.tab.c"
+    break;
+
+  case 59:
+#line 299 "bison/bison.y"
+               {
+        yyval = newExpNode(OpK);
+        yyval->attr.op = MULT; 
+    }
+#line 1953 "bison.tab.c"
+    break;
+
+  case 60:
+#line 302 "bison/bison.y"
             {
         yyval = newExpNode(OpK);
         yyval->attr.op = DIV; 
     }
-#line 1937 "bison.tab.c"
-    break;
-
-  case 58:
-#line 301 "bison/bison.y"
-                               { yyval = yyvsp[-1]; }
-#line 1943 "bison.tab.c"
-    break;
-
-  case 59:
-#line 302 "bison/bison.y"
-          { yyval = yyvsp[0]; }
-#line 1949 "bison.tab.c"
-    break;
-
-  case 60:
-#line 303 "bison/bison.y"
-               { yyval = yyvsp[0]; }
-#line 1955 "bison.tab.c"
+#line 1962 "bison.tab.c"
     break;
 
   case 61:
-#line 304 "bison/bison.y"
-          {yyval = yyvsp[0];}
-#line 1961 "bison.tab.c"
+#line 307 "bison/bison.y"
+                               { yyval = yyvsp[-1]; }
+#line 1968 "bison.tab.c"
     break;
 
   case 62:
-#line 306 "bison/bison.y"
+#line 308 "bison/bison.y"
+          {  yyval = yyvsp[0]; }
+#line 1974 "bison.tab.c"
+    break;
+
+  case 63:
+#line 309 "bison/bison.y"
+               { yyval = yyvsp[0]; }
+#line 1980 "bison.tab.c"
+    break;
+
+  case 64:
+#line 310 "bison/bison.y"
+          {yyval = yyvsp[0];}
+#line 1986 "bison.tab.c"
+    break;
+
+  case 65:
+#line 312 "bison/bison.y"
                                 {
         yyval = yyvsp[-3];
         yyval->child[0] = yyvsp[-1];
         yyval->nodekind = StmtK;
         yyval->kind.stmt = CallK;
     }
-#line 1972 "bison.tab.c"
+#line 1997 "bison.tab.c"
     break;
 
-  case 63:
-#line 312 "bison/bison.y"
+  case 66:
+#line 318 "bison/bison.y"
                     { yyval = yyvsp[0]; }
-#line 1978 "bison.tab.c"
+#line 2003 "bison.tab.c"
     break;
 
-  case 64:
-#line 312 "bison/bison.y"
+  case 67:
+#line 318 "bison/bison.y"
                                    { yyval = NULL; }
-#line 1984 "bison.tab.c"
+#line 2009 "bison.tab.c"
     break;
 
-  case 65:
-#line 313 "bison/bison.y"
+  case 68:
+#line 319 "bison/bison.y"
                                        {
         TreeNode* t = yyvsp[-2];
         if(t != NULL){
@@ -1995,17 +2020,17 @@ yyreduce:
             yyval = yyvsp[0] ;
         }
     }
-#line 1999 "bison.tab.c"
+#line 2024 "bison.tab.c"
     break;
 
-  case 66:
-#line 322 "bison/bison.y"
+  case 69:
+#line 328 "bison/bison.y"
                   { yyval = yyvsp[0]; }
-#line 2005 "bison.tab.c"
+#line 2030 "bison.tab.c"
     break;
 
 
-#line 2009 "bison.tab.c"
+#line 2034 "bison.tab.c"
 
       default: break;
     }
@@ -2237,19 +2262,15 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 324 "bison/bison.y"
+#line 330 "bison/bison.y"
 
 
 int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
 }
 
-static int yylex(void){
-    return getToken();
-}
 
 TreeNode* parse(){
-    printf("%s", savedToken);
     yyparse();
     printTree(root);
     return root;

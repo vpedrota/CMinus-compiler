@@ -12,6 +12,7 @@ static TreeNode *root;
 
 static int savedLineNo;
 static char* savedName;
+static int yylex(void); 
 
 %}
 
@@ -57,9 +58,11 @@ static char* savedName;
                         $2->nodekind = StmtK;
                         $2->kind.stmt = VarK;
                         $2->type = IntegerK;
+                        $2->attr.name = savedName;
                     } 
                     | INT id LCOL num RCOL PV {
                         $$ = newExpNode(TypeK);
+                        $$->kind.stmt = VetK;
                         $$->type = IntegerK;
                         $$->attr.name = "inteiro";
                         $$->child[0] = $2;
@@ -78,7 +81,9 @@ static char* savedName;
 
     id: ID { 
       $$ = newExpNode(IdK);
-      $$->attr.name = copyString(yytext);
+      savedName = copyString(tokenString);
+      $$->attr.name = copyString(tokenString);
+      //savedName = copyString(yytext);
     };
 
     tipo-especificador: INT {
@@ -141,6 +146,7 @@ static char* savedName;
         $2->type = $1->type;
     } | tipo-especificador id LCOL RCOL {
         $$= newExpNode(TypeK);
+        $$->nodekind = VetK;
         $$->child[0]= $2;
         $$->type = $1->type;
         $$->attr.name = $1->attr.name;
@@ -224,14 +230,20 @@ static char* savedName;
     };
 
     expressao: var ASSIGN expressao {
+        printf("asssa");
         $$ = newStmtNode(AssignK);
-        $$->attr.name = $1->attr.name;
+        $1->attr.name = savedName;
         $$->child[0] = $1;
         $$->child[1] = $3;
     } | simples-expressao { $$ = $1;};
 
-    var: id { $$ = $1;} | ID LCOL expressao RCOL {
+    var: id {  
+            $$ = newExpNode(IdK);
+            $$->attr.name = copyString("aaa");
+            savedName = copyString(yytext);
+            } | ID LCOL expressao RCOL {
         $$ = $1;
+        $$->attr.name = savedName;
         $$->child[0] = $3;
         $$->kind.exp = VetK;
         $$->type = IntegerK;
@@ -333,10 +345,13 @@ int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
 }
 
+static int yylex(void) {
+  return getToken(NULL);
+}
 
 TreeNode* parse(){
     yyparse();
+    printf("-%s--", tokenString);
     printTree(root);
     return root;
 }
-

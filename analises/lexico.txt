@@ -1,0 +1,91 @@
+1: INT  
+1: ID, name = a 
+1: LPAR  
+1: VOID   
+1: RPAR  
+1: LCHA  
+2: RETURN  
+2: ID, name = v 
+2: PV  
+3: RCHA  
+5: VOID   
+5: ID, name = b 
+5: LPAR  
+5: INT  
+5: ID, name = vetor 
+5: unknown  
+5: unknown  
+5: VIR  
+5: INT  
+5: ID, name = a 
+5: VIR  
+5: INT  
+5: ID, name = b 
+5: RPAR  
+5: LCHA  
+7: RCHA  
+9: VOID   
+9: ID, name = main 
+9: LPAR  
+9: VOID   
+9: RPAR  
+9: LCHA  
+10: INT  
+10: ID, name = b 
+10: PV  
+11: INT  
+11: ID, name = a 
+11: PV  
+12: INT  
+12: ID, name = c 
+12: PV  
+13: INT  
+13: ID, name = d 
+13: unknown  
+13: NUM, value = 3 
+13: unknown  
+13: PV  
+14: WHILE  
+14: LPAR  
+14: NUM, value = 1 
+14: RPAR  
+14: PV  
+15: ID, name = c 
+15: ASSIGN  
+15: NUM, value = 2 
+15: PV  
+16: unknown  
+16: LPAR  
+16: ID, name = c 
+16: GT  
+16: ID, name = c 
+16: RPAR  
+16: LCHA  
+17: WHILE  
+17: LPAR  
+17: NUM, value = 1 
+17: RPAR  
+17: PV  
+18: ID, name = a 
+18: ASSIGN  
+18: NUM, value = 2 
+18: PV  
+19: RCHA  
+20: ELSE  
+20: LCHA  
+21: ID, name = a 
+21: ASSIGN  
+21: NUM, value = 3 
+21: PV  
+22: RCHA  
+24: WHILE  
+24: LPAR  
+24: NUM, value = 3 
+24: RPAR  
+24: LCHA  
+25: ID, name = df 
+25: ASSIGN  
+25: NUM, value = 3 
+25: PV  
+26: RCHA  
+28: RCHA  

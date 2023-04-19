@@ -9,7 +9,7 @@ DIGITO [0-9]
 numero {DIGITO}+
 LETRA ([a-z]|[A-Z])
 identificador ({LETRA}|_)({LETRA}|_|{DIGITO})*
-whitespace  [ \t\r]+
+whitespace  [ \t]+
 
 %%
 

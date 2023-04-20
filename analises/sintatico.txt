@@ -17,7 +17,8 @@
         Id: c
         Const: 2
       If
-        Op:           Id: a
+        Op:  GT  
+          Id: a
           Id: c
         Atribuicao
           Id: a

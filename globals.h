@@ -4,23 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define  ENDFILE 0
-#define MAXTOKENLEN 100
-
-extern char tokenString[MAXTOKENLEN+1];
-int getToken(FILE *output);
-
-// Funções para análise
-void scanner();
-
-// Numero da linha
-extern int lineno;
-
-// Funções do flex 
-extern char* yytext;
-
-//extern int yylex();
-
+#define ENDFILE 0
 #define MAXCHILDREN 3
 
 typedef enum {StmtK,ExpK} NodeKind;

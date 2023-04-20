@@ -3,12 +3,11 @@
 // Importação das bibliotecas 
 #define YYSTYPE TreeNode*
 #include "globals.h"
+#include "scan.h"
 #include "arvore.h"
 int yyerror(char *s);
 static TreeNode *root;
 static int savedLineNo;
-static char* savedName;
-static int yylex(void); 
 
 %}
 
@@ -435,13 +434,13 @@ arg_lista : arg_lista VIR expressao
 ident : ID
       {
       $$ = newExpNode(IdK);
-      $$->attr.name = copyString(tokenString);
+      $$->attr.name = copyString(yytext);
       }
 ;
 num : NUM
       {
         $$ = newExpNode(ConstK);
-        $$->attr.val = atoi(tokenString);
+        $$->attr.val = atoi(yytext);
         $$->type = IntegerK;
       }
 ;
@@ -453,9 +452,6 @@ int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
 }
 
-static int yylex(void) {
-  return getToken(NULL);
-}
 
 TreeNode* parse(){
     yyparse();

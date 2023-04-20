@@ -15,9 +15,9 @@
 5: LCHA  
 6: INT  
 6: ID, name = b 
-6: unknown  
+6: LCOL  
 6: NUM, value = 2 
-6: unknown  
+6: RCOL  
 6: PV  
 7: INT  
 7: ID, name = a 
@@ -34,7 +34,7 @@
 10: ASSIGN  
 10: NUM, value = 2 
 10: PV  
-11: unknown  
+11: IF  
 11: LPAR  
 11: ID, name = a 
 11: GT  

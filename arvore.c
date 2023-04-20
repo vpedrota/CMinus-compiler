@@ -1,4 +1,5 @@
 #include "globals.h"
+#include "scan.h"
 
 // Variáveis utilizada para imprimir a árvore sintática
 // Utilizada apenas para controlar o nível de identação
@@ -60,8 +61,36 @@ char* copyString(const char *string){
   return str;
 }
 
-
-
+void printOp(FILE *output, int token){
+   switch (token){
+      case PLUS: 
+         fprintf(output, " PLUS  \n"); 
+         break;
+      case SUB: 
+         fprintf(output, " SUB  \n"); 
+         break;
+      case MULT: 
+         fprintf(output, " MULT  \n"); 
+         break;
+      case DIF: 
+         fprintf(output, " DIF  \n");  
+         break;
+      case GT: 
+         fprintf(output, " GT  \n");  
+         break;
+      case LT: 
+         fprintf(output, " LT  \n");  
+         break;
+      case GET: 
+         fprintf(output, " GT  \n");  
+         break;
+      case LET: 
+         fprintf(output, " LT  \n");  
+         break;
+      default:
+         fprintf(output, " unknown  \n");  
+   }
+}
 
 void printTree( TreeNode * tree, FILE *output){
   
@@ -103,7 +132,7 @@ void printTree( TreeNode * tree, FILE *output){
     { switch (tree->kind.exp) {
         case OpK:
           fprintf(output, "Op: ");
-          printT(tree->attr.op);
+          printOp(output, tree->attr.op);
           break;
         case ConstK:
           fprintf(output, "Const: %d\n",tree->attr.val);

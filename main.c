@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include "globals.h"
+#include "scan.h"
 #include "arvore.h"
 
 int lineno = 1;

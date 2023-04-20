@@ -1,7 +1,6 @@
 %{
-   
    #include "globals.h"
-   char tokenString[MAXTOKENLEN+1];
+   #include "scan.h"
 %}
 
 
@@ -100,6 +99,9 @@ void printToken(FILE *output, int token, char *tokenString){
       case LCHA: 
          fprintf(output, "%d: LCHA  \n", lineno); 
          break;
+      case IF: 
+         fprintf(output, "%d: IF  \n", lineno); 
+         break;
       case PV: 
          fprintf(output, "%d: PV  \n", lineno);  
          break;
@@ -142,6 +144,12 @@ void printToken(FILE *output, int token, char *tokenString){
       case RPAR: 
          fprintf(output, "%d: RPAR  \n", lineno);  
          break;
+      case RCOL: 
+         fprintf(output, "%d: RCOL  \n", lineno);  
+         break;
+      case LCOL: 
+         fprintf(output, "%d: LCOL  \n", lineno);  
+         break;
       case ERR:
          fprintf(output, "%d: ERR  \n", lineno); 
          printf("ERRO LÉXICO: %s LINHA: %d\n", tokenString, lineno);
@@ -158,7 +166,6 @@ int getToken(FILE *output){
    int currentToken = yylex();
    if(output != NULL)
       printToken(output, currentToken, yytext);
-   strncpy(tokenString, yytext, MAXTOKENLEN);
    return  currentToken;
 }
 

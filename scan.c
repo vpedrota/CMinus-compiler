@@ -479,11 +479,10 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "flex/flex.l"
 #line 2 "flex/flex.l"
-   
    #include "globals.h"
-   char tokenString[MAXTOKENLEN+1];
+   #include "scan.h"
+#line 485 "scan.c"
 #line 486 "scan.c"
-#line 487 "scan.c"
 
 #define INITIAL 0
 
@@ -700,10 +699,10 @@ YY_DECL
 		}
 
 	{
-#line 14 "flex/flex.l"
+#line 13 "flex/flex.l"
 
 
-#line 707 "scan.c"
+#line 706 "scan.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -762,132 +761,132 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "flex/flex.l"
+#line 15 "flex/flex.l"
 {return PLUS;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 "flex/flex.l"
+#line 16 "flex/flex.l"
 {return SUB;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "flex/flex.l"
+#line 17 "flex/flex.l"
 {return MULT;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "flex/flex.l"
+#line 18 "flex/flex.l"
 {return DIV;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "flex/flex.l"
+#line 19 "flex/flex.l"
 {return ASSIGN;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "flex/flex.l"
+#line 20 "flex/flex.l"
 {return PV;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "flex/flex.l"
+#line 21 "flex/flex.l"
 {return VIR;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 23 "flex/flex.l"
+#line 22 "flex/flex.l"
 {return VOID;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 "flex/flex.l"
+#line 23 "flex/flex.l"
 {return INT;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "flex/flex.l"
+#line 24 "flex/flex.l"
 {return IF;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "flex/flex.l"
+#line 25 "flex/flex.l"
 {return RETURN;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "flex/flex.l"
+#line 26 "flex/flex.l"
 {return ELSE;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "flex/flex.l"
+#line 27 "flex/flex.l"
 {return WHILE;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "flex/flex.l"
+#line 28 "flex/flex.l"
 {return RPAR;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "flex/flex.l"
+#line 29 "flex/flex.l"
 {return LPAR;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 31 "flex/flex.l"
+#line 30 "flex/flex.l"
 {return RCOL;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 32 "flex/flex.l"
+#line 31 "flex/flex.l"
 {return LCOL;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 33 "flex/flex.l"
+#line 32 "flex/flex.l"
 {return RCHA;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 34 "flex/flex.l"
+#line 33 "flex/flex.l"
 {return LCHA;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 35 "flex/flex.l"
+#line 34 "flex/flex.l"
 {return DIF;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 36 "flex/flex.l"
+#line 35 "flex/flex.l"
 {return LT;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 37 "flex/flex.l"
+#line 36 "flex/flex.l"
 {return GT;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 38 "flex/flex.l"
+#line 37 "flex/flex.l"
 {return LET;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 39 "flex/flex.l"
+#line 38 "flex/flex.l"
 {return GET;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 40 "flex/flex.l"
+#line 39 "flex/flex.l"
 {return COMP;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 41 "flex/flex.l"
+#line 40 "flex/flex.l"
 {
    char c;
       while(1){
@@ -904,35 +903,35 @@ YY_RULE_SETUP
 case 27:
 /* rule 27 can match eol */
 YY_RULE_SETUP
-#line 53 "flex/flex.l"
+#line 52 "flex/flex.l"
 {lineno++;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 54 "flex/flex.l"
+#line 53 "flex/flex.l"
 {return NUM;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 55 "flex/flex.l"
+#line 54 "flex/flex.l"
 {}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 56 "flex/flex.l"
+#line 55 "flex/flex.l"
 {return ID;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 57 "flex/flex.l"
+#line 56 "flex/flex.l"
 {return ERR;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 60 "flex/flex.l"
+#line 59 "flex/flex.l"
 ECHO;
 	YY_BREAK
-#line 936 "scan.c"
+#line 935 "scan.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1937,7 +1936,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 60 "flex/flex.l"
+#line 59 "flex/flex.l"
 
 
 int yywrap(){}
@@ -1981,6 +1980,9 @@ void printToken(FILE *output, int token, char *tokenString){
       case LCHA: 
          fprintf(output, "%d: LCHA  \n", lineno); 
          break;
+      case IF: 
+         fprintf(output, "%d: IF  \n", lineno); 
+         break;
       case PV: 
          fprintf(output, "%d: PV  \n", lineno);  
          break;
@@ -2023,6 +2025,12 @@ void printToken(FILE *output, int token, char *tokenString){
       case RPAR: 
          fprintf(output, "%d: RPAR  \n", lineno);  
          break;
+      case RCOL: 
+         fprintf(output, "%d: RCOL  \n", lineno);  
+         break;
+      case LCOL: 
+         fprintf(output, "%d: LCOL  \n", lineno);  
+         break;
       case ERR:
          fprintf(output, "%d: ERR  \n", lineno); 
          printf("ERRO LÉXICO: %s LINHA: %d\n", tokenString, lineno);
@@ -2039,7 +2047,6 @@ int getToken(FILE *output){
    int currentToken = yylex();
    if(output != NULL)
       printToken(output, currentToken, yytext);
-   strncpy(tokenString, yytext, MAXTOKENLEN);
    return  currentToken;
 }
 

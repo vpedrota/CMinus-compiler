@@ -12,7 +12,7 @@ bison.tab.o: bison/bison.y globals.h
 	$(CC) -c bison.tab.c
 
 lex.yy.o: flex/flex.l globals.h
-	flex flex/flex.l
+	flex -o scan.c flex/flex.l
 	$(CC) -c lex.yy.c
 
 arvore.o: arvore.c arvore.h globals.h

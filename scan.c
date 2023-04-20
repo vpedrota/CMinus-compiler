@@ -1,5 +1,6 @@
+#line 2 "scan.c"
 
-#line 3 "lex.yy.c"
+#line 4 "scan.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -481,8 +482,8 @@ char *yytext;
    
    #include "globals.h"
    char tokenString[MAXTOKENLEN+1];
-#line 485 "lex.yy.c"
-#line 486 "lex.yy.c"
+#line 486 "scan.c"
+#line 487 "scan.c"
 
 #define INITIAL 0
 
@@ -702,7 +703,7 @@ YY_DECL
 #line 14 "flex/flex.l"
 
 
-#line 706 "lex.yy.c"
+#line 707 "scan.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -931,7 +932,7 @@ YY_RULE_SETUP
 #line 60 "flex/flex.l"
 ECHO;
 	YY_BREAK
-#line 935 "lex.yy.c"
+#line 936 "scan.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

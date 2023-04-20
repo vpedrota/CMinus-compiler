@@ -48,10 +48,10 @@ TreeNode * newExpNode(ExpKind kind) {
   }
 }
 
-static void printSpaces(void){ 
+static void printSpaces(FILE *output){ 
   int i;
   for (i=0;i<indentno;i++)
-    printf(" ");
+    fprintf(output, " ");
 }
 
 char* copyString(const char *string){
@@ -60,71 +60,81 @@ char* copyString(const char *string){
   return str;
 }
 
-void printTree( TreeNode * tree ){
+
+
+
+void printTree( TreeNode * tree, FILE *output){
+  
   int i;
   INDENT;
   while (tree != NULL) {
-    printSpaces();
+    printSpaces(output);
     if (tree->nodekind==StmtK)
     { switch (tree->kind.stmt)
             {
             case IfK:
-                printf( "If\n");
+                fprintf(output, "If\n");
                 break;
             case AssignK:
-                printf( "Atribuicao\n");
+                fprintf(output, "Atribuicao\n");
                 break;
             case WhileK:
-                printf( "While\n");
+                fprintf(output, "While\n");
                 break;
             case VarK:
-                printf( "Variavel %s\n", tree->attr.name);
+                fprintf(output, "Variavel %s\n", tree->attr.name);
                 break;
             case FunK:
-                printf( "Funcao %s\n", tree->attr.name);
+                fprintf(output, "Funcao %s\n", tree->attr.name);
                 break;
             case CallK:
-                printf( "Chamada de Funcao %s \n", tree->attr.name);
+                fprintf(output, "Chamada de Funcao %s \n", tree->attr.name);
                 break;
             case ReturnK:
-                printf( "Return\n");
+                fprintf(output, "Return\n");
                 break;
 
             default:
-                printf( "No de Declaracao desconhecido\n");
+                fprintf(output, "No de Declaracao desconhecido\n");
                 break;
             }
     }
     else if (tree->nodekind==ExpK)
     { switch (tree->kind.exp) {
         case OpK:
-          printf("Op: ");
+          fprintf(output, "Op: ");
           printT(tree->attr.op);
           break;
         case ConstK:
-          printf("Const: %d\n",tree->attr.val);
+          fprintf(output, "Const: %d\n",tree->attr.val);
           break;
         case IdK:
-          printf("Id: %s\n",tree->attr.name);
+          fprintf(output, "Id: %s\n",tree->attr.name);
           break;
         case VetK:
-                printf( "Vetor: %s\n", tree->attr.name);
+                fprintf(output, "Vetor: %s\n", tree->attr.name);
                 break;
         //case VetidK:
-        //    printf( "Indice [%d]\n", tree->attr.val);
+        //    fprintf(output, "Indice [%d]\n", tree->attr.val);
         //    break;
         case TypeK:
-            printf( "Tipo %s\n", tree->attr.name);
+            fprintf(output, "Tipo %s\n", tree->attr.name);
             break;
         default:
-          printf("No de expressao desconhecido.\n");
+          fprintf(output, "No de expressao desconhecido.\n");
           break;
       }
     }
-    else printf("No desconhcido.\n");
+    else fprintf(output, "No desconhcido.\n");
     for (i=0;i<MAXCHILDREN;i++)
-         printTree(tree->child[i]);
+         printTree(tree->child[i], output);
     tree = tree->sibling;
   }
   UNINDENT;
+}
+
+void printTreeFile(TreeNode * tree){
+  FILE *output = fopen("analises/sintatico.txt", "w");
+  printTree( tree, output);
+  fclose(output);
 }

@@ -1,0 +1,24 @@
+  Tipo inteiro
+    Funcao a
+      Tipo void
+      Return
+  Tipo void
+    Funcao main
+      Tipo void
+      Tipo inteiro
+        Variavel b
+      Tipo inteiro
+        Variavel a
+      Tipo inteiro
+        Variavel c
+      While
+        Const: 1
+      Atribuicao
+        Id: c
+        Const: 2
+      If
+        Op:           Id: a
+          Id: c
+        Atribuicao
+          Id: a
+          Const: 3

@@ -1,7 +1,17 @@
+int a(void){
+    return;
+}
+
 void main(void){
-    int b;
+    int b[2];
     int a;
     int c;                                                        
     while(1);
     c = 2;
+    if( a > c){
+
+    }
+    else{
+        a = 3;
+    }
 }

@@ -459,6 +459,5 @@ static int yylex(void) {
 
 TreeNode* parse(){
     yyparse();
-    printTree(root);
     return root;
 }

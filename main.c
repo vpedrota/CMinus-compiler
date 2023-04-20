@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include "globals.h"
+#include "arvore.h"
 
 int lineno = 1;
 
@@ -24,12 +25,15 @@ int main(int argc, char * argv[]){
     // é passado para o destridor que representa a entrada padrão
     stdin = input;
     scanner();
-   
+    printf("Análise Léxica realizada com sucesso. \n\n");
     // Voltando o ponteiro para o início para realizar a análise sintática
     lineno = 1;
     fseek(stdin, 0, SEEK_SET); 
     
+    printf("Imprimindo análise sintática.\n\n");
     TreeNode* arvore = parse();
+    printTreeFile(arvore);
+
 
     // Fechando arquivos abertos
     fclose(input);

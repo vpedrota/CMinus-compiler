@@ -4,12 +4,12 @@ CFLAGS := -c -Wall
 
 all: compilador clean
 
-compilador: scan.o arvore.o bison.tab.o  symtab.o main.o
-	$(CC) scan.o arvore.o bison.tab.o symtab.o main.o -o cminus
+compilador: scan.o arvore.o parser.o  symtab.o main.o
+	$(CC) scan.o arvore.o parser.o symtab.o main.o -o cminus
 
-bison.tab.o: bison/bison.y globals.h
-	bison -d -t bison/bison.y 
-	$(CC) -c bison.tab.c
+parser.o: bison/bison.y globals.h
+	bison -d -t -o parser.c bison/bison.y 
+	$(CC) -c parser.c
 
 scan.o: flex/flex.l scan.h globals.h 
 	flex -o scan.c flex/flex.l

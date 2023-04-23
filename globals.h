@@ -32,6 +32,6 @@ TreeNode* parse();
 
 void printT(int value);
 
-#include "bison.tab.h"
+#include "parser.h"
 #define MAXCHILDREN 3
 

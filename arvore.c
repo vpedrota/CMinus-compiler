@@ -97,6 +97,8 @@ void printTree( TreeNode * tree, FILE *output){
   int i;
   INDENT;
   while (tree != NULL) {
+    
+    printf("------%s\n", tree->attr.scope);
     printSpaces(output);
     if (tree->nodekind==StmtK)
     { switch (tree->kind.stmt)

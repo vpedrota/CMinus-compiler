@@ -1,0 +1,1 @@
+void addScopes(TreeNode *root, char *scope);

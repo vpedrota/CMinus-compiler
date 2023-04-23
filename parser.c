@@ -79,7 +79,7 @@ static TreeNode *root;
 static int savedLineNo;
 
 
-#line 83 "bison.tab.c"
+#line 83 "parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -112,8 +112,8 @@ static int savedLineNo;
 
 /* Use api.header.include to #include this header
    instead of duplicating it here.  */
-#ifndef YY_YY_BISON_TAB_H_INCLUDED
-# define YY_YY_BISON_TAB_H_INCLUDED
+#ifndef YY_YY_PARSER_H_INCLUDED
+# define YY_YY_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 1
@@ -170,7 +170,7 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_BISON_TAB_H_INCLUDED  */
+#endif /* !YY_YY_PARSER_H_INCLUDED  */
 
 
 
@@ -1418,7 +1418,7 @@ yyreduce:
   case 2:
 #line 27 "bison/bison.y"
           {root = yyvsp[0];}
-#line 1422 "bison.tab.c"
+#line 1422 "parser.c"
     break;
 
   case 3:
@@ -1432,25 +1432,25 @@ yyreduce:
                     }
                     else yyval = yyvsp[0];
                   }
-#line 1436 "bison.tab.c"
+#line 1436 "parser.c"
     break;
 
   case 4:
 #line 39 "bison/bison.y"
                               {yyval = yyvsp[0];}
-#line 1442 "bison.tab.c"
+#line 1442 "parser.c"
     break;
 
   case 5:
 #line 41 "bison/bison.y"
                             {yyval = yyvsp[0];}
-#line 1448 "bison.tab.c"
+#line 1448 "parser.c"
     break;
 
   case 6:
 #line 43 "bison/bison.y"
                             {yyval = yyvsp[0];}
-#line 1454 "bison.tab.c"
+#line 1454 "parser.c"
     break;
 
   case 7:
@@ -1464,7 +1464,7 @@ yyreduce:
                 yyvsp[-1]->kind.stmt = VarK;
                 yyvsp[-1]->type = IntegerK;
 						  }
-#line 1468 "bison.tab.c"
+#line 1468 "parser.c"
     break;
 
   case 8:
@@ -1479,7 +1479,7 @@ yyreduce:
                   yyvsp[-4]->type = IntegerK; 
                   yyvsp[-4]->attr.len = yyvsp[-2]->attr.val;
                 }
-#line 1483 "bison.tab.c"
+#line 1483 "parser.c"
     break;
 
   case 9:
@@ -1496,7 +1496,7 @@ yyreduce:
                   yyvsp[-4]->type = IntegerK;
                   yyvsp[-2]->type = IntegerK;
                 }
-#line 1500 "bison.tab.c"
+#line 1500 "parser.c"
     break;
 
   case 10:
@@ -1511,7 +1511,7 @@ yyreduce:
                   yyvsp[-4]->nodekind = StmtK;
                   yyvsp[-4]->kind.stmt = FunK;
                 }
-#line 1515 "bison.tab.c"
+#line 1515 "parser.c"
     break;
 
   case 11:
@@ -1519,7 +1519,7 @@ yyreduce:
         {
           yyval = yyvsp[0];
         }
-#line 1523 "bison.tab.c"
+#line 1523 "parser.c"
     break;
 
   case 12:
@@ -1529,7 +1529,7 @@ yyreduce:
           yyval->attr.name = "void";
           yyval->child[0] = NULL;
 				}
-#line 1533 "bison.tab.c"
+#line 1533 "parser.c"
     break;
 
   case 13:
@@ -1543,7 +1543,7 @@ yyreduce:
                 yyval = yyvsp[-2];
               }else yyval = yyvsp[0];
             }
-#line 1547 "bison.tab.c"
+#line 1547 "parser.c"
     break;
 
   case 14:
@@ -1551,7 +1551,7 @@ yyreduce:
             {
               yyval = yyvsp[0];
             }
-#line 1555 "bison.tab.c"
+#line 1555 "parser.c"
     break;
 
   case 15:
@@ -1561,7 +1561,7 @@ yyreduce:
                     yyval->attr.name = "inteiro";
                     yyval->type = IntegerK;
                   }
-#line 1565 "bison.tab.c"
+#line 1565 "parser.c"
     break;
 
   case 16:
@@ -1571,7 +1571,7 @@ yyreduce:
                     yyval->attr.name = "void";
                     yyval->type = VoidK;
                   }
-#line 1575 "bison.tab.c"
+#line 1575 "parser.c"
     break;
 
   case 17:
@@ -1586,7 +1586,7 @@ yyreduce:
         yyvsp[0]->type = yyvsp[-1]->type;
 
       }
-#line 1590 "bison.tab.c"
+#line 1590 "parser.c"
     break;
 
   case 18:
@@ -1600,7 +1600,7 @@ yyreduce:
         yyvsp[-2]->type = yyvsp[-3]->type;
         yyvsp[-2]->kind.stmt = VetK;
       }
-#line 1604 "bison.tab.c"
+#line 1604 "parser.c"
     break;
 
   case 19:
@@ -1615,7 +1615,7 @@ yyreduce:
                 } 
                 else yyval = yyvsp[-1];
               }
-#line 1619 "bison.tab.c"
+#line 1619 "parser.c"
     break;
 
   case 20:
@@ -1623,7 +1623,7 @@ yyreduce:
               {
                 yyval = yyvsp[-1];
               }
-#line 1627 "bison.tab.c"
+#line 1627 "parser.c"
     break;
 
   case 21:
@@ -1631,13 +1631,13 @@ yyreduce:
               {
                 yyval = yyvsp[-1];
               }
-#line 1635 "bison.tab.c"
+#line 1635 "parser.c"
     break;
 
   case 22:
 #line 173 "bison/bison.y"
                           {}
-#line 1641 "bison.tab.c"
+#line 1641 "parser.c"
     break;
 
   case 23:
@@ -1650,7 +1650,7 @@ yyreduce:
                       yyval = yyvsp[-1];
                     }else yyval = yyvsp[0];
                   }
-#line 1654 "bison.tab.c"
+#line 1654 "parser.c"
     break;
 
   case 24:
@@ -1658,7 +1658,7 @@ yyreduce:
                   {
                     yyval = yyvsp[0];
                   }
-#line 1662 "bison.tab.c"
+#line 1662 "parser.c"
     break;
 
   case 25:
@@ -1672,7 +1672,7 @@ yyreduce:
                       yyval = yyvsp[-1];
                     }else yyval = yyvsp[0];
                   }
-#line 1676 "bison.tab.c"
+#line 1676 "parser.c"
     break;
 
   case 26:
@@ -1680,7 +1680,7 @@ yyreduce:
                   {
                     yyval = yyvsp[0];
                   }
-#line 1684 "bison.tab.c"
+#line 1684 "parser.c"
     break;
 
   case 27:
@@ -1688,7 +1688,7 @@ yyreduce:
           {
             yyval = yyvsp[0];
           }
-#line 1692 "bison.tab.c"
+#line 1692 "parser.c"
     break;
 
   case 28:
@@ -1696,7 +1696,7 @@ yyreduce:
           {
             yyval = yyvsp[0];
           }
-#line 1700 "bison.tab.c"
+#line 1700 "parser.c"
     break;
 
   case 29:
@@ -1704,7 +1704,7 @@ yyreduce:
           {
             yyval = yyvsp[0];
           }
-#line 1708 "bison.tab.c"
+#line 1708 "parser.c"
     break;
 
   case 30:
@@ -1712,7 +1712,7 @@ yyreduce:
           {
             yyval = yyvsp[0];
           }
-#line 1716 "bison.tab.c"
+#line 1716 "parser.c"
     break;
 
   case 31:
@@ -1720,7 +1720,7 @@ yyreduce:
           {
             yyval = yyvsp[0];
           }
-#line 1724 "bison.tab.c"
+#line 1724 "parser.c"
     break;
 
   case 32:
@@ -1728,7 +1728,7 @@ yyreduce:
                 {
                   yyval = yyvsp[-1];
                 }
-#line 1732 "bison.tab.c"
+#line 1732 "parser.c"
     break;
 
   case 34:
@@ -1738,7 +1738,7 @@ yyreduce:
                 yyval->child[0] = yyvsp[-2];
                 yyval->child[1] = yyvsp[0];
               }
-#line 1742 "bison.tab.c"
+#line 1742 "parser.c"
     break;
 
   case 35:
@@ -1749,7 +1749,7 @@ yyreduce:
                 yyval->child[1] = yyvsp[-2];
                 yyval->child[2] = yyvsp[0];
              }
-#line 1753 "bison.tab.c"
+#line 1753 "parser.c"
     break;
 
   case 36:
@@ -1759,7 +1759,7 @@ yyreduce:
                 yyval->child[0] = yyvsp[-2];
                 yyval->child[1] = yyvsp[0];
               }
-#line 1763 "bison.tab.c"
+#line 1763 "parser.c"
     break;
 
   case 37:
@@ -1767,7 +1767,7 @@ yyreduce:
               {
                 yyval = newStmtNode(ReturnK);
               }
-#line 1771 "bison.tab.c"
+#line 1771 "parser.c"
     break;
 
   case 38:
@@ -1776,7 +1776,7 @@ yyreduce:
                 yyval = newStmtNode(ReturnK);
                 yyval->child[0] = yyvsp[-1];
               }
-#line 1780 "bison.tab.c"
+#line 1780 "parser.c"
     break;
 
   case 39:
@@ -1787,7 +1787,7 @@ yyreduce:
             yyval->child[0] = yyvsp[-2];
             yyval->child[1] = yyvsp[0];
           }
-#line 1791 "bison.tab.c"
+#line 1791 "parser.c"
     break;
 
   case 40:
@@ -1798,7 +1798,7 @@ yyreduce:
             yyval->child[0] = yyvsp[-2];
             yyval->child[1] = yyvsp[0];
           }
-#line 1802 "bison.tab.c"
+#line 1802 "parser.c"
     break;
 
   case 41:
@@ -1806,7 +1806,7 @@ yyreduce:
           {
             yyval = yyvsp[0];
           }
-#line 1810 "bison.tab.c"
+#line 1810 "parser.c"
     break;
 
   case 42:
@@ -1814,7 +1814,7 @@ yyreduce:
     {
       yyval = yyvsp[0];
     }
-#line 1818 "bison.tab.c"
+#line 1818 "parser.c"
     break;
 
   case 43:
@@ -1825,7 +1825,7 @@ yyreduce:
       yyval->kind.exp = VetK;
       yyval->type = IntegerK;
     }
-#line 1829 "bison.tab.c"
+#line 1829 "parser.c"
     break;
 
   case 44:
@@ -1835,7 +1835,7 @@ yyreduce:
                       yyval->child[0] = yyvsp[-2];
                       yyval->child[1] = yyvsp[0];
                   }
-#line 1839 "bison.tab.c"
+#line 1839 "parser.c"
     break;
 
   case 45:
@@ -1843,7 +1843,7 @@ yyreduce:
                   {
                     yyval = yyvsp[0];
                   }
-#line 1847 "bison.tab.c"
+#line 1847 "parser.c"
     break;
 
   case 46:
@@ -1853,7 +1853,7 @@ yyreduce:
               yyval->attr.op = LET;                            
               yyval->type = BooleanK;
             }
-#line 1857 "bison.tab.c"
+#line 1857 "parser.c"
     break;
 
   case 47:
@@ -1863,7 +1863,7 @@ yyreduce:
             yyval->attr.op = LT;                            
 						yyval->type = BooleanK;
            }
-#line 1867 "bison.tab.c"
+#line 1867 "parser.c"
     break;
 
   case 48:
@@ -1873,7 +1873,7 @@ yyreduce:
             yyval->attr.op = GT;                            
 						yyval->type = BooleanK;
            }
-#line 1877 "bison.tab.c"
+#line 1877 "parser.c"
     break;
 
   case 49:
@@ -1883,7 +1883,7 @@ yyreduce:
             yyval->attr.op = GET;                            
 						yyval->type = BooleanK;
            }
-#line 1887 "bison.tab.c"
+#line 1887 "parser.c"
     break;
 
   case 50:
@@ -1893,7 +1893,7 @@ yyreduce:
             yyval->attr.op = COMP;                            
 						yyval->type = BooleanK;
            }
-#line 1897 "bison.tab.c"
+#line 1897 "parser.c"
     break;
 
   case 51:
@@ -1903,7 +1903,7 @@ yyreduce:
             yyval->attr.op = DIF;                            
 						yyval->type = BooleanK;
            }
-#line 1907 "bison.tab.c"
+#line 1907 "parser.c"
     break;
 
   case 52:
@@ -1913,7 +1913,7 @@ yyreduce:
                 yyval->child[0] = yyvsp[-2];
                 yyval->child[1] = yyvsp[0];
               }
-#line 1917 "bison.tab.c"
+#line 1917 "parser.c"
     break;
 
   case 53:
@@ -1921,7 +1921,7 @@ yyreduce:
                {
                 yyval = yyvsp[0];
                }
-#line 1925 "bison.tab.c"
+#line 1925 "parser.c"
     break;
 
   case 54:
@@ -1930,7 +1930,7 @@ yyreduce:
         yyval = newExpNode(OpK);
         yyval->attr.op = PLUS;  
       }
-#line 1934 "bison.tab.c"
+#line 1934 "parser.c"
     break;
 
   case 55:
@@ -1939,7 +1939,7 @@ yyreduce:
       yyval = newExpNode(OpK);
       yyval->attr.op = SUB;  
      }
-#line 1943 "bison.tab.c"
+#line 1943 "parser.c"
     break;
 
   case 56:
@@ -1949,7 +1949,7 @@ yyreduce:
         yyval->child[0] = yyvsp[-2];
         yyval->child[1] = yyvsp[0];
       }
-#line 1953 "bison.tab.c"
+#line 1953 "parser.c"
     break;
 
   case 57:
@@ -1957,7 +1957,7 @@ yyreduce:
       {
         yyval = yyvsp[0];
       }
-#line 1961 "bison.tab.c"
+#line 1961 "parser.c"
     break;
 
   case 58:
@@ -1966,7 +1966,7 @@ yyreduce:
         yyval = newExpNode(OpK);
         yyval->attr.op = MULT; 
       }
-#line 1970 "bison.tab.c"
+#line 1970 "parser.c"
     break;
 
   case 59:
@@ -1975,7 +1975,7 @@ yyreduce:
         yyval = newExpNode(OpK);
         yyval->attr.op = DIV; 
       }
-#line 1979 "bison.tab.c"
+#line 1979 "parser.c"
     break;
 
   case 60:
@@ -1983,7 +1983,7 @@ yyreduce:
       {
         yyval = yyvsp[-1];
       }
-#line 1987 "bison.tab.c"
+#line 1987 "parser.c"
     break;
 
   case 61:
@@ -1991,7 +1991,7 @@ yyreduce:
       {
         yyval = yyvsp[0];
       }
-#line 1995 "bison.tab.c"
+#line 1995 "parser.c"
     break;
 
   case 62:
@@ -1999,7 +1999,7 @@ yyreduce:
       {
         yyval = yyvsp[0];
       }
-#line 2003 "bison.tab.c"
+#line 2003 "parser.c"
     break;
 
   case 63:
@@ -2007,7 +2007,7 @@ yyreduce:
       {
         yyval = yyvsp[0];
       }
-#line 2011 "bison.tab.c"
+#line 2011 "parser.c"
     break;
 
   case 64:
@@ -2018,7 +2018,7 @@ yyreduce:
             yyval->nodekind = StmtK;
             yyval->kind.stmt = CallK;
           }
-#line 2022 "bison.tab.c"
+#line 2022 "parser.c"
     break;
 
   case 65:
@@ -2028,7 +2028,7 @@ yyreduce:
             yyval->nodekind = StmtK;
             yyval->kind.stmt = CallK;
           }
-#line 2032 "bison.tab.c"
+#line 2032 "parser.c"
     break;
 
   case 66:
@@ -2042,7 +2042,7 @@ yyreduce:
               yyval = yyvsp[-2];
             } else yyval = yyvsp[0];
           }
-#line 2046 "bison.tab.c"
+#line 2046 "parser.c"
     break;
 
   case 67:
@@ -2050,7 +2050,7 @@ yyreduce:
           {
             yyval = yyvsp[0];
           }
-#line 2054 "bison.tab.c"
+#line 2054 "parser.c"
     break;
 
   case 68:
@@ -2059,7 +2059,7 @@ yyreduce:
       yyval = newExpNode(IdK);
       yyval->attr.name = copyString(yytext);
       }
-#line 2063 "bison.tab.c"
+#line 2063 "parser.c"
     break;
 
   case 69:
@@ -2069,11 +2069,11 @@ yyreduce:
         yyval->attr.val = atoi(yytext);
         yyval->type = IntegerK;
       }
-#line 2073 "bison.tab.c"
+#line 2073 "parser.c"
     break;
 
 
-#line 2077 "bison.tab.c"
+#line 2077 "parser.c"
 
       default: break;
     }

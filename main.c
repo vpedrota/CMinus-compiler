@@ -3,6 +3,7 @@
 #include "globals.h"
 #include "scan.h"
 #include "arvore.h"
+#include "symtab.h"
 
 int lineno = 1;
 
@@ -35,6 +36,9 @@ int main(int argc, char * argv[]){
     TreeNode* arvore = parse();
     printTreeFile(arvore);
 
+    char scope[10] = "globcal";
+    addScopes(arvore, scope);
+    printTreeFile(arvore);
 
     // Fechando arquivos abertos
     fclose(input);

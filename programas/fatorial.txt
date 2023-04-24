@@ -1,17 +1,12 @@
-int a(void){
-    return;
+int b;
+int c;
+
+int b(void){
+}
+
+int d(void){
+
 }
 
 void main(void){
-    int b[2];
-    int a;
-    int c;                                                        
-    while(1);
-    c = 2;
-    if( a > c){
-
-    }
-    else{
-        a = 3;
-    }
 }

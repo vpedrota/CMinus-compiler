@@ -1,52 +1,27 @@
 1: INT  
-1: ID, name = a 
-1: LPAR  
-1: VOID   
-1: RPAR  
-1: LCHA  
-2: RETURN  
+1: ID, name = b 
+1: PV  
+2: INT  
+2: ID, name = c 
 2: PV  
-3: RCHA  
-5: VOID   
-5: ID, name = main 
-5: LPAR  
-5: VOID   
-5: RPAR  
-5: LCHA  
-6: INT  
-6: ID, name = b 
-6: LCOL  
-6: NUM, value = 2 
-6: RCOL  
-6: PV  
+4: INT  
+4: ID, name = b 
+4: LPAR  
+4: VOID   
+4: RPAR  
+4: LCHA  
+5: RCHA  
 7: INT  
-7: ID, name = a 
-7: PV  
-8: INT  
-8: ID, name = c 
-8: PV  
-9: WHILE  
-9: LPAR  
-9: NUM, value = 1 
-9: RPAR  
-9: PV  
-10: ID, name = c 
-10: ASSIGN  
-10: NUM, value = 2 
-10: PV  
-11: IF  
+7: ID, name = d 
+7: LPAR  
+7: VOID   
+7: RPAR  
+7: LCHA  
+9: RCHA  
+11: VOID   
+11: ID, name = main 
 11: LPAR  
-11: ID, name = a 
-11: GT  
-11: ID, name = c 
+11: VOID   
 11: RPAR  
 11: LCHA  
-13: RCHA  
-14: ELSE  
-14: LCHA  
-15: ID, name = a 
-15: ASSIGN  
-15: NUM, value = 3 
-15: PV  
-16: RCHA  
-17: RCHA  
+12: RCHA  

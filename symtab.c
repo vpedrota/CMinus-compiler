@@ -63,6 +63,7 @@ void insert_node(Node** table, char* name, int value) {
 
 // Função para imprimir a tabela hash
 void print_table(Node** table) {
+    printf("Imprimindo tabela de símbolos:\n");
     for (int i = 0; i < TABLE_SIZE; i++) {
         if (table[i] != NULL) {
             printf("Index %d:\n", i);
@@ -143,13 +144,68 @@ int find_name(char *name, char *scope_search){
     return 0;
 }
 
+void insert_node_symtab( TreeNode * t, char *scope ) {
+    Node **table = NULL;
+    switch (t->nodekind) { 
+        case StmtK:
+            switch (t->kind.stmt){ 
+                case VarK:
+                    if (find_name(t->attr.name, t->attr.scope) == 0){
+                        table = return_escope(t->attr.scope);
+                        insert_node(table, t->attr.name, 4);
+                    }
+                    else{
+                        printf("Redeclaração de varivável\n");
+                        exit(-1);
+                    }
+                    break;
+
+                case FunK:
+                    //printf("--%s--\n", t->attr.name);
+                    if(find_name(t->attr.name, t->attr.scope) == 0){  
+                        addScope(&first, t->attr.name);
+                        table = return_escope(t->attr.name);
+                        insert_node(table, t->attr.name, 4);
+                    }
+                    else{
+                        printf("Redeclaração de varivável\n");
+                        exit(-1);
+                    }
+                    break;
+
+                case CallK:
+                    printf("chamada de função");
+                    break;
+                
+                default:
+                    break;
+            }
+            break;
+    }
+}
+
+void transverse(TreeNode *tree){
+   
+    int i; 
+    if (tree != NULL){
+        insert_node_symtab(tree, tree->attr.scope);
+        for (i=0;i<MAXCHILDREN;i++)
+            transverse(tree->child[i]);
+
+        tree = tree->sibling;
+        transverse(tree);
+    }
+}
+
 void buildSymtab(TreeNode *root){
-    // Referente ao escopo global
-    // Primeiro escopo sempre será o global e será usado em todas as verificações 
+
+    Hash_table_list *aux;
+
     addScope(&first, "global");
-    addScope(&first, "funcao");
-    insert_node(first->table, "teste", 4);
-    insert_node(first->next->table, "teste", 4);
-    print_table(first->next->table);
-    printf("%d\n", find_name("testde", "fundcao"));
+    transverse(root);
+    aux = first;
+    while(aux != NULL){
+        print_table(aux->table);
+        aux = aux->next;
+    }
 }

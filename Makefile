@@ -22,6 +22,6 @@ symtab.o: symtab.c symtab.h globals.h
 	$(CC) -c symtab.c
 
 clean:
-	rm -f bison.tab.o scan.o arvore.o symtab.o main.o
+	rm -f parser.o scan.o arvore.o symtab.o main.o
 
 .PHONY: all clean

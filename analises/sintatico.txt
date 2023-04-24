@@ -1,25 +1,13 @@
   Tipo inteiro
-    Funcao a
+    Variavel b
+  Tipo inteiro
+    Variavel c
+  Tipo inteiro
+    Funcao b
       Tipo void
-      Return
+  Tipo inteiro
+    Funcao d
+      Tipo void
   Tipo void
     Funcao main
       Tipo void
-      Tipo inteiro
-        Variavel b
-      Tipo inteiro
-        Variavel a
-      Tipo inteiro
-        Variavel c
-      While
-        Const: 1
-      Atribuicao
-        Id: c
-        Const: 2
-      If
-        Op:  GT  
-          Id: a
-          Id: c
-        Atribuicao
-          Id: a
-          Const: 3

@@ -6,6 +6,7 @@ int b(int vetor[]){
     a =4;
     a = 6;
     vetor[3] = 3;
+    return 3;
 }
 
 int p(void){input();}

@@ -71,28 +71,33 @@ void insert_node(Node** table, TreeNode *t) {
 }
 
 
-void print_ocorrencies(Node *no){
+void print_ocorrencies(Node *no, FILE *f){
     Lineno_list *aux = no->first;
     while(aux != NULL){
-        printf("%d ", aux->value);
+        fprintf(f, "%d ", aux->value);
         aux = aux->next;
     }
 }
 
 // Função para imprimir a tabela hash
-void print_table(Node** table) {
-    printf("Imprimindo tabela de símbolos:\n");
+void print_table(Hash_table_list *table_list, FILE *f) {
+    Node** table = table_list->table;
+    if(table == NULL) return;
+    fprintf(f, "+---------------------+---------------------+---------------------+---------------------+\n");
+    fprintf(f, "| %-20s | %-20s | %-20s | %-20s |\n", "Nome", "Escopo", "Tipo", "Ocorrências");
+    fprintf(f, "+---------------------+---------------------+---------------------+---------------------+\n");
     for (int i = 0; i < TABLE_SIZE; i++) {
-        if (table[i] != NULL) {
+        if (table[i] != NULL) {  
             Node* current = table[i];
             while (current != NULL) {
-                printf(" %s: ", current->name);
-                print_ocorrencies(current);
+                fprintf(f, "| %-20s | %-20s | %-20s |", current->name, table_list->scopeName, "dados.tipo");
+                print_ocorrencies(current, f);
                 current = current->next;
-                printf("\n");
+                fprintf(f, "\n");
             }
         }
     }
+    fprintf(f, "\n\n");
 }
 
 
@@ -286,7 +291,7 @@ void buildSymtab(TreeNode *root){
     // Escrevendo tabela de símbolos no arquivo
     aux = first;
     while(aux != NULL){
-        print_table(aux->table);
+        print_table(aux, f);
         aux = aux->next;
     }
     fclose(f);

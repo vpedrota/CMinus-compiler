@@ -19,6 +19,8 @@
         Vetor: vetor
           Const: 3
         Const: 3
+      Return
+        Const: 3
   Tipo inteiro
     Funcao p
       Tipo void

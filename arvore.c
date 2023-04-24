@@ -98,8 +98,8 @@ void printTree( TreeNode * tree, FILE *output){
   INDENT;
   while (tree != NULL) {
     
-    printf("------%s\n", tree->attr.scope);
     printSpaces(output);
+    //fprintf(output, "-%s-", tree->attr.scope);
     if (tree->nodekind==StmtK)
     { switch (tree->kind.stmt)
             {
@@ -156,7 +156,7 @@ void printTree( TreeNode * tree, FILE *output){
           break;
       }
     }
-    else fprintf(output, "No desconhcido.\n");
+    else fprintf(output, "No desconhecido.\n");
     for (i=0;i<MAXCHILDREN;i++)
          printTree(tree->child[i], output);
     tree = tree->sibling;

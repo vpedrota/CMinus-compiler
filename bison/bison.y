@@ -5,6 +5,8 @@
 #include "globals.h"
 #include "scan.h"
 #include "arvore.h"
+#include "symtab.h"
+
 int yyerror(char *s);
 static TreeNode *root;
 static int savedLineNo;
@@ -77,6 +79,7 @@ fun_declaracao : INT ident LPAR params RPAR composto_decl
                   $2->kind.stmt = FunK;
                   $2->type = IntegerK;
                   $4->type = IntegerK;
+                  addScopes($$, $2->attr.name);
                 }
                 | VOID ident LPAR params RPAR composto_decl
                 {
@@ -88,6 +91,7 @@ fun_declaracao : INT ident LPAR params RPAR composto_decl
                   $2->child[1] = $6;
                   $2->nodekind = StmtK;
                   $2->kind.stmt = FunK;
+                  addScopes($$, $2->attr.name);
                 }
                ;
 params : param_lista 

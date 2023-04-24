@@ -35,11 +35,8 @@ int main(int argc, char * argv[]){
     printf("Imprimindo análise sintática.\n\n");
     TreeNode* arvore = parse();
     printTreeFile(arvore);
-
-    char scope[10] = "globcal";
-    addScopes(arvore, scope);
-    printTreeFile(arvore);
-
+    buildSymtab(arvore);
+    
     // Fechando arquivos abertos
     fclose(input);
     return 0;

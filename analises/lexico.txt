@@ -1,27 +1,69 @@
 1: INT  
-1: ID, name = b 
+1: ID, name = c 
 1: PV  
-2: INT  
-2: ID, name = c 
-2: PV  
+3: INT  
+3: ID, name = b 
+3: LPAR  
+3: INT  
+3: ID, name = vetor 
+3: LCOL  
+3: RCOL  
+3: RPAR  
+3: LCHA  
 4: INT  
-4: ID, name = b 
-4: LPAR  
-4: VOID   
-4: RPAR  
-4: LCHA  
-5: RCHA  
-7: INT  
-7: ID, name = d 
-7: LPAR  
-7: VOID   
-7: RPAR  
-7: LCHA  
+4: ID, name = a 
+4: PV  
+5: ID, name = a 
+5: ASSIGN  
+5: NUM, value = 3 
+5: PV  
+6: ID, name = a 
+6: ASSIGN  
+6: NUM, value = 4 
+6: PV  
+7: ID, name = a 
+7: ASSIGN  
+7: NUM, value = 6 
+7: PV  
+8: ID, name = vetor 
+8: LCOL  
+8: NUM, value = 3 
+8: RCOL  
+8: ASSIGN  
+8: NUM, value = 3 
+8: PV  
 9: RCHA  
-11: VOID   
-11: ID, name = main 
+11: INT  
+11: ID, name = p 
 11: LPAR  
 11: VOID   
 11: RPAR  
 11: LCHA  
-12: RCHA  
+11: RCHA  
+13: INT  
+13: ID, name = d 
+13: LPAR  
+13: VOID   
+13: RPAR  
+13: LCHA  
+14: INT  
+14: ID, name = a 
+14: PV  
+15: RCHA  
+17: VOID   
+17: ID, name = main 
+17: LPAR  
+17: VOID   
+17: RPAR  
+17: LCHA  
+18: INT  
+18: ID, name = vetor 
+18: LCOL  
+18: NUM, value = 5 
+18: RCOL  
+18: PV  
+19: ID, name = b 
+19: LPAR  
+19: RPAR  
+19: PV  
+20: RCHA  

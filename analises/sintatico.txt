@@ -1,13 +1,35 @@
   Tipo inteiro
-    Variavel b
-  Tipo inteiro
     Variavel c
   Tipo inteiro
     Funcao b
+      Tipo inteiro
+        Variavel vetor
+      Tipo inteiro
+        Variavel a
+      Atribuicao
+        Id: a
+        Const: 3
+      Atribuicao
+        Id: a
+        Const: 4
+      Atribuicao
+        Id: a
+        Const: 6
+      Atribuicao
+        Vetor: vetor
+          Const: 3
+        Const: 3
+  Tipo inteiro
+    Funcao p
       Tipo void
   Tipo inteiro
     Funcao d
       Tipo void
+      Tipo inteiro
+        Variavel a
   Tipo void
     Funcao main
       Tipo void
+      Tipo inteiro
+        Variavel vetor
+      Chamada de Funcao b 

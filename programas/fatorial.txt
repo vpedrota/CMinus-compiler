@@ -1,12 +1,20 @@
-int b;
 int c;
 
-int b(void){
+int b(int vetor[]){
+    int a;
+    a=3;
+    a =4;
+    a = 6;
+    vetor[3] = 3;
 }
 
-int d(void){
+int p(void){}
 
+int d(void){
+    int a;
 }
 
 void main(void){
+    int vetor[5];
+    b();
 }

@@ -3,6 +3,7 @@
         "globals.h": "c",
         "bison.tab.h": "c",
         "stdlib.h": "c",
-        "arvore.h": "c"
+        "arvore.h": "c",
+        "stdio.h": "c"
     }
 }

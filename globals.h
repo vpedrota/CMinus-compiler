@@ -7,6 +7,8 @@
 #define ENDFILE 0
 #define MAXCHILDREN 3
 
+extern int lineno;
+
 typedef enum {StmtK,ExpK} NodeKind;
 typedef enum {IfK,WhileK,AssignK,VarK,FunK, CallK, ReturnK} StmtKind;
 typedef enum {OpK, ConstK, IdK, VetK, TypeK} ExpKind;

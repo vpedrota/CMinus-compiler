@@ -22,6 +22,7 @@
   Tipo inteiro
     Funcao p
       Tipo void
+      Chamada de Funcao input 
   Tipo inteiro
     Funcao d
       Tipo void
@@ -33,3 +34,5 @@
       Tipo inteiro
         Variavel vetor
       Chamada de Funcao b 
+      Chamada de Funcao input 
+      Chamada de Funcao output 

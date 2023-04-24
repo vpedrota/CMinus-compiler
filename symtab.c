@@ -193,7 +193,9 @@ void insert_node_symtab( TreeNode * t, char *scope ) {
 
                 case FunK:
                     if(find_name(t->attr.name, "global") == NULL){  
-                        addScope(&first, t->attr.name);
+                        if(strcmp(t->attr.scope, "global") != 0){
+                            addScope(&first, t->attr.name);
+                        }
                         table = return_escope("global");
                         insert_node(table, t);
                     }
@@ -263,8 +265,25 @@ void buildSymtab(TreeNode *root){
 
     Hash_table_list *aux;
     FILE *f = fopen("analises/tabela_simbolos.txt", "w");
+
+    // Adicionando escopo global
     addScope(&first, "global");
+
+    // Adiconando as funções de input e output
+    TreeNode t;
+    t.kind.stmt = FunK;
+    t.nodekind = StmtK;
+    t.attr.name = "input";
+    t.attr.scope = "global";
+    insert_node_symtab(&t, "global");
+
+    t.attr.name = "output";
+    insert_node_symtab(&t, "global");
+    
+    // Percorrendo e inserindo símbolos na árvore
     transverse(root);
+
+    // Escrevendo tabela de símbolos no arquivo
     aux = first;
     while(aux != NULL){
         print_table(aux->table);

@@ -8,13 +8,16 @@ int b(int vetor[]){
     vetor[3] = 3;
 }
 
-int p(void){}
+int p(void){input();}
 
 int d(void){
     int a;
 }
 
+
 void main(void){
     int vetor[5];
     b();
+    input();
+    output();
 }

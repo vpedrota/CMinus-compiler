@@ -39,6 +39,10 @@
 11: VOID   
 11: RPAR  
 11: LCHA  
+11: ID, name = input 
+11: LPAR  
+11: RPAR  
+11: PV  
 11: RCHA  
 13: INT  
 13: ID, name = d 
@@ -50,20 +54,28 @@
 14: ID, name = a 
 14: PV  
 15: RCHA  
-17: VOID   
-17: ID, name = main 
-17: LPAR  
-17: VOID   
-17: RPAR  
-17: LCHA  
-18: INT  
-18: ID, name = vetor 
-18: LCOL  
-18: NUM, value = 5 
-18: RCOL  
-18: PV  
-19: ID, name = b 
-19: LPAR  
-19: RPAR  
+18: VOID   
+18: ID, name = main 
+18: LPAR  
+18: VOID   
+18: RPAR  
+18: LCHA  
+19: INT  
+19: ID, name = vetor 
+19: LCOL  
+19: NUM, value = 5 
+19: RCOL  
 19: PV  
-20: RCHA  
+20: ID, name = b 
+20: LPAR  
+20: RPAR  
+20: PV  
+21: ID, name = input 
+21: LPAR  
+21: RPAR  
+21: PV  
+22: ID, name = output 
+22: LPAR  
+22: RPAR  
+22: PV  
+23: RCHA  

@@ -1,8 +1,8 @@
 
 
-void p(void){
+int p(void){
     input(); 
-    return ;
+    return 3;
 }
 
 void e(void){
@@ -13,5 +13,5 @@ void main(void){
     int a;
     int g;
     p();
-    a = 3;
+    a = 3 + 2 + 2 + p() + 2 + p();
 }

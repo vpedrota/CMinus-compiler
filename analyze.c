@@ -66,18 +66,19 @@ void check_node(TreeNode *node){
         {
         case OpK:
 
-            //printf("%s", node->child[0]->attr.name);
-
+            //  printf("qq%d %d", node->child[0]->kind.exp, node->child[0]->attr.op);
+            //  printf("--%d", node->child[1]->kind.exp);
             // if(node->child[1]->type == IntegerK)
             //     printf("1%s", node->child[1]->attr.name);
 
-            // if(node->child[0]->type == IntegerK)
-            //     printf("-%s", node->child[0]->attr.name);
+           
+            // printf("-%s", node->child[0]->attr.name);
+            // printf("-%d", node->child[1]->type);
 
-            // if(node->child[0]->type != IntegerK || node->child[1]->type != IntegerK){
-            //     printf("OPERAÇÃO ARITMÉTICA ENTRE DOIS VALORES NÃO INTEIROS");
-            //     exit(1);
-            //}
+            if((node->child[0]->type != IntegerK && node->child[0]->kind.exp != OpK) || (node->child[1]->type != IntegerK && node->child[1]->kind.exp != OpK)){
+                printf("OPERAÇÃO ARITMÉTICA ENTRE DOIS VALORES NÃO INTEIROS\n");
+                exit(1);
+            }
 
             break;
         default:

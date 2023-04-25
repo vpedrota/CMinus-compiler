@@ -1,24 +1,17 @@
-int c;
 
-int b(int vetor[]){
-    int a;
-    a=3;
-    a =4;
-    a = 6;
-    vetor[3] = 3;
+
+int p(void){
+    input(); 
     return 3;
 }
 
-int p(void){input();}
-
-int d(void){
-    int a;
+void e(void){
 }
-
 
 void main(void){
     int vetor[5];
-    b();
-    input();
-    output();
+    int a;
+    int g;
+    a = p();
+    a = 3;
 }

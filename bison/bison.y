@@ -65,8 +65,28 @@ var_declaracao : INT ident PV
                   $2->kind.stmt = VarK;
                   $2->type = IntegerK; 
                   $2->attr.len = $4->attr.val;
+                } |  VOID ident PV 
+                {
+                  $$ = newExpNode(TypeK);
+                  $$->type = IntegerK;
+                  $$->attr.name = "void";
+                  $$->child[0] = $2;
+                  $2->nodekind = StmtK;
+                  $2->kind.stmt = VarK;
+                  $2->type = VoidK;
                 }
-                ;
+                |  VOID ident LCOL num RCOL PV
+                {
+                  $$ = newExpNode(TypeK);
+                  $$->type = IntegerK;
+                  $$->attr.name = "void";
+                  $$->child[0] = $2;
+                  $2->nodekind = StmtK;
+                  $2->kind.stmt = VarK;
+                  $2->type = VoidK; 
+                  $2->attr.len = $4->attr.val;
+                } 
+                  ;
 fun_declaracao : INT ident LPAR params RPAR composto_decl
                 {
                   $$ = newExpNode(TypeK);

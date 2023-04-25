@@ -1,84 +1,50 @@
-1: INT  
-1: ID, name = c 
-1: PV  
 3: INT  
-3: ID, name = b 
+3: ID, name = p 
 3: LPAR  
-3: INT  
-3: ID, name = vetor 
-3: LCOL  
-3: RCOL  
+3: VOID   
 3: RPAR  
 3: LCHA  
-4: INT  
-4: ID, name = a 
+4: ID, name = input 
+4: LPAR  
+4: RPAR  
 4: PV  
-5: ID, name = a 
-5: ASSIGN  
+5: RETURN  
 5: NUM, value = 3 
 5: PV  
-6: ID, name = a 
-6: ASSIGN  
-6: NUM, value = 4 
-6: PV  
-7: ID, name = a 
-7: ASSIGN  
-7: NUM, value = 6 
-7: PV  
-8: ID, name = vetor 
-8: LCOL  
-8: NUM, value = 3 
-8: RCOL  
-8: ASSIGN  
-8: NUM, value = 3 
-8: PV  
-9: RETURN  
-9: NUM, value = 3 
-9: PV  
-10: RCHA  
+6: RCHA  
+8: VOID   
+8: ID, name = e 
+8: LPAR  
+8: VOID   
+8: RPAR  
+8: LCHA  
+9: RCHA  
+11: VOID   
+11: ID, name = main 
+11: LPAR  
+11: VOID   
+11: RPAR  
+11: LCHA  
 12: INT  
-12: ID, name = p 
-12: LPAR  
-12: VOID   
-12: RPAR  
-12: LCHA  
-12: ID, name = input 
-12: LPAR  
-12: RPAR  
+12: ID, name = vetor 
+12: LCOL  
+12: NUM, value = 5 
+12: RCOL  
 12: PV  
-12: RCHA  
+13: INT  
+13: ID, name = a 
+13: PV  
 14: INT  
-14: ID, name = d 
-14: LPAR  
-14: VOID   
-14: RPAR  
-14: LCHA  
-15: INT  
+14: ID, name = g 
+14: PV  
 15: ID, name = a 
+15: ASSIGN  
+15: ID, name = p 
+15: LPAR  
+15: RPAR  
 15: PV  
-16: RCHA  
-19: VOID   
-19: ID, name = main 
-19: LPAR  
-19: VOID   
-19: RPAR  
-19: LCHA  
-20: INT  
-20: ID, name = vetor 
-20: LCOL  
-20: NUM, value = 5 
-20: RCOL  
-20: PV  
-21: ID, name = b 
-21: LPAR  
-21: RPAR  
-21: PV  
-22: ID, name = input 
-22: LPAR  
-22: RPAR  
-22: PV  
-23: ID, name = output 
-23: LPAR  
-23: RPAR  
-23: PV  
-24: RCHA  
+16: ID, name = a 
+16: ASSIGN  
+16: NUM, value = 3 
+16: PV  
+18: RCHA  

@@ -4,6 +4,7 @@
 #include "scan.h"
 #include "arvore.h"
 #include "symtab.h"
+#include "analyze.h"
 
 int lineno = 1;
 
@@ -27,16 +28,23 @@ int main(int argc, char * argv[]){
     // é passado para o destridor que representa a entrada padrão
     stdin = input;
     scanner();
-    printf("Análise Léxica realizada com sucesso. \n\n");
+    printf("Análise Léxica realizada com sucesso. \n");
     // Voltando o ponteiro para o início para realizar a análise sintática
     lineno = 1;
     fseek(stdin, 0, SEEK_SET); 
     
-    printf("Imprimindo análise sintática.\n\n");
+    // Realizando construção da árvore sintática
+    printf("Imprimindo análise sintática.\n");
     TreeNode* arvore = parse();
     printTreeFile(arvore);
+
+    // Realizando a construação da tabela de símbolos
+    printf("Imprimindo tabela de simbolos.\n");
     buildSymtab(arvore);
     
+    printf("Realizando análise semântica.\n");
+    analyze(arvore);
+    printf("Análise semântica concluída com sucesso.\n");
     // Fechando arquivos abertos
     fclose(input);
     return 0;

@@ -1,23 +1,7 @@
 #include "globals.h"
+#include "symtab.h"
+
 #define TABLE_SIZE 1000
-
-typedef struct lineno_list {
-    int value;
-    struct lineno_list *next;
-} Lineno_list;
-
-
-typedef struct node {
-    char* name;
-    struct lineno_list *first;
-    struct node* next;
-} Node;
-
-typedef struct hash_table_list {
-    char *scopeName;
-    Node** table;
-    struct hash_table_list *next;
-} Hash_table_list;
 
 // Ponteiro para a tabela hash que representa o escopo
 // Cada tabela hash é um escopo no programa
@@ -52,6 +36,7 @@ Node* create_node(TreeNode *t) {
     new_node->first->value = t->lineno;
     new_node->first->next = NULL;
     new_node->next = NULL;
+    new_node->type = t->type;
     return new_node;
 }
 
@@ -90,7 +75,13 @@ void print_table(Hash_table_list *table_list, FILE *f) {
         if (table[i] != NULL) {  
             Node* current = table[i];
             while (current != NULL) {
-                fprintf(f, "| %-20s | %-20s | %-20s |", current->name, table_list->scopeName, "dados.tipo");
+                fprintf(f, "| %-20s | %-20s |", current->name, table_list->scopeName);
+                if(current->type == IntegerK){
+                    fprintf(f, " %-20s |", "inteiro");
+                } else {
+                    fprintf(f, " %-20s |", "void");
+                }
+                
                 print_ocorrencies(current, f);
                 current = current->next;
                 fprintf(f, "\n");
@@ -214,6 +205,7 @@ void insert_node_symtab( TreeNode * t, char *scope ) {
                     aux = find_name(t->attr.name, t->attr.scope);
                     if(aux != NULL){
                         add_new_lineno(aux, t->lineno);
+                        t->type = aux->type;
                     } else {
                         printf("Função não declarada\n");
                         exit(1);

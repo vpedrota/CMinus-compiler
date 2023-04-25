@@ -272,6 +272,7 @@ void buildSymtab(TreeNode *root){
     t.nodekind = StmtK;
     t.attr.name = "input";
     t.attr.scope = "global";
+    t.type = IntegerK;
     insert_node_symtab(&t, "global");
 
     t.attr.name = "output";

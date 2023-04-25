@@ -2,7 +2,7 @@
 #include "symtab.h"
 
 void check_node(TreeNode *node){
-    Node* aux = NULL;
+    Node* aux = NULL, *aux2;
     switch (node->nodekind) {
 
     case StmtK:
@@ -15,11 +15,32 @@ void check_node(TreeNode *node){
                 
             aux = find_name(node->child[1]->attr.name, node->child[1]->attr.scope);
             if(aux->type != IntegerK ){
-                printf("Assign entre variável e retorno de void\n");
+                printf("Assign entre variável e retorno de void. Função: %s\n", aux->name);
                 exit(1);
             }
             break;
 
+        case ReturnK:
+
+            aux = find_name(node->attr.scope, "global");
+
+            if(node->child[0] == NULL && aux->type == IntegerK){
+                printf("Erro semântico: valor retornado não corresponde ao tipo da função declarada. Função: %s\n", aux->name);
+                exit(1);
+            }
+
+            else if (node->child[0] == NULL && aux->type == VoidK){
+                break;
+            }
+
+            if(node->child[0]->kind.exp == IdK && aux->type == IntegerK){
+                aux2 = find_name(node->child[0]->attr.name, node->child[0]->attr.scope);
+                if(aux2->type != aux->type){
+                    printf("Erro semântico: valor retornado não corresponde ao tipo da função declarada. Função: %s\n", aux->name);
+                    exit(1);
+                }
+            }
+            break;
 
         case ConstK:
             node->type = IntegerK;
@@ -47,16 +68,16 @@ void check_node(TreeNode *node){
 
             //printf("%s", node->child[0]->attr.name);
 
-            if(node->child[1]->type == IntegerK)
-                printf("1%s", node->child[1]->attr.name);
+            // if(node->child[1]->type == IntegerK)
+            //     printf("1%s", node->child[1]->attr.name);
 
-            if(node->child[0]->type == IntegerK)
-                printf("-%s", node->child[0]->attr.name);
+            // if(node->child[0]->type == IntegerK)
+            //     printf("-%s", node->child[0]->attr.name);
 
-            if(node->child[0]->type != IntegerK || node->child[1]->type != IntegerK){
-                printf("OPERAÇÃO ARITMÉTICA ENTRE DOIS VALORES NÃO INTEIROS");
-                exit(1);
-            }
+            // if(node->child[0]->type != IntegerK || node->child[1]->type != IntegerK){
+            //     printf("OPERAÇÃO ARITMÉTICA ENTRE DOIS VALORES NÃO INTEIROS");
+            //     exit(1);
+            //}
 
             break;
         default:

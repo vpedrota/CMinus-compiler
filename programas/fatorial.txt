@@ -1,8 +1,8 @@
 
 
-int p(void){
+void p(void){
     input(); 
-    return 3;
+    return ;
 }
 
 void e(void){
@@ -12,6 +12,6 @@ void main(void){
     int vetor[5];
     int a;
     int g;
-    a = p();
+    p();
     a = 3;
 }

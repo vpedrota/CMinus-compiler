@@ -7,6 +7,7 @@ typedef struct node {
     char* name;
     struct lineno_list *first;
     struct node* next;
+    StmtKind stmt;
     ExpType type;
 } Node;
 

@@ -3,6 +3,7 @@
 
 void check_node(TreeNode *node){
     Node* aux = NULL, *aux2;
+    int operador1, operador2;
     switch (node->nodekind) {
 
     case StmtK:
@@ -19,7 +20,6 @@ void check_node(TreeNode *node){
                 exit(1);
             }
             break;
-
         case ReturnK:
 
             aux = find_name(node->attr.scope, "global");
@@ -42,10 +42,6 @@ void check_node(TreeNode *node){
             }
             break;
 
-        case ConstK:
-            node->type = IntegerK;
-            break;
-
         case VarK:
             if(node->type == VoidK){
                 printf("Erro semântico: variável declarada do tipo void\n");
@@ -62,21 +58,31 @@ void check_node(TreeNode *node){
         break;
 
     case ExpK:
-        switch (node->kind.exp)
-        {
+        switch (node->kind.exp) {
+
+        case ConstK:
+        case IdK:
+            node->type = IntegerK;
+            break;
+
         case OpK:
 
             //  printf("qq%d %d", node->child[0]->kind.exp, node->child[0]->attr.op);
             //  printf("--%d", node->child[1]->kind.exp);
-            // if(node->child[1]->type == IntegerK)
-            //     printf("1%s", node->child[1]->attr.name);
+            
+            // printf("%d--", node->child[0]->kind.exp);
+            // printf("%d---\n", node->child[1]->kind.exp);
 
-           
-            // printf("-%s", node->child[0]->attr.name);
-            // printf("-%d", node->child[1]->type);
+            operador1 = (node->child[0]->kind.exp == ConstK || node->child[0]->kind.exp == IdK || node->child[0]->kind.exp == VetK || node->child[0]->kind.exp == OpK);
+            operador2 = (node->child[1]->kind.exp == ConstK || node->child[1]->kind.exp == IdK || node->child[1]->kind.exp == VetK || node->child[1]->kind.exp == OpK);
 
-            if((node->child[0]->type != IntegerK && node->child[0]->kind.exp != OpK) || (node->child[1]->type != IntegerK && node->child[1]->kind.exp != OpK)){
-                printf("OPERAÇÃO ARITMÉTICA ENTRE DOIS VALORES NÃO INTEIROS\n");
+            if(operador1 && operador2){
+                break;
+            }
+
+            if((node->child[0]->type != IntegerK || node->child[0]->kind.exp != OpK) || (node->child[1]->type != IntegerK || node->child[1]->kind.exp != OpK)){
+                printf("%d %d", node->child[0]->kind.exp, node->child[1]->kind.exp)/
+                printf("OPERAÇÃO ARITMÉTICA ENTRE DOIS VALORES NÃO INTEIROS: %d\n", node->lineno);
                 exit(1);
             }
 

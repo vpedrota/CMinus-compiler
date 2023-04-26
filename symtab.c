@@ -37,6 +37,7 @@ Node* create_node(TreeNode *t) {
     new_node->first->next = NULL;
     new_node->next = NULL;
     new_node->type = t->type;
+    new_node->stmt = t->kind.stmt;
     return new_node;
 }
 
@@ -68,9 +69,9 @@ void print_ocorrencies(Node *no, FILE *f){
 void print_table(Hash_table_list *table_list, FILE *f) {
     Node** table = table_list->table;
     if(table == NULL) return;
-    fprintf(f, "+---------------------+---------------------+---------------------+---------------------+\n");
-    fprintf(f, "| %-20s | %-20s | %-20s | %-20s |\n", "Nome", "Escopo", "Tipo", "Ocorrências");
-    fprintf(f, "+---------------------+---------------------+---------------------+---------------------+\n");
+    fprintf(f, "+---------------------+---------------------+---------------------+---------------------+---------------------+\n");
+    fprintf(f, "| %-20s | %-20s | %-20s | %-20s | %-20s |\n", "Nome", "Escopo", "Tipo", "Tipo" , "Ocorrências");
+    fprintf(f, "+---------------------+---------------------+---------------------+---------------------+---------------------+\n");
     for (int i = 0; i < TABLE_SIZE; i++) {
         if (table[i] != NULL) {  
             Node* current = table[i];
@@ -81,7 +82,16 @@ void print_table(Hash_table_list *table_list, FILE *f) {
                 } else {
                     fprintf(f, " %-20s |", "void");
                 }
-                
+                if(current->stmt == FunK){
+                    fprintf(f, " %-20s |", "Função");
+                }
+                else if(current->stmt == VarK){
+                    fprintf(f, " %-20s |", "Variável");
+                }
+                else{
+                    fprintf(f, " %-20s |", "Tipo não mapeado");
+                }
+               
                 print_ocorrencies(current, f);
                 current = current->next;
                 fprintf(f, "\n");

@@ -1,17 +1,6 @@
 
-
-int p(void){
-    input(); 
-    return 3;
-}
-
-void e(void){
-}
-
 void main(void){
     int vetor[5];
     int a;
-    int g;
-    p();
-    a = 3 + 2 + 2 + p() + 2 + p();
+    a = 3 + 2 + 2;
 }

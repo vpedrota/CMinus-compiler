@@ -1,6 +1,8 @@
+void tese(void){
+}
 
 void main(void){
     int vetor[5];
     int a;
-    a = 3 + 2 + 2;
+    a = 2+ tese;
 }

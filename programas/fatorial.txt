@@ -1,8 +1,10 @@
-void tese(void){
+int g;
+
+void f(void){
+    int a;
 }
 
 void main(void){
-    int vetor[5];
     int a;
-    a = 2+ tese;
+    a =  2 + 2 + 2;
 }

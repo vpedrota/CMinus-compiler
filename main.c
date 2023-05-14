@@ -5,6 +5,7 @@
 #include "arvore.h"
 #include "symtab.h"
 #include "analyze.h"
+#include "codegen.h"
 
 int lineno = 1;
 
@@ -45,6 +46,10 @@ int main(int argc, char * argv[]){
     printf("Realizando análise semântica.\n");
     analyze(arvore);
     printf("Análise semântica concluída com sucesso.\n");
+
+    printf("Iniciando código intermediário.\n");
+    codeGen(arvore);
+    printf("Código intermediário gerado com suceeso.\n");
     // Fechando arquivos abertos
     fclose(input);
     return 0;

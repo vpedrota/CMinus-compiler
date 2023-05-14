@@ -4,8 +4,8 @@ CFLAGS := -c -Wall
 
 all: compilador clean
 
-compilador: scan.o arvore.o parser.o symtab.o analyze.o main.o
-	$(CC) scan.o arvore.o parser.o symtab.o analyze.o main.o -o cminus
+compilador: scan.o arvore.o parser.o symtab.o analyze.o codegen.o main.o
+	$(CC) scan.o arvore.o parser.o symtab.o analyze.o main.o codegen.o -o cminus
 
 parser.o: bison/bison.y globals.h
 	bison -d -t -o parser.c bison/bison.y 
@@ -23,6 +23,9 @@ symtab.o: symtab.c symtab.h globals.h
 
 analyze.o: analyze.c analyze.h globals.h
 	$(CC) -c analyze.c
+
+codegen.o: codegen.c codegen.h globals.h
+	$(CC) -c codegen.c
 
 clean:
 	rm -f parser.o scan.o arvore.o symtab.o analyze.o main.o

@@ -3,7 +3,7 @@
 
 
 int contador = 0;
-
+static int quant_param = 0;
 void register_index(){
     contador = (contador + 1) % 32;
 }
@@ -32,7 +32,7 @@ void printOperation(FILE *output, int token){
          fprintf(output, "GT ");  
          break;
       case LET: 
-         fprintf(output, "LT ");  
+         fprintf(output, "LET ");  
          break;
       default:
          fprintf(output, " unknown ");  
@@ -54,22 +54,27 @@ TreeNode* find_function(TreeNode *arvore, char *name){
         printf("Erro: Função %s não encontrada\n", t->child[0]->attr.name);
         exit(1);
     }
-    return t;
+    return t->child[0];
 }
 
 void generateStmt(TreeNode *tree){
-    TreeNode *func;
+    TreeNode *func, *aux;
     switch (tree->kind.stmt) { 
 
         case FunK:
-            //printf("Função %s\n", tree->attr.name);
             codeGen(tree->child[1]);
             break;
         case CallK:
+            quant_param = 0;
             func = find_function(arvore, tree->attr.name);
-            codeGen(func->child[0]);
-            codeGen(func->child[1]);
+            aux = func->child[0];
+            while(aux != NULL){
+                printf("PARAM %s _ _\n", aux->child[0]->attr.name);
+                aux = aux->sibling;
+            }
+            printf("CALL %s %d t1\n", tree->attr.name, quant_param);
             break;
+
         case IfK:
             codeGen(tree->child[0]);
             printf("BNE t%d 1 ELSE\n", contador);
@@ -78,15 +83,14 @@ void generateStmt(TreeNode *tree){
             printf("ELSE:\n");
             codeGen(tree->child[2]);
             printf("ENDELSE:\n");
-            
             break;
         case VarK:
-            // printf("Variável %s\n", tree->attr.name);
+            //printf("Variável %s\n", tree->attr.name);
             break;
         case AssignK:
             if(tree->child[1]->kind.exp == IdK){
                 printf("ASSIGN ");
-                codeGen(tree->child[1]);
+                codeGen(tree->child[0]);
                 printf("_ ");
                 printf("%s\n", tree->attr.name);
             }
@@ -107,7 +111,6 @@ void generateExp(TreeNode *tree){
     switch (tree->kind.exp)
     {
     case TypeK:
-        //printf("declaração\n");
         codeGen(tree->child[0]);
         break;
     case IdK:

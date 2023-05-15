@@ -3,15 +3,12 @@
   Tipo void
     Funcao f
       Tipo inteiro
+        Variavel z
+      Tipo inteiro
         Variavel a
       Tipo inteiro
-        Variavel an
-      Atribuicao
-        Id: an
-        Id: a
-      Atribuicao
-        Id: an
-        Const: 3
+        Variavel c
+      Chamada de Funcao f 
   Tipo void
     Funcao main
       Tipo void
@@ -19,6 +16,8 @@
         Variavel a
       Tipo inteiro
         Variavel b
+      Tipo inteiro
+        Variavel p
       Atribuicao
         Id: a
         Id: b
@@ -29,7 +28,7 @@
             Op:  PLUS  
               Const: 2
               Op:  MULT  
-                Const: 2
+                Const: 4
                 Const: 44
             Const: 4422
           Op:  MULT  

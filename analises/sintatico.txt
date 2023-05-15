@@ -10,21 +10,27 @@
       Tipo void
       Tipo inteiro
         Variavel a
+      Tipo inteiro
+        Variavel b
       Atribuicao
         Id: a
-        Const: 3
+        Id: b
       Atribuicao
         Id: a
         Op:  PLUS  
           Op:  PLUS  
             Op:  PLUS  
               Const: 2
-              Const: 2
-            Op:  MULT  
-              Const: 44
-              Const: 4422
+              Op:  MULT  
+                Const: 2
+                Const: 44
+            Const: 4422
           Op:  MULT  
             Const: 4
             Op:  PLUS  
               Const: 3
               Const: 2
+      If
+        Op:  GT  
+          Const: 2
+          Const: 4

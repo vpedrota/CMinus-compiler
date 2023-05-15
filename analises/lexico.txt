@@ -20,26 +20,37 @@
 8: INT  
 8: ID, name = a 
 8: PV  
-9: ID, name = a 
-9: ASSIGN  
-9: NUM, value = 3 
+9: INT  
+9: ID, name = b 
 9: PV  
 10: ID, name = a 
 10: ASSIGN  
-10: NUM, value = 2 
-10: PLUS  
-10: NUM, value = 2 
-10: PLUS  
-10: NUM, value = 44 
-10: MULT  
-10: NUM, value = 4422 
-10: PLUS  
-10: NUM, value = 4 
-10: MULT  
-10: LPAR  
-10: NUM, value = 3 
-10: PLUS  
-10: NUM, value = 2 
-10: RPAR  
+10: ID, name = b 
 10: PV  
-11: RCHA  
+11: ID, name = a 
+11: ASSIGN  
+11: NUM, value = 2 
+11: PLUS  
+11: NUM, value = 2 
+11: MULT  
+11: NUM, value = 44 
+11: PLUS  
+11: NUM, value = 4422 
+11: PLUS  
+11: NUM, value = 4 
+11: MULT  
+11: LPAR  
+11: NUM, value = 3 
+11: PLUS  
+11: NUM, value = 2 
+11: RPAR  
+11: PV  
+12: IF  
+12: LPAR  
+12: NUM, value = 2 
+12: GT  
+12: NUM, value = 4 
+12: RPAR  
+12: LCHA  
+14: RCHA  
+15: RCHA  

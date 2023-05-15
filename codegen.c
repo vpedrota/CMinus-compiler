@@ -44,15 +44,26 @@ void generateStmt(TreeNode *tree){
     switch (tree->kind.stmt) { 
 
         case FunK:
-            printf("Função %s\n", tree->attr.name);
+            //printf("Função %s\n", tree->attr.name);
             codeGen(tree->child[1]);
+            break;
+        case IfK:
             break;
         case VarK:
             // printf("Variável %s\n", tree->attr.name);
             break;
         case AssignK:
-            codeGen(tree->child[1]);
-            printf("ASSIGN %s\n", tree->attr.name);
+            if(tree->child[1]->kind.exp == IdK){
+                printf("ASSIGN ");
+                codeGen(tree->child[1]);
+                printf("_ ");
+                printf("%s\n", tree->attr.name);
+            }
+            else{
+                codeGen(tree->child[1]);
+                printf("ASSIGN %s _ t%d\n", tree->attr.name, contador);
+            }
+            
             break;
         default:
             printf("não mapeado - stmt\n");
@@ -65,11 +76,11 @@ void generateExp(TreeNode *tree){
     switch (tree->kind.exp)
     {
     case TypeK:
-        printf("declaração\n");
+        //printf("declaração\n");
         codeGen(tree->child[0]);
         break;
     case IdK:
-        printf("s\n");
+        printf("%s ", tree->attr.name);
         break;
     case ConstK:
         printf("%d ", tree->attr.val);

@@ -48,6 +48,15 @@ void generateStmt(TreeNode *tree){
             codeGen(tree->child[1]);
             break;
         case IfK:
+        
+            codeGen(tree->child[0]);
+            printf("BNE t%d 1 ELSE\n", contador);
+            codeGen(tree->child[1]);
+            printf("BNE t%d 0 ENDELSE\n", contador);
+            printf("ELSE:\n");
+            codeGen(tree->child[2]);
+            printf("ENDELSE:\n");
+            
             break;
         case VarK:
             // printf("Variável %s\n", tree->attr.name);

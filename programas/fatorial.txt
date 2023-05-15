@@ -2,6 +2,7 @@ int g;
 
 void f(void){
     int a;
+    a = 3;
 }
 
 void main(void){
@@ -9,7 +10,9 @@ void main(void){
     int b;
     a = b;
     a =  2 + 2 * 44 + 4422 + 4 * (3 + 2);
-    if(2 > 4){
-
+    if(2 > 4 + b){
+        a = a + b;
+    }else{
+        a + b;
     }
 }

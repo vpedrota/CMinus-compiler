@@ -5,6 +5,9 @@
       Tipo void
       Tipo inteiro
         Variavel a
+      Atribuicao
+        Id: a
+        Const: 3
   Tipo void
     Funcao main
       Tipo void
@@ -33,4 +36,14 @@
       If
         Op:  GT  
           Const: 2
-          Const: 4
+          Op:  PLUS  
+            Const: 4
+            Id: b
+        Atribuicao
+          Id: a
+          Op:  PLUS  
+            Id: a
+            Id: b
+        Op:  PLUS  
+          Id: a
+          Id: b

@@ -19,8 +19,8 @@
       Tipo inteiro
         Variavel p
       Atribuicao
-        Id: a
-        Id: b
+        Id: g
+        Const: 2
       Atribuicao
         Id: a
         Op:  PLUS  

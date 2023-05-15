@@ -34,9 +34,9 @@
 10: INT  
 10: ID, name = p 
 10: PV  
-11: ID, name = a 
+11: ID, name = g 
 11: ASSIGN  
-11: ID, name = b 
+11: NUM, value = 2 
 11: PV  
 12: ID, name = a 
 12: ASSIGN  

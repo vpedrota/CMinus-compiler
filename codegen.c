@@ -71,6 +71,7 @@ void generateStmt(TreeNode *tree){
             while(aux != NULL){
                 printf("PARAM %s _ _\n", aux->child[0]->attr.name);
                 aux = aux->sibling;
+                quant_param++;
             }
             printf("CALL %s %d t1\n", tree->attr.name, quant_param);
             break;
@@ -94,6 +95,12 @@ void generateStmt(TreeNode *tree){
                 printf("_ ");
                 printf("%s\n", tree->attr.name);
             }
+            else if(tree->child[1]->kind.exp == ConstK){
+                printf("ASSIGN ");
+                codeGen(tree->child[1]);
+                printf("_ ");
+                printf("%s\n", tree->attr.name);
+            } 
             else{
                 codeGen(tree->child[1]);
                 printf("ASSIGN %s _ t%d\n", tree->attr.name, contador);
@@ -120,6 +127,7 @@ void generateExp(TreeNode *tree){
         printf("%d ", tree->attr.val);
         break;
     case OpK:
+
         if(tree->child[0]->kind.exp != OpK && tree->child[1]->kind.exp != OpK){
             printOperation(stdout, tree->attr.op);
             codeGen(tree->child[0]);

@@ -39,16 +39,38 @@ void printOperation(FILE *output, int token){
    }
 }
 
+TreeNode* find_function(TreeNode *arvore, char *name){
+    TreeNode *t = arvore;
+
+    while (t != NULL) {
+
+        if( t->child[0]->kind.stmt == FunK && strcmp(t->child[0]->attr.name, name) == 0){
+            break;
+        }
+        t = t->sibling;
+    }
+    
+    if(t == NULL){
+        printf("Erro: Função %s não encontrada\n", t->child[0]->attr.name);
+        exit(1);
+    }
+    return t;
+}
 
 void generateStmt(TreeNode *tree){
+    TreeNode *func;
     switch (tree->kind.stmt) { 
 
         case FunK:
             //printf("Função %s\n", tree->attr.name);
             codeGen(tree->child[1]);
             break;
+        case CallK:
+            func = find_function(arvore, tree->attr.name);
+            codeGen(func->child[0]);
+            codeGen(func->child[1]);
+            break;
         case IfK:
-        
             codeGen(tree->child[0]);
             printf("BNE t%d 1 ELSE\n", contador);
             codeGen(tree->child[1]);

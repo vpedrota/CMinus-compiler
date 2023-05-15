@@ -2,11 +2,15 @@
     Variavel g
   Tipo void
     Funcao f
-      Tipo void
       Tipo inteiro
         Variavel a
+      Tipo inteiro
+        Variavel an
       Atribuicao
+        Id: an
         Id: a
+      Atribuicao
+        Id: an
         Const: 3
   Tipo void
     Funcao main
@@ -47,3 +51,9 @@
         Op:  PLUS  
           Id: a
           Id: b
+      Chamada de Funcao f 
+        Const: 3
+      Chamada de Funcao f 
+        Const: 3
+      Chamada de Funcao f 
+        Const: 3

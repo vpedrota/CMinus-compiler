@@ -1,8 +1,9 @@
 int g;
 
-void f(void){
-    int a;
-    a = 3;
+void f(int a){
+    int an;
+    an = a;
+    an = 3;
 }
 
 void main(void){
@@ -15,4 +16,7 @@ void main(void){
     }else{
         a + b;
     }
+    f(3);
+    f(3);
+    f(3);
 }

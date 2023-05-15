@@ -8,6 +8,7 @@
 #include "codegen.h"
 
 int lineno = 1;
+TreeNode* arvore;
 
 int main(int argc, char * argv[]){
     
@@ -36,7 +37,7 @@ int main(int argc, char * argv[]){
     
     // Realizando construção da árvore sintática
     printf("Imprimindo análise sintática.\n");
-    TreeNode* arvore = parse();
+    arvore = parse();
     printTreeFile(arvore);
 
     // Realizando a construação da tabela de símbolos

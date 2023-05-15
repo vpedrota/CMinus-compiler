@@ -6,5 +6,6 @@ void f(void){
 
 void main(void){
     int a;
-    a =  2 + 2 + 2;
+    a = 3;
+    a =  2 + 2 + 44 * 4422 + 4 * (3 + 2);
 }

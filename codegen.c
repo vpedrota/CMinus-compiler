@@ -1,10 +1,42 @@
 #include "globals.h"
 #include "codegen.h"
 
+
 int contador = 0;
 
 void register_index(){
     contador = (contador + 1) % 32;
+}
+
+void printOperation(FILE *output, int token){
+   switch (token){
+      case PLUS: 
+         fprintf(output, "PLUS "); 
+         break;
+      case SUB: 
+         fprintf(output, "SUB  "); 
+         break;
+      case MULT: 
+         fprintf(output, "MULT "); 
+         break;
+      case DIF: 
+         fprintf(output, "IF ");  
+         break;
+      case GT: 
+         fprintf(output, "GT ");  
+         break;
+      case LT: 
+         fprintf(output, "LT ");  
+         break;
+      case GET: 
+         fprintf(output, "GT ");  
+         break;
+      case LET: 
+         fprintf(output, "LT ");  
+         break;
+      default:
+         fprintf(output, " unknown ");  
+   }
 }
 
 
@@ -20,17 +52,16 @@ void generateStmt(TreeNode *tree){
             break;
         case AssignK:
             codeGen(tree->child[1]);
-
-            printf("\nASSIGN %s\n", tree->attr.name);
+            printf("ASSIGN %s\n", tree->attr.name);
             break;
         default:
             printf("não mapeado - stmt\n");
             break;
-
     }
 }
 
 void generateExp(TreeNode *tree){
+    int aux1, aux2;
     switch (tree->kind.exp)
     {
     case TypeK:
@@ -41,18 +72,45 @@ void generateExp(TreeNode *tree){
         printf("s\n");
         break;
     case ConstK:
-        printf("const");
+        printf("%d ", tree->attr.val);
         break;
     case OpK:
-        codeGen(tree->child[0]);
-        if(tree->child[0]->kind.exp == OpK){
-            printf("t%d", contador);
+        if(tree->child[0]->kind.exp != OpK && tree->child[1]->kind.exp != OpK){
+            printOperation(stdout, tree->attr.op);
+            codeGen(tree->child[0]);
+            codeGen(tree->child[1]);
+            register_index();
+            printf("t%d \n", contador); 
         }
-        printf(" operador ");
-        codeGen(tree->child[1]);
-        printf(" RESULT t%d", contador);
-        register_index();
-        printf("\n");
+        else if(tree->child[0]->kind.exp == OpK && tree->child[1]->kind.exp != OpK){
+            codeGen(tree->child[0]);
+            aux1 = contador;
+            printOperation(stdout, tree->attr.op);
+            printf("t%d ", aux1);
+            codeGen(tree->child[1]);
+            register_index();
+            printf("t%d \n", contador);
+        }
+        else if(tree->child[0]->kind.exp != OpK && tree->child[1]->kind.exp == OpK){
+            codeGen(tree->child[1]);
+            aux1 = contador;
+            printOperation(stdout, tree->attr.op);
+            printf("t%d ", aux1);
+            codeGen(tree->child[0]);
+            register_index();
+            printf("t%d \n", contador);
+        }
+        else if (tree->child[0]->kind.exp == OpK && tree->child[1]->kind.exp == OpK){
+            codeGen(tree->child[0]);
+            aux1 = contador;
+            codeGen(tree->child[1]);
+            aux2 = contador;
+            printOperation(stdout, tree->attr.op);
+            printf("t%d ", aux1);
+            printf("t%d ", aux2);
+            register_index();
+            printf("t%d \n", contador);
+        }
         break;
     
     default:

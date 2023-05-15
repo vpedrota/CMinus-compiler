@@ -12,8 +12,19 @@
         Variavel a
       Atribuicao
         Id: a
+        Const: 3
+      Atribuicao
+        Id: a
         Op:  PLUS  
           Op:  PLUS  
-            Const: 2
-            Const: 2
-          Const: 2
+            Op:  PLUS  
+              Const: 2
+              Const: 2
+            Op:  MULT  
+              Const: 44
+              Const: 4422
+          Op:  MULT  
+            Const: 4
+            Op:  PLUS  
+              Const: 3
+              Const: 2

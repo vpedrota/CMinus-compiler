@@ -1,0 +1,232 @@
+4: INT  
+4: ID, name = vet 
+4: LCOL  
+4: NUM, value = 10 
+4: RCOL  
+4: PV  
+7: INT  
+7: ID, name = minloc 
+7: LPAR  
+7: INT  
+7: ID, name = a 
+7: LCOL  
+7: RCOL  
+7: VIR  
+7: INT  
+7: ID, name = low 
+7: VIR  
+7: INT  
+7: ID, name = high 
+7: RPAR  
+8: LCHA  
+8: INT  
+8: ID, name = i 
+8: PV  
+8: INT  
+8: ID, name = x 
+8: PV  
+8: INT  
+8: ID, name = k 
+8: PV  
+9: ID, name = k 
+9: ASSIGN  
+9: ID, name = low 
+9: PV  
+10: ID, name = x 
+10: ASSIGN  
+10: ID, name = a 
+10: LCOL  
+10: ID, name = low 
+10: RCOL  
+10: PV  
+11: ID, name = i 
+11: ASSIGN  
+11: ID, name = low 
+11: PLUS  
+11: NUM, value = 1 
+11: PV  
+12: WHILE  
+12: LPAR  
+12: ID, name = i 
+12: LT  
+12: ID, name = high 
+12: RPAR  
+12: LCHA  
+13: IF  
+13: LPAR  
+13: ID, name = a 
+13: LCOL  
+13: ID, name = i 
+13: RCOL  
+13: LT  
+13: ID, name = x 
+13: RPAR  
+13: LCHA  
+14: ID, name = x 
+14: ASSIGN  
+14: ID, name = a 
+14: LCOL  
+14: ID, name = i 
+14: RCOL  
+14: PV  
+15: ID, name = k 
+15: ASSIGN  
+15: ID, name = i 
+15: PV  
+16: RCHA  
+16: ELSE  
+16: LCHA  
+17: ID, name = i 
+17: ASSIGN  
+17: NUM, value = 1 
+17: PV  
+18: RCHA  
+19: ID, name = i 
+19: ASSIGN  
+19: ID, name = i 
+19: PLUS  
+19: NUM, value = 1 
+19: PV  
+20: RCHA  
+21: RETURN  
+21: ID, name = k 
+21: PV  
+22: RCHA  
+24: VOID   
+24: ID, name = sort 
+24: LPAR  
+24: INT  
+24: ID, name = a 
+24: LCOL  
+24: RCOL  
+24: VIR  
+24: INT  
+24: ID, name = low 
+24: VIR  
+24: INT  
+24: ID, name = high 
+24: RPAR  
+25: LCHA  
+25: INT  
+25: ID, name = i 
+25: PV  
+25: INT  
+25: ID, name = k 
+25: PV  
+26: ID, name = i 
+26: ASSIGN  
+26: ID, name = low 
+26: PV  
+27: WHILE  
+27: LPAR  
+27: ID, name = i 
+27: LT  
+27: ID, name = high 
+27: SUB  
+27: NUM, value = 1 
+27: RPAR  
+27: LCHA  
+28: INT  
+28: ID, name = t 
+28: PV  
+29: ID, name = k 
+29: ASSIGN  
+29: ID, name = minloc 
+29: LPAR  
+29: ID, name = a 
+29: VIR  
+29: ID, name = i 
+29: VIR  
+29: ID, name = high 
+29: RPAR  
+29: PV  
+30: ID, name = t 
+30: ASSIGN  
+30: ID, name = a 
+30: LCOL  
+30: ID, name = k 
+30: RCOL  
+30: PV  
+31: ID, name = a 
+31: LCOL  
+31: ID, name = k 
+31: RCOL  
+31: ASSIGN  
+31: ID, name = a 
+31: LCOL  
+31: ID, name = i 
+31: RCOL  
+31: PV  
+32: ID, name = a 
+32: LCOL  
+32: ID, name = i 
+32: RCOL  
+32: ASSIGN  
+32: ID, name = t 
+32: PV  
+33: ID, name = i 
+33: ASSIGN  
+33: ID, name = i 
+33: PLUS  
+33: NUM, value = 1 
+33: PV  
+34: RCHA  
+35: RCHA  
+37: INT  
+37: ID, name = main 
+37: LPAR  
+37: VOID   
+37: RPAR  
+38: LCHA  
+39: INT  
+39: ID, name = i 
+39: PV  
+40: ID, name = i 
+40: ASSIGN  
+40: NUM, value = 0 
+40: PV  
+41: WHILE  
+41: LPAR  
+41: ID, name = i 
+41: LT  
+41: NUM, value = 10 
+41: RPAR  
+41: LCHA  
+42: ID, name = i 
+42: ASSIGN  
+42: ID, name = i 
+42: PLUS  
+42: NUM, value = 1 
+42: PV  
+43: RCHA  
+44: ID, name = sort 
+44: LPAR  
+44: ID, name = vet 
+44: VIR  
+44: NUM, value = 0 
+44: VIR  
+44: NUM, value = 10 
+44: RPAR  
+44: PV  
+45: ID, name = i 
+45: ASSIGN  
+45: NUM, value = 0 
+45: PV  
+46: WHILE  
+46: LPAR  
+46: ID, name = i 
+46: LT  
+46: NUM, value = 10 
+46: RPAR  
+46: LCHA  
+47: ID, name = i 
+47: ASSIGN  
+47: ID, name = i 
+47: PLUS  
+47: NUM, value = 1 
+47: PV  
+48: RCHA  
+49: RETURN  
+49: NUM, value = 0 
+49: PV  
+50: RCHA  

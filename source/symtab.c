@@ -229,15 +229,16 @@ void insert_node_symtab( TreeNode * t, char *scope ) {
         case ExpK:
             switch (t->kind.exp){
             case IdK:
+
                 aux = find_name(t->attr.name, t->attr.scope);
                 if(aux != NULL && aux->stmt == VarK){
                      add_new_lineno(aux, t->lineno);
                 }
-                else if(aux->stmt == FunK){
+                else if(aux != NULL && aux->stmt == FunK){
                     printf("Erro semântico: chamada inválida de função: %s\n", t->attr.name);
                     exit(1);
                 } else {
-                    printf("Variável não declarada\n");
+                    printf("Erro semântico: Variável não declarada\n");
                     exit(1);
                 }
                 break;

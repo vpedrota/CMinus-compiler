@@ -1,4 +1,4 @@
-*.o
-*.out
-cminus
+/source/*.o
+/source/*.out
+/source/cminus
 .vscode

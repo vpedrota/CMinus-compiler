@@ -1,8 +1,10 @@
 #include "globals.h"
 #include "codegen.h"
+#include <ctype.h>
 
 
 int contador = 0;
+int contador_while = 1;
 static int quant_param = 0;
 void register_index(){
     contador = (contador + 1) % 32;
@@ -59,9 +61,17 @@ TreeNode* find_function(TreeNode *arvore, char *name){
 
 void generateStmt(TreeNode *tree){
     TreeNode *func, *aux;
+    int i = 0;
+    char nome[100];
     switch (tree->kind.stmt) { 
 
         case FunK:
+            sprintf(nome, "%s:", tree->child[0]->attr.scope);
+            while (nome[i] != '\0') {
+                printf("%c", toupper(nome[i]));
+                i++;
+            }
+            printf("\n");
             codeGen(tree->child[1]);
             break;
         case CallK:
@@ -93,7 +103,16 @@ void generateStmt(TreeNode *tree){
                 printf("ASSIGN ");
                 codeGen(tree->child[0]);
                 printf("_ ");
-                printf("%s\n", tree->attr.name);
+                printf("%s\n", tree->child[1]->attr.name);
+            }
+            else if(tree->child[1]->kind.exp == VetK ){
+                printf("ASSIGN ");
+                codeGen(tree->child[0]);
+                printf("_ ");
+                printf("%s[ ", tree->child[1]->attr.name);
+                codeGen(tree->child[1]->child[0]);
+                printf("]\n");
+
             }
             else if(tree->child[1]->kind.exp == ConstK){
                 printf("ASSIGN ");
@@ -106,6 +125,18 @@ void generateStmt(TreeNode *tree){
                 printf("ASSIGN %s _ t%d\n", tree->attr.name, contador);
             }
             
+            break;
+            case WhileK:
+                printf("LOOP%d\n", contador_while);
+                codeGen(tree->child[0]);
+                printf("BNE t%d 1 SAIDA_WHILE%d\n", contador, contador_while);
+                codeGen(tree->child[1]);
+                printf("JUMP LOOP%d\n", contador_while);
+                printf("SAIDA_WHILE%d\n", contador_while);
+                register_index(); 
+                contador_while++;
+                break;
+        case ReturnK:
             break;
         default:
             printf("não mapeado - stmt\n");
@@ -122,6 +153,8 @@ void generateExp(TreeNode *tree){
         break;
     case IdK:
         printf("%s ", tree->attr.name);
+        break;
+    case VetK:
         break;
     case ConstK:
         printf("%d ", tree->attr.val);

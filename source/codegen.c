@@ -6,8 +6,9 @@
 int contador = 0;
 int contador_while = 1;
 static int quant_param = 0;
-void register_index(){
-    contador = (contador + 1) % 32;
+int register_index(){
+    contador = (contador) % 32;
+    return ++contador;
 }
 
 void printOperation(FILE *output, int token){
@@ -36,6 +37,9 @@ void printOperation(FILE *output, int token){
       case LET: 
          fprintf(output, "LET ");  
          break;
+      case DIV: 
+         fprintf(output, "DIV ");  
+         break;
       default:
          fprintf(output, " unknown ");  
    }
@@ -61,80 +65,70 @@ TreeNode* find_function(TreeNode *arvore, char *name){
 
 void generateStmt(TreeNode *tree){
     TreeNode *func, *aux;
+    int reg1 = 0, reg2 = 0;
     int i = 0;
     char nome[100];
     switch (tree->kind.stmt) { 
 
         case FunK:
-            sprintf(nome, "%s:", tree->child[0]->attr.scope);
-            while (nome[i] != '\0') {
-                printf("%c", toupper(nome[i]));
-                i++;
-            }
-            printf("\n");
+            printf("(FUN %s %s, -) \n", tree->child[0]->attr.scope,  tree->child[0]->attr.scope);
+            // árvore com problemas no filho 0
+            // codeGen(tree->child[0]);
+            //func = find_function(arvore, tree->attr.scope);
+            //printf("%s", func->child[0]->attr.name);
             codeGen(tree->child[1]);
             break;
+
         case CallK:
-            quant_param = 0;
-            func = find_function(arvore, tree->attr.name);
-            aux = func->child[0];
-            while(aux != NULL){
-                printf("PARAM %s _ _\n", aux->child[0]->attr.name);
-                aux = aux->sibling;
-                quant_param++;
-            }
-            printf("CALL %s %d t1\n", tree->attr.name, quant_param);
+            // quant_param = 0;
+            // func = find_function(arvore, tree->attr.name);
+            // aux = func->child[0];
+            // while(aux != NULL){
+            //     printf("PARAM %s _ _\n", aux->child[0]->attr.name);
+            //     aux = aux->sibling;
+            //     quant_param++;
+            // }
+            // printf("CALL %s %d t1\n", tree->attr.name, quant_param);
             break;
 
         case IfK:
-            codeGen(tree->child[0]);
-            printf("BNE t%d 1 ELSE\n", contador);
-            codeGen(tree->child[1]);
-            printf("BNE t%d 0 ENDELSE\n", contador);
-            printf("ELSE:\n");
-            codeGen(tree->child[2]);
-            printf("ENDELSE:\n");
+            // codeGen(tree->child[0]);
+            // printf("BNE t%d 1 ELSE\n", contador);
+            // codeGen(tree->child[1]);
+            // printf("BNE t%d 0 ENDELSE\n", contador);
+            // printf("ELSE:\n");
+            // codeGen(tree->child[2]);
+            // printf("ENDELSE:\n");
             break;
         case VarK:
-            //printf("Variável %s\n", tree->attr.name);
+            printf("(ALLOC %s, %s, -)\n", tree->attr.name, tree->attr.scope);
             break;
         case AssignK:
-            if(tree->child[1]->kind.exp == IdK){
-                printf("ASSIGN ");
-                codeGen(tree->child[0]);
-                printf("_ ");
-                printf("%s\n", tree->child[1]->attr.name);
-            }
-            else if(tree->child[1]->kind.exp == VetK ){
-                printf("ASSIGN ");
-                codeGen(tree->child[0]);
-                printf("_ ");
-                printf("%s[ ", tree->child[1]->attr.name);
-                codeGen(tree->child[1]->child[0]);
-                printf("]\n");
 
-            }
-            else if(tree->child[1]->kind.exp == ConstK){
-                printf("ASSIGN ");
-                codeGen(tree->child[1]);
-                printf("_ ");
-                printf("%s\n", tree->attr.name);
-            } 
-            else{
-                codeGen(tree->child[1]);
-                printf("ASSIGN %s _ t%d\n", tree->attr.name, contador);
-            }
+            // Em todo assign precisamos carregar o endereço para um registrador
+            // Realizando LOAD
+   
+            reg1 = contador;
+            printf("(LOAD t%d, %s -)\n", contador, tree->child[0]->attr.name);
+
             
+            // Gerando as expressões do fiho1 e atribuindo a um registrador
+            codeGen(tree->child[1]);
+            reg2 = contador;
+
+            printf("(ASSIGN t%d, t%d, -)\n", reg1, reg2);
+            printf("(STORE, %s, t%d, -)\n", tree->child[0]->attr.name, reg1);
+
             break;
             case WhileK:
-                printf("LOOP%d\n", contador_while);
-                codeGen(tree->child[0]);
-                printf("BNE t%d 1 SAIDA_WHILE%d\n", contador, contador_while);
-                codeGen(tree->child[1]);
-                printf("JUMP LOOP%d\n", contador_while);
-                printf("SAIDA_WHILE%d\n", contador_while);
-                register_index(); 
-                contador_while++;
+                // printf("LOOP%d\n", contador_while);
+                // codeGen(tree->child[0]);
+                // printf("BNE t%d 1 SAIDA_WHILE%d\n", contador, contador_while);
+                // codeGen(tree->child[1]);
+                // printf("JUMP LOOP%d\n", contador_while);
+                // printf("SAIDA_WHILE%d\n", contador_while);
+                // register_index(); 
+                // contador_while++;
                 break;
         case ReturnK:
             break;
@@ -146,57 +140,36 @@ void generateStmt(TreeNode *tree){
 
 void generateExp(TreeNode *tree){
     int aux1, aux2;
-    switch (tree->kind.exp)
-    {
+    switch (tree->kind.exp) {
+    
+    // Aqui sempre teremos uma declaração de variável ou de função
+    // Será analisado aqui o tipo 
     case TypeK:
+
+        // Aqui será analisado o tipo de declaração
+        // Podendo ser entre vetK, varK e funK
+
         codeGen(tree->child[0]);
         break;
     case IdK:
-        printf("%s ", tree->attr.name);
+        register_index();
+        printf("(LOAD t%d, %s, -)\n", contador, tree->attr.name);
         break;
     case VetK:
-        break;
+        printf("asfaf");
     case ConstK:
-        printf("%d ", tree->attr.val);
+        register_index();
+        printf("(LOAD t%d, %d, -)\n", contador,tree->attr.val);
         break;
     case OpK:
-
-        if(tree->child[0]->kind.exp != OpK && tree->child[1]->kind.exp != OpK){
-            printOperation(stdout, tree->attr.op);
-            codeGen(tree->child[0]);
-            codeGen(tree->child[1]);
-            register_index();
-            printf("t%d \n", contador); 
-        }
-        else if(tree->child[0]->kind.exp == OpK && tree->child[1]->kind.exp != OpK){
-            codeGen(tree->child[0]);
-            aux1 = contador;
-            printOperation(stdout, tree->attr.op);
-            printf("t%d ", aux1);
-            codeGen(tree->child[1]);
-            register_index();
-            printf("t%d \n", contador);
-        }
-        else if(tree->child[0]->kind.exp != OpK && tree->child[1]->kind.exp == OpK){
-            codeGen(tree->child[1]);
-            aux1 = contador;
-            printOperation(stdout, tree->attr.op);
-            printf("t%d ", aux1);
-            codeGen(tree->child[0]);
-            register_index();
-            printf("t%d \n", contador);
-        }
-        else if (tree->child[0]->kind.exp == OpK && tree->child[1]->kind.exp == OpK){
-            codeGen(tree->child[0]);
-            aux1 = contador;
-            codeGen(tree->child[1]);
-            aux2 = contador;
-            printOperation(stdout, tree->attr.op);
-            printf("t%d ", aux1);
-            printf("t%d ", aux2);
-            register_index();
-            printf("t%d \n", contador);
-        }
+        codeGen(tree->child[0]);
+        aux1 = contador;
+        codeGen(tree->child[1]);
+        aux2 = contador;
+        register_index();
+        printf("(");
+        printOperation(stdout, tree->attr.op);
+        printf("t%d, t%d, t%d )\n",contador, aux1, aux2); 
         break;
     
     default:

@@ -19,14 +19,14 @@ typedef struct treeNode
    { struct treeNode * child[MAXCHILDREN];
      struct treeNode * sibling;
      int lineno;
-     const char *name;
      NodeKind nodekind;
      union { StmtKind stmt; ExpKind exp;} kind;
      struct { int op;
              int val;
              char *name;
              int len;
-             char * scope; } attr;
+             char * scope; 
+            } attr;
      ExpType type;
    } TreeNode;
 

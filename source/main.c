@@ -68,8 +68,10 @@ int main(int argc, char * argv[]){
     //     exit(1);
     // }
 
+    freopen("analises/codigo_intermediario.txt", "w", stdout);
     codeGen(arvore);
-    printf("Código intermediário gerado com suceeso.\n");
+    freopen("/dev/tty", "w", stdout); 
+    printf("Código intermediário gerado com sucesso.\n");
     // Fechando arquivos abertos
     fclose(input);
     return 0;

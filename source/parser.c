@@ -1639,7 +1639,7 @@ yyreduce:
         yyval->attr.name = yyvsp[-3]->attr.name;
         yyvsp[-2]->nodekind = StmtK;
         yyvsp[-2]->type = yyvsp[-3]->type;
-        yyvsp[-2]->kind.stmt = VetK;
+        yyvsp[-2]->kind.exp = VetK;
       }
 #line 1645 "parser.c"
     break;

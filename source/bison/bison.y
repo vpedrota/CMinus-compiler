@@ -172,7 +172,7 @@ param : tipo_especificador ident
         $$->attr.name = $1->attr.name;
         $2->nodekind = StmtK;
         $2->type = $1->type;
-        $2->kind.stmt = VetK;
+        $2->kind.exp = VetK;
       }
       ;
 composto_decl : LCHA local_declaracoes statement_lista RCHA

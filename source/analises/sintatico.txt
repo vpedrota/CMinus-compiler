@@ -112,6 +112,10 @@
           Id: i
           Const: 10
         Atribuicao
+          Vetor: vet
+            Id: i
+          Chamada de Funcao input 
+        Atribuicao
           Id: i
           Op:  PLUS  
             Id: i
@@ -127,6 +131,9 @@
         Op:  LT  
           Id: i
           Const: 10
+        Chamada de Funcao output 
+          Vetor: vet
+            Id: i
         Atribuicao
           Id: i
           Op:  PLUS  

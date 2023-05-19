@@ -4,8 +4,9 @@
 
 
 int contador = 0;
-int contador_while = 1;
-static int quant_param = 0;
+int contador_if = 0;
+int contador_while = 0;
+
 int register_index(){
     contador = (contador) % 32;
     return ++contador;
@@ -64,10 +65,12 @@ TreeNode* find_function(TreeNode *arvore, char *name){
 }
 
 void generateStmt(TreeNode *tree){
+
     TreeNode *func, *aux;
     int reg1 = 0, reg2 = 0;
     int i = 0;
     char nome[100];
+    int store = 0, store2 = 0;
     switch (tree->kind.stmt) { 
 
         case FunK:
@@ -92,35 +95,37 @@ void generateStmt(TreeNode *tree){
             break;
 
         case IfK:
-            // codeGen(tree->child[0]);
-            // printf("BNE t%d 1 ELSE\n", contador);
-            // codeGen(tree->child[1]);
-            // printf("BNE t%d 0 ENDELSE\n", contador);
-            // printf("ELSE:\n");
-            // codeGen(tree->child[2]);
-            // printf("ENDELSE:\n");
+        
+            codeGen(tree->child[0]);
+            contador_if++;
+            store = contador_if;
+            printf("(IFF, t%d, L%d, -)\n", contador, contador_if);
+            register_index(); 
+            codeGen(tree->child[1]);
+            contador_if++;
+            store2 = contador_if;
+            printf("(GOTO, L%d, -, -)\n", store2);
+            printf("(LAB, L%d, -, - )\n", store);
+            codeGen(tree->child[2]);
+            printf("(LAB, L%d, -, - )\n", store2); 
+            register_index(); 
             break;
+
         case VarK:
             printf("(ALLOC %s, %s, -)\n", tree->attr.name, tree->attr.scope);
             break;
+
         case AssignK:
-
-            // Em todo assign precisamos carregar o endereço para um registrador
-            // Realizando LOAD
-   
             reg1 = contador;
-            printf("(LOAD t%d, %s -)\n", contador, tree->child[0]->attr.name);
-
-            
-            // Gerando as expressões do fiho1 e atribuindo a um registrador
-            codeGen(tree->child[1]);
+            codeGen(tree->child[0]);     
             reg2 = contador;
-
+            codeGen(tree->child[1]);
             printf("(ASSIGN t%d, t%d, -)\n", reg1, reg2);
             printf("(STORE, %s, t%d, -)\n", tree->child[0]->attr.name, reg1);
-
+            register_index();
             break;
-            case WhileK:
+
+        case WhileK:
                 // printf("LOOP%d\n", contador_while);
                 // codeGen(tree->child[0]);
                 // printf("BNE t%d 1 SAIDA_WHILE%d\n", contador, contador_while);
@@ -142,36 +147,28 @@ void generateExp(TreeNode *tree){
     int aux1, aux2;
     switch (tree->kind.exp) {
     
-    // Aqui sempre teremos uma declaração de variável ou de função
-    // Será analisado aqui o tipo 
     case TypeK:
-
-        // Aqui será analisado o tipo de declaração
-        // Podendo ser entre vetK, varK e funK
-
         codeGen(tree->child[0]);
         break;
     case IdK:
-        register_index();
         printf("(LOAD t%d, %s, -)\n", contador, tree->attr.name);
+        register_index();
         break;
     case VetK:
         printf("asfaf");
     case ConstK:
-        register_index();
         printf("(LOAD t%d, %d, -)\n", contador,tree->attr.val);
+        register_index();
         break;
     case OpK:
-        codeGen(tree->child[0]);
         aux1 = contador;
-        codeGen(tree->child[1]);
+        codeGen(tree->child[0]);
         aux2 = contador;
-        register_index();
+        codeGen(tree->child[1]);
         printf("(");
         printOperation(stdout, tree->attr.op);
         printf("t%d, t%d, t%d )\n",contador, aux1, aux2); 
         break;
-    
     default:
         printf("não mapeado - expr\n");
         break;

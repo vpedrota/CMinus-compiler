@@ -41,6 +41,9 @@ void printOperation(FILE *output, int token){
       case DIV: 
          fprintf(output, "DIV ");  
          break;
+      case COMP: 
+         fprintf(output, "COMP ");  
+         break;
       default:
          fprintf(output, " unknown ");  
    }
@@ -65,33 +68,66 @@ TreeNode* find_function(TreeNode *arvore, char *name){
 }
 
 void generateStmt(TreeNode *tree){
-
+    if(tree == NULL) return;
     TreeNode *func, *aux;
     int reg1 = 0, reg2 = 0;
     int i = 0;
     char nome[100];
     int store = 0, store2 = 0;
-    switch (tree->kind.stmt) { 
+    int quant_param = 0;
 
+    switch (tree->kind.stmt) { 
         case FunK:
-            printf("(FUN, %s %s, -) \n", tree->child[0]->attr.scope,  tree->child[0]->attr.scope);
-            // árvore com problemas no filho 0
-            // codeGen(tree->child[0]);
-            //func = find_function(arvore, tree->attr.scope);
-            //printf("%s", func->child[0]->attr.name);
+
+            if(tree->type == IntegerK)
+                printf("(FUN, int, %s, -) \n",  tree->child[0]->attr.scope);
+            else
+                printf("(FUN, void, %s, -) \n",  tree->child[0]->attr.scope);
+
+            aux = tree->child[0];
+            while(aux != NULL){
+                if(aux->child[0] != NULL){
+                    printf("(ARG, %s, %s, %s)\n",aux->attr.name, aux->child[0]->attr.name, aux->child[0]->attr.scope);
+                } 
+                aux = aux->sibling;
+            }
+
+            aux = tree->child[0];
+            while(aux != NULL){
+                if(aux->child[0] != NULL){
+                    printf("(LOAD, t%d, %s, -)\n", contador, aux->child[0]->attr.name);
+                    register_index();
+                } 
+                aux = aux->sibling;
+            }
+            
             codeGen(tree->child[1]);
             break;
 
         case CallK:
-            // quant_param = 0;
-            // func = find_function(arvore, tree->attr.name);
-            // aux = func->child[0];
-            // while(aux != NULL){
-            //     printf("PARAM %s _ _\n", aux->child[0]->attr.name);
-            //     aux = aux->sibling;
-            //     quant_param++;
-            // }
-            // printf("CALL %s %d t1\n", tree->attr.name, quant_param);
+            
+            quant_param = 0;
+            aux = tree->child[0];
+            
+            while(aux != NULL){
+                codeGen(aux);
+                printf("(PARAM, t%d, -, -)\n", contador, tree->attr.name);
+                aux = aux->sibling;
+                quant_param++;
+            }
+
+            if(strcmp(tree->attr.name, "input") == 0){
+                printf("(CALL, t%d, %s, 0)\n", contador, tree->attr.name);
+                return;
+            }
+
+            if(strcmp(tree->attr.name, "output") == 0){
+                printf("(CALL, t%d, %s, 1)\n", contador, tree->attr.name);
+                return;
+            }
+
+           
+            printf("(CALL, t%d, %s, %d)\n", contador, tree->attr.name, quant_param);
             break;
 
         case IfK:
@@ -114,12 +150,11 @@ void generateStmt(TreeNode *tree){
         case VarK:
             printf("(ALLOC, %s, %s, -)\n", tree->attr.name, tree->attr.scope);
             break;
-
+            
         case AssignK:
         
             reg1 = contador;
             codeGen(tree->child[0]);     
-            
             codeGen(tree->child[1]);
             reg2 = contador;
             printf("(ASSIGN, t%d, t%d, -)\n", reg1, reg2);
@@ -139,8 +174,12 @@ void generateStmt(TreeNode *tree){
                 printf("(GOTO, L%d, - , -)\n", store);
                 printf("(LAB, L%d, -, -)\n", store2);
                 break;
+
         case ReturnK:
+            codeGen(tree->child[0]);
+            printf("(RET, t%d, -, -)\n", contador);
             break;
+
         default:
             printf("não mapeado - stmt\n");
             break;
@@ -148,6 +187,7 @@ void generateStmt(TreeNode *tree){
 }
 
 void generateExp(TreeNode *tree){
+    if(tree == NULL) return;
     int aux1, aux2;
     switch (tree->kind.exp) {
     
@@ -159,7 +199,7 @@ void generateExp(TreeNode *tree){
         register_index();
         break;
     case VetK:
-        printf("asfaf");
+        printf("asfaf\n");
         break;
     case ConstK:
         printf("(LOAD, t%d, %d, -)\n", contador,tree->attr.val);

@@ -24,10 +24,9 @@ static int savedLineNo;
 
 %token ERR
 
-%% /* Grammar for Cminus */
-programa : declaracao_lista     //raiz da arvore
-          {root = $1;}
-         ;
+%%
+
+programa : declaracao_lista   {root = $1;} ;
 declaracao_lista : declaracao_lista declaracao
                   {
                     TreeNode* t = $1;
@@ -38,87 +37,47 @@ declaracao_lista : declaracao_lista declaracao
                     }
                     else $$ = $2;
                   }
-                 | declaracao {$$ = $1;}
-                 ;
-declaracao : var_declaracao {$$ = $1;}
+                 | declaracao {$$ = $1;} ;
 
-           | fun_declaracao {$$ = $1;}
+declaracao : var_declaracao {$$ = $1;} | fun_declaracao {$$ = $1;} ;
 
-           ;
-var_declaracao : INT ident PV 
+var_declaracao : tipo_especificador ident PV 
               {
                 $$ = newExpNode(TypeK);
-                $$->type = IntegerK;
-                $$->attr.name = "inteiro";
+                $$->type = $1->type;
+                $$->attr.name = $1->attr.name;
                 $$->child[0] = $2;
                 $2->nodekind = StmtK;
                 $2->kind.stmt = VarK;
                 $2->type = IntegerK;
 						  }
-               | INT ident LCOL num RCOL PV
+               | tipo_especificador ident LCOL num RCOL PV
                 {
                   $$ = newExpNode(TypeK);
-                  $$->type = IntegerK;
-                  $$->attr.name = "inteiro";
+                  $$->type = $1->type;
+                  $$->attr.name = $1->attr.name;
                   $$->child[0] = $2;
                   $2->nodekind = StmtK;
                   $2->kind.stmt = VarK;
-                  $2->type = IntegerK; 
+                  $2->type = $1->type;
                   $2->attr.len = $4->attr.val;
-                } |  VOID ident PV 
+                };
+
+fun_declaracao : tipo_especificador ident LPAR params RPAR composto_decl
                 {
                   $$ = newExpNode(TypeK);
-                  $$->type = IntegerK;
-                  $$->attr.name = "void";
-                  $$->child[0] = $2;
-                  $2->nodekind = StmtK;
-                  $2->kind.stmt = VarK;
-                  $2->type = VoidK;
-                }
-                |  VOID ident LCOL num RCOL PV
-                {
-                  $$ = newExpNode(TypeK);
-                  $$->type = IntegerK;
-                  $$->attr.name = "void";
-                  $$->child[0] = $2;
-                  $2->nodekind = StmtK;
-                  $2->kind.stmt = VarK;
-                  $2->type = VoidK; 
-                  $2->attr.len = $4->attr.val;
-                } 
-                  ;
-fun_declaracao : INT ident LPAR params RPAR composto_decl
-                {
-                  $$ = newExpNode(TypeK);
-                  $$->type = IntegerK;
-                  $$->attr.name = "inteiro";
+                  $$->type = $1->type;
+                  $$->attr.name = $1->attr.name;
                   $$->child[0] = $2;
                   $2->child[0] = $4;
                   $2->child[1] = $6;
                   $2->nodekind = StmtK;
                   $2->kind.stmt = FunK;
-                  $2->type = IntegerK;
-                  $4->type = IntegerK;
+                  $2->type = $1->type;
                   addScopes($$, $2->attr.name);
                 }
-                | VOID ident LPAR params RPAR composto_decl
-                {
-                  $$ = newExpNode(TypeK);
-                  $$->type = VoidK;
-                  $$->attr.name = "void";
-                  $$->child[0] = $2;
-                  $2->child[0] = $4;
-                  $2->child[1] = $6;
-                  $2->nodekind = StmtK;
-                  $2->kind.stmt = FunK;
-                  addScopes($$, $2->attr.name);
-                }
-               ;
-params : param_lista 
-        {
-          $$ = $1;
-        }
-       | VOID
+
+params : param_lista { $$ = $1; } | VOID
         {
 				  $$ = newExpNode(TypeK);
           $$->attr.name = "void";
@@ -130,16 +89,18 @@ param_lista : param_lista VIR param
               TreeNode* t = $1;
               if(t != NULL){
                 while(t->sibling != NULL)
-                t = t->sibling;
+                  t = t->sibling;
                 t->sibling = $3;
                 $$ = $1;
-              }else $$ = $3;
+              }
+              else 
+                $$ = $3;
             }
             | param 
             {
               $$ = $1;
-            }
-            ;
+            };
+
 tipo_especificador : INT
                   {
                     $$ = newExpNode(TypeK);

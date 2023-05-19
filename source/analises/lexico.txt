@@ -7,44 +7,31 @@
 4: INT  
 4: ID, name = a 
 4: PV  
-5: INT  
-5: ID, name = b 
-5: PV  
-6: IF  
-6: LPAR  
-6: NUM, value = 3 
-6: GT  
-6: NUM, value = 3 
-6: RPAR  
-6: LCHA  
-7: ID, name = a 
-7: ASSIGN  
-7: NUM, value = 2 
-7: PV  
-8: RCHA  
-8: ELSE  
-8: LCHA  
-9: IF  
-9: LPAR  
-9: NUM, value = 5 
-9: GT  
-9: NUM, value = 5 
-9: RPAR  
-9: LCHA  
-10: ID, name = a 
-10: ASSIGN  
-10: NUM, value = 6 
-10: PV  
+5: WHILE  
+5: LPAR  
+5: NUM, value = 5 
+5: GT  
+5: NUM, value = 4 
+5: RPAR  
+5: LCHA  
+6: ID, name = a 
+6: ASSIGN  
+6: NUM, value = 4 
+6: PV  
+7: WHILE  
+7: LPAR  
+7: NUM, value = 3 
+7: GT  
+7: NUM, value = 3 
+7: RPAR  
+7: LCHA  
+8: ID, name = a 
+8: ASSIGN  
+8: NUM, value = 5 
+8: PV  
+9: RCHA  
 11: RCHA  
-12: ELSE  
-12: LCHA  
-13: ID, name = a 
-13: ASSIGN  
-13: NUM, value = 4 
+13: RETURN  
+13: NUM, value = 0 
 13: PV  
 14: RCHA  
-15: RCHA  
-16: RETURN  
-16: NUM, value = 0 
-16: PV  
-17: RCHA  

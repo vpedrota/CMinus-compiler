@@ -74,7 +74,7 @@ void generateStmt(TreeNode *tree){
     switch (tree->kind.stmt) { 
 
         case FunK:
-            printf("(FUN %s %s, -) \n", tree->child[0]->attr.scope,  tree->child[0]->attr.scope);
+            printf("(FUN, %s %s, -) \n", tree->child[0]->attr.scope,  tree->child[0]->attr.scope);
             // árvore com problemas no filho 0
             // codeGen(tree->child[0]);
             //func = find_function(arvore, tree->attr.scope);
@@ -95,7 +95,7 @@ void generateStmt(TreeNode *tree){
             break;
 
         case IfK:
-        
+
             codeGen(tree->child[0]);
             contador_if++;
             store = contador_if;
@@ -112,7 +112,7 @@ void generateStmt(TreeNode *tree){
             break;
 
         case VarK:
-            printf("(ALLOC %s, %s, -)\n", tree->attr.name, tree->attr.scope);
+            printf("(ALLOC, %s, %s, -)\n", tree->attr.name, tree->attr.scope);
             break;
 
         case AssignK:
@@ -120,20 +120,22 @@ void generateStmt(TreeNode *tree){
             codeGen(tree->child[0]);     
             reg2 = contador;
             codeGen(tree->child[1]);
-            printf("(ASSIGN t%d, t%d, -)\n", reg1, reg2);
+            printf("(ASSIGN, t%d, t%d, -)\n", reg1, reg2);
             printf("(STORE, %s, t%d, -)\n", tree->child[0]->attr.name, reg1);
             register_index();
             break;
 
         case WhileK:
-                // printf("LOOP%d\n", contador_while);
-                // codeGen(tree->child[0]);
-                // printf("BNE t%d 1 SAIDA_WHILE%d\n", contador, contador_while);
-                // codeGen(tree->child[1]);
-                // printf("JUMP LOOP%d\n", contador_while);
-                // printf("SAIDA_WHILE%d\n", contador_while);
-                // register_index(); 
-                // contador_while++;
+                store = contador_if;
+                printf("(LAB, L%d, -, -)\n", store);
+                contador_if++;
+                store2 = contador_if;
+                contador_if++;
+                codeGen(tree->child[0]);
+                printf("(IFF, t%d, L%d, -)\n", contador, store2);
+                codeGen(tree->child[1]);
+                printf("(GOTO, L%d, - , -)\n", store);
+                printf("(LAB, L%d, -, -)\n", store2);
                 break;
         case ReturnK:
             break;
@@ -151,13 +153,13 @@ void generateExp(TreeNode *tree){
         codeGen(tree->child[0]);
         break;
     case IdK:
-        printf("(LOAD t%d, %s, -)\n", contador, tree->attr.name);
+        printf("(LOAD, t%d, %s, -)\n", contador, tree->attr.name);
         register_index();
         break;
     case VetK:
         printf("asfaf");
     case ConstK:
-        printf("(LOAD t%d, %d, -)\n", contador,tree->attr.val);
+        printf("(LOAD, t%d, %d, -)\n", contador,tree->attr.val);
         register_index();
         break;
     case OpK:

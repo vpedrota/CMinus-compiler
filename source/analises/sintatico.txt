@@ -3,24 +3,19 @@
       Tipo void
       Tipo inteiro
         Variavel a
-      Tipo inteiro
-        Variavel b
-      If
+      While
         Op:  GT  
-          Const: 3
-          Const: 3
+          Const: 5
+          Const: 4
         Atribuicao
           Id: a
-          Const: 2
-        If
+          Const: 4
+        While
           Op:  GT  
-            Const: 5
-            Const: 5
+            Const: 3
+            Const: 3
           Atribuicao
             Id: a
-            Const: 6
-          Atribuicao
-            Id: a
-            Const: 4
+            Const: 5
       Return
         Const: 0

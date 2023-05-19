@@ -116,10 +116,12 @@ void generateStmt(TreeNode *tree){
             break;
 
         case AssignK:
+        
             reg1 = contador;
             codeGen(tree->child[0]);     
-            reg2 = contador;
+            
             codeGen(tree->child[1]);
+            reg2 = contador;
             printf("(ASSIGN, t%d, t%d, -)\n", reg1, reg2);
             printf("(STORE, %s, t%d, -)\n", tree->child[0]->attr.name, reg1);
             register_index();
@@ -158,6 +160,7 @@ void generateExp(TreeNode *tree){
         break;
     case VetK:
         printf("asfaf");
+        break;
     case ConstK:
         printf("(LOAD, t%d, %d, -)\n", contador,tree->attr.val);
         register_index();

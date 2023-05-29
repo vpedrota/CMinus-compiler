@@ -20,6 +20,28 @@
                   Id: u
                   Id: v
                 Id: v
+  Tipo inteiro
+    Funcao gcd
+      Tipo inteiro
+        Variavel u
+      Tipo inteiro
+        Variavel v
+      If
+        Op:  unknown  
+          Id: v
+          Const: 0
+        Return
+          Id: u
+        Return
+          Chamada de Funcao gcd 
+            Id: v
+            Op:  SUB  
+              Id: u
+              Op:  MULT  
+                Op:  unknown  
+                  Id: u
+                  Id: v
+                Id: v
   Tipo void
     Funcao main
       Tipo void
@@ -27,12 +49,17 @@
         Variavel x
       Tipo inteiro
         Variavel y
+      Tipo void
+        Variavel d
       Atribuicao
         Id: x
         Chamada de Funcao input 
       Atribuicao
         Id: y
         Chamada de Funcao input 
+      Atribuicao
+        Id: d
+        Const: 3
       Chamada de Funcao output 
         Chamada de Funcao gcd 
           Id: x

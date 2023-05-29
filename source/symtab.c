@@ -206,7 +206,7 @@ void insert_node_symtab( TreeNode * t, char *scope ) {
                         insert_node(table, t);
                     }
                     else{
-                        printf("Redeclaração de Função\n");
+                        printf("ERRO SEMÂNTICO: Redeclaração da Função %s\n", t->attr.name);
                         exit(-1);
                     }
                     break;
@@ -217,8 +217,8 @@ void insert_node_symtab( TreeNode * t, char *scope ) {
                         add_new_lineno(aux, t->lineno);
                         t->type = aux->type;
                     }else {
-                        printf("Erro semântico: Função não declarada\n");
-                        exit(1);
+                        printf("ERRO SEMÂNTICO: Função %s não declarada\n", t->attr.name);
+                        exit(-1);
                     }
                     break;
                 

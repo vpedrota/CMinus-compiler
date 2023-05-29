@@ -1464,7 +1464,7 @@ yyreduce:
                 yyval->child[0] = yyvsp[-1];
                 yyvsp[-1]->nodekind = StmtK;
                 yyvsp[-1]->kind.stmt = VarK;
-                yyvsp[-1]->type = IntegerK;
+                yyvsp[-1]->type = yyvsp[-2]->type;
 						  }
 #line 1470 "parser.c"
     break;
@@ -2298,6 +2298,7 @@ yyreturn:
 
 int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
+    exit(-1);
 }
 
 

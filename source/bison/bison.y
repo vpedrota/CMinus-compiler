@@ -49,7 +49,7 @@ var_declaracao : tipo_especificador ident PV
                 $$->child[0] = $2;
                 $2->nodekind = StmtK;
                 $2->kind.stmt = VarK;
-                $2->type = IntegerK;
+                $2->type = $1->type;
 						  }
                | tipo_especificador ident LCOL num RCOL PV
                 {
@@ -435,6 +435,7 @@ num : NUM
 
 int yyerror(char *msg){
     printf("ERRO SINTÁTICO: %s LINHA: %d\n", yytext, lineno);
+    exit(-1);
 }
 
 

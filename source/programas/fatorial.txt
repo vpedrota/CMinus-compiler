@@ -2,8 +2,13 @@ int gcd(int u, int v)
  { if (v==0) return u;
   else return gcd(v, u-u/v*v);
  }
+ int gcd(int u, int v)
+ { if (v==0) return u;
+  else return gcd(v, u-u/v*v);
+ }
   void main(void)
- { int x; int y;
+ { int x; int y; void d;
    x = input(); y = input();
+   d = 3;
  output(gcd(x,y));
 }

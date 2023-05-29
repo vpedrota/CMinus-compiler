@@ -44,7 +44,7 @@ void check_node(TreeNode *node){
 
         case VarK:
             if(node->type == VoidK){
-                printf("Erro semântico: variável declarada do tipo void\n");
+                printf("ERRO SEMÂNTICO: variável declarada do tipo void.\n");
                 exit(1);
             }
             break;

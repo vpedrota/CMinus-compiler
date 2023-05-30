@@ -27,6 +27,7 @@ TreeNode * newStmtNode(StmtKind kind) {
     t->kind.stmt = kind;
     t->lineno = lineno;
     t->attr.scope = "global";
+    t->attr.vetor = 0;
   }
   return t;
 }
@@ -46,6 +47,7 @@ TreeNode * newExpNode(ExpKind kind) {
     t->lineno = lineno;
     t->type = VoidK;
     t->attr.scope = "global";
+    t->attr.vetor = 0;
   }
 }
 

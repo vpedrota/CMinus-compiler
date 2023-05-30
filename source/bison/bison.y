@@ -61,6 +61,7 @@ var_declaracao : tipo_especificador ident PV
                   $2->kind.stmt = VarK;
                   $2->type = $1->type;
                   $2->attr.len = $4->attr.val;
+                  $2->attr.vetor = 1;
                 };
 
 fun_declaracao : tipo_especificador ident LPAR params RPAR composto_decl

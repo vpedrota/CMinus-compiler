@@ -26,6 +26,7 @@ typedef struct treeNode
              char *name;
              int len;
              char * scope; 
+             int vetor;
             } attr;
      ExpType type;
    } TreeNode;

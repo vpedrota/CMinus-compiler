@@ -1,66 +1,143 @@
   Tipo inteiro
-    Funcao gcd
-      Tipo inteiro
-        Variavel u
-      Tipo inteiro
-        Variavel v
-      If
-        Op:  unknown  
-          Id: v
-          Const: 0
-        Return
-          Id: u
-        Return
-          Chamada de Funcao gcd 
-            Id: v
-            Op:  SUB  
-              Id: u
-              Op:  MULT  
-                Op:  unknown  
-                  Id: u
-                  Id: v
-                Id: v
+    Variavel vet
   Tipo inteiro
-    Funcao gcd
+    Funcao minloc
       Tipo inteiro
-        Variavel u
+        Variavel a
       Tipo inteiro
-        Variavel v
-      If
-        Op:  unknown  
-          Id: v
-          Const: 0
-        Return
-          Id: u
-        Return
-          Chamada de Funcao gcd 
-            Id: v
-            Op:  SUB  
-              Id: u
-              Op:  MULT  
-                Op:  unknown  
-                  Id: u
-                  Id: v
-                Id: v
-  Tipo void
-    Funcao main
-      Tipo void
+        Variavel low
+      Tipo inteiro
+        Variavel high
+      Tipo inteiro
+        Variavel i
       Tipo inteiro
         Variavel x
       Tipo inteiro
-        Variavel y
-      Tipo void
-        Variavel d
+        Variavel k
+      Atribuicao
+        Id: k
+        Id: low
       Atribuicao
         Id: x
-        Chamada de Funcao input 
+        Vetor: a
+          Id: low
       Atribuicao
-        Id: y
-        Chamada de Funcao input 
+        Id: i
+        Op:  PLUS  
+          Id: low
+          Const: 1
+      While
+        Op:  LT  
+          Id: i
+          Id: high
+        If
+          Op:  LT  
+            Vetor: a
+              Id: i
+            Id: x
+          Atribuicao
+            Id: x
+            Vetor: a
+              Id: i
+          Atribuicao
+            Id: k
+            Id: i
+          Atribuicao
+            Id: i
+            Const: 1
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Id: k
+  Tipo void
+    Funcao sort
+      Tipo inteiro
+        Variavel a
+      Tipo inteiro
+        Variavel low
+      Tipo inteiro
+        Variavel high
+      Tipo inteiro
+        Variavel i
+      Tipo inteiro
+        Variavel k
       Atribuicao
-        Id: d
-        Const: 3
-      Chamada de Funcao output 
-        Chamada de Funcao gcd 
-          Id: x
-          Id: y
+        Id: i
+        Id: low
+      While
+        Op:  LT  
+          Id: i
+          Op:  SUB  
+            Id: high
+            Const: 1
+        Tipo inteiro
+          Variavel t
+        Atribuicao
+          Id: k
+          Chamada de Funcao minloc 
+            Id: a
+            Id: i
+            Id: high
+        Atribuicao
+          Id: t
+          Vetor: a
+            Id: k
+        Atribuicao
+          Vetor: a
+            Id: k
+          Vetor: a
+            Id: i
+        Atribuicao
+          Vetor: a
+            Id: i
+          Id: t
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+  Tipo inteiro
+    Funcao main
+      Tipo void
+      Tipo inteiro
+        Variavel i
+      Atribuicao
+        Id: i
+        Const: 0
+      While
+        Op:  LT  
+          Id: i
+          Const: 10
+        Atribuicao
+          Vetor: vet
+            Id: i
+          Chamada de Funcao input 
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 3
+      Chamada de Funcao sort 
+        Id: vet
+        Const: 0
+        Const: 10
+      Atribuicao
+        Id: i
+        Const: 0
+      While
+        Op:  LT  
+          Id: i
+          Const: 10
+        Chamada de Funcao output 
+          Vetor: vet
+            Id: i
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Const: 0

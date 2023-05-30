@@ -160,6 +160,10 @@ void generateStmt(TreeNode *tree){
             break;
 
         case VarK:
+            if(tree->attr.vetor){
+                printf("(ALLOC_VET, %s, %d, %s)\n", tree->attr.name, tree->attr.len, tree->attr.scope);
+                break;
+            }
             printf("(ALLOC, %s, %s, -)\n", tree->attr.name, tree->attr.scope);
             break;
             
@@ -215,7 +219,13 @@ void generateExp(TreeNode *tree){
         printf("(LOAD, t%d, %s, -)\n", contador, tree->attr.name);
         break;
     case VetK:
-        printf("asfaf\n");
+        codeGen(tree->child[0]);
+        aux1=contador;
+        register_index();
+        printf("(MULT, t%d, t%d, 4)\n", contador, aux1);
+        aux2=contador;
+        register_index();
+        printf("(LOAD, t%d, %s, (t%d))\n", contador, tree->attr.name, aux2);
         break;
     case ConstK:
         register_index();

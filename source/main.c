@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "globals.h"
 #include "scan.h"
 #include "arvore.h"
@@ -53,26 +54,14 @@ int main(int argc, char * argv[]){
     // Encontrando o scopo da função main, apenas as intruções dentro deste escopo
     // devem ser convertidas
 
-    //TreeNode *t = arvore;
-
-    // while (t != NULL) {
-
-    //     if( t->child[0]->kind.stmt == FunK && strcmp(t->child[0]->attr.name, "main") == 0){
-    //         break;
-    //     }
-    //     t = t->sibling;
-    // }
-    
-    // if(t == NULL){
-    //     printf("Erro: Função main não encontrada\n");
-    //     exit(1);
-    // }
-
     freopen("analises/codigo_intermediario.txt", "w", stdout);
     codeGen(arvore);
     freopen("/dev/tty", "w", stdout); 
     printf("Código intermediário gerado com sucesso.\n");
     // Fechando arquivos abertos
+
+    // Executando gerador de código assembly
+    system("python assemblyGen.py");
     fclose(input);
     return 0;
 }

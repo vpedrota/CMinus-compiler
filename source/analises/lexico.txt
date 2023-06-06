@@ -45,9 +45,6 @@
 6: INT  
 6: ID, name = y 
 6: PV  
-6: INT  
-6: ID, name = d 
-6: PV  
 7: ID, name = x 
 7: ASSIGN  
 7: ID, name = input 
@@ -60,18 +57,14 @@
 7: LPAR  
 7: RPAR  
 7: PV  
-8: ID, name = d 
-8: ASSIGN  
-8: NUM, value = 3 
+8: ID, name = output 
+8: LPAR  
+8: ID, name = gcd 
+8: LPAR  
+8: ID, name = x 
+8: VIR  
+8: ID, name = y 
+8: RPAR  
+8: RPAR  
 8: PV  
-9: ID, name = output 
-9: LPAR  
-9: ID, name = gcd 
-9: LPAR  
-9: ID, name = x 
-9: VIR  
-9: ID, name = y 
-9: RPAR  
-9: RPAR  
-9: PV  
-10: RCHA  
+9: RCHA  

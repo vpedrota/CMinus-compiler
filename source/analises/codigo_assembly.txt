@@ -11,6 +11,8 @@ NÃO MAPEADO
 NÃO MAPEADO
 NÃO MAPEADO
 LW  t8 r29 -1
+SW r30  t8 0 
+ADDI r30 r30 1 
 LW  t9 r29 -1
 LW  t10 r29 -1
 LW  t11 r29 -1
@@ -18,21 +20,33 @@ DIV
 LW  t13 r29 -1
 NÃO MAPEADO
 NÃO MAPEADO
-chamada t16
+SW r30  t15 0 
+ADDI r30 r30 1 
+SW r30 r29 0 
+CALL gcd
+ADDI r30 r30 -1 
+ADDI r30 r30 -1 
 NÃO MAPEADO
 NÃO MAPEADO
 NÃO MAPEADO
 .main
 ADDI r30 r30 1
 ADDI r30 r30 1
-ADDI r30 r30 1
 INPUT t18
 SW  t18 r29 0
 INPUT t20
 SW  t20 r29 1
-SW  t22 r29 2
-LW  t24 r29 0
-LW  t1 r29 1
-chamada t2
-IeeNPUT t3
+LW  t22 r29 0
+SW r30  t22 0 
+ADDI r30 r30 1 
+LW  t23 r29 1
+SW r30  t23 0 
+ADDI r30 r30 1 
+SW r30 r29 0 
+CALL gcd
+ADDI r30 r30 -1 
+ADDI r30 r30 -1 
+SW r30  t24 0 
+ADDI r30 r30 1 
+OUTPUT t1
 NÃO MAPEADO

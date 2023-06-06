@@ -27,17 +27,12 @@
         Variavel x
       Tipo inteiro
         Variavel y
-      Tipo inteiro
-        Variavel d
       Atribuicao
         Id: x
         Chamada de Funcao input 
       Atribuicao
         Id: y
         Chamada de Funcao input 
-      Atribuicao
-        Id: d
-        Const: 3
       Chamada de Funcao output 
         Chamada de Funcao gcd 
           Id: x

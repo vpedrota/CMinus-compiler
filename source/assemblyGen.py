@@ -52,16 +52,20 @@ def gera_assembly(quadruplas, saida, tabela_simbolos):
             if partes[2].strip() == "input":
                 instructions.append("INPUT" + partes[1] + "\n")
             elif partes[2].strip() == "output":
-                instructions.append("IeeNPUT" + partes[1] + "\n")
+                instructions.append("OUTPUT" + partes[1] + "\n")
             else: 
-                instructions.append("chamada" + partes[1] + "\n")
+                instructions.append("SW r30 r29 0 \n")
+                instructions.append("CALL" + partes[2] + "\n")
+                for i in range(0,int(partes[3])):
+                    instructions.append("ADDI r30 r30 -1 \n")
         elif "STOREVAR" in partes[0]:
             search  = tabela_simbolos.query("Nome == '{}' and Escopo == '{}'".format(partes[2].strip(), partes[3].strip()))
             instructions.append("SW " + partes[1] + " r29 " + str(search.values[0][5])+"\n")
         elif "DIV" in partes[0]:
             instructions.append("DIV" + "\n")
         elif "PARAM" in partes[0]:
-            pass
+            instructions.append("SW r30 "+ partes[1]+" 0 \n")
+            instructions.append("ADDI r30 r30 1 \n")
         elif "FUN" in partes[0]:
             instructions.append(".main\n")
         else:

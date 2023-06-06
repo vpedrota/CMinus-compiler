@@ -65,6 +65,36 @@ void print_ocorrencies(Node *no, FILE *f){
     }
 }
 
+void print_table_csv(Hash_table_list *table_list, FILE *f) {
+    Node** table = table_list->table;
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (table[i] != NULL) {  
+            Node* current = table[i];
+            while (current != NULL) {
+                fprintf(f, "%s,%s,", current->name, table_list->scopeName);
+                if(current->type == IntegerK){
+                    fprintf(f, "inteiro,");
+                } else {
+                    fprintf(f, "void,");
+                }
+                if(current->stmt == FunK){
+                    fprintf(f, "Função,");
+                }
+                else if(current->stmt == VarK){
+                    fprintf(f, "Variável,");
+                }
+                else{
+                    fprintf(f, "Tipo não mapeado,");
+                }
+               
+                print_ocorrencies(current, f);
+                current = current->next;
+                fprintf(f, "\n");
+            }
+        }
+    }
+}
+
 // Função para imprimir a tabela hash
 void print_table(Hash_table_list *table_list, FILE *f) {
     Node** table = table_list->table;
@@ -296,11 +326,16 @@ void buildSymtab(TreeNode *root){
     // Percorrendo e inserindo símbolos na árvore
     transverse(root);
 
+    FILE *f_csv = fopen("analises/tabela_simbolos_csv.csv", "w");
+    fprintf(f_csv,  "Nome,Escopo,Tipo,Tipo_var,Ocorrências\n");
+
     // Escrevendo tabela de símbolos no arquivo
     aux = first;
     while(aux != NULL){
         print_table(aux, f);
+        print_table_csv(aux, f_csv);
         aux = aux->next;
     }
+    fclose(f_csv);
     fclose(f);
 }

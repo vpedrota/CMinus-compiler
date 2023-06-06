@@ -1,0 +1,10 @@
+Nome,Escopo,Tipo,Tipo_var,Ocorrências
+gcd,global,inteiro,Função,1 3 9 
+main,global,void,Função,5 
+input,global,inteiro,Função,0 7 7 
+output,global,inteiro,Função,0 9 
+u,gcd,inteiro,Variável,1 2 3 3 
+v,gcd,inteiro,Variável,1 2 3 3 3 
+d,main,inteiro,Variável,6 8 
+x,main,inteiro,Variável,6 7 9 
+y,main,inteiro,Variável,6 7 9 

@@ -327,7 +327,7 @@ void buildSymtab(TreeNode *root){
     transverse(root);
 
     FILE *f_csv = fopen("analises/tabela_simbolos_csv.csv", "w");
-    fprintf(f_csv,  "Nome,Escopo,Tipo,Tipo_var,Ocorrências\n");
+    fprintf(f_csv,  "Nome,Escopo,Tipo_var,Tipo,Ocorrências\n");
 
     // Escrevendo tabela de símbolos no arquivo
     aux = first;

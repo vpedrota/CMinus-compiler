@@ -1,5 +1,7 @@
 import pandas as pd
 
+stack_size = 0
+
 def ler_quadruplas():
     linhas = []
 
@@ -25,6 +27,10 @@ def encontra_label(quadruplas, valor_procurado = "main", instrucao = "FUN"):
 
 def gera_assembly(quadruplas, saida, tabela_simbolos):
 
+    global stack_size
+
+    # Adicionando memory position
+    tabela_simbolos["memory_position"] = -1
     instructions = []
     
     for quad in quadruplas:
@@ -33,16 +39,38 @@ def gera_assembly(quadruplas, saida, tabela_simbolos):
         partes = quad.split(',')
 
         # Realizando o mapeamento das quadruplas para o assembly
-        if("DIV" in partes[0]):
+        if "ALLOC" in partes[0]:
+            instructions.append("ADDI r30 r30 1" + "\n")
+            tabela_simbolos.loc[tabela_simbolos['Nome'] == partes[1].strip(), 'memory_position'] = stack_size
+            stack_size += 1
+        elif "LOAD" in partes[0]:
+            search = tabela_simbolos.loc[tabela_simbolos['Nome'] == partes[2].strip()]
+            if not search.empty:
+                instructions.append("LW " + partes[1]+ " r29 " + str(search.values[0][5])+"\n")
+        elif "CALL" in partes[0]:
+            #no caso de chamadas de função deve ser analisar se é do tipo input ou output
+            if partes[2].strip() == "input":
+                instructions.append("INPUT" + partes[1] + "\n")
+            elif partes[2].strip() == "output":
+                instructions.append("IeeNPUT" + partes[1] + "\n")
+            else: 
+                instructions.append("chamada" + partes[1] + "\n")
+        elif "STOREVAR" in partes[0]:
+            search  = tabela_simbolos.query("Nome == '{}' and Escopo == '{}'".format(partes[2].strip(), partes[3].strip()))
+            instructions.append("SW " + partes[1] + " r29 " + str(search.values[0][5])+"\n")
+        elif "DIV" in partes[0]:
             instructions.append("DIV" + "\n")
-        elif("FUN" in partes[0]):
+        elif "PARAM" in partes[0]:
             pass
+        elif "FUN" in partes[0]:
+            instructions.append(".main\n")
         else:
             instructions.append("NÃO MAPEADO" + "\n")
 
     for instruction in instructions:
         saida.write(instruction)
 
+    print(tabela_simbolos)
 
 if __name__ == "__main__":
 

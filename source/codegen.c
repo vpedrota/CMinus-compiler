@@ -9,7 +9,7 @@ int contador_while = 0;
 int registrador_retorno = 0;
 
 int register_index(){
-    contador = (contador) % 32;
+    contador = (contador) % 24;
     return ++contador;
 }
 
@@ -170,15 +170,16 @@ void generateStmt(TreeNode *tree){
         case AssignK:
         
             
-            codeGen(tree->child[0]);   
+            //codeGen(tree->child[0]);   
             reg1 = contador;
 
             
             registrador_retorno = 0; 
             codeGen(tree->child[1]);
             reg2 = contador;
-            printf("(ASSIGN, t%d, t%d, -)\n", reg1, reg2);
-            printf("(STORE, %s, t%d, -)\n", tree->child[0]->attr.name, reg1);
+            printf("(STOREVAR, t%d, %s, %s)\n", reg2, tree->child[0]->attr.name, tree->child[0]->attr.scope);
+            // printf("(ASSIGN, t%d, t%d, -)\n", reg1, reg2);
+            // printf("(STORE, %s, t%d, -)\n", tree->child[0]->attr.name, reg1);
             register_index();
             break;
 

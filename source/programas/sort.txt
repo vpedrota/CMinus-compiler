@@ -37,6 +37,8 @@ void sort( int a[], int low, int high)
 int main(void)
 {
     int i;
+    int a[10];
+    int c;
     i = 0;
     while (i < 10){
         vet[i] = input();

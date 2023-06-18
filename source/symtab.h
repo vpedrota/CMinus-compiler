@@ -9,6 +9,7 @@ typedef struct node {
     struct node* next;
     StmtKind stmt;
     ExpType type;
+    int vetor;
 } Node;
 
 typedef struct hash_table_list {

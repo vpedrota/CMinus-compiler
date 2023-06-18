@@ -1,93 +1,225 @@
 import pandas as pd
 
+# Variavaeis globais
 stack_size = 0
 
-def ler_quadruplas():
-    linhas = []
+# Lista utilizada para determinar se os registradores estão em uso
+registradores = [''] * 24
 
-    try: 
-        with open("analises/codigo_intermediario.txt", "r") as arquivo:
-            for linha in arquivo:
-                linha = linha.replace("(", "")
-                linha = linha.replace(")", "")
-                linhas.append(linha.strip())
-    except FileNotFoundError:
-        print("Erro ao encontrar os arquivos para fazer a conversão das quádruplas")
+# Função utilizaa para determinar a posição de memória de cada variével
+def calculate_index(group):
+    group['memory_position'] = group['Tamanho'].replace(0, 1).shift(fill_value=0).cumsum() + 1
+    return group
 
-    return linhas
+# Função utilizada para retornar a posição da memória
+def buscar_dados(df, nome, escopo):
+    nome = nome.strip()
+    escopo = escopo.strip()
+    resultado = df.query("`Nome` == @nome and `Escopo` == @escopo")
+    if resultado.empty:
+        return "-1"
+    return resultado.values[0][6]
 
-def encontra_label(quadruplas, valor_procurado = "main", instrucao = "FUN"):
+# Função que retorna o próximo registardor livre
+def return_register(register):
+    global registradores
 
-    for index, elemento in enumerate(quadruplas):
-        partes = elemento.split(',')
-        if instrucao in partes[0] and  valor_procurado in partes[2]:
-            return index
+    register = register.strip()
+
+    for i, valor in enumerate(registradores):
+        if register == valor.strip():
+            return i
         
-    return -1
+    for i, valor in enumerate(registradores):
+        if valor == '':
+            return i
+        
+    return None 
 
-def gera_assembly(quadruplas, saida, tabela_simbolos):
+def search_string_in_assembly(string, assembly, pos):
+    for index, line in enumerate(assembly):
+        line = line.split(",")
 
+        for item in line:
+            item = remover_caracteres(item) 
+            item = item.strip()
+            if item == string and index >= pos:
+                return True
+    return False
+
+def store_register(registrador, assembly):
+    global registradores
+
+    return registrador
+
+# Função utilizada para removar os caracteres das quádruplas lidas
+def remover_caracteres(string):
+    caracteres_indesejados = ["(", ",", ")"]
+    for caractere in caracteres_indesejados:
+        string = string.replace(caractere, "")
+    return string
+
+
+def gerar_quadruplas(saida, df):
+
+    global registradores
     global stack_size
 
-    # Adicionando memory position
-    tabela_simbolos["memory_position"] = -1
-    instructions = []
+    quads = []
+    assembly = []
     
-    for quad in quadruplas:
+    with open("analises/codigo_intermediario.txt", "r") as arquivo:
+        quads = arquivo.readlines()
+
+    escopo_atual = "global"
+    for pos_quad, quad in enumerate(quads):
+
+        # Tratando a quadrupla
+        quad = quad.split(",")
         
-        # Pegando a instrução
-        partes = quad.split(',')
+        registers_quad = []
+        for index, item in enumerate(quad):
+            quad[index] = item.strip()
+            quad[index] = remover_caracteres(quad[index])
 
-        # Realizando o mapeamento das quadruplas para o assembly
-        if "ALLOC" in partes[0]:
-            instructions.append("ADDI r30 r30 1" + "\n")
-            tabela_simbolos.loc[tabela_simbolos['Nome'] == partes[1].strip(), 'memory_position'] = stack_size
-            stack_size += 1
-        elif "LOAD" in partes[0]:
-            search = tabela_simbolos.loc[tabela_simbolos['Nome'] == partes[2].strip()]
-            if not search.empty:
-                instructions.append("LW " + partes[1]+ " r29 " + str(search.values[0][5])+"\n")
-        elif "CALL" in partes[0]:
-            #no caso de chamadas de função deve ser analisar se é do tipo input ou output
-            if partes[2].strip() == "input":
-                instructions.append("INPUT" + partes[1] + "\n")
-            elif partes[2].strip() == "output":
-                instructions.append("OUTPUT" + partes[1] + "\n")
+            if(index > 0 and '$t' in quad[index]):
+                pos_register = return_register(quad[index])
+                registradores[pos_register] =  quad[index]
+
+                registers_quad.append(pos_register)
+                # print(search_string_in_assembly(quad[index], quads, pos_quad))
+
+        if  quad[0] == "FUN":
+            escopo_atual = quad[2]
+            assembly.append("."+ quad[2].strip() + "\n")
+
+        elif quad[0] == "LAB":
+            assembly.append(".{}\n".format(quad[1]))
+
+        elif quad[0] == "LOAD_WORD":
+            assembly.append("LOAD_WORD $t{} {} {}\n".format(registers_quad[0], "SP", buscar_dados(df, quad[2], escopo_atual)))
+
+        elif quad[0] == "LOAD_IMEDIATE":
+            assembly.append("LOAD_IMEDIATE $t{} {}\n".format(registers_quad[0], quad[2]))
+
+        elif quad[0] == "PLUS":
+            assembly.append("ADD {} {} {}\n".format(quad[1], quad[2], quad[3]))
+
+        elif quad[0] == "DIV":
+            assembly.append("DIV $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+
+        elif quad[0] == "MULT":
+                    assembly.append("MULT $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+
+        elif quad[0] == "SUB":
+                    assembly.append("SUB $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+
+        elif quad[0] == "COMP":
+            assembly.append("COMP $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+
+        elif quad[0] == "IFF":
+            assembly.append("IFF $t{} {}\n".format(registers_quad[0], quad[2]))
+
+        elif quad[0] == "GOTO":
+            assembly.append("JUMP {}\n".format(quad[1]))
+
+        elif quad[0] == "ALLOC":
+            stack_size+=1
+
+        elif quad[0] == "STOREVAR":
+            nome = quad[2]
+            escopo = quad[3]
+            source = registers_quad[0]
+            mem_pos = buscar_dados(df, nome, escopo)
+            assembly.append("STORE_WORD $t{} {} {}\n".format( source, "SP", mem_pos))
+
+        elif quad[0] == "PARAM":
+            pass
+            #assembly.append("----------" + str(registers_quad[0]) + "\n")
+
+        elif quad[0] == "EMPILHA":
+            assembly.append("STORE_WORD $t{} {} {}\n".format(registers_quad[0], "$sp", 0))
+            # Release allocated register
+            registradores[registers_quad[0]] = ''
+
+        elif quad[0] == "DESEMPILHA":
+            assembly.append("STORE_WORD $t{} {} {}\n".format(registers_quad[0], "$sp", 0))
+            # Release allocated register
+            registradores[registers_quad[0]] = ''
+
+        elif quad[0] == "CALL":
+            if quad[2].strip() == "input":
+                assembly.append("IN $t{}\n".format(registers_quad[0]))
+
+            elif quad[2].strip() == "output":
+                assembly.append("OUTPUT $t{}\n".format(registers_quad[0]))
+
+            else:
+                # Utilizado para o return adress
+                stack_size+=1
+                print(registradores)
+                for i, register in enumerate(registradores):
+                    if(register != ''):
+                        stack_size+=1
+                        assembly.append("STORE_WORD $t{} {} $t{}\n".format(i,"$sp",stack_size))
+
+                assembly.append("CALL\n")
+
+                for i, register in enumerate(registradores):
+                    if(register != ''):
+                        stack_size+=1
+                        assembly.append("LOAD_WORD $t{} {} $t{}\n".format(i,"$sp",stack_size))
+
+
+
+        elif quad[0] == "END":
+
+            if quad[1] == "main":
+                assembly.append("HALT\n")
             else: 
-                instructions.append("SW r30 r29 0 \n")
-                instructions.append("CALL" + partes[2] + "\n")
-                for i in range(0,int(partes[3])):
-                    instructions.append("ADDI r30 r30 -1 \n")
-        elif "STOREVAR" in partes[0]:
-            search  = tabela_simbolos.query("Nome == '{}' and Escopo == '{}'".format(partes[2].strip(), partes[3].strip()))
-            instructions.append("SW " + partes[1] + " r29 " + str(search.values[0][5])+"\n")
-        elif "DIV" in partes[0]:
-            instructions.append("DIV" + "\n")
-        elif "PARAM" in partes[0]:
-            instructions.append("SW r30 "+ partes[1]+" 0 \n")
-            instructions.append("ADDI r30 r30 1 \n")
-        elif "FUN" in partes[0]:
-            instructions.append(".main\n")
+                assembly.append("NÃO MAPEADO\n")
+
         else:
-            instructions.append("NÃO MAPEADO" + "\n")
+            assembly.append("NÃO MAPEADO - {} \n".format(quad[0]))
 
-    for instruction in instructions:
-        saida.write(instruction)
 
-    print(tabela_simbolos)
+        for item in registers_quad:
+                if not search_string_in_assembly(registradores[item], quads, pos_quad+1):
+                    pos_register = return_register(registradores[item])
+                    registradores[pos_register] =  ''
+
+        print("-----------------------------------\n")
+    for linha in assembly:
+        saida.write(linha)
+ 
 
 if __name__ == "__main__":
 
-    #Abrindo arquivo para imprimir resposta
+    # Abrindo arquivo para imprimir resposta
     saida = open("analises/codigo_assembly.txt", "w")
 
-    # CArregando a tabela de símbolos
-    tabela_simbolos = pd.read_csv("./analises/tabela_simbolos_csv.csv")
-    
-    # Realizando leitura das quádruplas para o mapeamento das instruções em assembly
-    quadruplas = ler_quadruplas()
+    # Carregando a tabela de símbolos
+    df = pd.read_csv("./analises/tabela_simbolos_csv.csv")
 
-    gera_assembly(quadruplas, saida, tabela_simbolos)
+    # Calculando posição de memória
+    df = df.groupby('Escopo').apply(calculate_index)
+    df.reset_index(drop=True, inplace=True)
+
+    # Transformações para realizar operações entre as colunas
+    df['Escopo'] = df['Escopo'].astype(str)
+    df['Nome'] = df['Nome'].astype(str)
+    df['Tamanho'] = df['Tamanho'].astype(str)
+    df['memory_position'] = df['memory_position'].astype(str)
+
+    for coluna in df.columns:
+    # Verificar se a coluna é do tipo 'object' (string)
+        if df[coluna].dtype == object:
+            # Aplicar a função strip() para remover espaços em branco antes e depois das strings
+            df[coluna] = df[coluna].str.strip()
+
+    tipos_variaveis = df
+
+    # print(tipos_variaveis)
+    gerar_quadruplas(saida, df)
 
     saida.close()
-

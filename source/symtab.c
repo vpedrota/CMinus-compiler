@@ -38,6 +38,7 @@ Node* create_node(TreeNode *t) {
     new_node->next = NULL;
     new_node->type = t->type;
     new_node->stmt = t->kind.stmt;
+    new_node->vetor = 0;
     return new_node;
 }
 
@@ -45,15 +46,23 @@ Node* create_node(TreeNode *t) {
 // Função para inserir um nó na tabela hash
 void insert_node(Node** table, TreeNode *t) {
     int index = hash(t->attr.name);
+    Node* current, *aux;
     if (table[index] == NULL) {
-        table[index] = create_node(t);
+        aux = create_node(t);
+        table[index] = aux;
     } else {
-        Node* current = table[index];
+        current = table[index];
         while (current->next != NULL) {
             current = current->next;
         }
-        current->next = create_node(t);
+        aux =  create_node(t);
+        current->next = aux;
     }
+
+    if(t->attr.vetor){
+        aux->vetor = t->attr.len;
+    }
+
 }
 
 
@@ -81,12 +90,19 @@ void print_table_csv(Hash_table_list *table_list, FILE *f) {
                     fprintf(f, "Função,");
                 }
                 else if(current->stmt == VarK){
-                    fprintf(f, "Variável,");
+                    if(current->vetor){
+                        fprintf(f, "Vetor,");
+                    }else{
+                        fprintf(f, "Variável,");
+                    }
+                    
                 }
                 else{
                     fprintf(f, "Tipo não mapeado,");
                 }
                
+                fprintf(f, "%d,", current->vetor);
+                
                 print_ocorrencies(current, f);
                 current = current->next;
                 fprintf(f, "\n");
@@ -100,7 +116,7 @@ void print_table(Hash_table_list *table_list, FILE *f) {
     Node** table = table_list->table;
     if(table == NULL) return;
     fprintf(f, "+---------------------+---------------------+---------------------+---------------------+---------------------+\n");
-    fprintf(f, "| %-20s | %-20s | %-20s | %-20s | %-20s |\n", "Nome", "Escopo", "Tipo", "Tipo" , "Ocorrências");
+    fprintf(f, "| %-20s | %-20s | %-20s | %-20s | %-20s | \n", "Nome", "Escopo", "Tipo", "Tipo" , "Ocorrências");
     fprintf(f, "+---------------------+---------------------+---------------------+---------------------+---------------------+\n");
     for (int i = 0; i < TABLE_SIZE; i++) {
         if (table[i] != NULL) {  
@@ -317,6 +333,7 @@ void buildSymtab(TreeNode *root){
     t.nodekind = StmtK;
     t.attr.name = "input";
     t.attr.scope = "global";
+    t.attr.len = 0;
     t.type = IntegerK;
     insert_node_symtab(&t, "global");
 
@@ -327,7 +344,7 @@ void buildSymtab(TreeNode *root){
     transverse(root);
 
     FILE *f_csv = fopen("analises/tabela_simbolos_csv.csv", "w");
-    fprintf(f_csv,  "Nome,Escopo,Tipo_var,Tipo,Ocorrências\n");
+    fprintf(f_csv,  "Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências\n");
 
     // Escrevendo tabela de símbolos no arquivo
     aux = first;

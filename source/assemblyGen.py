@@ -67,6 +67,7 @@ def gerar_quadruplas(saida, df):
 
     quads = []
     assembly = []
+    registrador_parametros = []
     
     with open("analises/codigo_intermediario.txt", "r") as arquivo:
         quads = arquivo.readlines()
@@ -97,7 +98,7 @@ def gerar_quadruplas(saida, df):
             assembly.append(".{}\n".format(quad[1]))
 
         elif quad[0] == "LOAD_WORD":
-            assembly.append("LOAD_WORD $t{} {} {}\n".format(registers_quad[0], "SP", buscar_dados(df, quad[2], escopo_atual)))
+            assembly.append("LOAD_WORD $t{} ${} {}\n".format(registers_quad[0], "sp", buscar_dados(df, quad[2], escopo_atual)))
 
         elif quad[0] == "LOAD_IMEDIATE":
             assembly.append("LOAD_IMEDIATE $t{} {}\n".format(registers_quad[0], quad[2]))
@@ -124,28 +125,29 @@ def gerar_quadruplas(saida, df):
             assembly.append("JUMP {}\n".format(quad[1]))
 
         elif quad[0] == "ALLOC":
-            stack_size+=1
+            assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
+
 
         elif quad[0] == "STOREVAR":
             nome = quad[2]
             escopo = quad[3]
             source = registers_quad[0]
             mem_pos = buscar_dados(df, nome, escopo)
-            assembly.append("STORE_WORD $t{} {} {}\n".format( source, "SP", mem_pos))
+            assembly.append("STORE_WORD $t{} ${} {}\n".format( source, "sp", mem_pos))
 
         elif quad[0] == "PARAM":
-            pass
-            #assembly.append("----------" + str(registers_quad[0]) + "\n")
+            registrador_parametros.append(registers_quad[0])
 
         elif quad[0] == "EMPILHA":
-            assembly.append("STORE_WORD $t{} {} {}\n".format(registers_quad[0], "$sp", 0))
+            
+            assembly.append("STORE_WORD $t{} {} {}\n".format(registers_quad[0], "$sz", 0))
+            assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
             # Release allocated register
             registradores[registers_quad[0]] = ''
 
         elif quad[0] == "DESEMPILHA":
-            assembly.append("STORE_WORD $t{} {} {}\n".format(registers_quad[0], "$sp", 0))
-            # Release allocated register
-            registradores[registers_quad[0]] = ''
+            assembly.append("ADDI $sz $sz -1\n")
+            assembly.append("LOAD_WORD $sz $sz -1\n")
 
         elif quad[0] == "CALL":
             if quad[2].strip() == "input":
@@ -155,23 +157,38 @@ def gerar_quadruplas(saida, df):
                 assembly.append("OUTPUT $t{}\n".format(registers_quad[0]))
 
             else:
+
                 # Utilizado para o return adress
-                stack_size+=1
+                assembly.append("STORE_WORD {} {} {}\n".format("$sp", "$sz", 0))
+                assembly.append("ADDI {} {} {}\n".format("$sp", "$sz", 0))
+                assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
+
+                escopo_desejado = quad[2]
+                df_filtrado = df.loc[df['Escopo'] == escopo_desejado]
+                maior_memory_position = int(df_filtrado['memory_position'].max())
+                
+                for parametro in registrador_parametros:
+                    maior_memory_position+=1
+                    assembly.append("STORE_WORD $t{} {} {}\n".format(parametro, "$sp", str(maior_memory_position)))
+                    registradores[parametro] = ''
+
+                registrador_parametros = []
+
                 print(registradores)
-                for i, register in enumerate(registradores):
-                    if(register != ''):
-                        stack_size+=1
-                        assembly.append("STORE_WORD $t{} {} $t{}\n".format(i,"$sp",stack_size))
 
-                assembly.append("CALL\n")
+                # for i, register in enumerate(registradores):
+                #     if(register != ''):
+                #         stack_size+=1
+                #         assembly.append("STORE_WORD $t{} {} $t{}\n".format(i,"$sp",stack_size))
 
-                for i, register in enumerate(registradores):
-                    if(register != ''):
-                        stack_size+=1
-                        assembly.append("LOAD_WORD $t{} {} $t{}\n".format(i,"$sp",stack_size))
+                assembly.append("JAL {}\n".format(quad[2]))
 
+                # for i, register in enumerate(registradores):
+                #     if(register != ''):
+                #         stack_size+=1
+                #         assembly.append("LOAD_WORD $t{} {} $t{}\n".format(i,"$sp",stack_size))
 
-
+                assembly.append("ADDI $sz $sp {}\n".format(0))
         elif quad[0] == "END":
 
             if quad[1] == "main":
@@ -219,7 +236,7 @@ if __name__ == "__main__":
 
     tipos_variaveis = df
 
-    # print(tipos_variaveis)
+    
     gerar_quadruplas(saida, df)
-
+    print(df)
     saida.close()

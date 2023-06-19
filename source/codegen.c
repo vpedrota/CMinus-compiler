@@ -136,19 +136,16 @@ void generateStmt(TreeNode *tree){
                 return;
             }
 
-            for(int i = contador; i >  contador - quant_param; i--){
-                printf("(EMPILHA, $t%d, -, -)\n", i);
-            }
+            
+        
 
             register_index();
             registrador_retorno = contador;
 
-           
+            printf("(EMPILHA, - , -, -)\n");
             printf("(CALL, $t%d, %s, %d)\n", contador, tree->attr.name, quant_param);
-
-            for(int i = contador - quant_param; i <= contador+-1 ; i++){
-                printf("(DESEMPILHA, $t%d, -, -)\n", i);
-            }
+            printf("(DESEMPILHA, - , -, -)\n");
+            
             break;
 
         case IfK:

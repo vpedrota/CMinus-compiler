@@ -52,9 +52,7 @@ def remover_caracteres(string):
         string = string.replace(caractere, "")
     return string
 
-
 def gerar_quadruplas(saida, df):
-
     # Lista utilizada para determinar se os registradores estão em uso
     global registradores
 
@@ -85,9 +83,17 @@ def gerar_quadruplas(saida, df):
                 # print(search_string_in_assembly(quad[index], quads, pos_quad))
 
         if  quad[0] == "FUN":
+    
             escopo_atual = quad[2]
             assembly.append("."+ quad[2].strip() + "\n")
 
+        elif quad[0] == "RET":
+           assembly.append("ADDI {} $t{} {}\n".format("$RR", registers_quad[0], 0))
+           assembly.append("JR\n")
+
+        elif quad[0] == "ARG":
+            assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
+            
         elif quad[0] == "LAB":
             assembly.append(".{}\n".format(quad[1]))
 
@@ -144,7 +150,7 @@ def gerar_quadruplas(saida, df):
         elif quad[0] == "DESEMPILHA":
 
             registradores = saved_registers
-            for i, reg in enumerate(saved_registers):
+            for i, reg in enumerate(reversed(saved_registers)):
                 if(reg != ''):
                     assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", -1))
                     assembly.append("LW $t{} {} {}\n".format(str(return_register(reg)), "$sz", 0))
@@ -162,11 +168,10 @@ def gerar_quadruplas(saida, df):
                 assembly.append("IN $t{}\n".format(registers_quad[0]))
 
             elif quad[2].strip() == "output":
-                assembly.append("OUTPUT $t{}\n".format(registers_quad[0]))
+                reg_print =  registrador_parametros[0]
+                assembly.append("OUTPUT $t{}\n".format(reg_print))
 
-            else:
-
-    
+            else:    
                 # Utilizado para o return adress
                 assembly.append("STORE_WORD {} {} {}\n".format("$sp", "$sz", 0))
                 assembly.append("ADDI {} {} {}\n".format("$sp", "$sz", 0))
@@ -177,21 +182,26 @@ def gerar_quadruplas(saida, df):
                 maior_memory_position = int(df_filtrado['memory_position'].max())
                 
                 for parametro in registrador_parametros:
-                    maior_memory_position+=1
-                    assembly.append("STORE_WORD $t{} {} {}\n".format(parametro, "$sp", str(maior_memory_position)))
+                    maior_memory_position +=1
+                    quad_anterior = quads[index - 1]
+                    quad_anterior = quad_anterior.split(",")
+                    assembly.append("STORE_WORD $t{} {} {}\n".format(parametro, "$sp", str(maior_memory_position - int(buscar_dados(df, quad_anterior[2], quad[2])))))
                     registradores[parametro] = ''
 
                 registrador_parametros = []
 
                 assembly.append("JAL {}\n".format(quad[2]))
+                assembly.append("ADDI $t{} {} {}\n".format(registers_quad[0],"$RR",0))
+
                 assembly.append("ADDI $sz $sp {}\n".format(0))
+                assembly.append("LW $sp $sp {}\n".format(0))
 
         elif quad[0] == "END":
 
             if quad[1] == "main":
                 assembly.append("HALT\n")
             else: 
-                assembly.append("NÃO MAPEADO\n")
+                assembly.append("JR\n")
 
         else:
             assembly.append("NÃO MAPEADO - {} \n".format(quad[0]))
@@ -232,7 +242,6 @@ if __name__ == "__main__":
 
     tipos_variaveis = df
 
-    
     gerar_quadruplas(saida, df)
     print(df)
     saida.close()

@@ -93,14 +93,14 @@ void generateStmt(TreeNode *tree){
                 aux = aux->sibling;
             }
 
-            aux = tree->child[0];
-            while(aux != NULL){
-                if(aux->child[0] != NULL){
-                    printf("(LOAD, $t%d, %s, -)\n", contador, aux->child[0]->attr.name);
-                    register_index();
-                } 
-                aux = aux->sibling;
-            }
+            // aux = tree->child[0];
+            // while(aux != NULL){
+            //     if(aux->child[0] != NULL){
+            //         printf("(LOAD, $t%d, %s, -)\n", contador, aux->child[0]->attr.name);
+            //         register_index();
+            //     } 
+            //     aux = aux->sibling;
+            // }
             
             codeGen(tree->child[1]);
             printf("(END, %s, -, -)\n", tree->attr.name);
@@ -135,9 +135,6 @@ void generateStmt(TreeNode *tree){
                 printf("(CALL, $t%d, %s, 1)\n", contador, tree->attr.name);
                 return;
             }
-
-            
-        
 
             register_index();
             registrador_retorno = contador;

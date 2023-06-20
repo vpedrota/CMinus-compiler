@@ -59,8 +59,6 @@
 7: PV  
 8: ID, name = output 
 8: LPAR  
-8: NUM, value = 2 
-8: MULT  
 8: ID, name = gcd 
 8: LPAR  
 8: ID, name = x 

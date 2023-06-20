@@ -1,14 +1,13 @@
 .gcd
-NÃO MAPEADO - ARG 
-NÃO MAPEADO - ARG 
-NÃO MAPEADO - LOAD 
-NÃO MAPEADO - LOAD 
+ADDI $sz $sz 1
+ADDI $sz $sz 1
 LOAD_WORD $t0 $sp 2
 LOAD_IMEDIATE $t1 0
 COMP $t2 $t0 $t1
 IFF $t2 L1
 LOAD_WORD $t0 $sp 1
-NÃO MAPEADO - RET 
+ADDI $RR $t0 0
+JR
 JUMP L2
 .L1
 LOAD_WORD $t0 $sp 2
@@ -26,17 +25,20 @@ ADDI $sz $sz 1
 STORE_WORD $sp $sz 0
 ADDI $sp $sz 0
 ADDI $sz $sz 1
-STORE_WORD $t0 $sp 3
-STORE_WORD $t2 $sp 4
+STORE_WORD $t0 $sp 1
+STORE_WORD $t2 $sp 2
 JAL gcd
+ADDI $t0 $RR 0
 ADDI $sz $sp 0
-ADDI $sz $sz -1
-LW $t0 $sz 0
+LW $sp $sp 0
 ADDI $sz $sz -1
 LW $t2 $sz 0
-NÃO MAPEADO - RET 
+ADDI $sz $sz -1
+LW $t0 $sz 0
+ADDI $RR $t0 0
+JR
 .L2
-NÃO MAPEADO
+JR
 .main
 ADDI $sz $sz 1
 ADDI $sz $sz 1
@@ -44,28 +46,24 @@ IN $t0
 STORE_WORD $t0 $sp 1
 IN $t0
 STORE_WORD $t0 $sp 2
-LOAD_IMEDIATE $t0 2
-LOAD_WORD $t1 $sp 1
-LOAD_WORD $t2 $sp 2
+LOAD_WORD $t0 $sp 1
+LOAD_WORD $t1 $sp 2
 SW $t0 $sz 0
 ADDI $sz $sz 1
 SW $t1 $sz 0
 ADDI $sz $sz 1
-SW $t2 $sz 0
-ADDI $sz $sz 1
 STORE_WORD $sp $sz 0
 ADDI $sp $sz 0
 ADDI $sz $sz 1
-STORE_WORD $t1 $sp 3
-STORE_WORD $t2 $sp 4
+STORE_WORD $t0 $sp 1
+STORE_WORD $t1 $sp 2
 JAL gcd
+ADDI $t0 $RR 0
 ADDI $sz $sp 0
-ADDI $sz $sz -1
-LW $t0 $sz 0
+LW $sp $sp 0
 ADDI $sz $sz -1
 LW $t1 $sz 0
 ADDI $sz $sz -1
-LW $t2 $sz 0
-MULT $t1 $t0 $t2
+LW $t0 $sz 0
 OUTPUT $t0
 HALT

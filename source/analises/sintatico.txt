@@ -34,8 +34,6 @@
         Id: y
         Chamada de Funcao input 
       Chamada de Funcao output 
-        Op:  MULT  
-          Const: 2
-          Chamada de Funcao gcd 
-            Id: x
-            Id: y
+        Chamada de Funcao gcd 
+          Id: x
+          Id: y

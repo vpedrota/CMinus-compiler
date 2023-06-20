@@ -19,8 +19,7 @@ def buscar_dados(df, nome, escopo):
     return resultado.values[0][6]
 
 # Função que retorna o próximo registardor livre
-def return_register(register):
-    global registradores
+def return_register(registradores,register):
 
     register = register.strip()
 
@@ -71,14 +70,14 @@ def gerar_quadruplas(saida, df):
         quad = quad.split(",")
         
         registers_quad = []
+       
         for index, item in enumerate(quad):
             quad[index] = item.strip()
             quad[index] = remover_caracteres(quad[index])
 
             if(index > 0 and '$t' in quad[index]):
-                pos_register = return_register(quad[index])
+                pos_register = return_register(registradores,quad[index])
                 registradores[pos_register] =  quad[index]
-
                 registers_quad.append(pos_register)
                 # print(search_string_in_assembly(quad[index], quads, pos_quad))
 
@@ -87,9 +86,15 @@ def gerar_quadruplas(saida, df):
             escopo_atual = quad[2]
             assembly.append("."+ quad[2].strip() + "\n")
 
+            if quad[2] != "main":
+                assembly.append("SW {} {} {}\n".format( "$r31", "rsz", 1))
+                assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
+
+
         elif quad[0] == "RET":
-           assembly.append("ADDI {} $t{} {}\n".format("$RR", registers_quad[0], 0))
-           assembly.append("JR\n")
+            assembly.append("ADDI {} $t{} {}\n".format("$RR", registers_quad[0], 0))
+            assembly.append("JUMP FIMFUN {}\n".format(escopo_atual))
+          
 
         elif quad[0] == "ARG":
             assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
@@ -131,6 +136,7 @@ def gerar_quadruplas(saida, df):
             nome = quad[2]
             escopo = quad[3]
             source = registers_quad[0]
+        
             mem_pos = buscar_dados(df, nome, escopo)
             assembly.append("STORE_WORD $t{} ${} {}\n".format( source, "sp", mem_pos))
 
@@ -143,7 +149,7 @@ def gerar_quadruplas(saida, df):
             for i, reg in enumerate(registradores):
                     if(reg != ''):
 
-                        assembly.append("SW $t{} {} {}\n".format(str(return_register(reg)), "$sz", 0))
+                        assembly.append("SW $t{} {} {}\n".format(str(return_register(registradores,reg)), "$sz", 0))
                         assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
                         registradores[i] = ''
 
@@ -153,17 +159,18 @@ def gerar_quadruplas(saida, df):
             for i, reg in enumerate(reversed(saved_registers)):
                 if(reg != ''):
                     assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", -1))
-                    assembly.append("LW $t{} {} {}\n".format(str(return_register(reg)), "$sz", 0))
+                    assembly.append("LW $t{} {} {}\n".format(str(return_register(registradores,reg)), "$sz", 0))
                     
                 
 
             for i in registradores:
                 if not search_string_in_assembly(i, quads, pos_quad+1):
-                    pos_register = return_register(i)
+                    pos_register = return_register(registradores,i)
                     registradores[pos_register] =  ''
 
         
         elif quad[0] == "CALL":
+
             if quad[2].strip() == "input":
                 assembly.append("IN $t{}\n".format(registers_quad[0]))
 
@@ -191,17 +198,23 @@ def gerar_quadruplas(saida, df):
                 registrador_parametros = []
 
                 assembly.append("JAL {}\n".format(quad[2]))
-                assembly.append("ADDI $t{} {} {}\n".format(registers_quad[0],"$RR",0))
 
+                pos_register = return_register(saved_registers, quad[1])
+                print(saved_registers)
+                saved_registers[pos_register] = quad[1]
+                assembly.append("ADDI $t{} {} {}\n".format(pos_register,"$RR",0))
                 assembly.append("ADDI $sz $sp {}\n".format(0))
                 assembly.append("LW $sp $sp {}\n".format(0))
+
 
         elif quad[0] == "END":
 
             if quad[1] == "main":
                 assembly.append("HALT\n")
             else: 
-                assembly.append("JR\n")
+                assembly.append(".FIMFUN {}\n".format( quad[1]))
+                assembly.append("LW {} {} {}\n".format("$t31", "$sp", "1"))
+                assembly.append("JR {}\n".format("$t31") )
 
         else:
             assembly.append("NÃO MAPEADO - {} \n".format(quad[0]))
@@ -209,7 +222,7 @@ def gerar_quadruplas(saida, df):
 
         for item in registers_quad:
                 if not search_string_in_assembly(registradores[item], quads, pos_quad+1):
-                    pos_register = return_register(registradores[item])
+                    pos_register = return_register(registradores,registradores[item])
                     registradores[pos_register] =  ''
 
     for linha in assembly:

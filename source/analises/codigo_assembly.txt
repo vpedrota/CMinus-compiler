@@ -1,4 +1,6 @@
 .gcd
+SW $r31 rsz 1
+ADDI $sz $sz 1
 ADDI $sz $sz 1
 ADDI $sz $sz 1
 LOAD_WORD $t0 $sp 2
@@ -7,7 +9,7 @@ COMP $t2 $t0 $t1
 IFF $t2 L1
 LOAD_WORD $t0 $sp 1
 ADDI $RR $t0 0
-JR
+JUMP FIMFUN gcd
 JUMP L2
 .L1
 LOAD_WORD $t0 $sp 2
@@ -28,17 +30,21 @@ ADDI $sz $sz 1
 STORE_WORD $t0 $sp 1
 STORE_WORD $t2 $sp 2
 JAL gcd
-ADDI $t0 $RR 0
+ADDI $t1 $RR 0
 ADDI $sz $sp 0
 LW $sp $sp 0
 ADDI $sz $sz -1
 LW $t2 $sz 0
 ADDI $sz $sz -1
+LW $t1 $sz 0
+ADDI $sz $sz -1
 LW $t0 $sz 0
-ADDI $RR $t0 0
-JR
+ADDI $RR $t1 0
+JUMP FIMFUN gcd
 .L2
-JR
+FIMFUN gcd
+LW $t31 $sp 1
+JR $t31
 .main
 ADDI $sz $sz 1
 ADDI $sz $sz 1
@@ -58,12 +64,14 @@ ADDI $sz $sz 1
 STORE_WORD $t0 $sp 1
 STORE_WORD $t1 $sp 2
 JAL gcd
-ADDI $t0 $RR 0
+ADDI $t2 $RR 0
 ADDI $sz $sp 0
 LW $sp $sp 0
+ADDI $sz $sz -1
+LW $t2 $sz 0
 ADDI $sz $sz -1
 LW $t1 $sz 0
 ADDI $sz $sz -1
 LW $t0 $sz 0
-OUTPUT $t0
+OUTPUT $t2
 HALT

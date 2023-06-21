@@ -1,9 +1,22 @@
 Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
-gcd,global,inteiro,Função,0,1 3 8 
-main,global,void,Função,0,5 
-input,global,inteiro,Função,0,0 7 7 
-output,global,inteiro,Função,0,0 8 
-u,gcd,inteiro,Variável,0,1 2 3 3 
-v,gcd,inteiro,Variável,0,1 2 3 3 3 
-x,main,inteiro,Variável,0,6 7 8 
-y,main,inteiro,Variável,0,6 7 8 
+vet,global,inteiro,Vetor,10,4 44 47 50 
+main,global,inteiro,Função,0,37 
+sort,global,void,Função,0,24 47 
+input,global,inteiro,Função,0,0 44 
+minloc,global,inteiro,Função,0,7 29 
+output,global,inteiro,Função,0,0 50 
+a,minloc,inteiro,Variável,0,7 10 13 14 
+i,minloc,inteiro,Variável,0,8 11 12 13 14 15 17 19 19 
+k,minloc,inteiro,Variável,0,8 9 15 21 
+x,minloc,inteiro,Variável,0,8 10 13 14 
+low,minloc,inteiro,Variável,0,7 9 10 11 
+high,minloc,inteiro,Variável,0,7 12 
+a,sort,inteiro,Variável,0,24 29 30 31 31 32 
+i,sort,inteiro,Variável,0,25 26 27 29 31 32 33 33 
+k,sort,inteiro,Variável,0,25 29 30 31 
+t,sort,inteiro,Variável,0,28 30 32 
+low,sort,inteiro,Variável,0,24 26 
+high,sort,inteiro,Variável,0,24 27 29 
+a,main,inteiro,Vetor,10,40 
+c,main,inteiro,Variável,0,41 
+i,main,inteiro,Variável,0,39 42 43 44 45 45 48 49 50 51 51 

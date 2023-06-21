@@ -144,6 +144,14 @@ def gerar_quadruplas(saida, df):
             registrador_parametros.append(registers_quad[0])
             continue
 
+        elif quad[0] == "LT":
+            assembly.append("LT $t{} $t{} $t{} \n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+
+        elif quad[0] == "LOAD_WORD_VETOR":
+            deslocamento = return_register(registradores, quad[3])
+            pos_mem = buscar_dados(df, quad[2], escopo_atual)
+            assembly.append("ADDI $t{} $t{} {}\n".format(deslocamento, deslocamento, pos_mem))
+            assembly.append("LOAD_WORD_vetor $t{} $t{} 0\n".format(registers_quad[0], deslocamento))
         elif quad[0] == "EMPILHA":
             saved_registers = registradores.copy()
             for i, reg in enumerate(registradores):

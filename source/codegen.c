@@ -227,7 +227,7 @@ void generateExp(TreeNode *tree){
         aux1=contador;
         aux2=contador;
         register_index();
-        printf("(LOAD, $t%d, %s, ($t%d))\n", contador, tree->attr.name, aux2);
+        printf("(LOAD_WORD_VETOR, $t%d, %s, ($t%d))\n", contador, tree->attr.name, aux2);
         break;
     case ConstK:
         register_index();

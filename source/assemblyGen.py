@@ -74,6 +74,8 @@ def gerar_quadruplas(saida, df):
     assembly = []
     registrador_parametros = []
     
+    assembly.append("JUMP main\n")
+
     with open("analises/codigo_intermediario.txt", "r") as arquivo:
         quads = arquivo.readlines()
 
@@ -102,12 +104,12 @@ def gerar_quadruplas(saida, df):
             assembly.append("."+ quad[2].strip() + "\n")
 
             if quad[2] != "main":
-                assembly.append("SW {} {} {}\n".format( "$r31", "rsz", 1))
+                assembly.append("SW {} {} {}\n".format("$sz", "$r31", 1))
                 assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
 
 
         elif quad[0] == "RET":
-            assembly.append("ADDI {} $t{} {}\n".format("$RR", registers_quad[0], 0))
+            assembly.append("ADDI $t{} $RR {}\n".format(registers_quad[0], 0))
             assembly.append("JUMP FIMFUN {}\n".format(escopo_atual))
           
 
@@ -118,25 +120,25 @@ def gerar_quadruplas(saida, df):
             assembly.append(".{}\n".format(quad[1]))
 
         elif quad[0] == "LOAD_WORD":
-            assembly.append("LOAD_WORD $t{} ${} {}\n".format(registers_quad[0], "sp", buscar_dados(df, quad[2], escopo_atual)))
+            assembly.append("LW ${} $t{} {}\n".format("sp",registers_quad[0] , buscar_dados(df, quad[2], escopo_atual)))
 
         elif quad[0] == "LOAD_IMEDIATE":
-            assembly.append("LOAD_IMEDIATE $t{} {}\n".format(registers_quad[0], quad[2]))
+            assembly.append("ADDI {} $t{} {}\n".format(quad[2], registers_quad[0], 0))
 
         elif quad[0] == "PLUS":
-            assembly.append("ADD {} {} {}\n".format(quad[1], quad[2], quad[3]))
+            assembly.append("ADD {} {} {}\n".format(quad[2], quad[1], quad[3]))
 
         elif quad[0] == "DIV":
-            assembly.append("DIV $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+            assembly.append("DIV $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
 
         elif quad[0] == "MULT":
-                    assembly.append("MULT $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+                    assembly.append("MULT $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
 
         elif quad[0] == "SUB":
-                    assembly.append("SUB $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+                    assembly.append("SUB $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
 
         elif quad[0] == "COMP":
-            assembly.append("COMP $t{} $t{} $t{}\n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+            assembly.append("COMP $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
 
         elif quad[0] == "IFF":
             assembly.append("IFF $t{} {}\n".format(registers_quad[0], quad[2]))
@@ -153,25 +155,26 @@ def gerar_quadruplas(saida, df):
             source = registers_quad[0]
         
             mem_pos = buscar_dados(df, nome, escopo)
-            assembly.append("STORE_WORD $t{} ${} {}\n".format( source, "sp", mem_pos))
+            assembly.append("SW $t{} ${} {}\n".format("sp", source, mem_pos))
 
         elif quad[0] == "PARAM":
             registrador_parametros.append(registers_quad[0])
             continue
 
         elif quad[0] == "LT":
-            assembly.append("LT $t{} $t{} $t{} \n".format(registers_quad[0], registers_quad[1], registers_quad[2]))
+            assembly.append("LT $t{} $t{} $t{} \n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
 
         elif quad[0] == "LOAD_WORD_VETOR":
             deslocamento = return_register(registradores, quad[3])
             pos_mem = buscar_dados(df, quad[2], escopo_atual)
             assembly.append("ADDI $t{} $t{} {}\n".format(deslocamento, deslocamento, pos_mem))
-            assembly.append("LOAD_WORD_vetor $t{} $t{} 0\n".format(registers_quad[0], deslocamento))
+            assembly.append("LOAD_WORD_vetor $t{} $t{} 0\n".format(deslocamento, registers_quad[0]))
+
         elif quad[0] == "EMPILHA":
             saved_registers = registradores.copy()
             for i, reg in enumerate(registradores):
                     if(reg != ''):
-                        assembly.append("SW $t{} {} {}\n".format(str(return_register(registradores,reg)), "$sz", 0))
+                        assembly.append("SW {} $t{} {}\n".format( "$sz", str(return_register(registradores,reg)), 0))
                         assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
                         registradores[i] = ''
 
@@ -181,7 +184,7 @@ def gerar_quadruplas(saida, df):
             for i, reg in enumerate(reversed(saved_registers)):
                 if(reg != ''):
                     assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", -1))
-                    assembly.append("LW $t{} {} {}\n".format(str(return_register(registradores,reg)), "$sz", 0))
+                    assembly.append("LW {} $t{} {}\n".format("$sz",str(return_register(registradores,reg)), 0))
                     
                 
 
@@ -204,8 +207,8 @@ def gerar_quadruplas(saida, df):
 
             else:    
                 # Utilizado para o return adress
-                assembly.append("STORE_WORD {} {} {}\n".format("$sp", "$sz", 0))
-                assembly.append("ADDI {} {} {}\n".format("$sp", "$sz", 0))
+                assembly.append("SW {} {} {}\n".format( "$sz", "$sp", 0))
+                assembly.append("ADDI {} {} {}\n".format("$sz", "$sp", 0))
                 assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
 
                 escopo_desejado = quad[2]
@@ -213,7 +216,6 @@ def gerar_quadruplas(saida, df):
                 maior_memory_position = int(df_filtrado['memory_position'].max())
                 
                 args = return_arguments(quads, quad[2])
-                print("--", args)
 
                 for i, parametro in enumerate(registrador_parametros):
                     maior_memory_position +=1
@@ -221,7 +223,7 @@ def gerar_quadruplas(saida, df):
                     quad_anterior = quad_anterior.split(",")
                     arg = args[i].split(",")
                     arg2 = remover_caracteres(arg[2])
-                    assembly.append("STORE_WORD $t{} {} {}\n".format(parametro, "$sp", str(1+int(buscar_dados(df, arg2, escopo_desejado)))))
+                    assembly.append("SW {} $t{}  {}\n".format("$sp",parametro,  str(int(buscar_dados(df, arg2, escopo_desejado)))))
                     registradores[parametro] = ''
 
                 registrador_parametros = []
@@ -231,8 +233,8 @@ def gerar_quadruplas(saida, df):
                 pos_register = return_register(saved_registers, quad[1])
                 print(saved_registers)
                 saved_registers[pos_register] = quad[1]
-                assembly.append("ADDI $t{} {} {}\n".format(pos_register,"$RR",0))
-                assembly.append("ADDI $sz $sp {}\n".format(0))
+                assembly.append("ADDI {} $t{}  {}\n".format("$RR",pos_register,0))
+                assembly.append("ADDI $sp $sz  {}\n".format(0))
                 assembly.append("LW $sp $sp {}\n".format(0))
 
 
@@ -242,7 +244,7 @@ def gerar_quadruplas(saida, df):
                 assembly.append("HALT\n")
             else: 
                 assembly.append(".FIMFUN {}\n".format( quad[1]))
-                assembly.append("LW {} {} {}\n".format("$t31", "$sp", "1"))
+                assembly.append("LW {} {} {}\n".format("$sp", "$t31", "1"))
                 assembly.append("JR {}\n".format("$t31") )
 
         else:
@@ -256,9 +258,67 @@ def gerar_quadruplas(saida, df):
 
     for linha in assembly:
         saida.write(linha)
- 
-def asm_to_binary():
-    pass
+
+    return assembly
+
+def asm_to_binary(assembly_instructions):
+
+    saida = open("analises/binario.txt", "w")
+    binario = []
+
+    opcodes = {
+        "ADDI": "001001", 
+        "SW": "101011",
+        "LW": "100011", 
+        "JUMP": "000010"
+    }
+
+    registers = {
+        '$t0': '00000',
+        '$t1': '00001',
+        '$t2': '00010',
+        '$t3': '00011',
+        '$t4': '00100',
+        '$t5': '00101',
+        '$t6': '00110',
+        '$t7': '00111',
+        '$t8': '01000',
+        '$t9': '01001',
+        '$t10': '01010',
+        '$t11': '01011',
+        '$t12': '01100',
+        '$t13': '01101',
+        '$t14': '01110',
+        '$t15': '01111',
+        '$t16': '10000',
+        '$t17': '10001',
+        '$t18': '10010',
+        '$t19': '10011',
+        '$t20': '10100',
+        '$t21': '10101',
+        '$t22': '10110',
+        '$t23': '10111',
+        '$t24': '11000',
+        '$sz': '11110', 
+        '$sp': '11101', 
+        '$31' :'11111'
+    }
+
+    for instruction in assembly_instructions:
+        final_binary = instruction
+
+        for inst, opcode in opcodes.items():
+            final_binary = final_binary.replace(inst, opcode)
+    
+        for reg, address in registers.items():
+            final_binary = final_binary.replace(reg, address)
+            
+        binario.append(final_binary)
+
+    for instruction in binario:
+        saida.write(instruction)
+
+    saida.close()
 
 if __name__ == "__main__":
 
@@ -271,7 +331,7 @@ if __name__ == "__main__":
     # Calculando posição de memória
     df = df.groupby('Escopo').apply(calculate_index)
     df.reset_index(drop=True, inplace=True)
-
+    df.loc[~df['Escopo'].isin(['main', 'global']), 'memory_position'] += 1
     # Transformações para realizar operações entre as colunas
     df['Escopo'] = df['Escopo'].astype(str)
     df['Nome'] = df['Nome'].astype(str)
@@ -284,8 +344,9 @@ if __name__ == "__main__":
             # Aplicar a função strip() para remover espaços em branco antes e depois das strings
             df[coluna] = df[coluna].str.strip()
 
-    tipos_variaveis = df
+    
 
-    gerar_quadruplas(saida, df)
+    assembly = gerar_quadruplas(saida, df)
+    asm_to_binary(assembly)
     print(df)
     saida.close()

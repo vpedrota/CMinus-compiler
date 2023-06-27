@@ -1,77 +1,78 @@
+JUMP main
 .gcd
-SW $r31 rsz 1
+SW $sz $r31 1
 ADDI $sz $sz 1
 ADDI $sz $sz 1
 ADDI $sz $sz 1
-LOAD_WORD $t0 $sp 2
-LOAD_IMEDIATE $t1 0
-COMP $t2 $t0 $t1
+LW $sp $t0 3
+ADDI 0 $t1 0
+COMP $t0 $t2 $t1
 IFF $t2 L1
-LOAD_WORD $t0 $sp 1
-ADDI $RR $t0 0
+LW $sp $t0 2
+ADDI $t0 $RR 0
 JUMP FIMFUN gcd
 JUMP L2
 .L1
-LOAD_WORD $t0 $sp 2
-LOAD_WORD $t1 $sp 1
-LOAD_WORD $t2 $sp 1
-LOAD_WORD $t3 $sp 2
-DIV $t4 $t2 $t3
-LOAD_WORD $t2 $sp 2
-MULT $t3 $t4 $t2
-SUB $t2 $t1 $t3
-SW $t0 $sz 0
+LW $sp $t0 3
+LW $sp $t1 2
+LW $sp $t2 2
+LW $sp $t3 3
+DIV $t2 $t4 $t3
+LW $sp $t2 3
+MULT $t4 $t3 $t2
+SUB $t1 $t2 $t3
+SW $sz $t0 0
 ADDI $sz $sz 1
-SW $t2 $sz 0
+SW $sz $t2 0
 ADDI $sz $sz 1
-STORE_WORD $sp $sz 0
-ADDI $sp $sz 0
-ADDI $sz $sz 1
-STORE_WORD $t0 $sp 2
-STORE_WORD $t2 $sp 3
-JAL gcd
-ADDI $t1 $RR 0
+SW $sz $sp 0
 ADDI $sz $sp 0
+ADDI $sz $sz 1
+SW $sp $t0  2
+SW $sp $t2  3
+JAL gcd
+ADDI $RR $t1  0
+ADDI $sp $sz  0
 LW $sp $sp 0
 ADDI $sz $sz -1
-LW $t2 $sz 0
+LW $sz $t2 0
 ADDI $sz $sz -1
-LW $t1 $sz 0
+LW $sz $t1 0
 ADDI $sz $sz -1
-LW $t0 $sz 0
-ADDI $RR $t1 0
+LW $sz $t0 0
+ADDI $t1 $RR 0
 JUMP FIMFUN gcd
 .L2
 .FIMFUN gcd
-LW $t31 $sp 1
+LW $sp $t31 1
 JR $t31
 .main
 ADDI $sz $sz 1
 ADDI $sz $sz 1
 IN $t0
-STORE_WORD $t0 $sp 1
+SW $tsp $0 1
 IN $t0
-STORE_WORD $t0 $sp 2
-LOAD_WORD $t0 $sp 1
-LOAD_WORD $t1 $sp 2
-SW $t0 $sz 0
+SW $tsp $0 2
+LW $sp $t0 1
+LW $sp $t1 2
+SW $sz $t0 0
 ADDI $sz $sz 1
-SW $t1 $sz 0
+SW $sz $t1 0
 ADDI $sz $sz 1
-STORE_WORD $sp $sz 0
-ADDI $sp $sz 0
-ADDI $sz $sz 1
-STORE_WORD $t0 $sp 2
-STORE_WORD $t1 $sp 3
-JAL gcd
-ADDI $t2 $RR 0
+SW $sz $sp 0
 ADDI $sz $sp 0
+ADDI $sz $sz 1
+SW $sp $t0  2
+SW $sp $t1  3
+JAL gcd
+ADDI $RR $t2  0
+ADDI $sp $sz  0
 LW $sp $sp 0
 ADDI $sz $sz -1
-LW $t2 $sz 0
+LW $sz $t2 0
 ADDI $sz $sz -1
-LW $t1 $sz 0
+LW $sz $t1 0
 ADDI $sz $sz -1
-LW $t0 $sz 0
+LW $sz $t0 0
 OUTPUT $t2
 HALT

@@ -155,7 +155,7 @@ def gerar_quadruplas(saida, df):
             source = registers_quad[0]
         
             mem_pos = buscar_dados(df, nome, escopo)
-            assembly.append("SW $t{} ${} {}\n".format("sp", source, mem_pos))
+            assembly.append("SW ${} $t{} {}\n".format("sp", source, mem_pos))
 
         elif quad[0] == "PARAM":
             registrador_parametros.append(registers_quad[0])

@@ -50,9 +50,9 @@ JR $t31
 ADDI $sz $sz 1
 ADDI $sz $sz 1
 IN $t0
-SW $tsp $0 1
+SW $sp $t0 1
 IN $t0
-SW $tsp $0 2
+SW $sp $t0 2
 LW $sp $t0 1
 LW $sp $t1 2
 SW $sz $t0 0

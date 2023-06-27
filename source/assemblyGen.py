@@ -51,6 +51,21 @@ def remover_caracteres(string):
         string = string.replace(caractere, "")
     return string
 
+def return_arguments(quads, fun_name):
+    args = []
+    for index, quad in enumerate(quads):
+        quad = quad.split(",")
+        if  "FUN" in quad[0]:
+            index+=1
+            print(quad)
+            while "ARG" in quads[index]:
+                print(quad)
+                args.append(quads[index])
+                index+=1
+    return args
+
+
+
 def gerar_quadruplas(saida, df):
     # Lista utilizada para determinar se os registradores estão em uso
     global registradores
@@ -156,7 +171,6 @@ def gerar_quadruplas(saida, df):
             saved_registers = registradores.copy()
             for i, reg in enumerate(registradores):
                     if(reg != ''):
-
                         assembly.append("SW $t{} {} {}\n".format(str(return_register(registradores,reg)), "$sz", 0))
                         assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
                         registradores[i] = ''
@@ -176,6 +190,8 @@ def gerar_quadruplas(saida, df):
                     pos_register = return_register(registradores,i)
                     registradores[pos_register] =  ''
 
+        elif quad[0] == "ALLOC_VET":
+                assembly.append("ADDI $sz $sz {}\n".format(quad[2]) )
         
         elif quad[0] == "CALL":
 
@@ -196,11 +212,16 @@ def gerar_quadruplas(saida, df):
                 df_filtrado = df.loc[df['Escopo'] == escopo_desejado]
                 maior_memory_position = int(df_filtrado['memory_position'].max())
                 
-                for parametro in registrador_parametros:
+                args = return_arguments(quads, quad[2])
+                print("--", args)
+
+                for i, parametro in enumerate(registrador_parametros):
                     maior_memory_position +=1
                     quad_anterior = quads[index - 1]
                     quad_anterior = quad_anterior.split(",")
-                    assembly.append("STORE_WORD $t{} {} {}\n".format(parametro, "$sp", str(maior_memory_position - int(buscar_dados(df, quad_anterior[2], quad[2])))))
+                    arg = args[i].split(",")
+                    arg2 = remover_caracteres(arg[2])
+                    assembly.append("STORE_WORD $t{} {} {}\n".format(parametro, "$sp", str(1+int(buscar_dados(df, arg2, escopo_desejado)))))
                     registradores[parametro] = ''
 
                 registrador_parametros = []
@@ -236,6 +257,8 @@ def gerar_quadruplas(saida, df):
     for linha in assembly:
         saida.write(linha)
  
+def asm_to_binary():
+    pass
 
 if __name__ == "__main__":
 

@@ -1,186 +1,77 @@
-NÃO MAPEADO - ALLOC_VET 
-.minloc
+.gcd
 SW $r31 rsz 1
 ADDI $sz $sz 1
 ADDI $sz $sz 1
 ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-LOAD_WORD $t0 $sp 5
-STORE_WORD $t0 $sp 3
-LOAD_WORD $t0 $sp 5
-ADDI $t0 $t0 1
-LOAD_WORD_vetor $t1 $t0 0
-STORE_WORD $t1 $sp 4
-LOAD_WORD $t0 $sp 5
-LOAD_IMEDIATE $t1 1
-ADD $t8 $t6 $t7 
-STORE_WORD $t2 $sp 2
-.L0
 LOAD_WORD $t0 $sp 2
-LOAD_WORD $t1 $sp 6
-LT $t2 $t0 $t1 
+LOAD_IMEDIATE $t1 0
+COMP $t2 $t0 $t1
 IFF $t2 L1
-LOAD_WORD $t0 $sp 2
-ADDI $t0 $t0 1
-LOAD_WORD_vetor $t1 $t0 0
-LOAD_WORD $t0 $sp 4
-LT $t2 $t1 $t0 
-IFF $t2 L3
-LOAD_WORD $t0 $sp 2
-ADDI $t0 $t0 1
-LOAD_WORD_vetor $t1 $t0 0
-STORE_WORD $t1 $sp 4
-LOAD_WORD $t0 $sp 2
-STORE_WORD $t0 $sp 3
-JUMP L4
-.L3
-LOAD_IMEDIATE $t0 1
-STORE_WORD $t0 $sp 2
-.L4
-LOAD_WORD $t0 $sp 2
-LOAD_IMEDIATE $t1 1
-ADD $t28 $t26 $t27 
-STORE_WORD $t2 $sp 2
-JUMP L0
-.L1
-LOAD_WORD $t0 $sp 3
-ADDI $RR $t0 0
-JUMP FIMFUN minloc
-.FIMFUN minloc
-LW $t31 $sp 1
-JR $t31
-.sort
-SW $r31 rsz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-LOAD_WORD $t0 $sp 5
-STORE_WORD $t0 $sp 2
-.L4
-LOAD_WORD $t0 $sp 2
-LOAD_WORD $t1 $sp 6
-LOAD_IMEDIATE $t2 1
-SUB $t3 $t1 $t2
-LT $t1 $t0 $t3 
-IFF $t1 L5
-ADDI $sz $sz 1
 LOAD_WORD $t0 $sp 1
-LOAD_WORD $t1 $sp 2
-LOAD_WORD $t2 $sp 6
+ADDI $RR $t0 0
+JUMP FIMFUN gcd
+JUMP L2
+.L1
+LOAD_WORD $t0 $sp 2
+LOAD_WORD $t1 $sp 1
+LOAD_WORD $t2 $sp 1
+LOAD_WORD $t3 $sp 2
+DIV $t4 $t2 $t3
+LOAD_WORD $t2 $sp 2
+MULT $t3 $t4 $t2
+SUB $t2 $t1 $t3
 SW $t0 $sz 0
-ADDI $sz $sz 1
-SW $t1 $sz 0
 ADDI $sz $sz 1
 SW $t2 $sz 0
 ADDI $sz $sz 1
 STORE_WORD $sp $sz 0
 ADDI $sp $sz 0
 ADDI $sz $sz 1
-STORE_WORD $t0 $sp 6
-STORE_WORD $t1 $sp 7
-STORE_WORD $t2 $sp 8
-JAL minloc
-ADDI $t3 $RR 0
+STORE_WORD $t0 $sp 2
+STORE_WORD $t2 $sp 3
+JAL gcd
+ADDI $t1 $RR 0
 ADDI $sz $sp 0
 LW $sp $sp 0
-ADDI $sz $sz -1
-LW $t3 $sz 0
 ADDI $sz $sz -1
 LW $t2 $sz 0
 ADDI $sz $sz -1
 LW $t1 $sz 0
 ADDI $sz $sz -1
 LW $t0 $sz 0
-STORE_WORD $t3 $sp 3
-LOAD_WORD $t0 $sp 3
-ADDI $t0 $t0 1
-LOAD_WORD_vetor $t1 $t0 0
-STORE_WORD $t1 $sp 4
-LOAD_WORD $t0 $sp 2
-ADDI $t0 $t0 1
-LOAD_WORD_vetor $t1 $t0 0
-STORE_WORD $t1 $sp 1
-LOAD_WORD $t0 $sp 4
-STORE_WORD $t0 $sp 1
-LOAD_WORD $t0 $sp 2
-LOAD_IMEDIATE $t1 1
-ADD $t53 $t51 $t52 
-STORE_WORD $t2 $sp 2
-JUMP L4
-.L5
-.FIMFUN sort
+ADDI $RR $t1 0
+JUMP FIMFUN gcd
+.L2
+.FIMFUN gcd
 LW $t31 $sp 1
 JR $t31
 .main
 ADDI $sz $sz 1
-NÃO MAPEADO - ALLOC_VET 
 ADDI $sz $sz 1
-LOAD_IMEDIATE $t0 0
-STORE_WORD $t0 $sp 12
-.L6
-LOAD_WORD $t0 $sp 12
-LOAD_IMEDIATE $t1 10
-LT $t2 $t0 $t1 
-IFF $t2 L7
 IN $t0
-STORE_WORD $t0 $sp -1
-LOAD_WORD $t0 $sp 12
-LOAD_IMEDIATE $t1 3
-ADD $t64 $t62 $t63 
-STORE_WORD $t2 $sp 12
-JUMP L6
-.L7
-LOAD_WORD $t0 $sp -1
-LOAD_IMEDIATE $t1 0
-LOAD_IMEDIATE $t2 10
+STORE_WORD $t0 $sp 1
+IN $t0
+STORE_WORD $t0 $sp 2
+LOAD_WORD $t0 $sp 1
+LOAD_WORD $t1 $sp 2
 SW $t0 $sz 0
 ADDI $sz $sz 1
 SW $t1 $sz 0
 ADDI $sz $sz 1
-SW $t2 $sz 0
-ADDI $sz $sz 1
 STORE_WORD $sp $sz 0
 ADDI $sp $sz 0
 ADDI $sz $sz 1
-STORE_WORD $t0 $sp 6
-STORE_WORD $t1 $sp 7
-STORE_WORD $t2 $sp 8
-JAL sort
-ADDI $t3 $RR 0
+STORE_WORD $t0 $sp 2
+STORE_WORD $t1 $sp 3
+JAL gcd
+ADDI $t2 $RR 0
 ADDI $sz $sp 0
 LW $sp $sp 0
-ADDI $sz $sz -1
-LW $t3 $sz 0
 ADDI $sz $sz -1
 LW $t2 $sz 0
 ADDI $sz $sz -1
 LW $t1 $sz 0
 ADDI $sz $sz -1
 LW $t0 $sz 0
-LOAD_IMEDIATE $t0 0
-STORE_WORD $t0 $sp 12
-.L8
-LOAD_WORD $t0 $sp 12
-LOAD_IMEDIATE $t1 10
-LT $t2 $t0 $t1 
-IFF $t2 L9
-LOAD_WORD $t0 $sp 12
-ADDI $t0 $t0 -1
-LOAD_WORD_vetor $t1 $t0 0
-OUTPUT $t1
-LOAD_WORD $t0 $sp 12
-LOAD_IMEDIATE $t2 1
-ADD $t80 $t78 $t79 
-STORE_WORD $t3 $sp 12
-JUMP L8
-.L9
-LOAD_IMEDIATE $t0 0
-ADDI $RR $t0 0
-JUMP FIMFUN main
+OUTPUT $t2
 HALT

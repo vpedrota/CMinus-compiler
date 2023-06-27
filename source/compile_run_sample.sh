@@ -6,7 +6,7 @@ make
 # Verifica se a compilação foi bem-sucedida
 if [ $? -eq 0 ]; then
     # Executa o executável passando o caminho do arquivo de entrada
-    ./cminus programas/sort.txt
+    ./cminus programas/fatorial.txt
 else
     echo "A compilação falhou."
 fi

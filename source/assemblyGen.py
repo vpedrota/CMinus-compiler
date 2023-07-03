@@ -104,12 +104,12 @@ def gerar_quadruplas(saida, df):
             assembly.append("."+ quad[2].strip() + "\n")
 
             if quad[2] != "main":
-                assembly.append("SW {} {} {}\n".format("$sz", "$r31", 1))
+                assembly.append("SW {} {} {}\n".format("$sz", "$ra", 1))
                 assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
 
 
         elif quad[0] == "RET":
-            assembly.append("ADDI $t{} $RR {}\n".format(registers_quad[0], 0))
+            assembly.append("ADDI $RR $t{} {}\n".format(registers_quad[0], 0))
             assembly.append("JUMP FIMFUN {}\n".format(escopo_atual))
           
 
@@ -123,22 +123,22 @@ def gerar_quadruplas(saida, df):
             assembly.append("LW ${} $t{} {}\n".format("sp",registers_quad[0] , buscar_dados(df, quad[2], escopo_atual)))
 
         elif quad[0] == "LOAD_IMEDIATE":
-            assembly.append("ADDI {} $t{} {}\n".format(quad[2], registers_quad[0], 0))
+            assembly.append("ADDI ${} $t{} {}\n".format("zero", registers_quad[0], quad[2]))
 
         elif quad[0] == "PLUS":
-            assembly.append("ADD {} {} {}\n".format(quad[2], quad[1], quad[3]))
+            assembly.append("ADD $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "DIV":
             assembly.append("DIV $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
 
         elif quad[0] == "MULT":
-                    assembly.append("MULT $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
+                    assembly.append("MULT $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "SUB":
                     assembly.append("SUB $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
 
         elif quad[0] == "COMP":
-            assembly.append("COMP $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
+            assembly.append("COMP $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "IFF":
             assembly.append("IFF $t{} {}\n".format(registers_quad[0], quad[2]))
@@ -158,11 +158,12 @@ def gerar_quadruplas(saida, df):
             assembly.append("SW ${} $t{} {}\n".format("sp", source, mem_pos))
 
         elif quad[0] == "PARAM":
+            print(registers_quad[0])
             registrador_parametros.append(registers_quad[0])
             continue
 
         elif quad[0] == "LT":
-            assembly.append("LT $t{} $t{} $t{} \n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
+            assembly.append("LT $t{} $t{} $t{} \n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "LOAD_WORD_VETOR":
             deslocamento = return_register(registradores, quad[3])
@@ -171,6 +172,7 @@ def gerar_quadruplas(saida, df):
             assembly.append("LOAD_WORD_vetor $t{} $t{} 0\n".format(deslocamento, registers_quad[0]))
 
         elif quad[0] == "EMPILHA":
+            print("---*--", registradores)
             saved_registers = registradores.copy()
             for i, reg in enumerate(registradores):
                     if(reg != ''):
@@ -181,9 +183,11 @@ def gerar_quadruplas(saida, df):
         elif quad[0] == "DESEMPILHA":
 
             registradores = saved_registers
-            for i, reg in enumerate(reversed(saved_registers)):
+            
+            desempilhar_lista = [valor for valor in registradores if valor != '']
+            for i, reg in enumerate(reversed(desempilhar_lista[:-1])):
                 if(reg != ''):
-                    assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", -1))
+                    assembly.append("SUBI {} {} {}\n".format("$sz", "$sz", 1))
                     assembly.append("LW {} $t{} {}\n".format("$sz",str(return_register(registradores,reg)), 0))
                     
                 
@@ -202,8 +206,9 @@ def gerar_quadruplas(saida, df):
                 assembly.append("IN $t{}\n".format(registers_quad[0]))
 
             elif quad[2].strip() == "output":
-                reg_print =  registrador_parametros[0]
+                reg_print = registrador_parametros[0]
                 assembly.append("OUTPUT $t{}\n".format(reg_print))
+                registrador_parametros = []
 
             else:    
                 # Utilizado para o return adress
@@ -244,8 +249,8 @@ def gerar_quadruplas(saida, df):
                 assembly.append("HALT\n")
             else: 
                 assembly.append(".FIMFUN {}\n".format( quad[1]))
-                assembly.append("LW {} {} {}\n".format("$sp", "$t31", "1"))
-                assembly.append("JR {}\n".format("$t31") )
+                assembly.append("LW {} {} {}\n".format("$sp", "$ra", "1"))
+                assembly.append("JR {}\n".format("$ra") )
 
         else:
             assembly.append("NÃO MAPEADO - {} \n".format(quad[0]))
@@ -256,10 +261,39 @@ def gerar_quadruplas(saida, df):
                     pos_register = return_register(registradores,registradores[item])
                     registradores[pos_register] =  ''
 
+    assembly = replace_labels_with_line_distance(assembly)
+
     for linha in assembly:
         saida.write(linha)
 
     return assembly
+
+def replace_labels_with_line_distance(lines):
+    label_to_line = {}
+    processed_lines = []
+
+    # First, enumerate over lines to map labels to line numbers
+    for i, line in enumerate(lines):
+        # If the line is a label
+        if line.startswith('.'):
+            label = line.strip('.')
+            # Record the label with adjusted line number
+            label_to_line[label] = len(processed_lines)
+        else:
+            processed_lines.append(line)
+
+    # Now, replace labels with line distances in the processed lines
+    for i, line in enumerate(processed_lines):
+        for label, line_number in label_to_line.items():
+            if label in line:
+                if 'IFF' in line:  # If the line contains the IFF instruction
+                    # Replace the label with its distance from the current line
+                    processed_lines[i] = line.replace(label, str(abs(i - line_number) - 1) + "\n")
+                else:
+                    # For other lines, replace the label with its line number
+                    processed_lines[i] = line.replace(label, str(line_number) + "\n")
+
+    return processed_lines
 
 def asm_to_binary(assembly_instructions):
 
@@ -267,10 +301,24 @@ def asm_to_binary(assembly_instructions):
     binario = []
 
     opcodes = {
-        "ADDI": "001001", 
+        "ADDI": "001000", 
         "SW": "101011",
         "LW": "100011", 
-        "JUMP": "000010"
+        "JUMP": "000010",
+        "SUBI": "101010",
+        "MULT": "000000",
+        "DIV": "000000",
+        "COMP": "000000",
+        "SUB": "000000",
+        "JAL": "000011",
+        "OUTPUT": "101110",
+        "IN": "xxxxxx",
+        "JR": "001111", 
+        "ADD ": "000000",
+        "HALT": "111111",
+        "IFF": "000101", 
+        "LT": "000000"
+
     }
 
     registers = {
@@ -301,18 +349,58 @@ def asm_to_binary(assembly_instructions):
         '$t24': '11000',
         '$sz': '11110', 
         '$sp': '11101', 
-        '$31' :'11111'
+        '$ra' :'01111',
+        '$zero': '11011',
+        '$RR' : '11100'
     }
+
+    funct = {
+        "ADD ": "100000",
+        "MULT ": "011000", 
+        "DIV ": "011010", 
+        "SUB ": "100010", 
+        "COMP":  "111111",
+        "LT": "101010"
+    }
+
+    operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI"]
+        
+    operations_26bits_imediate = ["IN", "OUTPUT", "JR"]
+
 
     for instruction in assembly_instructions:
         final_binary = instruction
-
+        
         for inst, opcode in opcodes.items():
             final_binary = final_binary.replace(inst, opcode)
     
-        for reg, address in registers.items():
+        for reg, address in reversed(registers.items()):
             final_binary = final_binary.replace(reg, address)
+
+        parts = final_binary.split()
+
+        if any(op in instruction for op in ["JUMP", "JAL"]):
+            parts[1] = format(int(parts[1]), '026b') + "\n"
+            final_binary = "".join(parts)
+
+        if any(op in instruction for op in ["IFF"]):
+            parts[2] = format(int(parts[2]), '016b') + "\n"
+            parts[1] = format("11011" + parts[1])
+            final_binary = "".join(parts)
+
+        if any(op in instruction for op in operations_16bits_imediate):
+            parts[3] = format(int(parts[3]), '016b') + "\n"
+            final_binary = "".join(parts)
+
+        for inst_ula, ula_code in funct.items():
+            if inst_ula in instruction:
+                parts.append("00000{}\n".format(ula_code))
+                final_binary = "".join(parts)
             
+        if any(op in instruction for op in operations_26bits_imediate):
+             parts.append("000000000000000000000\n")
+             final_binary = "".join(parts)
+
         binario.append(final_binary)
 
     for instruction in binario:
@@ -332,6 +420,7 @@ if __name__ == "__main__":
     df = df.groupby('Escopo').apply(calculate_index)
     df.reset_index(drop=True, inplace=True)
     df.loc[~df['Escopo'].isin(['main', 'global']), 'memory_position'] += 1
+
     # Transformações para realizar operações entre as colunas
     df['Escopo'] = df['Escopo'].astype(str)
     df['Nome'] = df['Nome'].astype(str)
@@ -343,8 +432,6 @@ if __name__ == "__main__":
         if df[coluna].dtype == object:
             # Aplicar a função strip() para remover espaços em branco antes e depois das strings
             df[coluna] = df[coluna].str.strip()
-
-    
 
     assembly = gerar_quadruplas(saida, df)
     asm_to_binary(assembly)

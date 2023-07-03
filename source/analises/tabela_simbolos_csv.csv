@@ -1,9 +1,5 @@
 Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
-gcd,global,inteiro,Função,0,1 3 8 
-main,global,void,Função,0,5 
-input,global,inteiro,Função,0,0 7 7 
-output,global,inteiro,Função,0,0 8 
-u,gcd,inteiro,Variável,0,1 2 3 3 
-v,gcd,inteiro,Variável,0,1 2 3 3 3 
-x,main,inteiro,Variável,0,6 7 8 
-y,main,inteiro,Variável,0,6 7 8 
+main,global,void,Função,0,1 
+input,global,inteiro,Função,0,0 
+output,global,inteiro,Função,0,0 6 
+x,main,inteiro,Variável,0,2 3 4 5 5 6 

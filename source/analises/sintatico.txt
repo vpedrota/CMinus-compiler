@@ -1,39 +1,19 @@
-  Tipo inteiro
-    Funcao gcd
-      Tipo inteiro
-        Variavel u
-      Tipo inteiro
-        Variavel v
-      If
-        Op:  unknown  
-          Id: v
-          Const: 0
-        Return
-          Id: u
-        Return
-          Chamada de Funcao gcd 
-            Id: v
-            Op:  SUB  
-              Id: u
-              Op:  MULT  
-                Op:  unknown  
-                  Id: u
-                  Id: v
-                Id: v
   Tipo void
     Funcao main
       Tipo void
       Tipo inteiro
         Variavel x
-      Tipo inteiro
-        Variavel y
       Atribuicao
         Id: x
-        Chamada de Funcao input 
-      Atribuicao
-        Id: y
-        Chamada de Funcao input 
-      Chamada de Funcao output 
-        Chamada de Funcao gcd 
+        Const: 3
+      While
+        Op:  LT  
           Id: x
-          Id: y
+          Const: 9
+        Atribuicao
+          Id: x
+          Op:  PLUS  
+            Id: x
+            Const: 1
+        Chamada de Funcao output 
+          Id: x

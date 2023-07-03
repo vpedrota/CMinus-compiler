@@ -1,78 +1,16 @@
-JUMP main
-.gcd
-SW $sz $r31 1
+JUMP 1
 ADDI $sz $sz 1
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-LW $sp $t0 3
-ADDI 0 $t1 0
-COMP $t0 $t2 $t1
-IFF $t2 L1
-LW $sp $t0 2
-ADDI $t0 $RR 0
-JUMP FIMFUN gcd
-JUMP L2
-.L1
-LW $sp $t0 3
-LW $sp $t1 2
-LW $sp $t2 2
-LW $sp $t3 3
-DIV $t2 $t4 $t3
-LW $sp $t2 3
-MULT $t4 $t3 $t2
-SUB $t1 $t2 $t3
-SW $sz $t0 0
-ADDI $sz $sz 1
-SW $sz $t2 0
-ADDI $sz $sz 1
-SW $sz $sp 0
-ADDI $sz $sp 0
-ADDI $sz $sz 1
-SW $sp $t0  2
-SW $sp $t2  3
-JAL gcd
-ADDI $RR $t1  0
-ADDI $sp $sz  0
-LW $sp $sp 0
-ADDI $sz $sz -1
-LW $sz $t2 0
-ADDI $sz $sz -1
-LW $sz $t1 0
-ADDI $sz $sz -1
-LW $sz $t0 0
-ADDI $t1 $RR 0
-JUMP FIMFUN gcd
-.L2
-.FIMFUN gcd
-LW $sp $t31 1
-JR $t31
-.main
-ADDI $sz $sz 1
-ADDI $sz $sz 1
-IN $t0
+ADDI $zero $t0 3
 SW $sp $t0 1
-IN $t0
-SW $sp $t0 2
 LW $sp $t0 1
-LW $sp $t1 2
-SW $sz $t0 0
-ADDI $sz $sz 1
-SW $sz $t1 0
-ADDI $sz $sz 1
-SW $sz $sp 0
-ADDI $sz $sp 0
-ADDI $sz $sz 1
-SW $sp $t0  2
-SW $sp $t1  3
-JAL gcd
-ADDI $RR $t2  0
-ADDI $sp $sz  0
-LW $sp $sp 0
-ADDI $sz $sz -1
-LW $sz $t2 0
-ADDI $sz $sz -1
-LW $sz $t1 0
-ADDI $sz $sz -1
-LW $sz $t0 0
-OUTPUT $t2
+ADDI $zero $t1 9
+LT $t0 $t1 $t2 
+IFF $t2 7
+LW $sp $t0 1
+ADDI $zero $t1 1
+ADD $t0 $t1 $t2
+SW $sp $t2 1
+LW $sp $t0 1
+OUTPUT $t0
+JUMP 4
 HALT

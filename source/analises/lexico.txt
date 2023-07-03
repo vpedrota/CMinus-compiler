@@ -1,70 +1,33 @@
-1: INT  
-1: ID, name = gcd 
+1: VOID   
+1: ID, name = main 
 1: LPAR  
-1: INT  
-1: ID, name = u 
-1: VIR  
-1: INT  
-1: ID, name = v 
+1: VOID   
 1: RPAR  
-2: LCHA  
-2: IF  
-2: LPAR  
-2: ID, name = v 
-2: COMP  
-2: NUM, value = 0 
-2: RPAR  
-2: RETURN  
-2: ID, name = u 
+1: LCHA  
+2: INT  
+2: ID, name = x 
 2: PV  
-3: ELSE  
-3: RETURN  
-3: ID, name = gcd 
-3: LPAR  
-3: ID, name = v 
-3: VIR  
-3: ID, name = u 
-3: SUB  
-3: ID, name = u 
-3: unknown  
-3: ID, name = v 
-3: MULT  
-3: ID, name = v 
-3: RPAR  
+3: ID, name = x 
+3: ASSIGN  
+3: NUM, value = 3 
 3: PV  
-4: RCHA  
-5: VOID   
-5: ID, name = main 
-5: LPAR  
-5: VOID   
-5: RPAR  
-6: LCHA  
-6: INT  
+4: WHILE  
+4: LPAR  
+4: ID, name = x 
+4: LT  
+4: NUM, value = 9 
+4: RPAR  
+4: LCHA  
+5: ID, name = x 
+5: ASSIGN  
+5: ID, name = x 
+5: PLUS  
+5: NUM, value = 1 
+5: PV  
+6: ID, name = output 
+6: LPAR  
 6: ID, name = x 
+6: RPAR  
 6: PV  
-6: INT  
-6: ID, name = y 
-6: PV  
-7: ID, name = x 
-7: ASSIGN  
-7: ID, name = input 
-7: LPAR  
-7: RPAR  
-7: PV  
-7: ID, name = y 
-7: ASSIGN  
-7: ID, name = input 
-7: LPAR  
-7: RPAR  
-7: PV  
-8: ID, name = output 
-8: LPAR  
-8: ID, name = gcd 
-8: LPAR  
-8: ID, name = x 
-8: VIR  
-8: ID, name = y 
-8: RPAR  
-8: RPAR  
-8: PV  
-9: RCHA  
+7: RCHA  
+8: RCHA  

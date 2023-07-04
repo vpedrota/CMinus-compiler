@@ -57,9 +57,9 @@ def return_arguments(quads, fun_name):
         quad = quad.split(",")
         if  "FUN" in quad[0]:
             index+=1
-            print(quad)
+           
             while "ARG" in quads[index]:
-                print(quad)
+                
                 args.append(quads[index])
                 index+=1
     return args
@@ -104,12 +104,12 @@ def gerar_quadruplas(saida, df):
             assembly.append("."+ quad[2].strip() + "\n")
 
             if quad[2] != "main":
-                assembly.append("SW {} {} {}\n".format("$sz", "$ra", 1))
+                assembly.append("SW {} {} {}\n".format("$sp", "$ra", 1))
                 assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
 
 
         elif quad[0] == "RET":
-            assembly.append("ADDI $RR $t{} {}\n".format(registers_quad[0], 0))
+            assembly.append("ADDI $t{} $RR {}\n".format(registers_quad[0], 0))
             assembly.append("JUMP FIMFUN {}\n".format(escopo_atual))
           
 
@@ -129,13 +129,13 @@ def gerar_quadruplas(saida, df):
             assembly.append("ADD $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "DIV":
-            assembly.append("DIV $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
+            assembly.append("DIV $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "MULT":
                     assembly.append("MULT $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "SUB":
-                    assembly.append("SUB $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[0], registers_quad[2]))
+                    assembly.append("SUB $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "COMP":
             assembly.append("COMP $t{} $t{} $t{}\n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
@@ -158,12 +158,14 @@ def gerar_quadruplas(saida, df):
             assembly.append("SW ${} $t{} {}\n".format("sp", source, mem_pos))
 
         elif quad[0] == "PARAM":
-            print(registers_quad[0])
             registrador_parametros.append(registers_quad[0])
             continue
 
         elif quad[0] == "LT":
-            assembly.append("LT $t{} $t{} $t{} \n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
+            assembly.append("LESSTHAN $t{} $t{} $t{} \n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
+
+        elif quad[0] == "LET":
+            assembly.append("LETEQUAL $t{} $t{} $t{} \n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "LOAD_WORD_VETOR":
             deslocamento = return_register(registradores, quad[3])
@@ -172,7 +174,6 @@ def gerar_quadruplas(saida, df):
             assembly.append("LOAD_WORD_vetor $t{} $t{} 0\n".format(deslocamento, registers_quad[0]))
 
         elif quad[0] == "EMPILHA":
-            print("---*--", registradores)
             saved_registers = registradores.copy()
             for i, reg in enumerate(registradores):
                     if(reg != ''):
@@ -185,17 +186,21 @@ def gerar_quadruplas(saida, df):
             registradores = saved_registers
             
             desempilhar_lista = [valor for valor in registradores if valor != '']
-            for i, reg in enumerate(reversed(desempilhar_lista[:-1])):
+            for i, reg in enumerate(reversed(desempilhar_lista)):
                 if(reg != ''):
                     assembly.append("SUBI {} {} {}\n".format("$sz", "$sz", 1))
                     assembly.append("LW {} $t{} {}\n".format("$sz",str(return_register(registradores,reg)), 0))
-                    
-                
+
+               
 
             for i in registradores:
                 if not search_string_in_assembly(i, quads, pos_quad+1):
                     pos_register = return_register(registradores,i)
                     registradores[pos_register] =  ''
+                    
+            pos_register = return_register(registradores, return_register_number)
+            registradores[pos_register] = return_register_number
+            assembly.append("ADDI {} $t{}  {}\n".format("$RR", pos_register, 0))
 
         elif quad[0] == "ALLOC_VET":
                 assembly.append("ADDI $sz $sz {}\n".format(quad[2]) )
@@ -218,12 +223,10 @@ def gerar_quadruplas(saida, df):
 
                 escopo_desejado = quad[2]
                 df_filtrado = df.loc[df['Escopo'] == escopo_desejado]
-                maior_memory_position = int(df_filtrado['memory_position'].max())
                 
                 args = return_arguments(quads, quad[2])
 
                 for i, parametro in enumerate(registrador_parametros):
-                    maior_memory_position +=1
                     quad_anterior = quads[index - 1]
                     quad_anterior = quad_anterior.split(",")
                     arg = args[i].split(",")
@@ -236,12 +239,12 @@ def gerar_quadruplas(saida, df):
                 assembly.append("JAL {}\n".format(quad[2]))
 
                 pos_register = return_register(saved_registers, quad[1])
-                print(saved_registers)
-                saved_registers[pos_register] = quad[1]
-                assembly.append("ADDI {} $t{}  {}\n".format("$RR",pos_register,0))
+                return_register_number = quad[1]
+                # saved_registers[pos_register] = quad[1]
+                # assembly.append("ADDI {} $t{}  {}\n".format("$RR", pos_register, 0))
                 assembly.append("ADDI $sp $sz  {}\n".format(0))
                 assembly.append("LW $sp $sp {}\n".format(0))
-
+        
 
         elif quad[0] == "END":
 
@@ -317,7 +320,8 @@ def asm_to_binary(assembly_instructions):
         "ADD ": "000000",
         "HALT": "111111",
         "IFF": "000101", 
-        "LT": "000000"
+        "LT": "000000",
+        "LETEQUAL": "000000" 
 
     }
 
@@ -349,7 +353,7 @@ def asm_to_binary(assembly_instructions):
         '$t24': '11000',
         '$sz': '11110', 
         '$sp': '11101', 
-        '$ra' :'01111',
+        '$ra' :'11111',
         '$zero': '11011',
         '$RR' : '11100'
     }
@@ -360,7 +364,8 @@ def asm_to_binary(assembly_instructions):
         "DIV ": "011010", 
         "SUB ": "100010", 
         "COMP":  "111111",
-        "LT": "101010"
+        "LETEQUAL": "100110"
+       # "LT": "101010"
     }
 
     operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI"]
@@ -392,7 +397,7 @@ def asm_to_binary(assembly_instructions):
             parts[3] = format(int(parts[3]), '016b') + "\n"
             final_binary = "".join(parts)
 
-        for inst_ula, ula_code in funct.items():
+        for inst_ula, ula_code in funct.items(): 
             if inst_ula in instruction:
                 parts.append("00000{}\n".format(ula_code))
                 final_binary = "".join(parts)

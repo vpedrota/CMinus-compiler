@@ -1,9 +1,11 @@
 Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
-gcd,global,inteiro,Função,0,1 4 11 
-main,global,void,Função,0,8 
+a,global,inteiro,Variável,0,5 13 
+f,global,inteiro,Variável,0,4 
+an,global,inteiro,Variável,0,2 14 
+vet4,global,inteiro,Vetor,3,6 
+main,global,inteiro,Função,0,8 
 input,global,inteiro,Função,0,0 
-output,global,inteiro,Função,0,0 11 
-u,gcd,inteiro,Variável,0,1 3 4 4 
-v,gcd,inteiro,Variável,0,1 3 4 4 4 
-x,main,inteiro,Variável,0,9 10 11 
-y,main,inteiro,Variável,0,9 10 11 
+output,global,inteiro,Função,0,0 14 15 17 
+x,main,inteiro,Variável,0,10 12 15 
+y,main,inteiro,Variável,0,11 
+vet,main,inteiro,Vetor,10,9 16 17 

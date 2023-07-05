@@ -172,17 +172,23 @@ void generateStmt(TreeNode *tree){
             
         case AssignK:
         
-            
+            if(tree->child[0]->kind.exp == VetK){
+                codeGen(tree->child[0]->child[0]);
+            }
+
             //codeGen(tree->child[0]);   
             reg1 = contador;
-
-            
             registrador_retorno = 0; 
             codeGen(tree->child[1]);
             reg2 = contador;
-            printf("(STOREVAR, $t%d, %s, %s)\n", reg2, tree->child[0]->attr.name, tree->child[0]->attr.scope);
-            // printf("(ASSIGN, $t%d, $t%d, -)\n", reg1, reg2);
-            // printf("(STORE, %s, $t%d, -)\n", tree->child[0]->attr.name, reg1);
+
+            if(tree->child[0]->kind.exp == VetK){
+                printf("(STOREVAR_VETOR, $t%d, %s, $t%d)\n", reg2, tree->child[0]->attr.name, reg1);
+            }
+            else{
+                printf("(STOREVAR, $t%d, %s, %s)\n", reg2, tree->child[0]->attr.name, tree->child[0]->attr.scope);
+            }
+            
             register_index();
             break;
 

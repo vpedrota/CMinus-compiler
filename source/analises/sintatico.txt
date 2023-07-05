@@ -1,39 +1,34 @@
   Tipo inteiro
-    Funcao gcd
-      Tipo inteiro
-        Variavel u
-      Tipo inteiro
-        Variavel v
-      If
-        Op:  unknown  
-          Id: v
-          Const: 0
-        Return
-          Id: u
-        Return
-          Chamada de Funcao gcd 
-            Id: v
-            Op:  SUB  
-              Id: u
-              Op:  MULT  
-                Op:  unknown  
-                  Id: u
-                  Id: v
-                Id: v
-  Tipo void
+    Variavel an
+  Tipo inteiro
+    Variavel f
+  Tipo inteiro
+    Variavel a
+  Tipo inteiro
+    Variavel vet4
+  Tipo inteiro
     Funcao main
       Tipo void
+      Tipo inteiro
+        Variavel vet
       Tipo inteiro
         Variavel x
       Tipo inteiro
         Variavel y
       Atribuicao
         Id: x
-        Const: 12
+        Const: 43
       Atribuicao
-        Id: y
-        Const: 8
+        Id: a
+        Const: 3
       Chamada de Funcao output 
-        Chamada de Funcao gcd 
-          Id: x
-          Id: y
+        Id: an
+      Chamada de Funcao output 
+        Id: x
+      Atribuicao
+        Vetor: vet
+          Const: 3
+        Const: 43
+      Chamada de Funcao output 
+        Vetor: vet
+          Const: 3

@@ -1,10 +1,7 @@
 import pandas as pd
-import copy
-from queue import LifoQueue
 
-registradores = [''] * 24
+registradores = [''] * 26
 
-# Função utilizaa para determinar a posição de memória de cada variével
 def calculate_index(group):
     group['memory_position'] = group['Tamanho'].replace(0, 1).shift(fill_value=0).cumsum() + 1
     return group
@@ -17,6 +14,7 @@ def buscar_dados(df, nome, escopo):
     if resultado.empty:
         return "-1"
     return resultado.values[0][6]
+
 
 # Função que retorna o próximo registardor livre
 def return_register(registradores,register):
@@ -64,8 +62,6 @@ def return_arguments(quads, fun_name):
                 index+=1
     return args
 
-
-
 def gerar_quadruplas(saida, df):
     # Lista utilizada para determinar se os registradores estão em uso
     global registradores
@@ -73,8 +69,9 @@ def gerar_quadruplas(saida, df):
     quads = []
     assembly = []
     registrador_parametros = []
+    primeira_func = 1;
     
-    assembly.append("JUMP main\n")
+    
 
     with open("analises/codigo_intermediario.txt", "r") as arquivo:
         quads = arquivo.readlines()
@@ -82,10 +79,7 @@ def gerar_quadruplas(saida, df):
     escopo_atual = "global"
     for pos_quad, quad in enumerate(quads):
 
-        
-        # Tratando a quadrupla
         quad = quad.split(",")
-        
         registers_quad = []
        
         for index, item in enumerate(quad):
@@ -96,21 +90,26 @@ def gerar_quadruplas(saida, df):
                 pos_register = return_register(registradores,quad[index])
                 registradores[pos_register] =  quad[index]
                 registers_quad.append(pos_register)
-                # print(search_string_in_assembly(quad[index], quads, pos_quad))
 
         if  quad[0] == "FUN":
     
+            
+            if(primeira_func):
+                assembly.append("JUMP main\n")
+                primeira_func = 0
+
             escopo_atual = quad[2]
             assembly.append("."+ quad[2].strip() + "\n")
-
             if quad[2] != "main":
                 assembly.append("SW {} {} {}\n".format("$sp", "$ra", 1))
                 assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
+            else:
+                assembly.append("ADDI {} {} {}\n".format("$sz", "$sp", 0))
 
 
         elif quad[0] == "RET":
             assembly.append("ADDI $t{} $RR {}\n".format(registers_quad[0], 0))
-            assembly.append("JUMP FIMFUN {}\n".format(escopo_atual))
+            assembly.append("JUMP FIMFUN_{}\n".format(escopo_atual))
           
 
         elif quad[0] == "ARG":
@@ -120,7 +119,12 @@ def gerar_quadruplas(saida, df):
             assembly.append(".{}\n".format(quad[1]))
 
         elif quad[0] == "LOAD_WORD":
-            assembly.append("LW ${} $t{} {}\n".format("sp",registers_quad[0] , buscar_dados(df, quad[2], escopo_atual)))
+            mem_pos = buscar_dados(df, quad[2], escopo_atual)
+            if(mem_pos == "-1"):
+                 mem_pos = buscar_dados(df, quad[2], "global")
+                 assembly.append("LW ${} $t{} {}\n".format("zero",registers_quad[0] , mem_pos))
+            else:
+                assembly.append("LW ${} $t{} {}\n".format("sp",registers_quad[0] , mem_pos))
 
         elif quad[0] == "LOAD_IMEDIATE":
             assembly.append("ADDI ${} $t{} {}\n".format("zero", registers_quad[0], quad[2]))
@@ -149,13 +153,36 @@ def gerar_quadruplas(saida, df):
         elif quad[0] == "ALLOC":
             assembly.append("ADDI {} {} {}\n".format("$sz", "$sz", 1))
 
+        elif quad[0] == "STOREVAR_VETOR":
+
+            nome = quad[2]
+            source = registers_quad[0]
+            deslocamento = return_register(registradores, quad[3])
+            
+            mem_pos = buscar_dados(df, nome, escopo_atual)
+
+            if mem_pos == "-1":
+                mem_pos = buscar_dados(df, quad[2], "global")
+                assembly.append("ADD ${} $t{} $t{}\n".format("zero", deslocamento, deslocamento))
+            else:
+                assembly.append("ADD ${} $t{} $t{}\n".format("sp", deslocamento, deslocamento))
+
+            assembly.append("SW $t{} $t{} {}\n".format(deslocamento, source, mem_pos))
+            
+
         elif quad[0] == "STOREVAR":
+
             nome = quad[2]
             escopo = quad[3]
             source = registers_quad[0]
         
             mem_pos = buscar_dados(df, nome, escopo)
-            assembly.append("SW ${} $t{} {}\n".format("sp", source, mem_pos))
+            if mem_pos == "-1":
+                mem_pos = buscar_dados(df, quad[2], "global")
+                assembly.append("SW ${} $t{} {}\n".format("zero", source, mem_pos))
+            else:
+                assembly.append("SW ${} $t{} {}\n".format("sp", source, mem_pos))
+            
 
         elif quad[0] == "PARAM":
             registrador_parametros.append(registers_quad[0])
@@ -168,10 +195,16 @@ def gerar_quadruplas(saida, df):
             assembly.append("LETEQUAL $t{} $t{} $t{} \n".format(registers_quad[1], registers_quad[2], registers_quad[0]))
 
         elif quad[0] == "LOAD_WORD_VETOR":
+
             deslocamento = return_register(registradores, quad[3])
             pos_mem = buscar_dados(df, quad[2], escopo_atual)
-            assembly.append("ADDI $t{} $t{} {}\n".format(deslocamento, deslocamento, pos_mem))
-            assembly.append("LOAD_WORD_vetor $t{} $t{} 0\n".format(deslocamento, registers_quad[0]))
+            if pos_mem == "-1":
+                pos_mem = buscar_dados(df, quad[2], "global")
+                assembly.append("ADD {} $t{} $t{}\n".format("$zero", deslocamento, deslocamento))
+            else:
+                assembly.append("ADD {} $t{} $t{}\n".format("$sp", deslocamento, deslocamento))
+            
+            assembly.append("LW $t{} $t{} {}\n".format(deslocamento, registers_quad[0], pos_mem))
 
         elif quad[0] == "EMPILHA":
             saved_registers = registradores.copy()
@@ -249,9 +282,10 @@ def gerar_quadruplas(saida, df):
         elif quad[0] == "END":
 
             if quad[1] == "main":
+                assembly.append(".FIMFUN_{}\n".format( "main"))
                 assembly.append("HALT\n")
             else: 
-                assembly.append(".FIMFUN {}\n".format( quad[1]))
+                assembly.append(".FIMFUN_{}\n".format( quad[1]))
                 assembly.append("LW {} {} {}\n".format("$sp", "$ra", "1"))
                 assembly.append("JR {}\n".format("$ra") )
 
@@ -263,6 +297,7 @@ def gerar_quadruplas(saida, df):
                 if not search_string_in_assembly(registradores[item], quads, pos_quad+1):
                     pos_register = return_register(registradores,registradores[item])
                     registradores[pos_register] =  ''
+
 
     assembly = replace_labels_with_line_distance(assembly)
 
@@ -420,7 +455,6 @@ if __name__ == "__main__":
 
     # Carregando a tabela de símbolos
     df = pd.read_csv("./analises/tabela_simbolos_csv.csv")
-
     # Calculando posição de memória
     df = df.groupby('Escopo').apply(calculate_index)
     df.reset_index(drop=True, inplace=True)

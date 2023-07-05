@@ -1580,12 +1580,12 @@ yyreduce:
   case 17:
 #line 130 "bison/bison.y"
       {
-        yyval= newExpNode(TypeK);
-        yyval->child[0]= yyvsp[-2];
+        yyval = newExpNode(TypeK);
+        yyval->child[0] = yyvsp[-2];
         yyval->type = yyvsp[-3]->type;
-        yyval->attr.name = yyvsp[-3]->attr.name;
+        yyval->attr.name = "inteiro_parametro_vetor";
         yyvsp[-2]->nodekind = StmtK;
-        yyvsp[-2]->type = yyvsp[-3]->type;
+        yyvsp[-2]->type = IntegerVetorK;
         yyvsp[-2]->kind.exp = VetK;
       }
 #line 1592 "parser.c"

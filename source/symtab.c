@@ -83,7 +83,11 @@ void print_table_csv(Hash_table_list *table_list, FILE *f) {
                 fprintf(f, "%s,%s,", current->name, table_list->scopeName);
                 if(current->type == IntegerK){
                     fprintf(f, "inteiro,");
-                } else {
+                }
+                else if(current->type == IntegerVetorK) {
+                    fprintf(f, "VetorParametroInteiro,");
+                }
+                else {
                     fprintf(f, "void,");
                 }
                 if(current->stmt == FunK){

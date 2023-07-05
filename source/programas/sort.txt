@@ -1,19 +1,12 @@
 
-int an;
 
-int f;
-int a;
-int vet4[3];
+int vetor_teste(int teste[], int a){
+    return teste[3];
+}
 
-int main(void)
-{   int vet[ 10 ];
-    int x;
-    int y;
-    x  = 43;
-    a = 3;
-    output(an);
-    output(x);
-    vet[3] = 43;
-    output(vet[3]);
- 
+int main(void){   
+
+    int vet[5];
+    vet[3] = 3;
+    output(vetor_teste(vet, vet));
 }

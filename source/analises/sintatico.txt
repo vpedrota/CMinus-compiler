@@ -1,34 +1,22 @@
   Tipo inteiro
-    Variavel an
-  Tipo inteiro
-    Variavel f
-  Tipo inteiro
-    Variavel a
-  Tipo inteiro
-    Variavel vet4
+    Funcao vetor_teste
+      Tipo inteiro_parametro_vetor
+        Variavel teste
+      Tipo inteiro
+        Variavel a
+      Return
+        Vetor: teste
+          Const: 3
   Tipo inteiro
     Funcao main
       Tipo void
       Tipo inteiro
         Variavel vet
-      Tipo inteiro
-        Variavel x
-      Tipo inteiro
-        Variavel y
       Atribuicao
-        Id: x
-        Const: 43
-      Atribuicao
-        Id: a
+        Vetor: vet
+          Const: 3
         Const: 3
       Chamada de Funcao output 
-        Id: an
-      Chamada de Funcao output 
-        Id: x
-      Atribuicao
-        Vetor: vet
-          Const: 3
-        Const: 43
-      Chamada de Funcao output 
-        Vetor: vet
-          Const: 3
+        Chamada de Funcao vetor_teste 
+          Id: vet
+          Id: vet

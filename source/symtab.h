@@ -10,6 +10,7 @@ typedef struct node {
     StmtKind stmt;
     ExpType type;
     int vetor;
+    char* tipo_variavel;
 } Node;
 
 typedef struct hash_table_list {

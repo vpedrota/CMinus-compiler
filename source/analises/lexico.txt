@@ -1,67 +1,49 @@
-2: INT  
-2: ID, name = an 
-2: PV  
-4: INT  
-4: ID, name = f 
+3: INT  
+3: ID, name = vetor_teste 
+3: LPAR  
+3: INT  
+3: ID, name = teste 
+3: LCOL  
+3: RCOL  
+3: VIR  
+3: INT  
+3: ID, name = a 
+3: RPAR  
+3: LCHA  
+4: RETURN  
+4: ID, name = teste 
+4: LCOL  
+4: NUM, value = 3 
+4: RCOL  
 4: PV  
-5: INT  
-5: ID, name = a 
-5: PV  
-6: INT  
-6: ID, name = vet4 
-6: LCOL  
-6: NUM, value = 3 
-6: RCOL  
-6: PV  
-8: INT  
-8: ID, name = main 
-8: LPAR  
-8: VOID   
-8: RPAR  
-9: LCHA  
+5: RCHA  
+7: INT  
+7: ID, name = main 
+7: LPAR  
+7: VOID   
+7: RPAR  
+7: LCHA  
 9: INT  
 9: ID, name = vet 
 9: LCOL  
-9: NUM, value = 10 
+9: NUM, value = 5 
 9: RCOL  
 9: PV  
-10: INT  
-10: ID, name = x 
+10: ID, name = vet 
+10: LCOL  
+10: NUM, value = 3 
+10: RCOL  
+10: ASSIGN  
+10: NUM, value = 3 
 10: PV  
-11: INT  
-11: ID, name = y 
+11: ID, name = output 
+11: LPAR  
+11: ID, name = vetor_teste 
+11: LPAR  
+11: ID, name = vet 
+11: VIR  
+11: ID, name = vet 
+11: RPAR  
+11: RPAR  
 11: PV  
-12: ID, name = x 
-12: ASSIGN  
-12: NUM, value = 43 
-12: PV  
-13: ID, name = a 
-13: ASSIGN  
-13: NUM, value = 3 
-13: PV  
-14: ID, name = output 
-14: LPAR  
-14: ID, name = an 
-14: RPAR  
-14: PV  
-15: ID, name = output 
-15: LPAR  
-15: ID, name = x 
-15: RPAR  
-15: PV  
-16: ID, name = vet 
-16: LCOL  
-16: NUM, value = 3 
-16: RCOL  
-16: ASSIGN  
-16: NUM, value = 43 
-16: PV  
-17: ID, name = output 
-17: LPAR  
-17: ID, name = vet 
-17: LCOL  
-17: NUM, value = 3 
-17: RCOL  
-17: RPAR  
-17: PV  
-19: RCHA  
+12: RCHA  

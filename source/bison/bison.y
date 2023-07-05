@@ -128,12 +128,12 @@ param : tipo_especificador ident
       }
       | tipo_especificador ident LCOL RCOL
       {
-        $$= newExpNode(TypeK);
-        $$->child[0]= $2;
+        $$ = newExpNode(TypeK);
+        $$->child[0] = $2;
         $$->type = $1->type;
-        $$->attr.name = $1->attr.name;
+        $$->attr.name = "inteiro_parametro_vetor";
         $2->nodekind = StmtK;
-        $2->type = $1->type;
+        $2->type = IntegerVetorK;
         $2->kind.exp = VetK;
       }
       ;

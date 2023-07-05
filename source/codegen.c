@@ -111,11 +111,25 @@ void generateStmt(TreeNode *tree){
             quant_param = 0;
             aux = tree->child[0];
             
+            
             while(aux != NULL){
                 //printf("--%s--, %d", aux->attr.name, aux->attr.op);
-                if(aux->nodekind == ExpK) 
+                if(aux->nodekind == ExpK) {
+
+                    if(aux->kind.exp == IdK){
+                        printf("(PARAM_ID, %s, %s, -)\n", aux->attr.name, tree->attr.name);
+                        aux = aux->sibling;
+                        quant_param++;
+                        continue;
+                        
+                    }
+
                     generateExp(aux);
+                    
+    
+                } 
                 else{
+                   
                     generateStmt(aux);
                 }
                 printf("(PARAM, $t%d, %s, -)\n", contador, tree->attr.name);

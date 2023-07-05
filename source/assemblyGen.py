@@ -119,6 +119,7 @@ def gerar_quadruplas(saida, df):
             assembly.append(".{}\n".format(quad[1]))
 
         elif quad[0] == "LOAD_WORD":
+            
             mem_pos = buscar_dados(df, quad[2], escopo_atual)
             if(mem_pos == "-1"):
                  mem_pos = buscar_dados(df, quad[2], "global")
@@ -185,6 +186,7 @@ def gerar_quadruplas(saida, df):
             
 
         elif quad[0] == "PARAM":
+            
             registrador_parametros.append(registers_quad[0])
             continue
 
@@ -223,8 +225,6 @@ def gerar_quadruplas(saida, df):
                 if(reg != ''):
                     assembly.append("SUBI {} {} {}\n".format("$sz", "$sz", 1))
                     assembly.append("LW {} $t{} {}\n".format("$sz",str(return_register(registradores,reg)), 0))
-
-               
 
             for i in registradores:
                 if not search_string_in_assembly(i, quads, pos_quad+1):

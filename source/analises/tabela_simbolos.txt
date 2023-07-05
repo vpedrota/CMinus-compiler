@@ -1,20 +1,22 @@
 +---------------------+---------------------+---------------------+---------------------+---------------------+
 | Nome                 | Escopo               | Tipo                 | Tipo                 | Ocorrências         | 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
-| a                    | global               | inteiro              | Variável            |5 13 
-| f                    | global               | inteiro              | Variável            |4 
-| an                   | global               | inteiro              | Variável            |2 14 
-| vet4                 | global               | inteiro              | Variável            |6 
-| main                 | global               | inteiro              | Função             |8 
+| vetor_teste          | global               | inteiro              | Função             |3 11 
+| main                 | global               | inteiro              | Função             |7 
 | input                | global               | inteiro              | Função             |0 
-| output               | global               | inteiro              | Função             |0 14 15 17 
+| output               | global               | inteiro              | Função             |0 11 
 
 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
 | Nome                 | Escopo               | Tipo                 | Tipo                 | Ocorrências         | 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
-| x                    | main                 | inteiro              | Variável            |10 12 15 
-| y                    | main                 | inteiro              | Variável            |11 
-| vet                  | main                 | inteiro              | Variável            |9 16 17 
+| a                    | vetor_teste          | inteiro              | Variável            |3 
+| teste                | vetor_teste          | void                 | Variável            |3 4 
+
+
++---------------------+---------------------+---------------------+---------------------+---------------------+
+| Nome                 | Escopo               | Tipo                 | Tipo                 | Ocorrências         | 
++---------------------+---------------------+---------------------+---------------------+---------------------+
+| vet                  | main                 | inteiro              | Variável            |9 10 11 11 
 
 

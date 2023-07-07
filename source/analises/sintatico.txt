@@ -1,22 +1,126 @@
   Tipo inteiro
-    Funcao vetor_teste
-      Tipo inteiro_parametro_vetor
-        Variavel teste
-      Tipo inteiro
-        Variavel a
-      Return
-        Vetor: teste
-          Const: 3
+    Variavel vet
   Tipo inteiro
+    Funcao minloc
+      Tipo inteiro_parametro_vetor
+        Variavel a
+      Tipo inteiro
+        Variavel low
+      Tipo inteiro
+        Variavel high
+      Tipo inteiro
+        Variavel i
+      Tipo inteiro
+        Variavel x
+      Tipo inteiro
+        Variavel k
+      Atribuicao
+        Id: k
+        Id: low
+      Atribuicao
+        Id: x
+        Vetor: a
+          Id: low
+      Atribuicao
+        Id: i
+        Op:  PLUS  
+          Id: low
+          Const: 1
+      While
+        Op:  LT  
+          Id: i
+          Id: high
+        If
+          Op:  LT  
+            Vetor: a
+              Id: i
+            Id: x
+          Atribuicao
+            Id: x
+            Vetor: a
+              Id: i
+          Atribuicao
+            Id: k
+            Id: i
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Id: k
+  Tipo void
+    Funcao sort
+      Tipo inteiro_parametro_vetor
+        Variavel a
+      Tipo inteiro
+        Variavel low
+      Tipo inteiro
+        Variavel high
+      Tipo inteiro
+        Variavel i
+      Tipo inteiro
+        Variavel k
+      Atribuicao
+        Id: i
+        Id: low
+      While
+        Op:  LT  
+          Id: i
+          Op:  SUB  
+            Id: high
+            Const: 1
+        Tipo inteiro
+          Variavel t
+        Atribuicao
+          Id: k
+          Chamada de Funcao minloc 
+            Id: a
+            Id: i
+            Id: high
+        Atribuicao
+          Id: t
+          Vetor: a
+            Id: k
+        Atribuicao
+          Vetor: a
+            Id: k
+          Vetor: a
+            Id: i
+        Atribuicao
+          Vetor: a
+            Id: i
+          Id: t
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+  Tipo void
     Funcao main
       Tipo void
-      Tipo inteiro
-        Variavel vet
+      Atribuicao
+        Vetor: vet
+          Const: 1
+        Const: 3
+      Atribuicao
+        Vetor: vet
+          Const: 2
+        Const: 2
       Atribuicao
         Vetor: vet
           Const: 3
+        Const: 1
+      Chamada de Funcao sort 
+        Id: vet
+        Const: 0
         Const: 3
       Chamada de Funcao output 
-        Chamada de Funcao vetor_teste 
-          Id: vet
-          Id: vet
+        Vetor: vet
+          Const: 1
+      Chamada de Funcao output 
+        Vetor: vet
+          Const: 2
+      Chamada de Funcao output 
+        Vetor: vet
+          Const: 3

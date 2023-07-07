@@ -117,7 +117,8 @@ void generateStmt(TreeNode *tree){
                 if(aux->nodekind == ExpK) {
 
                     if(aux->kind.exp == IdK){
-                        printf("(PARAM_ID, %s, %s, -)\n", aux->attr.name, tree->attr.name);
+                        register_index();
+                        printf("(PARAM_ID, %s, %s, $t%d)\n", aux->attr.name, tree->attr.name, contador);
                         aux = aux->sibling;
                         quant_param++;
                         continue;
@@ -153,9 +154,9 @@ void generateStmt(TreeNode *tree){
             register_index();
             registrador_retorno = contador;
 
-            printf("(EMPILHA, - , -, -)\n");
+            // printf("(EMPILHA, - , -, -)\n");
             printf("(CALL, $t%d, %s, %d)\n", contador, tree->attr.name, quant_param);
-            printf("(DESEMPILHA, - , -, -)\n");
+            //printf("(DESEMPILHA, - , -, -)\n");
             
             break;
 

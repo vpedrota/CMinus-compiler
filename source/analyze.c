@@ -15,8 +15,8 @@ void check_node(TreeNode *node){
                 break;
                 
             aux = find_name(node->child[1]->attr.name, node->child[1]->attr.scope);
-            if(aux->type != IntegerK ){
-                printf("Assign entre variável e retorno de void. Função: %s\n", aux->name);
+            if(aux->type != IntegerK && aux->type != IntegerVetorK){
+                printf("Assign entre variável e retorno de void. Função: %s linha: %d\n", aux->name, node->lineno);
                 exit(1);
             }
             break;

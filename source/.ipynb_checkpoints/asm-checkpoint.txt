@@ -1,0 +1,74 @@
+.fun
+SW $sp $ra 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $zero $t0 0
+SW $sp $t0 2
+ADDI $zero $t0 3
+LW $sp $t0 3
+ADD $t1 $t1 $t0
+LW $t1 $t0 0
+OUTPUT $t1
+.L0
+LW $sp $t1 2
+ADDI $zero $t2 10
+LT $t2 $t1 $t3
+IFF $t1 L1
+LW $sp $t1 2
+LW $sp $t2 2
+ADDI $zero $t3 2
+PLUS $t3 $t2 $t4
+LW $sp $sp 3
+ADD $sp $t1 $t1
+SW $t1 $t2 0
+LW $sp $t1 2
+ADDI $zero $t2 1
+PLUS $t2 $t1 $t3
+SW $sp $t1 2
+JUMP L0
+.L1
+.FIMFUN_fun
+LW $sp $ra 1
+JR $ra
+.main
+ADDI $sz $sp 0
+ADDI $sz $sz 10
+ADDI $sz $sz 1
+ADDI $zero $t1 0
+SW $sp $t1 1
+SW $sz $t4 0
+ADDI $sz $sz 1
+SW $sz $t20 0
+ADDI $sz $sz 1
+SW $sz $sp 0
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+SW $sp $t0 3
+SW $sp $t1 3
+JAL fun
+ADDI $sp $sz  0
+LW $sp $sp 0
+SUBI $sz $sz 1
+LW $sz $t$t21 0
+SUBI $sz $sz 1
+LW $sz $t$t20 0
+SUBI $sz $sz 1
+LW $sz $t$t4 0
+.L2
+LW $sp $t2 1
+ADDI $zero $t3 10
+LT $t3 $t2 $t4
+IFF $t2 L3
+LW $sp $t2 1
+ADD $sp $t3 $t3
+LW $t3 $t2 0
+OUTPUT $t3
+LW $sp $t3 1
+ADDI $zero $t4 1
+PLUS $t4 $t3 $t5
+SW $sp $t3 1
+JUMP L2
+.L3
+.FIMFUN_main
+HALT

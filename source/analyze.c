@@ -94,7 +94,7 @@ void transverse_check(TreeNode *tree){
 void analyze(TreeNode *tree){
     Node* aux = find_name("main", "global");
     if(aux == NULL){
-        printf("Erro semântico: função main não declarada\n");
+        printf("Erro semântico: função main não declarada, %s %d\n", tree->attr.name, tree->lineno);
         exit(1);
     }
     transverse_check(tree);

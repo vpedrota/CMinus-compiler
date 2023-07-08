@@ -1,228 +1,66 @@
-4: INT  
-4: ID, name = vet 
-4: LCOL  
-4: NUM, value = 3 
-4: RCOL  
+1: INT  
+1: ID, name = gcd 
+1: LPAR  
+1: INT  
+1: ID, name = u 
+1: VIR  
+1: INT  
+1: ID, name = v 
+1: RPAR  
+2: LCHA  
+3: IF  
+3: LPAR  
+3: ID, name = v 
+3: COMP  
+3: NUM, value = 0 
+3: RPAR  
+3: RETURN  
+3: ID, name = u 
+3: PV  
+4: ELSE  
+4: RETURN  
+4: ID, name = gcd 
+4: LPAR  
+4: ID, name = v 
+4: VIR  
+4: ID, name = u 
+4: SUB  
+4: ID, name = u 
+4: unknown  
+4: ID, name = v 
+4: MULT  
+4: ID, name = v 
+4: RPAR  
 4: PV  
-6: INT  
-6: ID, name = minloc 
-6: LPAR  
-6: INT  
-6: ID, name = a 
-6: LCOL  
-6: RCOL  
-6: VIR  
-6: INT  
-6: ID, name = low 
-6: VIR  
-6: INT  
-6: ID, name = high 
-6: RPAR  
-7: LCHA  
-7: INT  
-7: ID, name = i 
-7: PV  
-7: INT  
-7: ID, name = x 
-7: PV  
-7: INT  
-7: ID, name = k 
-7: PV  
-8: ID, name = k 
-8: ASSIGN  
-8: ID, name = low 
-8: PV  
+6: RCHA  
+8: VOID   
+8: ID, name = main 
+8: LPAR  
+8: VOID   
+8: RPAR  
+9: LCHA  
+9: INT  
 9: ID, name = x 
-9: ASSIGN  
-9: ID, name = a 
-9: LCOL  
-9: ID, name = low 
-9: RCOL  
 9: PV  
-10: ID, name = i 
+9: INT  
+9: ID, name = y 
+9: PV  
+10: ID, name = x 
 10: ASSIGN  
-10: ID, name = low 
-10: PLUS  
-10: NUM, value = 1 
+10: NUM, value = 124 
 10: PV  
-11: WHILE  
+10: ID, name = y 
+10: ASSIGN  
+10: NUM, value = 8 
+10: PV  
+11: ID, name = output 
 11: LPAR  
-11: ID, name = i 
-11: LT  
-11: ID, name = high 
+11: ID, name = gcd 
+11: LPAR  
+11: ID, name = x 
+11: VIR  
+11: ID, name = y 
 11: RPAR  
-11: LCHA  
-12: IF  
-12: LPAR  
-12: ID, name = a 
-12: LCOL  
-12: ID, name = i 
-12: RCOL  
-12: LT  
-12: ID, name = x 
-12: RPAR  
-12: LCHA  
-13: ID, name = x 
-13: ASSIGN  
-13: ID, name = a 
-13: LCOL  
-13: ID, name = i 
-13: RCOL  
-13: PV  
-14: ID, name = k 
-14: ASSIGN  
-14: ID, name = i 
-14: PV  
-15: RCHA  
-16: ID, name = i 
-16: ASSIGN  
-16: ID, name = i 
-16: PLUS  
-16: NUM, value = 1 
-16: PV  
-17: RCHA  
-18: RETURN  
-18: ID, name = k 
-18: PV  
-19: RCHA  
-21: VOID   
-21: ID, name = sort 
-21: LPAR  
-21: INT  
-21: ID, name = a 
-21: LCOL  
-21: RCOL  
-21: VIR  
-21: INT  
-21: ID, name = low 
-21: VIR  
-21: INT  
-21: ID, name = high 
-21: RPAR  
-22: LCHA  
-22: INT  
-22: ID, name = i 
-22: PV  
-22: INT  
-22: ID, name = k 
-22: PV  
-23: ID, name = i 
-23: ASSIGN  
-23: ID, name = low 
-23: PV  
-24: WHILE  
-24: LPAR  
-24: ID, name = i 
-24: LT  
-24: ID, name = high 
-24: SUB  
-24: NUM, value = 1 
-24: RPAR  
-24: LCHA  
-25: INT  
-25: ID, name = t 
-25: PV  
-26: ID, name = k 
-26: ASSIGN  
-26: ID, name = minloc 
-26: LPAR  
-26: ID, name = a 
-26: VIR  
-26: ID, name = i 
-26: VIR  
-26: ID, name = high 
-26: RPAR  
-26: PV  
-27: ID, name = t 
-27: ASSIGN  
-27: ID, name = a 
-27: LCOL  
-27: ID, name = k 
-27: RCOL  
-27: PV  
-28: ID, name = a 
-28: LCOL  
-28: ID, name = k 
-28: RCOL  
-28: ASSIGN  
-28: ID, name = a 
-28: LCOL  
-28: ID, name = i 
-28: RCOL  
-28: PV  
-29: ID, name = a 
-29: LCOL  
-29: ID, name = i 
-29: RCOL  
-29: ASSIGN  
-29: ID, name = t 
-29: PV  
-30: ID, name = i 
-30: ASSIGN  
-30: ID, name = i 
-30: PLUS  
-30: NUM, value = 1 
-30: PV  
-31: RCHA  
-32: RCHA  
-34: VOID   
-34: ID, name = main 
-34: LPAR  
-34: VOID   
-34: RPAR  
-35: LCHA  
-37: ID, name = vet 
-37: LCOL  
-37: NUM, value = 1 
-37: RCOL  
-37: ASSIGN  
-37: NUM, value = 3 
-37: PV  
-38: ID, name = vet 
-38: LCOL  
-38: NUM, value = 2 
-38: RCOL  
-38: ASSIGN  
-38: NUM, value = 2 
-38: PV  
-39: ID, name = vet 
-39: LCOL  
-39: NUM, value = 3 
-39: RCOL  
-39: ASSIGN  
-39: NUM, value = 1 
-39: PV  
-41: ID, name = sort 
-41: LPAR  
-41: ID, name = vet 
-41: VIR  
-41: NUM, value = 0 
-41: VIR  
-41: NUM, value = 3 
-41: RPAR  
-41: PV  
-43: ID, name = output 
-43: LPAR  
-43: ID, name = vet 
-43: LCOL  
-43: NUM, value = 1 
-43: RCOL  
-43: RPAR  
-43: PV  
-44: ID, name = output 
-44: LPAR  
-44: ID, name = vet 
-44: LCOL  
-44: NUM, value = 2 
-44: RCOL  
-44: RPAR  
-44: PV  
-45: ID, name = output 
-45: LPAR  
-45: ID, name = vet 
-45: LCOL  
-45: NUM, value = 3 
-45: RCOL  
-45: RPAR  
-45: PV  
-48: RCHA  
+11: RPAR  
+11: PV  
+12: RCHA  

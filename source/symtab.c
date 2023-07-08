@@ -288,7 +288,7 @@ void insert_node_symtab( TreeNode * t, char *scope ) {
                     printf("Erro semântico: chamada inválida de função: %s\n", t->attr.name);
                     exit(1);
                 } else {
-                    printf("Erro semântico: Variável não declarada\n");
+                    printf("Erro semântico: Variável não declarada %s\n", t->attr.name);
                     exit(1);
                 }
                 break;

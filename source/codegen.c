@@ -163,13 +163,16 @@ void generateStmt(TreeNode *tree){
         case IfK:
 
             codeGen(tree->child[0]);
-            contador_if++;
+            
             store = contador_if;
-            printf("(IFF, $t%d, L%d, -)\n", contador, contador_if);
+            contador_if++; 
+            store2 = contador_if;
+            contador_if++;
+            printf("(IFF, $t%d, L%d, -)\n", contador, store);
+            
             register_index(); 
             codeGen(tree->child[1]);
-            contador_if++;
-            store2 = contador_if;
+           
             printf("(GOTO, L%d, -, -)\n", store2);
             printf("(LAB, L%d, -, - )\n", store);
             codeGen(tree->child[2]);
@@ -208,11 +211,14 @@ void generateStmt(TreeNode *tree){
             break;
 
         case WhileK:
+
                 store = contador_if;
-                printf("(LAB, L%d, -, -)\n", store);
                 contador_if++;
                 store2 = contador_if;
                 contador_if++;
+
+                printf("(LAB, L%d, -, -)\n", store);
+                
                 codeGen(tree->child[0]);
                 printf("(IFF, $t%d, L%d, -)\n", contador, store2);
                 codeGen(tree->child[1]);

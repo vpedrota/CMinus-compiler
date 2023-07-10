@@ -34,7 +34,7 @@ void printOperation(FILE *output, int token){
          fprintf(output, "LT, ");  
          break;
       case GET: 
-         fprintf(output, "GT, ");  
+         fprintf(output, "GET, ");  
          break;
       case LET: 
          fprintf(output, "LET, ");  

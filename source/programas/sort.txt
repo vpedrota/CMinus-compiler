@@ -1,12 +1,21 @@
-int gcd (int u, int v)
-{       
-    if (v == 0) return u ;
-    else return gcd(v,u-u/v*v);
-    /* u-u/v*v == u mod v */
+int vetor[10];
+int vet[10];
+
+void fun(void){
+
 }
 
 void main(void)
-{   int x; int y;
-    x = 124; y = 8;
-    output(gcd(x,y));
+{
+	int i;
+    int x;
+    i = 0;
+	while(i > 10){
+        x = input();
+        output(x);
+        output(99);
+        i = i + 1;
+    }
 }
+
+			

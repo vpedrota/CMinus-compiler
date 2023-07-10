@@ -5,6 +5,8 @@
   Tipo void
     Funcao fun
       Tipo void
+      Tipo inteiro
+        Variavel a
   Tipo void
     Funcao main
       Tipo void

@@ -16,6 +16,9 @@
 4: VOID   
 4: RPAR  
 4: LCHA  
+5: INT  
+5: ID, name = a 
+5: PV  
 6: RCHA  
 8: VOID   
 8: ID, name = main 

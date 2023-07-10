@@ -21,7 +21,7 @@ tabela_simbolos['memory_position'] = 0
 escopos = tabela_simbolos['Escopo'].unique()
 
 for escopo in escopos:
-    mask = tabela_simbolos['Escopo'] == escopo
+    mask = (tabela_simbolos['Escopo'] == escopo) & (tabela_simbolos['Tipo'] != 'Função')
     tabela_simbolos.loc[mask, 'memory_position'] = tabela_simbolos.loc[mask, 'Tamanho'].replace('0', '1').astype(int).shift(fill_value=0).cumsum()+1
 
 # Colocando a posição nas funções para considerar o return address

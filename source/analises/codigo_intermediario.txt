@@ -1,6 +1,7 @@
 (ALLOC_VET, vetor, 10, global)
 (ALLOC_VET, vet, 10, global)
 (FUN, void, fun, -) 
+(ALLOC, a, fun, -)
 (END, fun, -, -)
 (FUN, void, main, -) 
 (ALLOC, i, main, -)

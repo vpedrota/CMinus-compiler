@@ -1,7 +1,8 @@
 ADDI $sz $sz 10
 ADDI $sz $sz 10
-JUMP 7
+JUMP 8
 SW $sp $ra 1
+ADDI $sz $sz 1
 ADDI $sz $sz 1
 LW $sp $ra 1
 JR $ra
@@ -25,5 +26,5 @@ LW $sp $t0 1
 ADDI $zero $t1 1
 PLUS $t0 $t1 $t2
 SW $sp $t2 1
-JUMP 13
+JUMP 14
 HALT

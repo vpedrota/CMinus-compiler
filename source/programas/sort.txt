@@ -1,21 +1,12 @@
-int vetor[10];
-int vet[10];
-
-void fun(void){
-    int a;
+int gcd (int u, int v)
+{
+    if (v == 0) return u ;
+    else return gcd(v,u-u/v*v);
 }
 
 void main(void)
-{
-	int i;
-    int x;
-    i = 0;
-	while(i > 10){
-        x = input();
-        output(x);
-        output(99);
-        i = i + 1;
-    }
+{    int x; int y;
+    x = input();
+    y = input();
+    output(gcd(x,y));
 }
-
-			

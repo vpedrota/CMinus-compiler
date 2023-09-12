@@ -1,0 +1,12 @@
+Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
+n,global,inteiro,Variável,0,1 32 34 
+main,global,void,Função,0,30 
+input,global,inteiro,Função,0,0 32 
+result,global,inteiro,Variável,0,2 34 35 
+output,global,inteiro,Função,0,0 35 
+fibonacci,global,inteiro,Função,0,4 34 
+a,fibonacci,inteiro,Variável,0,5 10 15 21 22 
+b,fibonacci,inteiro,Variável,0,6 11 17 21 22 23 27 
+i,fibonacci,inteiro,Variável,0,8 12 20 24 24 
+num,fibonacci,inteiro,Variável,0,4 14 16 20 
+next,fibonacci,inteiro,Variável,0,7 21 23 

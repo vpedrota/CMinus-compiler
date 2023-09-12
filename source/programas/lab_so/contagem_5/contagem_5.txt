@@ -1,0 +1,8 @@
+void main(void) {
+    int i;
+    i = 5;
+    while (i <= 100) {
+        output(i);
+        i = i + 5;
+    }
+}

@@ -1,0 +1,81 @@
+3: INT  
+3: ID, name = arr 
+3: LCOL  
+3: NUM, value = 10 
+3: RCOL  
+3: PV  
+4: INT  
+4: ID, name = quadrado 
+4: PV  
+6: VOID   
+6: ID, name = main 
+6: LPAR  
+6: VOID   
+6: RPAR  
+6: LCHA  
+7: INT  
+7: ID, name = i 
+7: PV  
+8: ID, name = i 
+8: ASSIGN  
+8: NUM, value = 0 
+8: PV  
+10: WHILE  
+10: LPAR  
+10: ID, name = i 
+10: LT  
+10: NUM, value = 10 
+10: RPAR  
+10: LCHA  
+11: ID, name = arr 
+11: LCOL  
+11: ID, name = i 
+11: RCOL  
+11: ASSIGN  
+11: ID, name = input 
+11: LPAR  
+11: RPAR  
+11: PV  
+12: ID, name = i 
+12: ASSIGN  
+12: ID, name = i 
+12: PLUS  
+12: NUM, value = 1 
+12: PV  
+13: RCHA  
+15: ID, name = i 
+15: ASSIGN  
+15: NUM, value = 0 
+15: PV  
+16: WHILE  
+16: LPAR  
+16: ID, name = i 
+16: LT  
+16: NUM, value = 10 
+16: RPAR  
+16: LCHA  
+17: ID, name = quadrado 
+17: ASSIGN  
+17: ID, name = arr 
+17: LCOL  
+17: ID, name = i 
+17: RCOL  
+17: MULT  
+17: ID, name = arr 
+17: LCOL  
+17: ID, name = i 
+17: RCOL  
+17: PV  
+18: ID, name = output 
+18: LPAR  
+18: ID, name = quadrado 
+18: RPAR  
+18: PV  
+19: ID, name = i 
+19: ASSIGN  
+19: ID, name = i 
+19: PLUS  
+19: NUM, value = 1 
+19: PV  
+20: RCHA  
+21: RCHA  

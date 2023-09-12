@@ -1,0 +1,46 @@
+  Tipo inteiro
+    Variavel num
+  Tipo inteiro
+    Variavel result
+  Tipo inteiro
+    Funcao factorial
+      Tipo inteiro
+        Variavel n
+      Tipo inteiro
+        Variavel res
+      Tipo inteiro
+        Variavel i
+      Atribuicao
+        Id: res
+        Const: 1
+      Atribuicao
+        Id: i
+        Const: 1
+      While
+        Op:  LT  
+          Id: i
+          Id: n
+        Atribuicao
+          Id: res
+          Op:  MULT  
+            Id: res
+            Id: i
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Id: res
+  Tipo void
+    Funcao main
+      Tipo void
+      Atribuicao
+        Id: num
+        Chamada de Funcao input 
+      Atribuicao
+        Id: result
+        Chamada de Funcao factorial 
+          Id: num
+      Chamada de Funcao output 
+        Id: result

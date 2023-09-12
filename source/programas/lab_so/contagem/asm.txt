@@ -1,0 +1,18 @@
+JUMP 1
+ADDI $sz $sz 1
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+ADDI $zero $t0 1
+SW $sp $t0 1
+LW $sp $t0 1
+ADDI $zero $t1 100
+LETEQUAL $t0 $t1 $t2
+IFF $t2 7
+LW $sp $t0 1
+OUTPUT $t0
+LW $sp $t0 1
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 1
+JUMP 6
+HALT

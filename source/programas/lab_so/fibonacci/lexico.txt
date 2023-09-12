@@ -1,0 +1,117 @@
+1: INT  
+1: ID, name = n 
+1: PV  
+2: INT  
+2: ID, name = result 
+2: PV  
+4: INT  
+4: ID, name = fibonacci 
+4: LPAR  
+4: INT  
+4: ID, name = num 
+4: RPAR  
+4: LCHA  
+5: INT  
+5: ID, name = a 
+5: PV  
+6: INT  
+6: ID, name = b 
+6: PV  
+7: INT  
+7: ID, name = next 
+7: PV  
+8: INT  
+8: ID, name = i 
+8: PV  
+10: ID, name = a 
+10: ASSIGN  
+10: NUM, value = 0 
+10: PV  
+11: ID, name = b 
+11: ASSIGN  
+11: NUM, value = 1 
+11: PV  
+12: ID, name = i 
+12: ASSIGN  
+12: NUM, value = 2 
+12: PV  
+14: IF  
+14: LPAR  
+14: ID, name = num 
+14: COMP  
+14: NUM, value = 0 
+14: RPAR  
+14: LCHA  
+15: RETURN  
+15: ID, name = a 
+15: PV  
+16: RCHA  
+16: ELSE  
+16: IF  
+16: LPAR  
+16: ID, name = num 
+16: COMP  
+16: NUM, value = 1 
+16: RPAR  
+16: LCHA  
+17: RETURN  
+17: ID, name = b 
+17: PV  
+18: RCHA  
+20: WHILE  
+20: LPAR  
+20: ID, name = i 
+20: LT  
+20: ID, name = num 
+20: RPAR  
+20: LCHA  
+21: ID, name = next 
+21: ASSIGN  
+21: ID, name = a 
+21: PLUS  
+21: ID, name = b 
+21: PV  
+22: ID, name = a 
+22: ASSIGN  
+22: ID, name = b 
+22: PV  
+23: ID, name = b 
+23: ASSIGN  
+23: ID, name = next 
+23: PV  
+24: ID, name = i 
+24: ASSIGN  
+24: ID, name = i 
+24: PLUS  
+24: NUM, value = 1 
+24: PV  
+25: RCHA  
+27: RETURN  
+27: ID, name = b 
+27: PV  
+28: RCHA  
+30: VOID   
+30: ID, name = main 
+30: LPAR  
+30: VOID   
+30: RPAR  
+30: LCHA  
+32: ID, name = n 
+32: ASSIGN  
+32: ID, name = input 
+32: LPAR  
+32: RPAR  
+32: PV  
+34: ID, name = result 
+34: ASSIGN  
+34: ID, name = fibonacci 
+34: LPAR  
+34: ID, name = n 
+34: RPAR  
+34: PV  
+35: ID, name = output 
+35: LPAR  
+35: ID, name = result 
+35: RPAR  
+35: PV  
+37: RCHA  

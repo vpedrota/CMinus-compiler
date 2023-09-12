@@ -1,0 +1,33 @@
+1: VOID   
+1: ID, name = main 
+1: LPAR  
+1: VOID   
+1: RPAR  
+1: LCHA  
+2: INT  
+2: ID, name = i 
+2: PV  
+3: ID, name = i 
+3: ASSIGN  
+3: NUM, value = 1 
+3: PV  
+5: WHILE  
+5: LPAR  
+5: ID, name = i 
+5: LT  
+5: NUM, value = 100 
+5: RPAR  
+5: LCHA  
+6: ID, name = output 
+6: LPAR  
+6: ID, name = i 
+6: RPAR  
+6: PV  
+7: ID, name = i 
+7: ASSIGN  
+7: ID, name = i 
+7: PLUS  
+7: NUM, value = 1 
+7: PV  
+8: RCHA  
+9: RCHA  

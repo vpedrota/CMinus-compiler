@@ -1,0 +1,176 @@
+ADDI $sz $sz 10
+JUMP 117
+SW $sp $ra 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+LW $sp $t0 6
+SW $sp $t0 4
+LW $sp $t0 6
+LW $sp $t1 2
+ADD $t0 $t1 $t0
+LW $t0 $t1 0
+SW $sp $t1 5
+LW $sp $t0 6
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 3
+LW $sp $t0 3
+LW $sp $t1 7
+LESSTHAN $t0 $t1 $t2
+IFF $t2 20
+LW $sp $t0 3
+LW $sp $t1 2
+ADD $t0 $t1 $t0
+LW $t0 $t1 0
+LW $sp $t0 5
+LESSTHAN $t1 $t0 $t2
+IFF $t2 8
+LW $sp $t0 3
+LW $sp $t1 2
+ADD $t0 $t1 $t0
+LW $t0 $t1 0
+SW $sp $t1 5
+LW $sp $t0 3
+SW $sp $t0 4
+JUMP 40
+LW $sp $t0 3
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 3
+JUMP 21
+LW $sp $t0 4
+ADDI $t0 $RR 0
+JUMP 48
+LW $sp $ra 1
+JR $ra
+SW $sp $ra 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+LW $sp $t0 6
+SW $sp $t0 3
+LW $sp $t0 3
+LW $sp $t1 7
+ADDI $zero $t2 1
+SUB $t1 $t2 $t3
+LESSTHAN $t0 $t3 $t1
+IFF $t1 50
+ADDI $sz $sz 1
+LW $sp $t0 2
+LW $sp $t1 3
+LW $sp $t2 7
+SW $sz $t0 0
+ADDI $sz $sz 1
+SW $sz $t1 0
+ADDI $sz $sz 1
+SW $sz $t2 0
+ADDI $sz $sz 1
+SW $sz $sp 0
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+SW $sp $t0 2
+SW $sp $t1 6
+SW $sp $t2 7
+JAL 2
+ADDI $sp $sz 0
+LW $sp $sp 0
+SUBI $sz $sz 1
+LW $sz $t2 0
+SUBI $sz $sz 1
+LW $sz $t1 0
+SUBI $sz $sz 1
+LW $sz $t0 0
+ADDI $RR $t0 0
+SW $sp $t0 4
+LW $sp $t0 4
+LW $sp $t1 2
+ADD $t0 $t1 $t0
+LW $t0 $t1 0
+SW $sp $t1 5
+LW $sp $t0 4
+LW $sp $t1 3
+LW $sp $t2 2
+ADD $t1 $t2 $t1
+LW $t1 $t2 0
+LW $sp $t1 2
+ADD $t1 $t0 $t0
+SW $t0 $t2 0
+LW $sp $t0 3
+LW $sp $t1 5
+LW $sp $t2 2
+ADD $t2 $t0 $t0
+SW $t0 $t1 0
+LW $sp $t0 3
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 3
+JUMP 59
+LW $sp $ra 1
+JR $ra
+ADDI $sz $sz 1
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+ADDI $zero $t0 0
+SW $sp $t0 1
+LW $sp $t0 1
+ADDI $zero $t1 10
+LESSTHAN $t0 $t1 $t2
+IFF $t2 9
+LW $sp $t0 1
+IN $t1
+ADD $zero $t0 $t0
+SW $t0 $t1 1
+LW $sp $t0 1
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 1
+JUMP 122
+ADDI $zero $t0 1
+ADDI $zero $t1 0
+ADDI $zero $t2 10
+SW $sz $t0 0
+ADDI $sz $sz 1
+SW $sz $t1 0
+ADDI $sz $sz 1
+SW $sz $t2 0
+ADDI $sz $sz 1
+SW $sz $sp 0
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+SW $sp $t0 2
+SW $sp $t1 6
+SW $sp $t2 7
+JAL 50
+ADDI $sp $sz 0
+LW $sp $sp 0
+SUBI $sz $sz 1
+LW $sz $t2 0
+SUBI $sz $sz 1
+LW $sz $t1 0
+SUBI $sz $sz 1
+LW $sz $t0 0
+ADDI $RR $t0 0
+ADDI $zero $t0 0
+SW $sp $t0 1
+LW $sp $t0 1
+ADDI $zero $t1 10
+LESSTHAN $t0 $t1 $t2
+IFF $t2 9
+LW $sp $t0 1
+ADD $zero $t0 $t0
+LW $t0 $t1 1
+OUTPUT $t1
+LW $sp $t0 1
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 1
+JUMP 162
+HALT

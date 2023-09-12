@@ -1,0 +1,21 @@
+/* programa para ler 10 numeros em um vetor e imprimir o quadrado de cada numero */
+
+int arr[10];
+int quadrado;
+
+void main(void) {
+    int i;
+    i = 0;
+
+    while (i < 10) {
+        arr[i] = input();
+        i = i + 1;
+    }
+
+    i = 0;
+    while (i < 10) {
+        quadrado = arr[i] * arr[i];
+        output(quadrado);
+        i = i + 1;
+    }
+}

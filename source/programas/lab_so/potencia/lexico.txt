@@ -1,0 +1,104 @@
+3: INT  
+3: ID, name = base 
+3: PV  
+4: INT  
+4: ID, name = exponent 
+4: PV  
+5: INT  
+5: ID, name = result 
+5: PV  
+7: INT  
+7: ID, name = power 
+7: LPAR  
+7: INT  
+7: ID, name = b 
+7: VIR  
+7: INT  
+7: ID, name = e 
+7: RPAR  
+7: LCHA  
+8: INT  
+8: ID, name = res 
+8: PV  
+9: INT  
+9: ID, name = i 
+9: PV  
+11: ID, name = res 
+11: ASSIGN  
+11: NUM, value = 1 
+11: PV  
+12: ID, name = i 
+12: ASSIGN  
+12: NUM, value = 0 
+12: PV  
+14: IF  
+14: LPAR  
+14: ID, name = e 
+14: LT  
+14: NUM, value = 0 
+14: RPAR  
+14: LCHA  
+15: RETURN  
+15: NUM, value = 0 
+15: PV  
+16: RCHA  
+18: WHILE  
+18: LPAR  
+18: ID, name = i 
+18: LT  
+18: ID, name = e 
+18: RPAR  
+18: LCHA  
+19: ID, name = res 
+19: ASSIGN  
+19: ID, name = res 
+19: MULT  
+19: ID, name = b 
+19: PV  
+20: ID, name = i 
+20: ASSIGN  
+20: ID, name = i 
+20: PLUS  
+20: NUM, value = 1 
+20: PV  
+21: RCHA  
+23: RETURN  
+23: ID, name = res 
+23: PV  
+24: RCHA  
+26: VOID   
+26: ID, name = main 
+26: LPAR  
+26: VOID   
+26: RPAR  
+26: LCHA  
+27: INT  
+27: ID, name = i 
+27: PV  
+28: ID, name = base 
+28: ASSIGN  
+28: ID, name = input 
+28: LPAR  
+28: RPAR  
+28: PV  
+30: ID, name = exponent 
+30: ASSIGN  
+30: ID, name = input 
+30: LPAR  
+30: RPAR  
+30: PV  
+32: ID, name = result 
+32: ASSIGN  
+32: ID, name = power 
+32: LPAR  
+32: ID, name = base 
+32: VIR  
+32: ID, name = exponent 
+32: RPAR  
+32: PV  
+33: ID, name = output 
+33: LPAR  
+33: ID, name = result 
+33: RPAR  
+33: PV  
+34: RCHA  

@@ -1,0 +1,62 @@
+  Tipo inteiro
+    Variavel base
+  Tipo inteiro
+    Variavel exponent
+  Tipo inteiro
+    Variavel result
+  Tipo inteiro
+    Funcao power
+      Tipo inteiro
+        Variavel b
+      Tipo inteiro
+        Variavel e
+      Tipo inteiro
+        Variavel res
+      Tipo inteiro
+        Variavel i
+      Atribuicao
+        Id: res
+        Const: 1
+      Atribuicao
+        Id: i
+        Const: 0
+      If
+        Op:  LT  
+          Id: e
+          Const: 0
+        Return
+          Const: 0
+      While
+        Op:  LT  
+          Id: i
+          Id: e
+        Atribuicao
+          Id: res
+          Op:  MULT  
+            Id: res
+            Id: b
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Id: res
+  Tipo void
+    Funcao main
+      Tipo void
+      Tipo inteiro
+        Variavel i
+      Atribuicao
+        Id: base
+        Chamada de Funcao input 
+      Atribuicao
+        Id: exponent
+        Chamada de Funcao input 
+      Atribuicao
+        Id: result
+        Chamada de Funcao power 
+          Id: base
+          Id: exponent
+      Chamada de Funcao output 
+        Id: result

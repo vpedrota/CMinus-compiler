@@ -1,0 +1,7 @@
+Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
+arr,global,inteiro,Vetor,10,1 9 16 
+main,global,void,Função,0,4 
+soma,global,inteiro,Variável,0,2 13 16 16 20 
+input,global,inteiro,Função,0,0 9 
+output,global,inteiro,Função,0,0 20 
+i,main,inteiro,Variável,0,5 6 8 9 10 10 14 15 16 17 17 

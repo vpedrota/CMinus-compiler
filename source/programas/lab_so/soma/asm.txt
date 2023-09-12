@@ -1,0 +1,43 @@
+ADDI $sz $sz 10
+ADDI $sz $sz 1
+JUMP 3
+ADDI $sz $sz 1
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+ADDI $zero $t0 0
+SW $sp $t0 1
+LW $sp $t0 1
+ADDI $zero $t1 10
+LESSTHAN $t0 $t1 $t2
+IFF $t2 9
+LW $sp $t0 1
+IN $t1
+ADD $zero $t0 $t0
+SW $t0 $t1 1
+LW $sp $t0 1
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 1
+JUMP 8
+ADDI $zero $t0 0
+SW $zero $t0 11
+ADDI $zero $t0 0
+SW $sp $t0 1
+LW $sp $t0 1
+ADDI $zero $t1 10
+LESSTHAN $t0 $t1 $t2
+IFF $t2 11
+LW $zero $t0 11
+LW $sp $t1 1
+ADD $zero $t1 $t1
+LW $t1 $t2 1
+PLUS $t0 $t2 $t1
+SW $zero $t1 11
+LW $sp $t0 1
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 1
+JUMP 25
+LW $zero $t0 11
+OUTPUT $t0
+HALT

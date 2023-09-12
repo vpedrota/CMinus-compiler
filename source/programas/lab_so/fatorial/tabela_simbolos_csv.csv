@@ -1,0 +1,10 @@
+Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
+num,global,inteiro,Variável,0,3 23 24 
+main,global,void,Função,0,21 
+input,global,inteiro,Função,0,0 23 
+result,global,inteiro,Variável,0,4 24 25 
+output,global,inteiro,Função,0,0 25 
+factorial,global,inteiro,Função,0,6 24 
+i,factorial,inteiro,Variável,0,8 11 13 14 15 15 
+n,factorial,inteiro,Variável,0,6 13 
+res,factorial,inteiro,Variável,0,7 10 14 14 18 

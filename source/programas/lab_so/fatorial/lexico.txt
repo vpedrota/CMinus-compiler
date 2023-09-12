@@ -1,0 +1,76 @@
+3: INT  
+3: ID, name = num 
+3: PV  
+4: INT  
+4: ID, name = result 
+4: PV  
+6: INT  
+6: ID, name = factorial 
+6: LPAR  
+6: INT  
+6: ID, name = n 
+6: RPAR  
+6: LCHA  
+7: INT  
+7: ID, name = res 
+7: PV  
+8: INT  
+8: ID, name = i 
+8: PV  
+10: ID, name = res 
+10: ASSIGN  
+10: NUM, value = 1 
+10: PV  
+11: ID, name = i 
+11: ASSIGN  
+11: NUM, value = 1 
+11: PV  
+13: WHILE  
+13: LPAR  
+13: ID, name = i 
+13: LT  
+13: ID, name = n 
+13: RPAR  
+13: LCHA  
+14: ID, name = res 
+14: ASSIGN  
+14: ID, name = res 
+14: MULT  
+14: ID, name = i 
+14: PV  
+15: ID, name = i 
+15: ASSIGN  
+15: ID, name = i 
+15: PLUS  
+15: NUM, value = 1 
+15: PV  
+16: RCHA  
+18: RETURN  
+18: ID, name = res 
+18: PV  
+19: RCHA  
+21: VOID   
+21: ID, name = main 
+21: LPAR  
+21: VOID   
+21: RPAR  
+21: LCHA  
+23: ID, name = num 
+23: ASSIGN  
+23: ID, name = input 
+23: LPAR  
+23: RPAR  
+23: PV  
+24: ID, name = result 
+24: ASSIGN  
+24: ID, name = factorial 
+24: LPAR  
+24: ID, name = num 
+24: RPAR  
+24: PV  
+25: ID, name = output 
+25: LPAR  
+25: ID, name = result 
+25: RPAR  
+25: PV  
+27: RCHA  

@@ -1,0 +1,70 @@
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+JUMP 40
+SW $sp $ra 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $sz $sz 1
+ADDI $zero $t0 1
+SW $sp $t0 5
+ADDI $zero $t0 0
+SW $sp $t0 4
+LW $sp $t0 3
+ADDI $zero $t1 0
+LESSTHAN $t0 $t1 $t2
+IFF $t2 4
+ADDI $zero $t0 0
+ADDI $t0 $RR 0
+JUMP 38
+JUMP 22
+LW $sp $t0 4
+LW $sp $t1 3
+LESSTHAN $t0 $t1 $t2
+IFF $t2 9
+LW $sp $t0 5
+LW $sp $t1 2
+MULT $t0 $t1 $t2
+SW $sp $t2 5
+LW $sp $t0 4
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 4
+JUMP 22
+LW $sp $t0 5
+ADDI $t0 $RR 0
+JUMP 38
+LW $sp $ra 1
+JR $ra
+ADDI $sz $sz 1
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+IN $t0
+SW $zero $t0 1
+IN $t0
+SW $zero $t0 3
+LW $zero $t0 1
+LW $zero $t1 3
+SW $sz $t0 0
+ADDI $sz $sz 1
+SW $sz $t1 0
+ADDI $sz $sz 1
+SW $sz $sp 0
+ADDI $sz $sp 0
+ADDI $sz $sz 1
+SW $sp $t0 2
+SW $sp $t1 3
+JAL 4
+ADDI $sp $sz 0
+LW $sp $sp 0
+SUBI $sz $sz 1
+LW $sz $t1 0
+SUBI $sz $sz 1
+LW $sz $t0 0
+ADDI $RR $t0 0
+SW $zero $t0 2
+LW $zero $t0 2
+OUTPUT $t0
+HALT

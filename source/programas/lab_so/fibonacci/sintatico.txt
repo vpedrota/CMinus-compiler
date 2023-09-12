@@ -1,0 +1,71 @@
+  Tipo inteiro
+    Variavel n
+  Tipo inteiro
+    Variavel result
+  Tipo inteiro
+    Funcao fibonacci
+      Tipo inteiro
+        Variavel num
+      Tipo inteiro
+        Variavel a
+      Tipo inteiro
+        Variavel b
+      Tipo inteiro
+        Variavel next
+      Tipo inteiro
+        Variavel i
+      Atribuicao
+        Id: a
+        Const: 0
+      Atribuicao
+        Id: b
+        Const: 1
+      Atribuicao
+        Id: i
+        Const: 2
+      If
+        Op:  unknown  
+          Id: num
+          Const: 0
+        Return
+          Id: a
+        If
+          Op:  unknown  
+            Id: num
+            Const: 1
+          Return
+            Id: b
+      While
+        Op:  LT  
+          Id: i
+          Id: num
+        Atribuicao
+          Id: next
+          Op:  PLUS  
+            Id: a
+            Id: b
+        Atribuicao
+          Id: a
+          Id: b
+        Atribuicao
+          Id: b
+          Id: next
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Id: b
+  Tipo void
+    Funcao main
+      Tipo void
+      Atribuicao
+        Id: n
+        Chamada de Funcao input 
+      Atribuicao
+        Id: result
+        Chamada de Funcao fibonacci 
+          Id: n
+      Chamada de Funcao output 
+        Id: result

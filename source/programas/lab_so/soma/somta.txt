@@ -1,0 +1,21 @@
+int arr[10];
+int soma;
+
+void main(void) {
+    int i;
+    i = 0;
+
+    while (i < 10) {
+        arr[i] = input();
+        i = i + 1;
+    }
+
+    soma = 0;
+    i = 0;
+    while (i < 10) {
+        soma = soma + arr[i];
+        i = i + 1;
+    }
+
+    output(soma);
+}

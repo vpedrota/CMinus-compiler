@@ -1,0 +1,82 @@
+1: INT  
+1: ID, name = arr 
+1: LCOL  
+1: NUM, value = 10 
+1: RCOL  
+1: PV  
+2: INT  
+2: ID, name = soma 
+2: PV  
+4: VOID   
+4: ID, name = main 
+4: LPAR  
+4: VOID   
+4: RPAR  
+4: LCHA  
+5: INT  
+5: ID, name = i 
+5: PV  
+6: ID, name = i 
+6: ASSIGN  
+6: NUM, value = 0 
+6: PV  
+8: WHILE  
+8: LPAR  
+8: ID, name = i 
+8: LT  
+8: NUM, value = 10 
+8: RPAR  
+8: LCHA  
+9: ID, name = arr 
+9: LCOL  
+9: ID, name = i 
+9: RCOL  
+9: ASSIGN  
+9: ID, name = input 
+9: LPAR  
+9: RPAR  
+9: PV  
+10: ID, name = i 
+10: ASSIGN  
+10: ID, name = i 
+10: PLUS  
+10: NUM, value = 1 
+10: PV  
+11: RCHA  
+13: ID, name = soma 
+13: ASSIGN  
+13: NUM, value = 0 
+13: PV  
+14: ID, name = i 
+14: ASSIGN  
+14: NUM, value = 0 
+14: PV  
+15: WHILE  
+15: LPAR  
+15: ID, name = i 
+15: LT  
+15: NUM, value = 10 
+15: RPAR  
+15: LCHA  
+16: ID, name = soma 
+16: ASSIGN  
+16: ID, name = soma 
+16: PLUS  
+16: ID, name = arr 
+16: LCOL  
+16: ID, name = i 
+16: RCOL  
+16: PV  
+17: ID, name = i 
+17: ASSIGN  
+17: ID, name = i 
+17: PLUS  
+17: NUM, value = 1 
+17: PV  
+18: RCHA  
+20: ID, name = output 
+20: LPAR  
+20: ID, name = soma 
+20: RPAR  
+20: PV  
+21: RCHA  

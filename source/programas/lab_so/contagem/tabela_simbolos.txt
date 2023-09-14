@@ -2,13 +2,15 @@
 | Nome                 | Escopo               | Tipo                 | Tipo                 | Ocorrências         | 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
 | main                 | global               | void                 | Função             |1 
-| input                | global               | inteiro              | Função             |0 
-| output               | global               | inteiro              | Função             |0 6 
+| input                | global               | inteiro              | Função             |0 9 
+| output               | global               | inteiro              | Função             |0 11 
 
 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
 | Nome                 | Escopo               | Tipo                 | Tipo                 | Ocorrências         | 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
-| i                    | main                 | inteiro              | Variável            |2 3 5 6 7 7 
+| i                    | main                 | inteiro              | Variável            |2 6 8 12 12 
+| entrada              | main                 | inteiro              | Variável            |4 9 10 
+| produto              | main                 | inteiro              | Variável            |3 5 10 10 11 
 
 

@@ -1,9 +1,14 @@
 void main(void) {
     int i;
+    int produto;
+    int entrada;
+    produto = 1;
     i = 1;
 
-    while (i <= 100) {
-        output(i);
+    while (i <= 10) {
+        entrada = input();
+        produto = produto * entrada;
+        output(produto);
         i = i + 1;
     }
 }

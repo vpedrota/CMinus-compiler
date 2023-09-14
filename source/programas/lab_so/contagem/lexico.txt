@@ -7,27 +7,49 @@
 2: INT  
 2: ID, name = i 
 2: PV  
-3: ID, name = i 
-3: ASSIGN  
-3: NUM, value = 1 
+3: INT  
+3: ID, name = produto 
 3: PV  
-5: WHILE  
-5: LPAR  
-5: ID, name = i 
-5: LT  
-5: NUM, value = 100 
-5: RPAR  
-5: LCHA  
-6: ID, name = output 
-6: LPAR  
+4: INT  
+4: ID, name = entrada 
+4: PV  
+5: ID, name = produto 
+5: ASSIGN  
+5: NUM, value = 1 
+5: PV  
 6: ID, name = i 
-6: RPAR  
+6: ASSIGN  
+6: NUM, value = 1 
 6: PV  
-7: ID, name = i 
-7: ASSIGN  
-7: ID, name = i 
-7: PLUS  
-7: NUM, value = 1 
-7: PV  
-8: RCHA  
-9: RCHA  
+8: WHILE  
+8: LPAR  
+8: ID, name = i 
+8: LT  
+8: NUM, value = 10 
+8: RPAR  
+8: LCHA  
+9: ID, name = entrada 
+9: ASSIGN  
+9: ID, name = input 
+9: LPAR  
+9: RPAR  
+9: PV  
+10: ID, name = produto 
+10: ASSIGN  
+10: ID, name = produto 
+10: MULT  
+10: ID, name = entrada 
+10: PV  
+11: ID, name = output 
+11: LPAR  
+11: ID, name = produto 
+11: RPAR  
+11: PV  
+12: ID, name = i 
+12: ASSIGN  
+12: ID, name = i 
+12: PLUS  
+12: NUM, value = 1 
+12: PV  
+13: RCHA  
+14: RCHA  

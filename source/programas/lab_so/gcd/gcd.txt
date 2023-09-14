@@ -5,8 +5,9 @@ int gcd (int u, int v)
 }
 
 void main(void)
-{    int x; int y;
+{    int x; int y; int result;
     x = input();
     y = input();
-    output(gcd(x,y));
+    result = gcd(x,y);
+    output(result);
 }

@@ -1,21 +1,23 @@
-int arr[10];
-int soma;
 
 void main(void) {
-    int i;
+
+	int arr[4];
+    int i ;
+	int soma;
     i = 0;
 
-    while (i < 10) {
+    while (i < 4) {
         arr[i] = input();
         i = i + 1;
     }
 
-    soma = 0;
     i = 0;
-    while (i < 10) {
+	soma = 0;
+
+    while (i < 4) {
         soma = soma + arr[i];
         i = i + 1;
     }
 
-    output(soma);
+	output(soma);
 }

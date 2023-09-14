@@ -1,16 +1,16 @@
 +---------------------+---------------------+---------------------+---------------------+---------------------+
 | Nome                 | Escopo               | Tipo                 | Tipo                 | Ocorrências         | 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
-| arr                  | global               | inteiro              | Variável            |1 9 16 
-| main                 | global               | void                 | Função             |4 
-| soma                 | global               | inteiro              | Variável            |2 13 16 16 20 
-| input                | global               | inteiro              | Função             |0 9 
-| output               | global               | inteiro              | Função             |0 20 
+| main                 | global               | void                 | Função             |2 
+| input                | global               | inteiro              | Função             |0 10 
+| output               | global               | inteiro              | Função             |0 22 
 
 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
 | Nome                 | Escopo               | Tipo                 | Tipo                 | Ocorrências         | 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
-| i                    | main                 | inteiro              | Variável            |5 6 8 9 10 10 14 15 16 17 17 
+| i                    | main                 | inteiro              | Variável            |5 7 9 10 11 11 14 17 18 19 19 
+| arr                  | main                 | inteiro              | Variável            |4 10 18 
+| soma                 | main                 | inteiro              | Variável            |6 15 18 18 22 
 
 

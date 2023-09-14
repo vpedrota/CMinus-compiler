@@ -44,6 +44,7 @@ ADDI $sz $sz 1
 ADDI $sz $sp 0
 ADDI $sz $sz 1
 ADDI $sz $sz 1
+ADDI $sz $sz 1
 IN $t0
 SW $sp $t0 1
 IN $t0
@@ -67,5 +68,7 @@ LW $sz $t1 0
 SUBI $sz $sz 1
 LW $sz $t0 0
 ADDI $RR $t0 0
+SW $sp $t0 3
+LW $sp $t0 3
 OUTPUT $t0
 HALT

@@ -74,9 +74,10 @@ extern int yydebug;
     RCOL = 280,
     LCHA = 281,
     RCHA = 282,
-    ID = 283,
-    NUM = 284,
-    ERR = 285
+    RESTO = 283,
+    ID = 284,
+    NUM = 285,
+    ERR = 286
   };
 #endif
 

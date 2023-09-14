@@ -1,69 +1,71 @@
-1: INT  
-1: ID, name = arr 
-1: LCOL  
-1: NUM, value = 10 
-1: RCOL  
-1: PV  
 3: VOID   
 3: ID, name = main 
 3: LPAR  
 3: VOID   
 3: RPAR  
 3: LCHA  
-4: INT  
-4: ID, name = i 
-4: PV  
-5: ID, name = i 
-5: ASSIGN  
-5: NUM, value = 0 
+5: INT  
+5: ID, name = arr 
+5: LCOL  
+5: NUM, value = 5 
+5: RCOL  
 5: PV  
-7: WHILE  
-7: LPAR  
+6: INT  
+6: ID, name = i 
+6: PV  
 7: ID, name = i 
-7: LT  
-7: NUM, value = 10 
-7: RPAR  
-7: LCHA  
-8: ID, name = arr 
-8: LCOL  
-8: ID, name = i 
-8: RCOL  
-8: ASSIGN  
-8: ID, name = input 
-8: LPAR  
-8: RPAR  
-8: PV  
+7: ASSIGN  
+7: NUM, value = 0 
+7: PV  
+9: WHILE  
+9: LPAR  
 9: ID, name = i 
-9: ASSIGN  
-9: ID, name = i 
-9: PLUS  
-9: NUM, value = 1 
-9: PV  
-10: RCHA  
-12: ID, name = i 
-12: ASSIGN  
-12: NUM, value = 0 
-12: PV  
-13: WHILE  
-13: LPAR  
-13: ID, name = i 
-13: LT  
-13: NUM, value = 10 
-13: RPAR  
-13: LCHA  
-14: ID, name = output 
-14: LPAR  
-14: ID, name = arr 
-14: LCOL  
+9: LT  
+9: NUM, value = 5 
+9: RPAR  
+9: LCHA  
+10: ID, name = arr 
+10: LCOL  
+10: ID, name = i 
+10: RCOL  
+10: ASSIGN  
+10: ID, name = input 
+10: LPAR  
+10: RPAR  
+10: PV  
+11: ID, name = i 
+11: ASSIGN  
+11: ID, name = i 
+11: PLUS  
+11: NUM, value = 1 
+11: PV  
+12: RCHA  
 14: ID, name = i 
-14: RCOL  
-14: RPAR  
+14: ASSIGN  
+14: NUM, value = 0 
 14: PV  
+15: WHILE  
+15: LPAR  
 15: ID, name = i 
-15: ASSIGN  
-15: ID, name = i 
-15: PLUS  
-15: NUM, value = 1 
-15: PV  
-16: RCHA  
-17: RCHA  
+15: LT  
+15: NUM, value = 5 
+15: RPAR  
+15: LCHA  
+16: ID, name = output 
+16: LPAR  
+16: ID, name = arr 
+16: LCOL  
+16: NUM, value = 4 
+16: SUB  
+16: ID, name = i 
+16: RCOL  
+16: RPAR  
+16: PV  
+17: ID, name = i 
+17: ASSIGN  
+17: ID, name = i 
+17: PLUS  
+17: NUM, value = 1 
+17: PV  
+18: RCHA  
+19: RCHA  

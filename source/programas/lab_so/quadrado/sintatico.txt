@@ -1,10 +1,10 @@
-  Tipo inteiro
-    Variavel arr
-  Tipo inteiro
-    Variavel quadrado
   Tipo void
     Funcao main
       Tipo void
+      Tipo inteiro
+        Variavel arr
+      Tipo inteiro
+        Variavel quadrado
       Tipo inteiro
         Variavel i
       Atribuicao
@@ -13,7 +13,7 @@
       While
         Op:  LT  
           Id: i
-          Const: 10
+          Const: 5
         Atribuicao
           Vetor: arr
             Id: i
@@ -29,7 +29,7 @@
       While
         Op:  LT  
           Id: i
-          Const: 10
+          Const: 5
         Atribuicao
           Id: quadrado
           Op:  MULT  

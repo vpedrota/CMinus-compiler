@@ -1,17 +1,19 @@
-int arr[10];
+
 
 void main(void) {
+    
+    int arr[5];
     int i ;
     i = 0;
 
-    while (i < 10) {
+    while (i < 5) {
         arr[i] = input();
         i = i + 1;
     }
 
     i = 0;
-    while (i < 10) {
-        output(arr[i]);
+    while (i < 5) {
+        output(arr[4 - i]);
         i = i + 1;
     }
 }

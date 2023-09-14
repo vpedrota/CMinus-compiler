@@ -1,19 +1,19 @@
-  Tipo inteiro
-    Variavel arr
-  Tipo inteiro
-    Variavel soma
   Tipo void
     Funcao main
       Tipo void
       Tipo inteiro
+        Variavel arr
+      Tipo inteiro
         Variavel i
+      Tipo inteiro
+        Variavel soma
       Atribuicao
         Id: i
         Const: 0
       While
         Op:  LT  
           Id: i
-          Const: 10
+          Const: 4
         Atribuicao
           Vetor: arr
             Id: i
@@ -24,15 +24,15 @@
             Id: i
             Const: 1
       Atribuicao
-        Id: soma
+        Id: i
         Const: 0
       Atribuicao
-        Id: i
+        Id: soma
         Const: 0
       While
         Op:  LT  
           Id: i
-          Const: 10
+          Const: 4
         Atribuicao
           Id: soma
           Op:  PLUS  

@@ -17,7 +17,7 @@ static int savedLineNo;
 %token ASSIGN ELSE IF INT RETURN VOID WHILE
 
 // Simbolos especiais
-%token PLUS SUB MULT DIV LT LET GT GET COMP DIF PV VIR LPAR RPAR LCOL RCOL LCHA RCHA
+%token PLUS SUB MULT DIV LT LET GT GET COMP DIF PV VIR LPAR RPAR LCOL RCOL LCHA RCHA RESTO
 
 // Marcadores
 %token ID NUM
@@ -369,7 +369,7 @@ mult : MULT
       {
         $$ = newExpNode(OpK);
         $$->attr.op = DIV; 
-      }
+      } 
      ;
 fator : LPAR expressao RPAR 
       {

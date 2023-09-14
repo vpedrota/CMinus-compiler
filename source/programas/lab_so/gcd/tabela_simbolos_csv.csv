@@ -2,8 +2,9 @@ Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
 gcd,global,inteiro,Função,0,1 4 11 
 main,global,void,Função,0,7 
 input,global,inteiro,Função,0,0 9 10 
-output,global,inteiro,Função,0,0 11 
+output,global,inteiro,Função,0,0 12 
 u,gcd,inteiro,Variável,0,1 3 4 4 
 v,gcd,inteiro,Variável,0,1 3 4 4 4 
 x,main,inteiro,Variável,0,8 9 11 
 y,main,inteiro,Variável,0,8 10 11 
+result,main,inteiro,Variável,0,8 11 12 

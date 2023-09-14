@@ -1,82 +1,82 @@
-1: INT  
-1: ID, name = arr 
-1: LCOL  
-1: NUM, value = 10 
-1: RCOL  
-1: PV  
-2: INT  
-2: ID, name = soma 
-2: PV  
-4: VOID   
-4: ID, name = main 
-4: LPAR  
-4: VOID   
-4: RPAR  
-4: LCHA  
+2: VOID   
+2: ID, name = main 
+2: LPAR  
+2: VOID   
+2: RPAR  
+2: LCHA  
+4: INT  
+4: ID, name = arr 
+4: LCOL  
+4: NUM, value = 4 
+4: RCOL  
+4: PV  
 5: INT  
 5: ID, name = i 
 5: PV  
-6: ID, name = i 
-6: ASSIGN  
-6: NUM, value = 0 
+6: INT  
+6: ID, name = soma 
 6: PV  
-8: WHILE  
-8: LPAR  
-8: ID, name = i 
-8: LT  
-8: NUM, value = 10 
-8: RPAR  
-8: LCHA  
-9: ID, name = arr 
-9: LCOL  
-9: ID, name = i 
-9: RCOL  
-9: ASSIGN  
-9: ID, name = input 
+7: ID, name = i 
+7: ASSIGN  
+7: NUM, value = 0 
+7: PV  
+9: WHILE  
 9: LPAR  
+9: ID, name = i 
+9: LT  
+9: NUM, value = 4 
 9: RPAR  
-9: PV  
+9: LCHA  
+10: ID, name = arr 
+10: LCOL  
 10: ID, name = i 
+10: RCOL  
 10: ASSIGN  
-10: ID, name = i 
-10: PLUS  
-10: NUM, value = 1 
+10: ID, name = input 
+10: LPAR  
+10: RPAR  
 10: PV  
-11: RCHA  
-13: ID, name = soma 
-13: ASSIGN  
-13: NUM, value = 0 
-13: PV  
+11: ID, name = i 
+11: ASSIGN  
+11: ID, name = i 
+11: PLUS  
+11: NUM, value = 1 
+11: PV  
+12: RCHA  
 14: ID, name = i 
 14: ASSIGN  
 14: NUM, value = 0 
 14: PV  
-15: WHILE  
-15: LPAR  
-15: ID, name = i 
-15: LT  
-15: NUM, value = 10 
-15: RPAR  
-15: LCHA  
-16: ID, name = soma 
-16: ASSIGN  
-16: ID, name = soma 
-16: PLUS  
-16: ID, name = arr 
-16: LCOL  
-16: ID, name = i 
-16: RCOL  
-16: PV  
+15: ID, name = soma 
+15: ASSIGN  
+15: NUM, value = 0 
+15: PV  
+17: WHILE  
+17: LPAR  
 17: ID, name = i 
-17: ASSIGN  
-17: ID, name = i 
-17: PLUS  
-17: NUM, value = 1 
-17: PV  
-18: RCHA  
-20: ID, name = output 
-20: LPAR  
-20: ID, name = soma 
-20: RPAR  
-20: PV  
-21: RCHA  
+17: LT  
+17: NUM, value = 4 
+17: RPAR  
+17: LCHA  
+18: ID, name = soma 
+18: ASSIGN  
+18: ID, name = soma 
+18: PLUS  
+18: ID, name = arr 
+18: LCOL  
+18: ID, name = i 
+18: RCOL  
+18: PV  
+19: ID, name = i 
+19: ASSIGN  
+19: ID, name = i 
+19: PLUS  
+19: NUM, value = 1 
+19: PV  
+20: RCHA  
+22: ID, name = output 
+22: LPAR  
+22: ID, name = soma 
+22: RPAR  
+22: PV  
+23: RCHA  

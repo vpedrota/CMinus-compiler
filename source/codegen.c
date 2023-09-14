@@ -45,6 +45,10 @@ void printOperation(FILE *output, int token){
       case COMP: 
          fprintf(output, "COMP, ");  
          break;
+
+     case RESTO: 
+        fprintf(output, "RESTO, ");  
+        break;
       default:
          fprintf(output, " unknown ");  
    }
@@ -189,16 +193,18 @@ void generateStmt(TreeNode *tree){
             break;
             
         case AssignK:
-        
+            
+           
+            registrador_retorno = 0; 
+            codeGen(tree->child[1]);
+            reg2 = contador; 
+            
             if(tree->child[0]->kind.exp == VetK){
                 codeGen(tree->child[0]->child[0]);
             }
-
-            //codeGen(tree->child[0]);   
+          
+   
             reg1 = contador;
-            registrador_retorno = 0; 
-            codeGen(tree->child[1]);
-            reg2 = contador;
 
             if(tree->child[0]->kind.exp == VetK){
                 printf("(STOREVAR_VETOR, $t%d, %s, $t%d)\n", reg2, tree->child[0]->attr.name, reg1);

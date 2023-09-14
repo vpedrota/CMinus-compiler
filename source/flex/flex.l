@@ -17,6 +17,7 @@ whitespace  [ \t]+
 "*" {return MULT;}
 "/" {return DIV;}
 "=" {return ASSIGN;}
+"%" {return RESTO;}
 ";" {return PV;}
 "," {return VIR;}
 "void" {return VOID;}
@@ -137,6 +138,10 @@ void printToken(FILE *output, int token, char *tokenString){
          break;
       case VOID: 
          fprintf(output, "%d: VOID   \n", lineno);  
+         break;
+
+      case RESTO: 
+         fprintf(output, "%d: RESTO   \n", lineno);  
          break;
       case LPAR: 
          fprintf(output, "%d: LPAR  \n", lineno);  

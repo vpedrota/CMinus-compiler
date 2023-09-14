@@ -4,7 +4,7 @@
 | gcd                  | global               | inteiro              | Função             |1 4 11 
 | main                 | global               | void                 | Função             |7 
 | input                | global               | inteiro              | Função             |0 9 10 
-| output               | global               | inteiro              | Função             |0 11 
+| output               | global               | inteiro              | Função             |0 12 
 
 
 +---------------------+---------------------+---------------------+---------------------+---------------------+
@@ -19,5 +19,6 @@
 +---------------------+---------------------+---------------------+---------------------+---------------------+
 | x                    | main                 | inteiro              | Variável            |8 9 11 
 | y                    | main                 | inteiro              | Variável            |8 10 11 
+| result               | main                 | inteiro              | Variável            |8 11 12 
 
 

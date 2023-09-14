@@ -193,6 +193,7 @@ def asm_to_binary(assembly_instructions):
         "SUBI": "101010",
         "MULT": "000000",
         "DIV": "000000",
+        "RESTO": "000000",
         "COMP": "000000",
         "SUB": "000000",
         "JAL": "000011",
@@ -254,7 +255,8 @@ def asm_to_binary(assembly_instructions):
         "LETEQUAL ": "100110",
         "LESSTHAN ": "101010",
         "GT": "111111",
-        "GET":"111110"
+        "GET":"111110",
+        "RESTO":  "100111"
     }
 
     operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI"]
@@ -424,7 +426,7 @@ for quads_index, quad in enumerate(quads):
         registrador = return_register_position(registradores, quad[1])
         assembly.append("ADDI {} {} {}\n".format("$zero", registrador, imediato))
         
-    elif verificar_igualdade(quad[0], ["PLUS", "DIV", "MULT", "SUB", "COMP", "LET", "LET", "LT", "GT", "GET"]):
+    elif verificar_igualdade(quad[0], ["RESTO", "PLUS", "DIV", "MULT", "SUB", "COMP", "LET", "LET", "LT", "GT", "GET"]):
         
         registrador1 = return_register_position(registradores, quad[1])    
         registrador2 = return_register_position(registradores, quad[2])

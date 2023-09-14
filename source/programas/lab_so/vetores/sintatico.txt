@@ -1,8 +1,8 @@
-  Tipo inteiro
-    Variavel arr
   Tipo void
     Funcao main
       Tipo void
+      Tipo inteiro
+        Variavel arr
       Tipo inteiro
         Variavel i
       Atribuicao
@@ -11,7 +11,7 @@
       While
         Op:  LT  
           Id: i
-          Const: 10
+          Const: 5
         Atribuicao
           Vetor: arr
             Id: i
@@ -27,10 +27,12 @@
       While
         Op:  LT  
           Id: i
-          Const: 10
+          Const: 5
         Chamada de Funcao output 
           Vetor: arr
-            Id: i
+            Op:  SUB  
+              Const: 4
+              Id: i
         Atribuicao
           Id: i
           Op:  PLUS  

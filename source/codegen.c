@@ -155,6 +155,18 @@ void generateStmt(TreeNode *tree){
                 return;
             }
 
+            if(strcmp(tree->attr.name, "set_quantum_value") == 0){
+                register_index();
+                printf("(CALL, $t%d, %s, 1)\n", contador, tree->attr.name);
+                return;
+            }
+
+             if(strcmp(tree->attr.name, "change_context") == 0){
+                register_index();
+                printf("(CALL, $t%d, %s, 1)\n", contador, tree->attr.name);
+                return;
+            }
+
             register_index();
             registrador_retorno = contador;
 

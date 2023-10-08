@@ -198,6 +198,8 @@ def asm_to_binary(assembly_instructions):
         "SUB": "000000",
         "JAL": "000011",
         "OUTPUT": "101110",
+        "CHANGE_CONTEXT": "110011",
+        "SET_QUANTUM_VALUE": "101111",
         "IN": "111110",
         "JR": "001111", 
         "ADD ": "000000",
@@ -261,7 +263,7 @@ def asm_to_binary(assembly_instructions):
 
     operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI"]
         
-    operations_26bits_imediate = ["IN", "OUTPUT", "JR"]
+    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT"]
 
 
     for instruction in assembly_instructions:
@@ -484,6 +486,18 @@ for quads_index, quad in enumerate(quads):
         elif quad[2].strip() == "output":
             registrador = return_register_position(registradores, registradores_parametros[0])
             assembly.append("OUTPUT {}\n".format(registrador))
+            liberar_registrador(registradores,  registradores_parametros[0])
+            registradores_parametros = []
+
+        elif quad[2].strip() == "set_quantum_value":
+            registrador = return_register_position(registradores, registradores_parametros[0])
+            assembly.append("SET_QUANTUM_VALUE {}\n".format(registrador))
+            liberar_registrador(registradores,  registradores_parametros[0])
+            registradores_parametros = []
+
+        elif quad[2].strip() == "change_context":
+            registrador = return_register_position(registradores, registradores_parametros[0])
+            assembly.append("CHANGE_CONTEXT {}\n".format(registrador))
             liberar_registrador(registradores,  registradores_parametros[0])
             registradores_parametros = []
         

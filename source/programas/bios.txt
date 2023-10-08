@@ -1,0 +1,27 @@
+
+int files[10];
+int file_start[10];
+int file_end[10];
+
+void main(void){
+
+    /*
+        Declarando variáveis
+    */
+
+    int i;
+
+    /* 
+        Iniciando parâmetros do processador
+    */ 
+    set_quantum_value(4);
+
+
+    /*
+        Começando preempção
+    */
+    
+    while(i){
+        change_context(2);
+    }
+}

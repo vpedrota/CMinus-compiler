@@ -6,7 +6,7 @@ make
 # Verifica se a compilação foi bem-sucedida
 if [ $? -eq 0 ]; then
     # Executa o executável passando o caminho do arquivo de entrada
-    ./cminus programas/lab_so/contagem/contagem.txt
+    ./cminus programas/bios.txt
 else
     echo "A compilação falhou."
 fi

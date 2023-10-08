@@ -343,7 +343,12 @@ void buildSymtab(TreeNode *root){
 
     t.attr.name = "output";
     insert_node_symtab(&t, "global");
+
+    t.attr.name = "set_quantum_value";
+    insert_node_symtab(&t, "global");
     
+    t.attr.name = "change_context";
+    insert_node_symtab(&t, "global");
     // Percorrendo e inserindo símbolos na árvore
     transverse(root);
 

@@ -1,0 +1,13 @@
+  Tipo inteiro
+    Variavel files
+  Tipo inteiro
+    Variavel file_start
+  Tipo inteiro
+    Variavel file_end
+  Tipo void
+    Funcao main
+      Tipo void
+      Chamada de Funcao set_quantum_value 
+        Const: 4
+      Chamada de Funcao change_context 
+        Const: 2

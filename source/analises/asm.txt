@@ -1,0 +1,11 @@
+ADDI $sz $sz 10
+ADDI $sz $sz 10
+ADDI $sz $sz 10
+JUMP 4
+ADDI $sz $sz 1
+ADDI $sz $sp 0
+ADDI $zero $t0 4
+SET_QUANTUM_VALUE $t0
+ADDI $zero $t0 2
+CHANGE_CONTEXT $t0
+HALT

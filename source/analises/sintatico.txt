@@ -1,13 +1,43 @@
   Tipo inteiro
-    Variavel files
-  Tipo inteiro
-    Variavel file_start
-  Tipo inteiro
-    Variavel file_end
+    Variavel pc_processes
   Tipo void
     Funcao main
       Tipo void
+      Tipo inteiro
+        Variavel i
+      Atribuicao
+        Vetor: pc_processes
+          Const: 0
+        Const: 200
+      Atribuicao
+        Vetor: pc_processes
+          Const: 1
+        Const: 240
       Chamada de Funcao set_quantum_value 
         Const: 4
-      Chamada de Funcao change_context 
-        Const: 2
+      Atribuicao
+        Id: i
+        Const: 0
+      While
+        Op:  unknown  
+          Const: 1
+          Const: 1
+        While
+          Op:  LT  
+            Id: i
+            Const: 2
+          Chamada de Funcao change_context 
+            Vetor: pc_processes
+              Id: i
+          Atribuicao
+            Vetor: pc_processes
+              Id: i
+            Chamada de Funcao PC_INTERRUPTION 
+          Atribuicao
+            Id: i
+            Op:  PLUS  
+              Id: i
+              Const: 1
+        Atribuicao
+          Id: i
+          Const: 0

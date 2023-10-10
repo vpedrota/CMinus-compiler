@@ -1,35 +1,82 @@
 2: INT  
-2: ID, name = files 
+2: ID, name = pc_processes 
 2: LCOL  
 2: NUM, value = 10 
 2: RCOL  
 2: PV  
-3: INT  
-3: ID, name = file_start 
-3: LCOL  
-3: NUM, value = 10 
-3: RCOL  
-3: PV  
-4: INT  
-4: ID, name = file_end 
-4: LCOL  
-4: NUM, value = 10 
-4: RCOL  
-4: PV  
-6: VOID   
-6: ID, name = main 
-6: LPAR  
-6: VOID   
-6: RPAR  
-6: LCHA  
-11: ID, name = set_quantum_value 
-11: LPAR  
-11: NUM, value = 4 
-11: RPAR  
+4: VOID   
+4: ID, name = main 
+4: LPAR  
+4: VOID   
+4: RPAR  
+4: LCHA  
+11: INT  
+11: ID, name = i 
 11: PV  
-12: ID, name = change_context 
-12: LPAR  
-12: NUM, value = 2 
-12: RPAR  
-12: PV  
-13: RCHA  
+17: ID, name = pc_processes 
+17: LCOL  
+17: NUM, value = 0 
+17: RCOL  
+17: ASSIGN  
+17: NUM, value = 200 
+17: PV  
+18: ID, name = pc_processes 
+18: LCOL  
+18: NUM, value = 1 
+18: RCOL  
+18: ASSIGN  
+18: NUM, value = 240 
+18: PV  
+23: ID, name = set_quantum_value 
+23: LPAR  
+23: NUM, value = 4 
+23: RPAR  
+23: PV  
+30: ID, name = i 
+30: ASSIGN  
+30: NUM, value = 0 
+30: PV  
+31: WHILE  
+31: LPAR  
+31: NUM, value = 1 
+31: COMP  
+31: NUM, value = 1 
+31: RPAR  
+31: LCHA  
+33: WHILE  
+33: LPAR  
+33: ID, name = i 
+33: LT  
+33: NUM, value = 2 
+33: RPAR  
+33: LCHA  
+34: ID, name = change_context 
+34: LPAR  
+34: ID, name = pc_processes 
+34: LCOL  
+34: ID, name = i 
+34: RCOL  
+34: RPAR  
+34: PV  
+35: ID, name = pc_processes 
+35: LCOL  
+35: ID, name = i 
+35: RCOL  
+35: ASSIGN  
+35: ID, name = PC_INTERRUPTION 
+35: LPAR  
+35: RPAR  
+35: PV  
+36: ID, name = i 
+36: ASSIGN  
+36: ID, name = i 
+36: PLUS  
+36: NUM, value = 1 
+36: PV  
+37: RCHA  
+39: ID, name = i 
+39: ASSIGN  
+39: NUM, value = 0 
+39: PV  
+40: RCHA  
+42: RCHA  

@@ -201,6 +201,7 @@ def asm_to_binary(assembly_instructions):
         "CHANGE_CONTEXT": "110011",
         "SET_QUANTUM_VALUE": "101111",
         "IN": "111110",
+        "LAST_PC": "110110",
         "JR": "001111", 
         "ADD ": "000000",
         "PLUS ": "000000",
@@ -263,7 +264,7 @@ def asm_to_binary(assembly_instructions):
 
     operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI"]
         
-    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT"]
+    operations_26bits_imediate = ["IN","LAST_PC", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT"]
 
 
     for instruction in assembly_instructions:
@@ -481,6 +482,10 @@ for quads_index, quad in enumerate(quads):
         if quad[2].strip() == "input":
             registrador = return_register_position(registradores, quad[1])
             assembly.append("IN {}\n".format(registrador))
+
+        elif quad[2].strip() == "PC_INTERRUPTION":
+            registrador = return_register_position(registradores, quad[1])
+            assembly.append("LAST_PC {}\n".format(registrador))
             
 
         elif quad[2].strip() == "output":

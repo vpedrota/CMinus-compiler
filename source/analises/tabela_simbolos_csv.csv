@@ -1,9 +1,9 @@
 Nome,Escopo,Tipo_var,Tipo,Tamanho,Ocorrências
-file_start,global,inteiro,Vetor,10,3 
-main,global,void,Função,0,6 
-change_context,global,inteiro,Função,0,0 12 
-files,global,inteiro,Vetor,10,2 
+PC_INTERRUPTION,global,inteiro,Função,0,0 35 
+pc_processes,global,inteiro,Vetor,10,2 17 18 34 35 
+main,global,void,Função,0,4 
+change_context,global,inteiro,Função,0,0 34 
 input,global,inteiro,Função,0,0 
 output,global,inteiro,Função,0,0 
-file_end,global,inteiro,Vetor,10,4 
-set_quantum_value,global,inteiro,Função,0,0 11 
+set_quantum_value,global,inteiro,Função,0,0 23 
+i,main,inteiro,Variável,0,11 30 33 34 35 36 36 39 

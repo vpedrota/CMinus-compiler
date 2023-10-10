@@ -346,6 +346,9 @@ void buildSymtab(TreeNode *root){
 
     t.attr.name = "set_quantum_value";
     insert_node_symtab(&t, "global");
+
+    t.attr.name = "PC_INTERRUPTION";
+    insert_node_symtab(&t, "global");
     
     t.attr.name = "change_context";
     insert_node_symtab(&t, "global");

@@ -1,15 +1,21 @@
 
-int files[10];
-int file_start[10];
-int file_end[10];
+int pc_processes[10];
 
 void main(void){
+
 
     /*
         Declarando variáveis
     */
 
     int i;
+
+    /*
+        Determinando início de cada processo
+    */
+    
+    pc_processes[0] = 200;
+    pc_processes[1] = 240;
 
     /* 
         Iniciando parâmetros do processador
@@ -20,8 +26,17 @@ void main(void){
     /*
         Começando preempção
     */
-    
-    while(i){
-        change_context(2);
+
+    i = 0;
+    while(1 == 1){
+
+        while(i < 2){
+            change_context(pc_processes[i]);
+            pc_processes[i] = PC_INTERRUPTION();
+            i = i + 1;
+        }
+
+        i = 0;
     }
+        
 }

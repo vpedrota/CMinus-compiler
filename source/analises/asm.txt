@@ -18,25 +18,93 @@ SW $sp $t0 1
 ADDI $zero $t0 1
 ADDI $zero $t1 1
 COMP $t0 $t1 $t2
-IFF $t2 20
+IFF $t2 88
 LW $sp $t0 1
 ADDI $zero $t1 2
 LESSTHAN $t0 $t1 $t2
-IFF $t2 13
-LW $sp $t0 1
-ADD $zero $t0 $t0
-LW $t0 $t1 1
-CHANGE_CONTEXT $t1
-LAST_PC $t0
-LW $sp $t1 1
-ADD $zero $t1 $t1
-SW $t1 $t0 1
-LW $sp $t0 1
-ADDI $zero $t1 1
-PLUS $t0 $t1 $t2
-SW $sp $t2 1
-JUMP 21
+IFF $t2 81
 ADDI $zero $t0 0
-SW $sp $t0 1
+SW $t0 $sz 0
+SW $t1 $sz 1
+SW $t2 $sz 2
+SW $t3 $sz 3
+SW $t4 $sz 4
+SW $t5 $sz 5
+SW $t6 $sz 6
+SW $t7 $sz 7
+SW $t8 $sz 8
+SW $t9 $sz 9
+SW $t10 $sz 10
+SW $t11 $sz 11
+SW $t12 $sz 12
+SW $t13 $sz 13
+SW $t14 $sz 14
+SW $t15 $sz 15
+SW $t16 $sz 16
+SW $t17 $sz 17
+SW $t18 $sz 18
+SW $t19 $sz 19
+SW $t20 $sz 20
+SW $t21 $sz 21
+SW $t22 $sz 22
+SW $t23 $sz 23
+SW $t24 $sz 24
+SW $t25 $sz 25
+SW $sz $sz 26
+SW $sp $sz 27
+SW $ra $sz 28
+SW $zero $sz 29
+SW $RR $sz 30
+LW $sp $t1 1
+COPY_TO_BANK $t2
+LW $sp $t2 1
+ADD $zero $t2 $t2
+LW $t2 $t3 1
+CHANGE_CONTEXT $t0
+LW $sp $t0 1
+SW $t0 $sz 0
+SW $t1 $sz 1
+SW $t2 $sz 2
+SW $t3 $sz 3
+SW $t4 $sz 4
+SW $t5 $sz 5
+SW $t6 $sz 6
+SW $t7 $sz 7
+SW $t8 $sz 8
+SW $t9 $sz 9
+SW $t10 $sz 10
+SW $t11 $sz 11
+SW $t12 $sz 12
+SW $t13 $sz 13
+SW $t14 $sz 14
+SW $t15 $sz 15
+SW $t16 $sz 16
+SW $t17 $sz 17
+SW $t18 $sz 18
+SW $t19 $sz 19
+SW $t20 $sz 20
+SW $t21 $sz 21
+SW $t22 $sz 22
+SW $t23 $sz 23
+SW $t24 $sz 24
+SW $t25 $sz 25
+SW $sz $sz 26
+SW $sp $sz 27
+SW $ra $sz 28
+SW $zero $sz 29
+SW $RR $sz 30
+ADDI $zero $t2 0
+COPY_TO_BANK $t4
+LAST_PC $t4
+LW $sp $t5 1
+ADD $zero $t5 $t5
+SW $t5 $t4 1
+LW $sp $t4 1
+ADDI $zero $t5 1
+PLUS $t4 $t5 $t6
+SW $sp $t6 1
+JUMP 21
+ADDI $zero $t4 0
+SW $sp $t4 1
 JUMP 17
 HALT

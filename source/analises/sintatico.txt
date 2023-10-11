@@ -26,9 +26,17 @@
           Op:  LT  
             Id: i
             Const: 2
+          Chamada de Funcao copy_registers_to_ram 
+            Const: 0
+          Chamada de Funcao copy_registers_to_bank 
+            Id: i
           Chamada de Funcao change_context 
             Vetor: pc_processes
               Id: i
+          Chamada de Funcao copy_registers_to_ram 
+            Id: i
+          Chamada de Funcao copy_registers_to_bank 
+            Const: 0
           Atribuicao
             Vetor: pc_processes
               Id: i

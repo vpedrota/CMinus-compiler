@@ -50,33 +50,53 @@
 33: NUM, value = 2 
 33: RPAR  
 33: LCHA  
-34: ID, name = change_context 
-34: LPAR  
-34: ID, name = pc_processes 
-34: LCOL  
-34: ID, name = i 
-34: RCOL  
-34: RPAR  
-34: PV  
-35: ID, name = pc_processes 
-35: LCOL  
-35: ID, name = i 
-35: RCOL  
-35: ASSIGN  
-35: ID, name = PC_INTERRUPTION 
+35: ID, name = copy_registers_to_ram 
 35: LPAR  
+35: NUM, value = 0 
 35: RPAR  
 35: PV  
+36: ID, name = copy_registers_to_bank 
+36: LPAR  
 36: ID, name = i 
-36: ASSIGN  
-36: ID, name = i 
-36: PLUS  
-36: NUM, value = 1 
+36: RPAR  
 36: PV  
-37: RCHA  
-39: ID, name = i 
-39: ASSIGN  
+37: ID, name = change_context 
+37: LPAR  
+37: ID, name = pc_processes 
+37: LCOL  
+37: ID, name = i 
+37: RCOL  
+37: RPAR  
+37: PV  
+38: ID, name = copy_registers_to_ram 
+38: LPAR  
+38: ID, name = i 
+38: RPAR  
+38: PV  
+39: ID, name = copy_registers_to_bank 
+39: LPAR  
 39: NUM, value = 0 
+39: RPAR  
 39: PV  
-40: RCHA  
-42: RCHA  
+40: ID, name = pc_processes 
+40: LCOL  
+40: ID, name = i 
+40: RCOL  
+40: ASSIGN  
+40: ID, name = PC_INTERRUPTION 
+40: LPAR  
+40: RPAR  
+40: PV  
+46: ID, name = i 
+46: ASSIGN  
+46: ID, name = i 
+46: PLUS  
+46: NUM, value = 1 
+46: PV  
+47: RCHA  
+49: ID, name = i 
+49: ASSIGN  
+49: NUM, value = 0 
+49: PV  
+50: RCHA  
+52: RCHA  

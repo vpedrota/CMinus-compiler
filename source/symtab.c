@@ -352,6 +352,14 @@ void buildSymtab(TreeNode *root){
     
     t.attr.name = "change_context";
     insert_node_symtab(&t, "global");
+
+    t.attr.name = "copy_registers_to_bank";
+    insert_node_symtab(&t, "global");
+
+    t.attr.name = "copy_registers_to_ram";
+    insert_node_symtab(&t, "global");
+
+
     // Percorrendo e inserindo símbolos na árvore
     transverse(root);
 

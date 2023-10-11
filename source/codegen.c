@@ -149,6 +149,19 @@ void generateStmt(TreeNode *tree){
                 return;
             }
 
+            if(strcmp(tree->attr.name, "copy_registers_to_bank") == 0){
+                register_index();
+                printf("(CALL, $t%d, %s, 0)\n", contador, tree->attr.name);
+                return;
+            }
+
+            if(strcmp(tree->attr.name, "copy_registers_to_ram") == 0){
+                register_index();
+                printf("(CALL, $t%d, %s, 0)\n", contador, tree->attr.name);
+                return;
+            }
+
+
             if(strcmp(tree->attr.name, "PC_INTERRUPTION") == 0){
                 register_index();
                 printf("(CALL, $t%d, %s, 0)\n", contador, tree->attr.name);

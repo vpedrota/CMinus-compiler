@@ -31,8 +31,18 @@ void main(void){
     while(1 == 1){
 
         while(i < 2){
+            
+            copy_registers_to_ram(0);
+            copy_registers_to_bank(i);
             change_context(pc_processes[i]);
+            copy_registers_to_ram(i);
+            copy_registers_to_bank(0);
             pc_processes[i] = PC_INTERRUPTION();
+
+            /*
+                Verificar interrupção
+            */
+
             i = i + 1;
         }
 

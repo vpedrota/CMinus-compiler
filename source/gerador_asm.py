@@ -335,6 +335,41 @@ registradores_parametros = []
 # flag para jump para main
 jump_main = True
 
+registers = {
+        '$t0': '00000',
+        '$t1': '00001',
+        '$t2': '00010',
+        '$t3': '00011',
+        '$t4': '00100',
+        '$t5': '00101',
+        '$t6': '00110',
+        '$t7': '00111',
+        '$t8': '01000',
+        '$t9': '01001',
+        '$t10': '01010',
+        '$t11': '01011',
+        '$t12': '01100',
+        '$t13': '01101',
+        '$t14': '01110',
+        '$t15': '01111',
+        '$t16': '10000',
+        '$t17': '10001',
+        '$t18': '10010',
+        '$t19': '10011',
+        '$t20': '10100',
+        '$t21': '10101',
+        '$t22': '10110',
+        '$t23': '10111',
+        '$t24': '11000',
+        '$t24': '11000',
+        '$t25': '11001',
+        '$sz': '11110', 
+        '$sp': '11101', 
+        '$ra' :'11111',
+        '$zero': '11011',
+        '$RR' : '11100'
+    }
+
 for quads_index, quad in enumerate(quads):
     
     # Retirando caracteres indesejados e pegando os itens da quad
@@ -482,6 +517,18 @@ for quads_index, quad in enumerate(quads):
         if quad[2].strip() == "input":
             registrador = return_register_position(registradores, quad[1])
             assembly.append("IN {}\n".format(registrador))
+
+        elif quad[2].strip() == "copy_registers_to_bank":
+            registrador = return_register_position(registradores, quad[1])
+            assembly.append("COPY_TO_BANK {}\n".format(registrador))
+
+        elif quad[2].strip() == "copy_registers_to_ram":
+            registrador = return_register_position(registradores, quad[1])
+            # assembly.append("COPY_FROM_RAM {}\n".format(registrador))
+
+            for indice_registrador, valor in enumerate(registers.keys()):
+                assembly.append("SW {} {} {}\n".format(valor, "$sz", indice_registrador))
+
 
         elif quad[2].strip() == "PC_INTERRUPTION":
             registrador = return_register_position(registradores, quad[1])

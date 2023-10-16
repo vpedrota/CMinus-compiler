@@ -1,8 +1,10 @@
 
-int pc_processes[10];
+
 
 void main(void){
 
+    int pc_processes[10];
+    int stack_size_processes[10];
 
     /*
         Declarando variáveis
@@ -14,8 +16,11 @@ void main(void){
         Determinando início de cada processo
     */
     
-    pc_processes[0] = 200;
-    pc_processes[1] = 240;
+    pc_processes[0] = 740;
+    pc_processes[1] = 780;
+
+    stack_size_processes[0] = 0;
+    stack_size_processes[1] = 0;
 
     /* 
         Iniciando parâmetros do processador
@@ -32,12 +37,11 @@ void main(void){
 
         while(i < 2){
             
-            copy_registers_to_ram(0);
-            copy_registers_to_bank(i);
-            change_context(pc_processes[i]);
-            copy_registers_to_ram(i);
-            copy_registers_to_bank(0);
+            change_context(pc_processes[i], stack_size_processes[i],  i+1);
+            copy_registers_to_ram();
+            set_hd_track(0);
             pc_processes[i] = PC_INTERRUPTION();
+            stack_size_processes[i] = STACK_SIZE();
 
             /*
                 Verificar interrupção

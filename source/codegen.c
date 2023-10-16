@@ -8,6 +8,8 @@ int contador_if = 0;
 int contador_while = 0;
 int registrador_retorno = 0;
 
+int calls_param_change_context = 0;
+
 int register_index(){
     contador = (contador);
     return ++contador;
@@ -121,8 +123,13 @@ void generateStmt(TreeNode *tree){
                 if(aux->nodekind == ExpK) {
 
                     if(aux->kind.exp == IdK){
+
                         register_index();
+
+                       
                         printf("(PARAM_ID, %s, %s, $t%d)\n", aux->attr.name, tree->attr.name, contador);
+                        
+                       
                         aux = aux->sibling;
                         quant_param++;
                         continue;
@@ -137,7 +144,24 @@ void generateStmt(TreeNode *tree){
                    
                     generateStmt(aux);
                 }
-                printf("(PARAM, $t%d, %s, -)\n", contador, tree->attr.name);
+
+                
+                
+                // if(strcmp(tree->attr.name, "change_context") == 0 && calls_param_change_context == 0){
+                //     int a = contador;
+                //     register_index();
+                //     printf("(LOAD_IMEDIATE, $t%d, 0, -)\n", contador);
+                //     printf("(PLUS, $context_register, $t%d, $t%d)\n", a, contador);
+                //     printf("(PARAM, $context_register, %s, -)\n", tree->attr.name);
+                //     calls_param_change_context++;
+
+                    
+                // }else{
+                    printf("(PARAM, $t%d, %s, -)\n", contador, tree->attr.name);
+                //     calls_param_change_context = 0;
+                // }
+
+                
                 aux = aux->sibling;
                 quant_param++;
             }
@@ -161,8 +185,20 @@ void generateStmt(TreeNode *tree){
                 return;
             }
 
+             if(strcmp(tree->attr.name, "set_hd_track") == 0){
+                register_index();
+                printf("(CALL, $t%d, %s, 0)\n", contador, tree->attr.name);
+                return;
+            }
+
 
             if(strcmp(tree->attr.name, "PC_INTERRUPTION") == 0){
+                register_index();
+                printf("(CALL, $t%d, %s, 0)\n", contador, tree->attr.name);
+                return;
+            }
+
+            if(strcmp(tree->attr.name, "STACK_SIZE") == 0){
                 register_index();
                 printf("(CALL, $t%d, %s, 0)\n", contador, tree->attr.name);
                 return;
@@ -180,9 +216,9 @@ void generateStmt(TreeNode *tree){
                 return;
             }
 
-             if(strcmp(tree->attr.name, "change_context") == 0){
+            if(strcmp(tree->attr.name, "change_context") == 0){
                 register_index();
-                printf("(CALL, $t%d, %s, 1)\n", contador, tree->attr.name);
+                printf("(CALL, $t%d, %s, 2)\n", contador, tree->attr.name);
                 return;
             }
 

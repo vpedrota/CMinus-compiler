@@ -1,18 +1,28 @@
-  Tipo inteiro
-    Variavel pc_processes
   Tipo void
     Funcao main
       Tipo void
+      Tipo inteiro
+        Variavel pc_processes
+      Tipo inteiro
+        Variavel stack_size_processes
       Tipo inteiro
         Variavel i
       Atribuicao
         Vetor: pc_processes
           Const: 0
-        Const: 200
+        Const: 740
       Atribuicao
         Vetor: pc_processes
           Const: 1
-        Const: 240
+        Const: 780
+      Atribuicao
+        Vetor: stack_size_processes
+          Const: 0
+        Const: 0
+      Atribuicao
+        Vetor: stack_size_processes
+          Const: 1
+        Const: 0
       Chamada de Funcao set_quantum_value 
         Const: 4
       Atribuicao
@@ -26,21 +36,25 @@
           Op:  LT  
             Id: i
             Const: 2
-          Chamada de Funcao copy_registers_to_ram 
-            Const: 0
-          Chamada de Funcao copy_registers_to_bank 
-            Id: i
           Chamada de Funcao change_context 
             Vetor: pc_processes
               Id: i
+            Vetor: stack_size_processes
+              Id: i
+            Op:  PLUS  
+              Id: i
+              Const: 1
           Chamada de Funcao copy_registers_to_ram 
-            Id: i
-          Chamada de Funcao copy_registers_to_bank 
+          Chamada de Funcao set_hd_track 
             Const: 0
           Atribuicao
             Vetor: pc_processes
               Id: i
             Chamada de Funcao PC_INTERRUPTION 
+          Atribuicao
+            Vetor: stack_size_processes
+              Id: i
+            Chamada de Funcao STACK_SIZE 
           Atribuicao
             Id: i
             Op:  PLUS  

@@ -69,7 +69,9 @@ def search_string_in_assembly(string, quads, pos):
 # Função que retorna o próximo registardor livre
 def return_register_position(registradores,registrador):
 
-    registrador = registrador
+
+    if("$context_register" in registrador):
+        return "$context_register"
 
     for i, valor in enumerate(registradores):
         if registrador == valor:
@@ -198,6 +200,8 @@ def asm_to_binary(assembly_instructions):
         "SUB": "000000",
         "JAL": "000011",
         "OUTPUT": "101110",
+        "SET_HD_TRACK": "110010",
+        "STACK_SIZE": "011001",
         "CHANGE_CONTEXT": "110011",
         "SET_QUANTUM_VALUE": "101111",
         "IN": "111110",
@@ -246,6 +250,7 @@ def asm_to_binary(assembly_instructions):
         '$ra' :'11111',
         '$zero': '11011',
         '$RR' : '11100'
+        
     }
 
     funct = {
@@ -264,7 +269,7 @@ def asm_to_binary(assembly_instructions):
 
     operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI"]
         
-    operations_26bits_imediate = ["IN","LAST_PC", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT"]
+    operations_26bits_imediate = ["IN","LAST_PC", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE", "SET_HD_TRACK"]
 
 
     for instruction in assembly_instructions:
@@ -275,6 +280,8 @@ def asm_to_binary(assembly_instructions):
     
         for reg, address in reversed(registers.items()):
             final_binary = final_binary.replace(reg, address)
+
+        final_binary = final_binary.replace("$context_register", "11010")
 
         parts = final_binary.split()
 
@@ -327,7 +334,7 @@ assembly = []
 escopo_atual = "global" 
 
 # registradores que estão em uso
-registradores = [''] * 24
+registradores = [''] * 12
 
 # lista que terá os parêmetros de uma função
 registradores_parametros = []
@@ -335,6 +342,7 @@ registradores_parametros = []
 # flag para jump para main
 jump_main = True
 
+# Registradores para processos
 registers = {
         '$t0': '00000',
         '$t1': '00001',
@@ -349,26 +357,29 @@ registers = {
         '$t10': '01010',
         '$t11': '01011',
         '$t12': '01100',
-        '$t13': '01101',
-        '$t14': '01110',
-        '$t15': '01111',
-        '$t16': '10000',
-        '$t17': '10001',
-        '$t18': '10010',
-        '$t19': '10011',
-        '$t20': '10100',
-        '$t21': '10101',
-        '$t22': '10110',
-        '$t23': '10111',
-        '$t24': '11000',
-        '$t24': '11000',
-        '$t25': '11001',
         '$sz': '11110', 
         '$sp': '11101', 
         '$ra' :'11111',
         '$zero': '11011',
         '$RR' : '11100'
     }
+
+register_process = {
+    '$t13': '01101',
+    '$t14': '01110',
+    '$t15': '01111',
+    '$t16': '10000',
+    '$t17': '10001',
+    '$t18': '10010',
+    '$t19': '10011',
+    '$t20': '10100',
+    '$t21': '10101',
+    '$t22': '10110',
+    '$t23': '10111',
+    '$t24': '11000',
+    '$t24': '11000',
+    '$t25': '11001',
+}
 
 for quads_index, quad in enumerate(quads):
     
@@ -518,27 +529,44 @@ for quads_index, quad in enumerate(quads):
             registrador = return_register_position(registradores, quad[1])
             assembly.append("IN {}\n".format(registrador))
 
-        elif quad[2].strip() == "copy_registers_to_bank":
-            registrador = return_register_position(registradores, quad[1])
-            assembly.append("COPY_TO_BANK {}\n".format(registrador))
-
-        elif quad[2].strip() == "copy_registers_to_ram":
-            registrador = return_register_position(registradores, quad[1])
-            # assembly.append("COPY_FROM_RAM {}\n".format(registrador))
-
-            for indice_registrador, valor in enumerate(registers.keys()):
-                assembly.append("SW {} {} {}\n".format(valor, "$sz", indice_registrador))
-
-
         elif quad[2].strip() == "PC_INTERRUPTION":
             registrador = return_register_position(registradores, quad[1])
             assembly.append("LAST_PC {}\n".format(registrador))
+
+        elif quad[2].strip() == "STACK_SIZE":
+            registrador = return_register_position(registradores, quad[1])
+            #assembly.append("STACK_SIZE {}\n".format(registrador))
+            assembly.append("ADD $zero {} $t{}\n".format(registrador, 25))
+
             
 
         elif quad[2].strip() == "output":
             registrador = return_register_position(registradores, registradores_parametros[0])
             assembly.append("OUTPUT {}\n".format(registrador))
             liberar_registrador(registradores,  registradores_parametros[0])
+            registradores_parametros = []
+
+        elif quad[2].strip() == "set_hd_track":
+            registrador = return_register_position(registradores, registradores_parametros[0])
+            assembly.append("SET_HD_TRACK {}\n".format(registrador))
+            liberar_registrador(registradores,  registradores_parametros[0])
+            registradores_parametros = []
+
+        elif quad[2].strip() == "copy_registers_to_bank":
+            registrador = return_register_position(registradores, registradores_parametros[0])
+            
+            for indice_registrador, valor in enumerate(register_process.keys()):
+                assembly.append("LW {} {} {}\n".format(valor, registrador, indice_registrador))
+            
+            liberar_registrador(registradores,  registradores_parametros[0])
+            registradores_parametros = []
+
+        elif quad[2].strip() == "copy_registers_to_ram":
+            registrador = return_register_position(registradores, quad[1])
+
+            for indice_registrador, valor in enumerate(register_process.keys()):
+                assembly.append("SW {} {} {}\n".format(valor, "$t25", indice_registrador))
+
             registradores_parametros = []
 
         elif quad[2].strip() == "set_quantum_value":
@@ -548,8 +576,21 @@ for quads_index, quad in enumerate(quads):
             registradores_parametros = []
 
         elif quad[2].strip() == "change_context":
+
             registrador = return_register_position(registradores, registradores_parametros[0])
+            registrador2 = return_register_position(registradores, registradores_parametros[1])
+            registrador3 =  return_register_position(registradores, registradores_parametros[2])
+
+
+
+            assembly.append("SET_HD_TRACK {}\n".format(registrador3))
+
+
+            for indice_registrador, valor in enumerate(register_process.keys()):
+                assembly.append("LW {} {} {}\n".format(valor, registrador2, indice_registrador))
+        
             assembly.append("CHANGE_CONTEXT {}\n".format(registrador))
+                
             liberar_registrador(registradores,  registradores_parametros[0])
             registradores_parametros = []
         

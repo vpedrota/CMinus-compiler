@@ -349,6 +349,9 @@ void buildSymtab(TreeNode *root){
 
     t.attr.name = "PC_INTERRUPTION";
     insert_node_symtab(&t, "global");
+
+    t.attr.name = "STACK_SIZE";
+    insert_node_symtab(&t, "global");
     
     t.attr.name = "change_context";
     insert_node_symtab(&t, "global");
@@ -357,6 +360,9 @@ void buildSymtab(TreeNode *root){
     insert_node_symtab(&t, "global");
 
     t.attr.name = "copy_registers_to_ram";
+    insert_node_symtab(&t, "global");
+
+    t.attr.name = "set_hd_track";
     insert_node_symtab(&t, "global");
 
 

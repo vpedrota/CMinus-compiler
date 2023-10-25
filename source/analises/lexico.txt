@@ -24,14 +24,14 @@
 19: NUM, value = 0 
 19: RCOL  
 19: ASSIGN  
-19: NUM, value = 740 
+19: NUM, value = 376 
 19: PV  
 20: ID, name = pc_processes 
 20: LCOL  
 20: NUM, value = 1 
 20: RCOL  
 20: ASSIGN  
-20: NUM, value = 780 
+20: NUM, value = 460 
 20: PV  
 22: ID, name = stack_size_processes 
 22: LCOL  

@@ -281,7 +281,8 @@ def asm_to_binary(assembly_instructions):
         for reg, address in reversed(registers.items()):
             final_binary = final_binary.replace(reg, address)
 
-        final_binary = final_binary.replace("$context_register", "11010")
+        #final_binary = final_binary.replace("$context_register", "11010")
+        final_binary = final_binary.replace("$stack_size", "11010")
 
         parts = final_binary.split()
 
@@ -379,6 +380,7 @@ register_process = {
     '$t24': '11000',
     '$t24': '11000',
     '$t25': '11001',
+    '$stack_size': '11010'
 }
 
 for quads_index, quad in enumerate(quads):
@@ -536,7 +538,7 @@ for quads_index, quad in enumerate(quads):
         elif quad[2].strip() == "STACK_SIZE":
             registrador = return_register_position(registradores, quad[1])
             #assembly.append("STACK_SIZE {}\n".format(registrador))
-            assembly.append("ADD $zero {} $t{}\n".format(registrador, 25))
+            assembly.append("ADD $zero  $stack_size {}\n".format(registrador))
 
             
 
@@ -565,7 +567,7 @@ for quads_index, quad in enumerate(quads):
             registrador = return_register_position(registradores, quad[1])
 
             for indice_registrador, valor in enumerate(register_process.keys()):
-                assembly.append("SW {} {} {}\n".format(valor, "$t25", indice_registrador))
+                assembly.append("SW {} {} {}\n".format( "$stack_size", valor, indice_registrador))
 
             registradores_parametros = []
 
@@ -581,13 +583,10 @@ for quads_index, quad in enumerate(quads):
             registrador2 = return_register_position(registradores, registradores_parametros[1])
             registrador3 =  return_register_position(registradores, registradores_parametros[2])
 
-
-
             assembly.append("SET_HD_TRACK {}\n".format(registrador3))
 
-
             for indice_registrador, valor in enumerate(register_process.keys()):
-                assembly.append("LW {} {} {}\n".format(valor, registrador2, indice_registrador))
+                assembly.append("LW {} {} {}\n".format(registrador2, valor, indice_registrador))
         
             assembly.append("CHANGE_CONTEXT {}\n".format(registrador))
                 

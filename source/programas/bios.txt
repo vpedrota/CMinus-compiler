@@ -16,8 +16,8 @@ void main(void){
         Determinando início de cada processo
     */
     
-    pc_processes[0] = 740;
-    pc_processes[1] = 780;
+    pc_processes[0] = 376;
+    pc_processes[1] = 460;
 
     stack_size_processes[0] = 0;
     stack_size_processes[1] = 0;

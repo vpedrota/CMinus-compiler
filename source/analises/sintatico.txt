@@ -10,11 +10,11 @@
       Atribuicao
         Vetor: pc_processes
           Const: 0
-        Const: 740
+        Const: 376
       Atribuicao
         Vetor: pc_processes
           Const: 1
-        Const: 780
+        Const: 460
       Atribuicao
         Vetor: stack_size_processes
           Const: 0

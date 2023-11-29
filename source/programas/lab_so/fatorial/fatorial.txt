@@ -1,8 +1,5 @@
 /* programa para calcular o fatorial de um numero */
 
-int num;
-int result;
-
 int factorial(int n) {
     int res;
     int i;
@@ -19,8 +16,11 @@ int factorial(int n) {
 }
 
 void main(void) {
+
+    int num;
+    int result;
   
-    num = input();
+    num = 4;
     result = factorial(num);
     output(result);
     

@@ -4,96 +4,83 @@
 4: VOID   
 4: RPAR  
 4: LCHA  
-6: INT  
-6: ID, name = pc_processes 
-6: LCOL  
-6: NUM, value = 10 
-6: RCOL  
-6: PV  
-7: INT  
-7: ID, name = stack_size_processes 
-7: LCOL  
-7: NUM, value = 10 
-7: RCOL  
-7: PV  
-13: INT  
-13: ID, name = i 
-13: PV  
-19: ID, name = pc_processes 
-19: LCOL  
-19: NUM, value = 0 
-19: RCOL  
-19: ASSIGN  
-19: NUM, value = 376 
-19: PV  
-20: ID, name = pc_processes 
-20: LCOL  
-20: NUM, value = 1 
-20: RCOL  
-20: ASSIGN  
-20: NUM, value = 460 
-20: PV  
-22: ID, name = stack_size_processes 
-22: LCOL  
-22: NUM, value = 0 
-22: RCOL  
-22: ASSIGN  
-22: NUM, value = 0 
-22: PV  
-23: ID, name = stack_size_processes 
+10: INT  
+10: ID, name = memory_location 
+10: LCOL  
+10: NUM, value = 10 
+10: RCOL  
+10: PV  
+11: INT  
+11: ID, name = pc_processes 
+11: LCOL  
+11: NUM, value = 10 
+11: RCOL  
+11: PV  
+17: INT  
+17: ID, name = i 
+17: PV  
+23: ID, name = pc_processes 
 23: LCOL  
-23: NUM, value = 1 
+23: NUM, value = 0 
 23: RCOL  
 23: ASSIGN  
-23: NUM, value = 0 
+23: NUM, value = 200 
 23: PV  
-28: ID, name = set_quantum_value 
-28: LPAR  
-28: NUM, value = 4 
-28: RPAR  
-28: PV  
-35: ID, name = i 
-35: ASSIGN  
-35: NUM, value = 0 
+24: ID, name = pc_processes 
+24: LCOL  
+24: NUM, value = 1 
+24: RCOL  
+24: ASSIGN  
+24: NUM, value = 400 
+24: PV  
+31: ID, name = memory_location 
+31: LCOL  
+31: NUM, value = 0 
+31: RCOL  
+31: ASSIGN  
+31: NUM, value = 200 
+31: PV  
+32: ID, name = memory_location 
+32: LCOL  
+32: NUM, value = 1 
+32: RCOL  
+32: ASSIGN  
+32: NUM, value = 400 
+32: PV  
+35: ID, name = set_quantum_value 
+35: LPAR  
+35: NUM, value = 10 
+35: RPAR  
 35: PV  
-36: WHILE  
-36: LPAR  
-36: NUM, value = 1 
-36: COMP  
-36: NUM, value = 1 
-36: RPAR  
-36: LCHA  
+37: ID, name = i 
+37: ASSIGN  
+37: NUM, value = 0 
+37: PV  
 38: WHILE  
 38: LPAR  
-38: ID, name = i 
-38: LT  
-38: NUM, value = 2 
+38: NUM, value = 1 
+38: COMP  
+38: NUM, value = 1 
 38: RPAR  
 38: LCHA  
-40: ID, name = change_context 
+40: WHILE  
 40: LPAR  
-40: ID, name = pc_processes 
-40: LCOL  
 40: ID, name = i 
-40: RCOL  
-40: VIR  
-40: ID, name = stack_size_processes 
-40: LCOL  
-40: ID, name = i 
-40: RCOL  
-40: VIR  
-40: ID, name = i 
-40: PLUS  
-40: NUM, value = 1 
+40: LT  
+40: NUM, value = 2 
 40: RPAR  
-40: PV  
-41: ID, name = copy_registers_to_ram 
-41: LPAR  
-41: RPAR  
-41: PV  
-42: ID, name = set_hd_track 
+40: LCHA  
+42: ID, name = change_context 
 42: LPAR  
-42: NUM, value = 0 
+42: ID, name = pc_processes 
+42: LCOL  
+42: ID, name = i 
+42: RCOL  
+42: VIR  
+42: ID, name = memory_location 
+42: LCOL  
+42: ID, name = i 
+42: RCOL  
 42: RPAR  
 42: PV  
 43: ID, name = pc_processes 
@@ -105,25 +92,16 @@
 43: LPAR  
 43: RPAR  
 43: PV  
-44: ID, name = stack_size_processes 
-44: LCOL  
 44: ID, name = i 
-44: RCOL  
 44: ASSIGN  
-44: ID, name = STACK_SIZE 
-44: LPAR  
-44: RPAR  
+44: ID, name = i 
+44: PLUS  
+44: NUM, value = 1 
 44: PV  
-50: ID, name = i 
-50: ASSIGN  
-50: ID, name = i 
-50: PLUS  
-50: NUM, value = 1 
-50: PV  
-51: RCHA  
-53: ID, name = i 
-53: ASSIGN  
-53: NUM, value = 0 
-53: PV  
-54: RCHA  
-56: RCHA  
+45: RCHA  
+47: ID, name = i 
+47: ASSIGN  
+47: NUM, value = 0 
+47: PV  
+48: RCHA  
+50: RCHA  

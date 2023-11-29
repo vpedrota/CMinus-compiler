@@ -4,80 +4,74 @@ ADDI $sz $sp 0
 ADDI $sz $sz 10
 ADDI $sz $sz 10
 ADDI $sz $sz 1
-ADDI $zero $t0 376
-ADDI $zero $t1 0
-ADD $sp $t1 $t1
-SW $t1 $t0 12
-ADDI $zero $t0 460
-ADDI $zero $t1 1
-ADD $sp $t1 $t1
-SW $t1 $t0 12
-ADDI $zero $t0 0
+ADDI $zero $t0 200
 ADDI $zero $t1 0
 ADD $sp $t1 $t1
 SW $t1 $t0 2
-ADDI $zero $t0 0
+ADDI $zero $t0 400
 ADDI $zero $t1 1
 ADD $sp $t1 $t1
 SW $t1 $t0 2
-ADDI $zero $t0 4
+ADDI $zero $t0 200
+ADDI $zero $t1 0
+ADD $sp $t1 $t1
+SW $t1 $t0 12
+ADDI $zero $t0 400
+ADDI $zero $t1 1
+ADD $sp $t1 $t1
+SW $t1 $t0 12
+ADDI $zero $t0 10
 SET_QUANTUM_VALUE $t0
 ADDI $zero $t0 0
 SW $sp $t0 1
 ADDI $zero $t0 1
 ADDI $zero $t1 1
 COMP $t0 $t1 $t2
-IFF $t2 61
+IFF $t2 55
 LW $sp $t0 1
 ADDI $zero $t1 2
 LESSTHAN $t0 $t1 $t2
-IFF $t2 54
+IFF $t2 48
 LW $sp $t0 1
 ADD $sp $t0 $t0
-LW $t0 $t1 12
+LW $t0 $t1 2
 LW $sp $t0 1
 ADD $sp $t0 $t0
-LW $t0 $t2 2
-LW $sp $t0 1
-ADDI $zero $t3 1
-PLUS $t0 $t3 $t4
-SET_HD_TRACK $t4
-LW $t2 $t13 0
-LW $t2 $t14 1
-LW $t2 $t15 2
-LW $t2 $t16 3
-LW $t2 $t17 4
-LW $t2 $t18 5
-LW $t2 $t19 6
-LW $t2 $t20 7
-LW $t2 $t21 8
-LW $t2 $t22 9
-LW $t2 $t23 10
-LW $t2 $t24 11
-LW $t2 $t25 12
-LW $t2 $stack_size 13
+LW $t0 $t2 12
+SET_HD_TRACK $t2 0
+LW $zero $t13 0
+LW $zero $t14 1
+LW $zero $t15 2
+LW $zero $t16 3
+LW $zero $t17 4
+LW $zero $t18 5
+LW $zero $t19 6
+LW $zero $t20 7
+LW $zero $t21 8
+LW $zero $t22 9
+LW $zero $t23 10
+LW $zero $t24 11
+LW $zero $t25 12
+LW $zero $stack_size 13
+SET_HD_TRACK $t2 32
 CHANGE_CONTEXT $t1
-SW $stack_size $t13 0
-SW $stack_size $t14 1
-SW $stack_size $t15 2
-SW $stack_size $t16 3
-SW $stack_size $t17 4
-SW $stack_size $t18 5
-SW $stack_size $t19 6
-SW $stack_size $t20 7
-SW $stack_size $t21 8
-SW $stack_size $t22 9
-SW $stack_size $t23 10
-SW $stack_size $t24 11
-SW $stack_size $t25 12
-SW $stack_size $stack_size 13
-ADDI $zero $t0 0
-SET_HD_TRACK $t0
-LAST_PC $t0
-LW $sp $t1 1
-ADD $sp $t1 $t1
-SW $t1 $t0 12
-ADD $zero  $stack_size $t0
+SET_HD_TRACK $t2 0
+SW $zero $t13 0
+SW $zero $t14 1
+SW $zero $t15 2
+SW $zero $t16 3
+SW $zero $t17 4
+SW $zero $t18 5
+SW $zero $t19 6
+SW $zero $t20 7
+SW $zero $t21 8
+SW $zero $t22 9
+SW $zero $t23 10
+SW $zero $t24 11
+SW $zero $t25 12
+SW $zero $stack_size 13
+SET_HD_TRACK $zero 0
+LAST_PC $zero $t0 0
 LW $sp $t1 1
 ADD $sp $t1 $t1
 SW $t1 $t0 2

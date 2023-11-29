@@ -267,9 +267,9 @@ def asm_to_binary(assembly_instructions):
         "RESTO":  "100111"
     }
 
-    operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI"]
+    operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI", "LAST_PC"]
         
-    operations_26bits_imediate = ["IN","LAST_PC", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE", "SET_HD_TRACK"]
+    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE"]
 
 
     for instruction in assembly_instructions:
@@ -310,6 +310,11 @@ def asm_to_binary(assembly_instructions):
             
         if "HALT" in instruction:
             parts.append("00000000000000000000000000\n")
+            final_binary = "".join(parts)
+
+        if "SET_HD_TRACK" in instruction:
+            parts.insert(2, "11011")
+            parts[3] = format(int(parts[3]), '016b') + "\n"
             final_binary = "".join(parts)
 
         binario.append(final_binary)
@@ -533,7 +538,7 @@ for quads_index, quad in enumerate(quads):
 
         elif quad[2].strip() == "PC_INTERRUPTION":
             registrador = return_register_position(registradores, quad[1])
-            assembly.append("LAST_PC {}\n".format(registrador))
+            assembly.append("LAST_PC {} {} {}\n".format("$zero", registrador, "0"))
 
         elif quad[2].strip() == "STACK_SIZE":
             registrador = return_register_position(registradores, quad[1])
@@ -550,7 +555,7 @@ for quads_index, quad in enumerate(quads):
 
         elif quad[2].strip() == "set_hd_track":
             registrador = return_register_position(registradores, registradores_parametros[0])
-            assembly.append("SET_HD_TRACK {}\n".format(registrador))
+            assembly.append("SET_HD_TRACK {} {} {}\n".format(registrador, registrador, 0))
             liberar_registrador(registradores,  registradores_parametros[0])
             registradores_parametros = []
 
@@ -581,14 +586,24 @@ for quads_index, quad in enumerate(quads):
 
             registrador = return_register_position(registradores, registradores_parametros[0])
             registrador2 = return_register_position(registradores, registradores_parametros[1])
-            registrador3 =  return_register_position(registradores, registradores_parametros[2])
+            # registrador3 =  return_register_position(registradores, registradores_parametros[2])
 
-            assembly.append("SET_HD_TRACK {}\n".format(registrador3))
+            assembly.append("SET_HD_TRACK {} {}\n".format(registrador2, 0))
 
             for indice_registrador, valor in enumerate(register_process.keys()):
-                assembly.append("LW {} {} {}\n".format(registrador2, valor, indice_registrador))
+                assembly.append("LW {} {} {}\n".format("$zero", valor, indice_registrador))
+
+
+            assembly.append("SET_HD_TRACK {} {}\n".format(registrador2, 32))
         
             assembly.append("CHANGE_CONTEXT {}\n".format(registrador))
+
+            assembly.append("SET_HD_TRACK {} {}\n".format(registrador2, 0))
+
+            for indice_registrador, valor in enumerate(register_process.keys()):
+                assembly.append("SW {} {} {}\n".format( "$zero", valor, indice_registrador))
+
+            assembly.append("SET_HD_TRACK {} {}\n".format("$zero", 0))
                 
             liberar_registrador(registradores,  registradores_parametros[0])
             registradores_parametros = []

@@ -2,29 +2,29 @@
     Funcao main
       Tipo void
       Tipo inteiro
-        Variavel pc_processes
+        Variavel memory_location
       Tipo inteiro
-        Variavel stack_size_processes
+        Variavel pc_processes
       Tipo inteiro
         Variavel i
       Atribuicao
         Vetor: pc_processes
           Const: 0
-        Const: 376
+        Const: 200
       Atribuicao
         Vetor: pc_processes
           Const: 1
-        Const: 460
+        Const: 400
       Atribuicao
-        Vetor: stack_size_processes
+        Vetor: memory_location
           Const: 0
-        Const: 0
+        Const: 200
       Atribuicao
-        Vetor: stack_size_processes
+        Vetor: memory_location
           Const: 1
-        Const: 0
+        Const: 400
       Chamada de Funcao set_quantum_value 
-        Const: 4
+        Const: 10
       Atribuicao
         Id: i
         Const: 0
@@ -39,22 +39,12 @@
           Chamada de Funcao change_context 
             Vetor: pc_processes
               Id: i
-            Vetor: stack_size_processes
+            Vetor: memory_location
               Id: i
-            Op:  PLUS  
-              Id: i
-              Const: 1
-          Chamada de Funcao copy_registers_to_ram 
-          Chamada de Funcao set_hd_track 
-            Const: 0
           Atribuicao
             Vetor: pc_processes
               Id: i
             Chamada de Funcao PC_INTERRUPTION 
-          Atribuicao
-            Vetor: stack_size_processes
-              Id: i
-            Chamada de Funcao STACK_SIZE 
           Atribuicao
             Id: i
             Op:  PLUS  

@@ -365,6 +365,9 @@ void buildSymtab(TreeNode *root){
     t.attr.name = "set_hd_track";
     insert_node_symtab(&t, "global");
 
+    t.attr.name = "set_lcd_message";
+    insert_node_symtab(&t, "global");
+
 
     // Percorrendo e inserindo símbolos na árvore
     transverse(root);

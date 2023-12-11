@@ -439,7 +439,6 @@ int yyerror(char *msg){
     exit(-1);
 }
 
-
 TreeNode* parse(){
     yyparse();
     return root;

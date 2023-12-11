@@ -1,0 +1,8 @@
+void main(void) {
+    int a;
+    a = 1;
+    while(a < 200){
+        a = a+2;
+        output(a);
+    }
+}

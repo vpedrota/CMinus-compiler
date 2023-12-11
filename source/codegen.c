@@ -27,7 +27,7 @@ void printOperation(FILE *output, int token){
          fprintf(output, "MULT, "); 
          break;
       case DIF: 
-         fprintf(output, "IF, ");  
+         fprintf(output, "DFT, ");  
          break;
       case GT: 
          fprintf(output, "GT, ");  

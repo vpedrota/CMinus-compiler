@@ -204,6 +204,7 @@ def asm_to_binary(assembly_instructions):
         "STACK_SIZE": "011001",
         "CHANGE_CONTEXT": "110011",
         "SET_QUANTUM_VALUE": "101111",
+        "SET_LCD_MESSAGE": "101100",
         "IN": "111110",
         "LAST_PC": "110110",
         "JR": "001111", 
@@ -214,7 +215,9 @@ def asm_to_binary(assembly_instructions):
         "LESSTHAN": "000000",
         "LETEQUAL": "000000",
         "GT": "000000",
-        "GET": "000000"
+        "GET": "000000",
+        "SET_JP_ADDRESS":"001110",
+        "DFT": "000000"
     }
 
     registers = {
@@ -250,8 +253,26 @@ def asm_to_binary(assembly_instructions):
         '$ra' :'11111',
         '$zero': '11011',
         '$RR' : '11100'
-        
     }
+
+
+#     registers  = {
+#     '$t13': '01101',
+#     '$t14': '01110',
+#     '$t15': '01111',
+#     '$t16': '10000',
+#     '$t17': '10001',
+#     '$t18': '10010',
+#     '$t19': '10011',
+#     '$t20': '10100',
+#     '$sz': '10101', 
+#     '$sp': '10110', 
+#     '$ra' :'10111',
+#     '$zero': '11000',
+#     '$RR' : '11001'
+# }
+    
+
 
     funct = {
         "ADD ": "100000",
@@ -264,12 +285,13 @@ def asm_to_binary(assembly_instructions):
         "LESSTHAN ": "101010",
         "GT": "111111",
         "GET":"111110",
-        "RESTO":  "100111"
+        "RESTO":  "100111", 
+        "DFT": "011111"
     }
 
     operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI", "LAST_PC"]
         
-    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE"]
+    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE", "SET_LCD_MESSAGE"]
 
 
     for instruction in assembly_instructions:
@@ -316,6 +338,12 @@ def asm_to_binary(assembly_instructions):
             parts.insert(2, "11011")
             parts[3] = format(int(parts[3]), '016b') + "\n"
             final_binary = "".join(parts)
+
+        if "SET_JP_ADDRESS" in instruction:
+            print(parts)
+            parts.insert(3, "000000000000000000000\n")
+            final_binary = "".join(parts)
+        
 
         binario.append(final_binary)
 
@@ -383,10 +411,24 @@ register_process = {
     '$t22': '10110',
     '$t23': '10111',
     '$t24': '11000',
-    '$t24': '11000',
     '$t25': '11001',
-    '$stack_size': '11010'
 }
+
+#     registers  = {
+#     '$t13': '01101',
+#     '$t14': '01110',
+#     '$t15': '01111',
+#     '$t16': '10000',
+#     '$t17': '10001',
+#     '$t18': '10010',
+#     '$t19': '10011',
+#     '$t20': '10100',
+#     '$sz': '10101', 
+#     '$sp': '10110', 
+#     '$ra' :'10111',
+#     '$zero': '11000',
+#     '$RR' : '11001'
+# }
 
 for quads_index, quad in enumerate(quads):
     
@@ -482,7 +524,7 @@ for quads_index, quad in enumerate(quads):
         registrador = return_register_position(registradores, quad[1])
         assembly.append("ADDI {} {} {}\n".format("$zero", registrador, imediato))
         
-    elif verificar_igualdade(quad[0], ["RESTO", "PLUS", "DIV", "MULT", "SUB", "COMP", "LET", "LET", "LT", "GT", "GET"]):
+    elif verificar_igualdade(quad[0], ["RESTO", "PLUS", "DIV", "MULT", "SUB", "COMP", "LET", "LET", "LT", "GT", "GET", "DFT"]):
         
         registrador1 = return_register_position(registradores, quad[1])    
         registrador2 = return_register_position(registradores, quad[2])
@@ -582,22 +624,33 @@ for quads_index, quad in enumerate(quads):
             liberar_registrador(registradores,  registradores_parametros[0])
             registradores_parametros = []
 
+        elif quad[2].strip() == "set_lcd_message":
+            registrador = return_register_position(registradores, registradores_parametros[0])
+            assembly.append("SET_LCD_MESSAGE {}\n".format(registrador))
+            liberar_registrador(registradores,  registradores_parametros[0])
+            registradores_parametros = []
+
         elif quad[2].strip() == "change_context":
 
             registrador = return_register_position(registradores, registradores_parametros[0])
             registrador2 = return_register_position(registradores, registradores_parametros[1])
-            # registrador3 =  return_register_position(registradores, registradores_parametros[2])
+            registrador3 =  return_register_position(registradores, registradores_parametros[2])
+
+            assembly.append("SET_JP_ADDRESS {}\n".format(registrador3))
 
             assembly.append("SET_HD_TRACK {} {}\n".format(registrador2, 0))
 
             for indice_registrador, valor in enumerate(register_process.keys()):
                 assembly.append("LW {} {} {}\n".format("$zero", valor, indice_registrador))
 
+            
 
             assembly.append("SET_HD_TRACK {} {}\n".format(registrador2, 32))
         
             assembly.append("CHANGE_CONTEXT {}\n".format(registrador))
-
+            
+            assembly.append("SET_JP_ADDRESS {}\n".format("$zero"))
+            
             assembly.append("SET_HD_TRACK {} {}\n".format(registrador2, 0))
 
             for indice_registrador, valor in enumerate(register_process.keys()):

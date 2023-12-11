@@ -29,7 +29,7 @@ int fibonacci(int num) {
 
 void main(void) {
     
-    n = input();
+    n = 5;
 
     result = fibonacci(n);
     output(result);

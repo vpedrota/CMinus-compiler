@@ -1,50 +1,185 @@
-  Tipo void
-    Funcao main
+  Tipo inteiro
+    Variavel pc_processes
+  Tipo inteiro
+    Variavel memory_location
+  Tipo inteiro
+    Variavel init_pc
+  Tipo inteiro
+    Variavel quantum_value
+  Tipo inteiro
+    Funcao see_if_ended
       Tipo void
       Tipo inteiro
-        Variavel memory_location
-      Tipo inteiro
-        Variavel pc_processes
-      Tipo inteiro
         Variavel i
-      Atribuicao
-        Vetor: pc_processes
-          Const: 0
-        Const: 200
-      Atribuicao
-        Vetor: pc_processes
-          Const: 1
-        Const: 400
-      Atribuicao
-        Vetor: memory_location
-          Const: 0
-        Const: 200
-      Atribuicao
-        Vetor: memory_location
-          Const: 1
-        Const: 400
-      Chamada de Funcao set_quantum_value 
-        Const: 10
       Atribuicao
         Id: i
         Const: 0
       While
-        Op:  unknown  
+        Op:  LT  
+          Id: i
+          Const: 2
+        If
+          Op:  DIF  
+            Vetor: pc_processes
+              Id: i
+            Const: 0
+          Return
+            Const: 0
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Const: 1
+  Tipo void
+    Funcao main
+      Tipo void
+      Tipo inteiro
+        Variavel i
+      Tipo inteiro
+        Variavel in
+      Tipo inteiro
+        Variavel end
+      Tipo inteiro
+        Variavel n_process
+      Tipo inteiro
+        Variavel quantum
+      Atribuicao
+        Vetor: pc_processes
+          Const: 0
+        Const: 237
+      Atribuicao
+        Vetor: pc_processes
           Const: 1
+        Const: 256
+      Atribuicao
+        Vetor: memory_location
+          Const: 0
+        Const: 200
+      Atribuicao
+        Vetor: memory_location
+          Const: 1
+        Const: 400
+      Atribuicao
+        Vetor: init_pc
+          Const: 0
+        Const: 237
+      Atribuicao
+        Vetor: init_pc
+          Const: 1
+        Const: 256
+      Chamada de Funcao set_lcd_message 
+        Const: 1
+      Atribuicao
+        Id: i
+        Const: 0
+      While
+        Op:  LT  
+          Id: i
+          Const: 2
+        Atribuicao
+          Vetor: quantum_value
+            Id: i
+          Const: 0
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Atribuicao
+        Id: in
+        Chamada de Funcao input 
+      Atribuicao
+        Id: i
+        Const: 0
+      Chamada de Funcao set_lcd_message 
+        Const: 0
+      While
+        Op:  LT  
+          Id: i
+          Id: in
+        Atribuicao
+          Id: n_process
+          Chamada de Funcao input 
+        Atribuicao
+          Id: quantum
+          Chamada de Funcao input 
+        If
+          Op:  unknown  
+            Id: quantum
+            Const: 0
+          Atribuicao
+            Vetor: quantum_value
+              Id: n_process
+            Const: 9999
+        If
+          Op:  unknown  
+            Id: quantum
+            Const: 1
+          Atribuicao
+            Vetor: quantum_value
+              Id: n_process
+            Const: 5
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Atribuicao
+        Id: i
+        Const: 0
+      While
+        Op:  LT  
+          Id: i
+          Const: 2
+        If
+          Op:  unknown  
+            Vetor: quantum_value
+              Id: i
+            Const: 0
+          Atribuicao
+            Vetor: pc_processes
+              Id: i
+            Const: 0
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Atribuicao
+        Id: i
+        Const: 0
+      Atribuicao
+        Id: end
+        Const: 0
+      While
+        Op:  DIF  
+          Id: end
           Const: 1
         While
           Op:  LT  
             Id: i
             Const: 2
-          Chamada de Funcao change_context 
-            Vetor: pc_processes
-              Id: i
-            Vetor: memory_location
-              Id: i
-          Atribuicao
-            Vetor: pc_processes
-              Id: i
-            Chamada de Funcao PC_INTERRUPTION 
+          If
+            Op:  DIF  
+              Vetor: pc_processes
+                Id: i
+              Const: 0
+            Chamada de Funcao set_quantum_value 
+              Vetor: quantum_value
+                Id: i
+            Chamada de Funcao change_context 
+              Vetor: pc_processes
+                Id: i
+              Vetor: memory_location
+                Id: i
+              Vetor: init_pc
+                Id: i
+            Atribuicao
+              Vetor: pc_processes
+                Id: i
+              Chamada de Funcao PC_INTERRUPTION 
           Atribuicao
             Id: i
             Op:  PLUS  
@@ -53,3 +188,8 @@
         Atribuicao
           Id: i
           Const: 0
+        Atribuicao
+          Id: end
+          Chamada de Funcao see_if_ended 
+      Chamada de Funcao output 
+        Const: 999

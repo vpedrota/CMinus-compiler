@@ -1,5 +1,3 @@
-
-
 /*
     Iniciando vetores para controle de memória      
 */
@@ -7,14 +5,15 @@
 int pc_processes[10];
 int memory_location[10];
 int init_pc[10];
-int quantum_value[10];
+int exec[10];
+int nomes[10];
 
 int see_if_ended(void){
 
     int i;
     i = 0;
 
-    while(i < 2){
+    while(i < 4){
 
         if(pc_processes[i] != 0){
             return 0;
@@ -25,6 +24,22 @@ int see_if_ended(void){
     return 1;
 }
 
+int find_by_index(int num){
+
+    int i;
+    i = 0;
+
+    while(i < 4){
+        if(num == nomes[i]){
+            return 1;
+        }
+        i = i+1;
+    }
+
+    return 10;
+
+}
+
 void main(void){
 
     /*
@@ -32,17 +47,31 @@ void main(void){
     */
 
     int i;
-    int in;
+    int preempcao;
     int end;
-    int n_process;
-    int quantum;
+    int opcao;
+    int quantidade;
+    int processo;
+    int indice;
+
+    /*
+        Inicia o nomes dos programas
+    */ 
+
+    i = 0;
+    while(i < 4){
+        nomes[i] = i;
+        i = i + 1;
+    }
 
     /*
         Determinando início de cada processo na rom
     */
     
-    pc_processes[0] = 237;
-    pc_processes[1] = 256;
+    pc_processes[0] = 192;
+    pc_processes[1] = 211;
+    pc_processes[2] = 230;
+    pc_processes[3] = 256;
 
 
     /*
@@ -51,73 +80,98 @@ void main(void){
 
     memory_location[0] = 200;
     memory_location[1] = 400;
+    memory_location[2] = 600;
+    memory_location[3] = 800;
 
     /*
         Determinadno início de cada processo na rom para salto em instruções do tipo J
     */
 
-    init_pc[0] = 237;
-    init_pc[1] = 256;
+    init_pc[0] = 192;
+    init_pc[1] = 211;
+    init_pc[2] = 230;
+    init_pc[3] = 256;
 
     /*
         Perguntando ao usuário quantos programas devem ser executados e o quantum de cada programa
     */ 
 
-    set_lcd_message(0);
+    while(1 == 1){
 
-    i = 0;
-    while(i < 2){
-        quantum_value[i] = 0;
-        i = i + 1;
-    }
-    
-    in = input();
-    i = 0;
+        opcao = input();
 
-    set_lcd_message(1);
+        /* rodar todos */
+        if(opcao == 1){
 
-    while(i < in){
-        n_process = input();
-        quantum = input();
+            preempcao = input();
         
-        if(quantum == 0){
-            quantum_value[n_process] = 9999;
-        }
+            set_quantum_value(10);
 
-        if(quantum == 1){
-            quantum_value[n_process] = 5;
-        }
-
-        i = i + 1;
-    }
-
-    i = 0;
-    while(i < 2){
-
-        if(quantum_value[i] == 0){
-            pc_processes[i] = 0;
-        }
-        i =  i+1;
-    } 
-
-    i = 0;
-    end = 0;
-
-    while(end != 1){
-
-        while(i < 2){
-            if(pc_processes[i] != 0) {
-                set_quantum_value(quantum_value[i]);
-                change_context(pc_processes[i], memory_location[i], init_pc[i]);
-                pc_processes[i] = PC_INTERRUPTION();    
+            if(preempcao == 0){
+                set_quantum_value(9999);
             }
-            i = i+1;
+
         }
+
+        /* rodar uma quantidade específica de programas especifico */
+        if(opcao == 2 ){
+            quantidade = input();
+
+            i = 0;
+            while(i < quantidade){
+                processo = input();
+                indice = find_by_index(processo);
+                exec[indice] = 1; 
+                i = i + 1;
+            }
+
+            i = 0;
+            while(i < quantidade){
+                if(exec[i] != 1){
+                    pc_processes[i] = 0;
+                }
+                i = i + 1;
+            }
+
+
+            preempcao = input();
+        
+            set_quantum_value(10);
+
+            if(preempcao == 0){
+                set_quantum_value(9999);
+            }
+        }
+
+        /*
+            Alterar nomes dos vetores
+        */
+        if(opcao == 3){
+
+        }
+
 
         i = 0;
-        end = see_if_ended();
-    }
+        end = 0;
 
-    output(999);
+        while(end != 1){
+
+            while(i < 4){
+                set_process_bcd(0);
+            
+                if(pc_processes[i] != 0) {
+                    set_process_bcd(i+1);
+                    change_context(pc_processes[i], memory_location[i], init_pc[i]);
+                    pc_processes[i] = PC_INTERRUPTION();         
+                }
+                i = i+1;
+            }
+
+            i = 0;
+            end = see_if_ended(); 
+        }
+
+        output(99999);
+    }
         
 }

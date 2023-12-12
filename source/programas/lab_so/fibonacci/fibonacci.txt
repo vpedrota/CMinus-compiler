@@ -2,32 +2,12 @@ int n;
 int result;
 
 int fibonacci(int num) {
-    int a ;
-    int b ;
-    int next;
-    int i;
-
-    a = 0;
-    b = 1;
-    i = 2;
-
-    if (num == 0) {
-        return a;
-    } else if (num == 1) {
-        return b;
-    }
-
-    while (i <= num) {
-        next = a + b;
-        a = b;
-        b = next;
-        i = i + 1;
-    }
-
-    return b;
+    
 }
 
 void main(void) {
+
+    
     
     n = 5;
 

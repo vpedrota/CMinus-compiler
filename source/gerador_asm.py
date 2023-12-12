@@ -217,7 +217,8 @@ def asm_to_binary(assembly_instructions):
         "GT": "000000",
         "GET": "000000",
         "SET_JP_ADDRESS":"001110",
-        "DFT": "000000"
+        "DFT": "000000",
+        "SET_PROCESS_BCD":"111011"
     }
 
     registers = {
@@ -289,9 +290,9 @@ def asm_to_binary(assembly_instructions):
         "DFT": "011111"
     }
 
-    operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI", "LAST_PC"]
+    operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI", "LAST_PC", "SET_LCD_MESSAGE"]
         
-    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE", "SET_LCD_MESSAGE"]
+    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE" ]
 
 
     for instruction in assembly_instructions:
@@ -336,6 +337,10 @@ def asm_to_binary(assembly_instructions):
 
         if "SET_HD_TRACK" in instruction:
             parts.insert(2, "11011")
+            parts[3] = format(int(parts[3]), '016b') + "\n"
+            final_binary = "".join(parts)
+
+        if "SET_PROCESS_BCD" in instruction:
             parts[3] = format(int(parts[3]), '016b') + "\n"
             final_binary = "".join(parts)
 
@@ -601,6 +606,12 @@ for quads_index, quad in enumerate(quads):
             liberar_registrador(registradores,  registradores_parametros[0])
             registradores_parametros = []
 
+        elif quad[2].strip() == "set_process_bcd":
+            registrador = return_register_position(registradores, registradores_parametros[0])
+            assembly.append("SET_PROCESS_BCD {} {} {}\n".format(registrador, registrador, 0))
+            liberar_registrador(registradores,  registradores_parametros[0])
+            registradores_parametros = []
+
         elif quad[2].strip() == "copy_registers_to_bank":
             registrador = return_register_position(registradores, registradores_parametros[0])
             
@@ -626,8 +637,10 @@ for quads_index, quad in enumerate(quads):
 
         elif quad[2].strip() == "set_lcd_message":
             registrador = return_register_position(registradores, registradores_parametros[0])
-            assembly.append("SET_LCD_MESSAGE {}\n".format(registrador))
+            # registrador2 = return_register_position(registradores, registradores_parametros[1])
+            assembly.append("SET_LCD_MESSAGE {} {} 0\n".format(registrador, registrador2))
             liberar_registrador(registradores,  registradores_parametros[0])
+            # liberar_registrador(registradores,  registradores_parametros[1])
             registradores_parametros = []
 
         elif quad[2].strip() == "change_context":

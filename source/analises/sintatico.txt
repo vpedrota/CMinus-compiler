@@ -17,7 +17,7 @@
       While
         Op:  LT  
           Id: i
-          Const: 2
+          Const: 4
         If
           Op:  DIF  
             Vetor: pc_processes
@@ -38,20 +38,24 @@
       Tipo inteiro
         Variavel i
       Tipo inteiro
-        Variavel in
+        Variavel preempcao
       Tipo inteiro
         Variavel end
-      Tipo inteiro
-        Variavel n_process
-      Tipo inteiro
-        Variavel quantum
       Atribuicao
         Vetor: pc_processes
           Const: 0
-        Const: 237
+        Const: 192
       Atribuicao
         Vetor: pc_processes
           Const: 1
+        Const: 211
+      Atribuicao
+        Vetor: pc_processes
+          Const: 2
+        Const: 230
+      Atribuicao
+        Vetor: pc_processes
+          Const: 3
         Const: 256
       Atribuicao
         Vetor: memory_location
@@ -62,91 +66,40 @@
           Const: 1
         Const: 400
       Atribuicao
+        Vetor: memory_location
+          Const: 2
+        Const: 600
+      Atribuicao
+        Vetor: memory_location
+          Const: 3
+        Const: 800
+      Atribuicao
         Vetor: init_pc
           Const: 0
-        Const: 237
+        Const: 192
       Atribuicao
         Vetor: init_pc
           Const: 1
+        Const: 211
+      Atribuicao
+        Vetor: init_pc
+          Const: 2
+        Const: 230
+      Atribuicao
+        Vetor: init_pc
+          Const: 3
         Const: 256
-      Chamada de Funcao set_lcd_message 
-        Const: 1
       Atribuicao
-        Id: i
-        Const: 0
-      While
-        Op:  LT  
-          Id: i
-          Const: 2
-        Atribuicao
-          Vetor: quantum_value
-            Id: i
-          Const: 0
-        Atribuicao
-          Id: i
-          Op:  PLUS  
-            Id: i
-            Const: 1
-      Atribuicao
-        Id: in
+        Id: preempcao
         Chamada de Funcao input 
-      Atribuicao
-        Id: i
-        Const: 0
-      Chamada de Funcao set_lcd_message 
-        Const: 0
-      While
-        Op:  LT  
-          Id: i
-          Id: in
-        Atribuicao
-          Id: n_process
-          Chamada de Funcao input 
-        Atribuicao
-          Id: quantum
-          Chamada de Funcao input 
-        If
-          Op:  unknown  
-            Id: quantum
-            Const: 0
-          Atribuicao
-            Vetor: quantum_value
-              Id: n_process
-            Const: 9999
-        If
-          Op:  unknown  
-            Id: quantum
-            Const: 1
-          Atribuicao
-            Vetor: quantum_value
-              Id: n_process
-            Const: 5
-        Atribuicao
-          Id: i
-          Op:  PLUS  
-            Id: i
-            Const: 1
-      Atribuicao
-        Id: i
-        Const: 0
-      While
-        Op:  LT  
-          Id: i
-          Const: 2
-        If
-          Op:  unknown  
-            Vetor: quantum_value
-              Id: i
-            Const: 0
-          Atribuicao
-            Vetor: pc_processes
-              Id: i
-            Const: 0
-        Atribuicao
-          Id: i
-          Op:  PLUS  
-            Id: i
-            Const: 1
+      Chamada de Funcao set_quantum_value 
+        Const: 10
+      If
+        Op:  unknown  
+          Id: preempcao
+          Const: 0
+        Chamada de Funcao set_quantum_value 
+          Const: 9999
       Atribuicao
         Id: i
         Const: 0
@@ -160,15 +113,14 @@
         While
           Op:  LT  
             Id: i
-            Const: 2
+            Const: 4
           If
             Op:  DIF  
               Vetor: pc_processes
                 Id: i
               Const: 0
-            Chamada de Funcao set_quantum_value 
-              Vetor: quantum_value
-                Id: i
+            Chamada de Funcao set_process_bcd 
+              Id: i
             Chamada de Funcao change_context 
               Vetor: pc_processes
                 Id: i

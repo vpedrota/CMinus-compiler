@@ -643,6 +643,20 @@ for quads_index, quad in enumerate(quads):
             # liberar_registrador(registradores,  registradores_parametros[1])
             registradores_parametros = []
 
+        elif quad[2].strip() == "clean_ram":
+            registrador = return_register_position(registradores, registradores_parametros[0])
+            # registrador2 = return_register_position(registradores, registradores_parametros[1])
+            assembly.append("SET_HD_TRACK {} {}\n".format(registrador, 0))
+
+            for indice_registrador, valor in enumerate(register_process.keys()):
+                assembly.append("SW {} {} {}\n".format( "$zero", "$zero", indice_registrador))
+
+            assembly.append("SET_HD_TRACK {} {}\n".format("$zero", 0))
+            
+            #liberar_registrador(registradores,  registradores_parametros[0])
+            # liberar_registrador(registradores,  registradores_parametros[1])
+            registradores_parametros = []
+
         elif quad[2].strip() == "change_context":
 
             registrador = return_register_position(registradores, registradores_parametros[0])

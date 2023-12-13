@@ -1,281 +1,626 @@
+5: INT  
+5: ID, name = pc_processes 
+5: LCOL  
+5: NUM, value = 10 
+5: RCOL  
+5: PV  
+6: INT  
+6: ID, name = memory_location 
+6: LCOL  
+6: NUM, value = 10 
+6: RCOL  
+6: PV  
 7: INT  
-7: ID, name = pc_processes 
+7: ID, name = init_pc 
 7: LCOL  
 7: NUM, value = 10 
 7: RCOL  
 7: PV  
 8: INT  
-8: ID, name = memory_location 
+8: ID, name = exec 
 8: LCOL  
 8: NUM, value = 10 
 8: RCOL  
 8: PV  
 9: INT  
-9: ID, name = init_pc 
+9: ID, name = nomes 
 9: LCOL  
 9: NUM, value = 10 
 9: RCOL  
 9: PV  
-10: INT  
-10: ID, name = quantum_value 
-10: LCOL  
-10: NUM, value = 10 
-10: RCOL  
-10: PV  
-12: INT  
-12: ID, name = see_if_ended 
-12: LPAR  
-12: VOID   
-12: RPAR  
-12: LCHA  
-14: INT  
+11: INT  
+11: ID, name = see_if_ended 
+11: LPAR  
+11: VOID   
+11: RPAR  
+11: LCHA  
+13: INT  
+13: ID, name = i 
+13: PV  
 14: ID, name = i 
+14: ASSIGN  
+14: NUM, value = 0 
 14: PV  
-15: ID, name = i 
-15: ASSIGN  
-15: NUM, value = 0 
-15: PV  
-17: WHILE  
-17: LPAR  
-17: ID, name = i 
-17: LT  
-17: NUM, value = 4 
-17: RPAR  
-17: LCHA  
-19: IF  
-19: LPAR  
-19: ID, name = pc_processes 
-19: LCOL  
-19: ID, name = i 
-19: RCOL  
-19: DIF  
+16: WHILE  
+16: LPAR  
+16: ID, name = i 
+16: LT  
+16: NUM, value = 4 
+16: RPAR  
+16: LCHA  
+18: IF  
+18: LPAR  
+18: ID, name = pc_processes 
+18: LCOL  
+18: ID, name = i 
+18: RCOL  
+18: DIF  
+18: NUM, value = 0 
+18: RPAR  
+18: LCHA  
+19: RETURN  
 19: NUM, value = 0 
-19: RPAR  
-19: LCHA  
-20: RETURN  
-20: NUM, value = 0 
-20: PV  
-21: RCHA  
-22: ID, name = i 
-22: ASSIGN  
-22: ID, name = i 
-22: PLUS  
-22: NUM, value = 1 
-22: PV  
-23: RCHA  
-25: RETURN  
-25: NUM, value = 1 
-25: PV  
-26: RCHA  
-28: VOID   
-28: ID, name = main 
-28: LPAR  
-28: VOID   
-28: RPAR  
-28: LCHA  
-34: INT  
+19: PV  
+20: RCHA  
+21: ID, name = i 
+21: ASSIGN  
+21: ID, name = i 
+21: PLUS  
+21: NUM, value = 1 
+21: PV  
+22: RCHA  
+24: RETURN  
+24: NUM, value = 1 
+24: PV  
+25: RCHA  
+27: INT  
+27: ID, name = find_by_index 
+27: LPAR  
+27: INT  
+27: ID, name = num 
+27: RPAR  
+27: LCHA  
+29: INT  
+29: ID, name = i 
+29: PV  
+30: ID, name = i 
+30: ASSIGN  
+30: NUM, value = 0 
+30: PV  
+32: WHILE  
+32: LPAR  
+32: ID, name = i 
+32: LT  
+32: NUM, value = 4 
+32: RPAR  
+32: LCHA  
+33: IF  
+33: LPAR  
+33: ID, name = num 
+33: COMP  
+33: ID, name = nomes 
+33: LCOL  
+33: ID, name = i 
+33: RCOL  
+33: RPAR  
+33: LCHA  
+34: RETURN  
 34: ID, name = i 
 34: PV  
-35: INT  
-35: ID, name = preempcao 
-35: PV  
-36: INT  
-36: ID, name = end 
+35: RCHA  
+36: ID, name = i 
+36: ASSIGN  
+36: ID, name = i 
+36: PLUS  
+36: NUM, value = 1 
 36: PV  
-42: ID, name = pc_processes 
-42: LCOL  
-42: NUM, value = 0 
-42: RCOL  
-42: ASSIGN  
-42: NUM, value = 192 
-42: PV  
-43: ID, name = pc_processes 
-43: LCOL  
-43: NUM, value = 1 
-43: RCOL  
-43: ASSIGN  
-43: NUM, value = 211 
-43: PV  
-44: ID, name = pc_processes 
-44: LCOL  
-44: NUM, value = 2 
-44: RCOL  
-44: ASSIGN  
-44: NUM, value = 230 
-44: PV  
-45: ID, name = pc_processes 
-45: LCOL  
-45: NUM, value = 3 
-45: RCOL  
-45: ASSIGN  
-45: NUM, value = 256 
-45: PV  
-52: ID, name = memory_location 
-52: LCOL  
-52: NUM, value = 0 
-52: RCOL  
-52: ASSIGN  
-52: NUM, value = 200 
+37: RCHA  
+39: RETURN  
+39: NUM, value = 10 
+39: PV  
+41: RCHA  
+43: VOID   
+43: ID, name = main 
+43: LPAR  
+43: VOID   
+43: RPAR  
+43: LCHA  
+49: INT  
+49: ID, name = i 
+49: PV  
+50: INT  
+50: ID, name = preempcao 
+50: PV  
+51: INT  
+51: ID, name = end 
+51: PV  
+52: INT  
+52: ID, name = opcao 
 52: PV  
-53: ID, name = memory_location 
-53: LCOL  
-53: NUM, value = 1 
-53: RCOL  
-53: ASSIGN  
-53: NUM, value = 400 
+53: INT  
+53: ID, name = quantidade 
 53: PV  
-54: ID, name = memory_location 
-54: LCOL  
-54: NUM, value = 2 
-54: RCOL  
-54: ASSIGN  
-54: NUM, value = 600 
+54: INT  
+54: ID, name = processo 
 54: PV  
-55: ID, name = memory_location 
-55: LCOL  
-55: NUM, value = 3 
-55: RCOL  
-55: ASSIGN  
-55: NUM, value = 800 
+55: INT  
+55: ID, name = indice 
 55: PV  
-61: ID, name = init_pc 
-61: LCOL  
-61: NUM, value = 0 
-61: RCOL  
-61: ASSIGN  
-61: NUM, value = 192 
-61: PV  
-62: ID, name = init_pc 
-62: LCOL  
-62: NUM, value = 1 
-62: RCOL  
+56: INT  
+56: ID, name = nome 
+56: PV  
+62: ID, name = i 
 62: ASSIGN  
-62: NUM, value = 211 
+62: NUM, value = 0 
 62: PV  
-63: ID, name = init_pc 
-63: LCOL  
-63: NUM, value = 2 
-63: RCOL  
-63: ASSIGN  
-63: NUM, value = 230 
-63: PV  
-64: ID, name = init_pc 
+63: WHILE  
+63: LPAR  
+63: ID, name = i 
+63: LT  
+63: NUM, value = 4 
+63: RPAR  
+63: LCHA  
+64: ID, name = nomes 
 64: LCOL  
-64: NUM, value = 3 
+64: ID, name = i 
 64: RCOL  
 64: ASSIGN  
-64: NUM, value = 256 
+64: ID, name = i 
+64: PLUS  
+64: NUM, value = 1 
 64: PV  
-73: ID, name = preempcao 
-73: ASSIGN  
-73: ID, name = input 
-73: LPAR  
-73: RPAR  
-73: PV  
-75: ID, name = set_quantum_value 
+65: ID, name = i 
+65: ASSIGN  
+65: ID, name = i 
+65: PLUS  
+65: NUM, value = 1 
+65: PV  
+66: RCHA  
+72: WHILE  
+72: LPAR  
+72: NUM, value = 1 
+72: COMP  
+72: NUM, value = 1 
+72: RPAR  
+72: LCHA  
+74: ID, name = i 
+74: ASSIGN  
+74: NUM, value = 0 
+74: PV  
+75: WHILE  
 75: LPAR  
-75: NUM, value = 10 
+75: ID, name = i 
+75: LT  
+75: NUM, value = 4 
 75: RPAR  
-75: PV  
-77: IF  
-77: LPAR  
-77: ID, name = preempcao 
-77: COMP  
-77: NUM, value = 0 
-77: RPAR  
-77: LCHA  
-78: ID, name = set_quantum_value 
-78: LPAR  
-78: NUM, value = 9999 
-78: RPAR  
-78: PV  
-79: RCHA  
-81: ID, name = i 
-81: ASSIGN  
-81: NUM, value = 0 
-81: PV  
-82: ID, name = end 
-82: ASSIGN  
-82: NUM, value = 0 
-82: PV  
-84: WHILE  
-84: LPAR  
-84: ID, name = end 
-84: DIF  
-84: NUM, value = 1 
-84: RPAR  
-84: LCHA  
-86: WHILE  
-86: LPAR  
-86: ID, name = i 
-86: LT  
-86: NUM, value = 4 
-86: RPAR  
-86: LCHA  
-88: IF  
-88: LPAR  
-88: ID, name = pc_processes 
-88: LCOL  
-88: ID, name = i 
-88: RCOL  
-88: DIF  
-88: NUM, value = 0 
-88: RPAR  
-88: LCHA  
-89: ID, name = set_process_bcd 
-89: LPAR  
-89: ID, name = i 
-89: RPAR  
-89: PV  
-90: ID, name = change_context 
-90: LPAR  
-90: ID, name = pc_processes 
-90: LCOL  
-90: ID, name = i 
-90: RCOL  
-90: VIR  
-90: ID, name = memory_location 
-90: LCOL  
-90: ID, name = i 
-90: RCOL  
-90: VIR  
-90: ID, name = init_pc 
-90: LCOL  
-90: ID, name = i 
-90: RCOL  
-90: RPAR  
-90: PV  
-91: ID, name = pc_processes 
-91: LCOL  
-91: ID, name = i 
-91: RCOL  
-91: ASSIGN  
-91: ID, name = PC_INTERRUPTION 
-91: LPAR  
-91: RPAR  
-91: PV  
-92: RCHA  
-93: ID, name = i 
-93: ASSIGN  
-93: ID, name = i 
-93: PLUS  
-93: NUM, value = 1 
-93: PV  
-94: RCHA  
-96: ID, name = i 
+75: LCHA  
+76: ID, name = clean_ram 
+76: LPAR  
+76: ID, name = memory_location 
+76: LCOL  
+76: ID, name = i 
+76: RCOL  
+76: RPAR  
+76: PV  
+77: ID, name = i 
+77: ASSIGN  
+77: ID, name = i 
+77: PLUS  
+77: NUM, value = 1 
+77: PV  
+78: RCHA  
+84: ID, name = pc_processes 
+84: LCOL  
+84: NUM, value = 0 
+84: RCOL  
+84: ASSIGN  
+84: NUM, value = 430 
+84: PV  
+85: ID, name = pc_processes 
+85: LCOL  
+85: NUM, value = 1 
+85: RCOL  
+85: ASSIGN  
+85: NUM, value = 449 
+85: PV  
+86: ID, name = pc_processes 
+86: LCOL  
+86: NUM, value = 2 
+86: RCOL  
+86: ASSIGN  
+86: NUM, value = 468 
+86: PV  
+87: ID, name = pc_processes 
+87: LCOL  
+87: NUM, value = 3 
+87: RCOL  
+87: ASSIGN  
+87: NUM, value = 494 
+87: PV  
+94: ID, name = memory_location 
+94: LCOL  
+94: NUM, value = 0 
+94: RCOL  
+94: ASSIGN  
+94: NUM, value = 200 
+94: PV  
+95: ID, name = memory_location 
+95: LCOL  
+95: NUM, value = 1 
+95: RCOL  
+95: ASSIGN  
+95: NUM, value = 400 
+95: PV  
+96: ID, name = memory_location 
+96: LCOL  
+96: NUM, value = 2 
+96: RCOL  
 96: ASSIGN  
-96: NUM, value = 0 
+96: NUM, value = 600 
 96: PV  
-97: ID, name = end 
+97: ID, name = memory_location 
+97: LCOL  
+97: NUM, value = 3 
+97: RCOL  
 97: ASSIGN  
-97: ID, name = see_if_ended 
-97: LPAR  
-97: RPAR  
+97: NUM, value = 800 
 97: PV  
-98: RCHA  
-100: ID, name = output 
-100: LPAR  
-100: NUM, value = 999 
-100: RPAR  
-100: PV  
-102: RCHA  
+103: ID, name = init_pc 
+103: LCOL  
+103: NUM, value = 0 
+103: RCOL  
+103: ASSIGN  
+103: NUM, value = 430 
+103: PV  
+104: ID, name = init_pc 
+104: LCOL  
+104: NUM, value = 1 
+104: RCOL  
+104: ASSIGN  
+104: NUM, value = 449 
+104: PV  
+105: ID, name = init_pc 
+105: LCOL  
+105: NUM, value = 2 
+105: RCOL  
+105: ASSIGN  
+105: NUM, value = 468 
+105: PV  
+106: ID, name = init_pc 
+106: LCOL  
+106: NUM, value = 3 
+106: RCOL  
+106: ASSIGN  
+106: NUM, value = 494 
+106: PV  
+116: ID, name = opcao 
+116: ASSIGN  
+116: ID, name = input 
+116: LPAR  
+116: RPAR  
+116: PV  
+119: IF  
+119: LPAR  
+119: ID, name = opcao 
+119: COMP  
+119: NUM, value = 1 
+119: RPAR  
+119: LCHA  
+121: ID, name = preempcao 
+121: ASSIGN  
+121: ID, name = input 
+121: LPAR  
+121: RPAR  
+121: PV  
+123: ID, name = set_quantum_value 
+123: LPAR  
+123: NUM, value = 10 
+123: RPAR  
+123: PV  
+125: IF  
+125: LPAR  
+125: ID, name = preempcao 
+125: COMP  
+125: NUM, value = 0 
+125: RPAR  
+125: LCHA  
+126: ID, name = set_quantum_value 
+126: LPAR  
+126: NUM, value = 9999 
+126: RPAR  
+126: PV  
+127: RCHA  
+129: RCHA  
+131: IF  
+131: LPAR  
+131: ID, name = opcao 
+131: COMP  
+131: NUM, value = 2 
+131: RPAR  
+131: LCHA  
+132: ID, name = quantidade 
+132: ASSIGN  
+132: ID, name = input 
+132: LPAR  
+132: RPAR  
+132: PV  
+134: ID, name = i 
+134: ASSIGN  
+134: NUM, value = 0 
+134: PV  
+135: WHILE  
+135: LPAR  
+135: ID, name = i 
+135: LT  
+135: NUM, value = 4 
+135: RPAR  
+135: LCHA  
+136: ID, name = exec 
+136: LCOL  
+136: ID, name = i 
+136: RCOL  
+136: ASSIGN  
+136: NUM, value = 0 
+136: PV  
+137: ID, name = i 
+137: ASSIGN  
+137: ID, name = i 
+137: PLUS  
+137: NUM, value = 1 
+137: PV  
+138: RCHA  
+140: ID, name = i 
+140: ASSIGN  
+140: NUM, value = 0 
+140: PV  
+141: WHILE  
+141: LPAR  
+141: ID, name = i 
+141: LT  
+141: ID, name = quantidade 
+141: RPAR  
+141: LCHA  
+142: ID, name = processo 
+142: ASSIGN  
+142: ID, name = input 
+142: LPAR  
+142: RPAR  
+142: PV  
+143: ID, name = processo 
+143: ASSIGN  
+143: ID, name = find_by_index 
+143: LPAR  
+143: ID, name = processo 
+143: RPAR  
+143: PV  
+144: IF  
+144: LPAR  
+144: ID, name = processo 
+144: LT  
+144: NUM, value = 4 
+144: RPAR  
+144: LCHA  
+145: ID, name = exec 
+145: LCOL  
+145: ID, name = processo 
+145: RCOL  
+145: ASSIGN  
+145: NUM, value = 1 
+145: PV  
+146: ID, name = i 
+146: ASSIGN  
+146: ID, name = i 
+146: PLUS  
+146: NUM, value = 1 
+146: PV  
+147: RCHA  
+148: RCHA  
+150: ID, name = i 
+150: ASSIGN  
+150: NUM, value = 0 
+150: PV  
+151: WHILE  
+151: LPAR  
+151: ID, name = i 
+151: LT  
+151: NUM, value = 4 
+151: RPAR  
+151: LCHA  
+152: IF  
+152: LPAR  
+152: ID, name = exec 
+152: LCOL  
+152: ID, name = i 
+152: RCOL  
+152: DIF  
+152: NUM, value = 1 
+152: RPAR  
+152: LCHA  
+153: ID, name = pc_processes 
+153: LCOL  
+153: ID, name = i 
+153: RCOL  
+153: ASSIGN  
+153: NUM, value = 0 
+153: PV  
+154: RCHA  
+155: ID, name = i 
+155: ASSIGN  
+155: ID, name = i 
+155: PLUS  
+155: NUM, value = 1 
+155: PV  
+156: RCHA  
+158: ID, name = preempcao 
+158: ASSIGN  
+158: ID, name = input 
+158: LPAR  
+158: RPAR  
+158: PV  
+160: ID, name = set_quantum_value 
+160: LPAR  
+160: NUM, value = 10 
+160: RPAR  
+160: PV  
+162: IF  
+162: LPAR  
+162: ID, name = preempcao 
+162: COMP  
+162: NUM, value = 0 
+162: RPAR  
+162: LCHA  
+163: ID, name = set_quantum_value 
+163: LPAR  
+163: NUM, value = 9999 
+163: RPAR  
+163: PV  
+164: RCHA  
+167: RCHA  
+169: IF  
+169: LPAR  
+169: ID, name = opcao 
+169: COMP  
+169: NUM, value = 3 
+169: RPAR  
+169: LCHA  
+170: ID, name = processo 
+170: ASSIGN  
+170: ID, name = input 
+170: LPAR  
+170: RPAR  
+170: PV  
+171: ID, name = processo 
+171: ASSIGN  
+171: ID, name = find_by_index 
+171: LPAR  
+171: ID, name = processo 
+171: RPAR  
+171: PV  
+172: IF  
+172: LPAR  
+172: ID, name = processo 
+172: LT  
+172: NUM, value = 10 
+172: RPAR  
+172: LCHA  
+173: ID, name = nomes 
+173: LCOL  
+173: ID, name = processo 
+173: RCOL  
+173: ASSIGN  
+173: ID, name = input 
+173: LPAR  
+173: RPAR  
+173: PV  
+174: RCHA  
+175: RCHA  
+177: ID, name = i 
+177: ASSIGN  
+177: NUM, value = 0 
+177: PV  
+178: ID, name = end 
+178: ASSIGN  
+178: NUM, value = 0 
+178: PV  
+179: ID, name = set_process_bcd 
+179: LPAR  
+179: NUM, value = 0 
+179: RPAR  
+179: PV  
+181: IF  
+181: LPAR  
+181: ID, name = opcao 
+181: LT  
+181: NUM, value = 3 
+181: RPAR  
+181: LCHA  
+183: WHILE  
+183: LPAR  
+183: ID, name = end 
+183: DIF  
+183: NUM, value = 1 
+183: RPAR  
+183: LCHA  
+185: WHILE  
+185: LPAR  
+185: ID, name = i 
+185: LT  
+185: NUM, value = 4 
+185: RPAR  
+185: LCHA  
+187: IF  
+187: LPAR  
+187: ID, name = pc_processes 
+187: LCOL  
+187: ID, name = i 
+187: RCOL  
+187: DIF  
+187: NUM, value = 0 
+187: RPAR  
+187: LCHA  
+188: ID, name = set_process_bcd 
+188: LPAR  
+188: ID, name = i 
+188: PLUS  
+188: NUM, value = 1 
+188: RPAR  
+188: PV  
+189: ID, name = change_context 
+189: LPAR  
+189: ID, name = pc_processes 
+189: LCOL  
+189: ID, name = i 
+189: RCOL  
+189: VIR  
+189: ID, name = memory_location 
+189: LCOL  
+189: ID, name = i 
+189: RCOL  
+189: VIR  
+189: ID, name = init_pc 
+189: LCOL  
+189: ID, name = i 
+189: RCOL  
+189: RPAR  
+189: PV  
+190: ID, name = pc_processes 
+190: LCOL  
+190: ID, name = i 
+190: RCOL  
+190: ASSIGN  
+190: ID, name = PC_INTERRUPTION 
+190: LPAR  
+190: RPAR  
+190: PV  
+191: ID, name = set_process_bcd 
+191: LPAR  
+191: NUM, value = 0 
+191: RPAR  
+191: PV  
+192: RCHA  
+194: ID, name = i 
+194: ASSIGN  
+194: ID, name = i 
+194: PLUS  
+194: NUM, value = 1 
+194: PV  
+195: RCHA  
+197: ID, name = i 
+197: ASSIGN  
+197: NUM, value = 0 
+197: PV  
+198: ID, name = end 
+198: ASSIGN  
+198: ID, name = see_if_ended 
+198: LPAR  
+198: RPAR  
+198: PV  
+199: RCHA  
+201: RCHA  
+202: ID, name = output 
+202: LPAR  
+202: NUM, value = 9999 
+202: RPAR  
+202: PV  
+203: RCHA  
+205: RCHA  

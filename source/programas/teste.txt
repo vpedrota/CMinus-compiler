@@ -31,7 +31,7 @@ int find_by_index(int num){
 
     while(i < 4){
         if(num == nomes[i]){
-            return 1;
+            return i;
         }
         i = i+1;
     }
@@ -53,6 +53,7 @@ void main(void){
     int quantidade;
     int processo;
     int indice;
+    int nome;
 
     /*
         Inicia o nomes dos programas
@@ -60,43 +61,57 @@ void main(void){
 
     i = 0;
     while(i < 4){
-        nomes[i] = i;
+        nomes[i] = i + 1;
         i = i + 1;
     }
-
-    /*
-        Determinando início de cada processo na rom
-    */
-    
-    pc_processes[0] = 192;
-    pc_processes[1] = 211;
-    pc_processes[2] = 230;
-    pc_processes[3] = 256;
-
-
-    /*
-        Determinando o início de cada processo da ram
-    */
-
-    memory_location[0] = 200;
-    memory_location[1] = 400;
-    memory_location[2] = 600;
-    memory_location[3] = 800;
-
-    /*
-        Determinadno início de cada processo na rom para salto em instruções do tipo J
-    */
-
-    init_pc[0] = 192;
-    init_pc[1] = 211;
-    init_pc[2] = 230;
-    init_pc[3] = 256;
 
     /*
         Perguntando ao usuário quantos programas devem ser executados e o quantum de cada programa
     */ 
 
     while(1 == 1){
+
+        i = 0;
+        while(i < 4){
+            clean_ram(memory_location[i]);
+            i = i+1;
+        }
+
+        /*
+        Determinando início de cada processo na rom
+        */
+        
+        pc_processes[0] = 430;
+        pc_processes[1] = 449;
+        pc_processes[2] = 468;
+        pc_processes[3] = 494;
+
+
+        /*
+            Determinando o início de cada processo da ram
+        */
+
+        memory_location[0] = 200;
+        memory_location[1] = 400;
+        memory_location[2] = 600;
+        memory_location[3] = 800;
+
+        /*
+            Determinadno início de cada processo na rom para salto em instruções do tipo J
+        */
+
+        init_pc[0] = 430;
+        init_pc[1] = 449;
+        init_pc[2] = 468;
+        init_pc[3] = 494;
+
+        /*
+            Iniciando posições com zero
+        */
+        
+        /*
+            Começando menu
+        */
 
         opcao = input();
 
@@ -113,26 +128,32 @@ void main(void){
 
         }
 
-        /* rodar uma quantidade específica de programas especifico */
-        if(opcao == 2 ){
+        if(opcao == 2){
             quantidade = input();
+            
+            i = 0;
+            while(i < 4){
+                exec[i] = 0;
+                i = i + 1;
+            }
 
             i = 0;
             while(i < quantidade){
                 processo = input();
-                indice = find_by_index(processo);
-                exec[indice] = 1; 
-                i = i + 1;
+                processo = find_by_index(processo);
+                if(processo < 4){
+                    exec[processo] = 1;
+                    i = i + 1;
+                }
             }
 
             i = 0;
-            while(i < quantidade){
+            while(i < 4){
                 if(exec[i] != 1){
                     pc_processes[i] = 0;
                 }
-                i = i + 1;
+                i = i+1;
             }
-
 
             preempcao = input();
         
@@ -141,37 +162,47 @@ void main(void){
             if(preempcao == 0){
                 set_quantum_value(9999);
             }
+
+
         }
 
-        /*
-            Alterar nomes dos vetores
-        */
         if(opcao == 3){
-
+            processo = input();
+            processo = find_by_index(processo);
+            if(processo < 10){
+                nomes[processo] = input();
+            }
+            else{
+                output(11111);
+            }
         }
-
 
         i = 0;
         end = 0;
+        set_process_bcd(0);
 
-        while(end != 1){
+        if(opcao < 3){
 
-            while(i < 4){
-                set_process_bcd(0);
-            
-                if(pc_processes[i] != 0) {
-                    set_process_bcd(i+1);
-                    change_context(pc_processes[i], memory_location[i], init_pc[i]);
-                    pc_processes[i] = PC_INTERRUPTION();         
+            while(end != 1){
+
+                while(i < 4){
+                    
+                    if(pc_processes[i] != 0) {
+                        set_process_bcd(i+1);
+                        change_context(pc_processes[i], memory_location[i], init_pc[i]);
+                        pc_processes[i] = PC_INTERRUPTION();         
+                        set_process_bcd(0);
+                    }
+
+                    i = i+1;
                 }
-                i = i+1;
+
+                i = 0;
+                end = see_if_ended(); 
             }
 
-            i = 0;
-            end = see_if_ended(); 
         }
-
-        output(99999);
+        output(9999);
     }
         
 }

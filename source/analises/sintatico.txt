@@ -5,7 +5,9 @@
   Tipo inteiro
     Variavel init_pc
   Tipo inteiro
-    Variavel quantum_value
+    Variavel exec
+  Tipo inteiro
+    Variavel nomes
   Tipo inteiro
     Funcao see_if_ended
       Tipo void
@@ -32,6 +34,33 @@
             Const: 1
       Return
         Const: 1
+  Tipo inteiro
+    Funcao find_by_index
+      Tipo inteiro
+        Variavel num
+      Tipo inteiro
+        Variavel i
+      Atribuicao
+        Id: i
+        Const: 0
+      While
+        Op:  LT  
+          Id: i
+          Const: 4
+        If
+          Op:  unknown  
+            Id: num
+            Vetor: nomes
+              Id: i
+          Return
+            Id: i
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      Return
+        Const: 10
   Tipo void
     Funcao main
       Tipo void
@@ -41,107 +70,272 @@
         Variavel preempcao
       Tipo inteiro
         Variavel end
-      Atribuicao
-        Vetor: pc_processes
-          Const: 0
-        Const: 192
-      Atribuicao
-        Vetor: pc_processes
-          Const: 1
-        Const: 211
-      Atribuicao
-        Vetor: pc_processes
-          Const: 2
-        Const: 230
-      Atribuicao
-        Vetor: pc_processes
-          Const: 3
-        Const: 256
-      Atribuicao
-        Vetor: memory_location
-          Const: 0
-        Const: 200
-      Atribuicao
-        Vetor: memory_location
-          Const: 1
-        Const: 400
-      Atribuicao
-        Vetor: memory_location
-          Const: 2
-        Const: 600
-      Atribuicao
-        Vetor: memory_location
-          Const: 3
-        Const: 800
-      Atribuicao
-        Vetor: init_pc
-          Const: 0
-        Const: 192
-      Atribuicao
-        Vetor: init_pc
-          Const: 1
-        Const: 211
-      Atribuicao
-        Vetor: init_pc
-          Const: 2
-        Const: 230
-      Atribuicao
-        Vetor: init_pc
-          Const: 3
-        Const: 256
-      Atribuicao
-        Id: preempcao
-        Chamada de Funcao input 
-      Chamada de Funcao set_quantum_value 
-        Const: 10
-      If
-        Op:  unknown  
-          Id: preempcao
-          Const: 0
-        Chamada de Funcao set_quantum_value 
-          Const: 9999
+      Tipo inteiro
+        Variavel opcao
+      Tipo inteiro
+        Variavel quantidade
+      Tipo inteiro
+        Variavel processo
+      Tipo inteiro
+        Variavel indice
+      Tipo inteiro
+        Variavel nome
       Atribuicao
         Id: i
         Const: 0
-      Atribuicao
-        Id: end
-        Const: 0
       While
-        Op:  DIF  
-          Id: end
+        Op:  LT  
+          Id: i
+          Const: 4
+        Atribuicao
+          Vetor: nomes
+            Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+        Atribuicao
+          Id: i
+          Op:  PLUS  
+            Id: i
+            Const: 1
+      While
+        Op:  unknown  
           Const: 1
+          Const: 1
+        Atribuicao
+          Id: i
+          Const: 0
         While
           Op:  LT  
             Id: i
             Const: 4
-          If
-            Op:  DIF  
-              Vetor: pc_processes
-                Id: i
-              Const: 0
-            Chamada de Funcao set_process_bcd 
+          Chamada de Funcao clean_ram 
+            Vetor: memory_location
               Id: i
-            Chamada de Funcao change_context 
-              Vetor: pc_processes
-                Id: i
-              Vetor: memory_location
-                Id: i
-              Vetor: init_pc
-                Id: i
-            Atribuicao
-              Vetor: pc_processes
-                Id: i
-              Chamada de Funcao PC_INTERRUPTION 
           Atribuicao
             Id: i
             Op:  PLUS  
               Id: i
               Const: 1
         Atribuicao
+          Vetor: pc_processes
+            Const: 0
+          Const: 430
+        Atribuicao
+          Vetor: pc_processes
+            Const: 1
+          Const: 449
+        Atribuicao
+          Vetor: pc_processes
+            Const: 2
+          Const: 468
+        Atribuicao
+          Vetor: pc_processes
+            Const: 3
+          Const: 494
+        Atribuicao
+          Vetor: memory_location
+            Const: 0
+          Const: 200
+        Atribuicao
+          Vetor: memory_location
+            Const: 1
+          Const: 400
+        Atribuicao
+          Vetor: memory_location
+            Const: 2
+          Const: 600
+        Atribuicao
+          Vetor: memory_location
+            Const: 3
+          Const: 800
+        Atribuicao
+          Vetor: init_pc
+            Const: 0
+          Const: 430
+        Atribuicao
+          Vetor: init_pc
+            Const: 1
+          Const: 449
+        Atribuicao
+          Vetor: init_pc
+            Const: 2
+          Const: 468
+        Atribuicao
+          Vetor: init_pc
+            Const: 3
+          Const: 494
+        Atribuicao
+          Id: opcao
+          Chamada de Funcao input 
+        If
+          Op:  unknown  
+            Id: opcao
+            Const: 1
+          Atribuicao
+            Id: preempcao
+            Chamada de Funcao input 
+          Chamada de Funcao set_quantum_value 
+            Const: 10
+          If
+            Op:  unknown  
+              Id: preempcao
+              Const: 0
+            Chamada de Funcao set_quantum_value 
+              Const: 9999
+        If
+          Op:  unknown  
+            Id: opcao
+            Const: 2
+          Atribuicao
+            Id: quantidade
+            Chamada de Funcao input 
+          Atribuicao
+            Id: i
+            Const: 0
+          While
+            Op:  LT  
+              Id: i
+              Const: 4
+            Atribuicao
+              Vetor: exec
+                Id: i
+              Const: 0
+            Atribuicao
+              Id: i
+              Op:  PLUS  
+                Id: i
+                Const: 1
+          Atribuicao
+            Id: i
+            Const: 0
+          While
+            Op:  LT  
+              Id: i
+              Id: quantidade
+            Atribuicao
+              Id: processo
+              Chamada de Funcao input 
+            Atribuicao
+              Id: processo
+              Chamada de Funcao find_by_index 
+                Id: processo
+            If
+              Op:  LT  
+                Id: processo
+                Const: 4
+              Atribuicao
+                Vetor: exec
+                  Id: processo
+                Const: 1
+              Atribuicao
+                Id: i
+                Op:  PLUS  
+                  Id: i
+                  Const: 1
+          Atribuicao
+            Id: i
+            Const: 0
+          While
+            Op:  LT  
+              Id: i
+              Const: 4
+            If
+              Op:  DIF  
+                Vetor: exec
+                  Id: i
+                Const: 1
+              Atribuicao
+                Vetor: pc_processes
+                  Id: i
+                Const: 0
+            Atribuicao
+              Id: i
+              Op:  PLUS  
+                Id: i
+                Const: 1
+          Atribuicao
+            Id: preempcao
+            Chamada de Funcao input 
+          Chamada de Funcao set_quantum_value 
+            Const: 10
+          If
+            Op:  unknown  
+              Id: preempcao
+              Const: 0
+            Chamada de Funcao set_quantum_value 
+              Const: 9999
+        If
+          Op:  unknown  
+            Id: opcao
+            Const: 3
+          Atribuicao
+            Id: processo
+            Chamada de Funcao input 
+          Atribuicao
+            Id: processo
+            Chamada de Funcao find_by_index 
+              Id: processo
+          If
+            Op:  LT  
+              Id: processo
+              Const: 10
+            Atribuicao
+              Vetor: nomes
+                Id: processo
+              Chamada de Funcao input 
+        Atribuicao
           Id: i
           Const: 0
         Atribuicao
           Id: end
-          Chamada de Funcao see_if_ended 
-      Chamada de Funcao output 
-        Const: 999
+          Const: 0
+        Chamada de Funcao set_process_bcd 
+          Const: 0
+        If
+          Op:  LT  
+            Id: opcao
+            Const: 3
+          While
+            Op:  DIF  
+              Id: end
+              Const: 1
+            While
+              Op:  LT  
+                Id: i
+                Const: 4
+              If
+                Op:  DIF  
+                  Vetor: pc_processes
+                    Id: i
+                  Const: 0
+                Chamada de Funcao set_process_bcd 
+                  Op:  PLUS  
+                    Id: i
+                    Const: 1
+                Chamada de Funcao change_context 
+                  Vetor: pc_processes
+                    Id: i
+                  Vetor: memory_location
+                    Id: i
+                  Vetor: init_pc
+                    Id: i
+                Atribuicao
+                  Vetor: pc_processes
+                    Id: i
+                  Chamada de Funcao PC_INTERRUPTION 
+                Chamada de Funcao set_process_bcd 
+                  Const: 0
+              Atribuicao
+                Id: i
+                Op:  PLUS  
+                  Id: i
+                  Const: 1
+            Atribuicao
+              Id: i
+              Const: 0
+            Atribuicao
+              Id: end
+              Chamada de Funcao see_if_ended 
+        Chamada de Funcao output 
+          Const: 9999

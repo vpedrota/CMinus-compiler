@@ -371,6 +371,9 @@ void buildSymtab(TreeNode *root){
     t.attr.name = "set_process_bcd";
     insert_node_symtab(&t, "global");
 
+    t.attr.name = "clean_ram";
+    insert_node_symtab(&t, "global");
+
 
     // Percorrendo e inserindo símbolos na árvore
     transverse(root);

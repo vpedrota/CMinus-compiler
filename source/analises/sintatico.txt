@@ -120,19 +120,19 @@
         Atribuicao
           Vetor: pc_processes
             Const: 0
-          Const: 430
+          Const: 420
         Atribuicao
           Vetor: pc_processes
             Const: 1
-          Const: 449
+          Const: 439
         Atribuicao
           Vetor: pc_processes
             Const: 2
-          Const: 468
+          Const: 458
         Atribuicao
           Vetor: pc_processes
             Const: 3
-          Const: 494
+          Const: 477
         Atribuicao
           Vetor: memory_location
             Const: 0
@@ -152,19 +152,19 @@
         Atribuicao
           Vetor: init_pc
             Const: 0
-          Const: 430
+          Const: 420
         Atribuicao
           Vetor: init_pc
             Const: 1
-          Const: 449
+          Const: 439
         Atribuicao
           Vetor: init_pc
             Const: 2
-          Const: 468
+          Const: 458
         Atribuicao
           Vetor: init_pc
             Const: 3
-          Const: 494
+          Const: 477
         Atribuicao
           Id: opcao
           Chamada de Funcao input 
@@ -176,7 +176,7 @@
             Id: preempcao
             Chamada de Funcao input 
           Chamada de Funcao set_quantum_value 
-            Const: 10
+            Const: 15
           If
             Op:  unknown  
               Id: preempcao
@@ -258,7 +258,7 @@
             Id: preempcao
             Chamada de Funcao input 
           Chamada de Funcao set_quantum_value 
-            Const: 10
+            Const: 15
           If
             Op:  unknown  
               Id: preempcao
@@ -284,6 +284,8 @@
               Vetor: nomes
                 Id: processo
               Chamada de Funcao input 
+            Chamada de Funcao output 
+              Const: 11111
         Atribuicao
           Id: i
           Const: 0

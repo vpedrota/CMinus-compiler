@@ -1,12 +1,13 @@
 void main(void){
-
     int i;
-    int a ;
-    a = 1;
-    i = 2;
+    int n;
+    i = 0;
+    n = input();
+
     while(i < 10){
-        a = a * 3;
-        output(a);
-        i = i+1;
+        output(n);
+        n = n*2;
+        i = 1 + 1;
     }
+
 }

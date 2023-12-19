@@ -1,60 +1,44 @@
-
+int pc_processes[10];
+int memory_location[10];
+int init_pc[10];
 
 
 void main(void){
 
-    int pc_processes[10];
-
-    /*
-        Declarando variáveis
-    */
-
     int i;
+    int quantidade_processos;
 
-    /*
-        Determinando início de cada processo
-    */
+    i = 0;
+    quantidade_processos = 2;
+
+    pc_processes[0] = 124;
+    pc_processes[1] = 176;
+    pc_processes[2] = 176;
+
+    memory_location[0] = 200;
+    memory_location[1] = 400;
+    memory_location[2] = 600;
     
-    pc_processes[0] = 376;
-    pc_processes[1] = 460;
+    init_pc[0] = 112;
+    init_pc[1] = 176;
+    init_pc[2] = 176;
 
+    set_quantum_value(10);
 
-    /* 
-        --------------BIOS----------------
-        Iniciando parâmetros do processador
-    */ 
-    set_quantum_value(4);
-
-    i = 0;
-    while(i < 2){
-        set_hd_track(i);
-        
-        i = i+1;
-    }
-
-
-    /*
-        Começando preempção
-    */
-
-    i = 0;
     while(1 == 1){
 
-        while(i < 2){
-            
-            change_context(pc_processes[i],  i+1);
-            copy_registers_to_ram();
-            set_hd_track(0);
-            pc_processes[i] = PC_INTERRUPTION();
+        while(i < quantidade_processos){
+                    
+            if(pc_processes[i] != 0) {
+                set_process_bcd(i+1);
+                change_context(pc_processes[i], memory_location[i], init_pc[i]);
+                pc_processes[i] = PC_INTERRUPTION();
+            }
 
-            /*
-                Verificar interrupção
-            */
-
-            i = i + 1;
+            i = i+1;
         }
-
         i = 0;
     }
-        
+    
+
 }

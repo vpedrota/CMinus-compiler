@@ -26,7 +26,6 @@ int power(int b, int e) {
 void main(void) {
     int i;
     base = input();
-
     exponent = input();
 
     result = power(base, exponent);

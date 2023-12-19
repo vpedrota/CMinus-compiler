@@ -93,7 +93,7 @@ JUMP 77
 ADDI $zero $t0 1
 ADDI $zero $t1 1
 COMP $t0 $t1 $t2
-IFF $t2 333
+IFF $t2 323
 ADDI $zero $t0 0
 SW $sp $t0 2
 LW $sp $t0 2
@@ -119,109 +119,107 @@ SW $zero $zero 11
 SW $zero $zero 12
 SET_HD_TRACK $zero 0
 LW $sp $t0 2
-ADDI $zero $t2 1
-PLUS $t0 $t2 $t3
-SW $sp $t3 2
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 2
 JUMP 98
-ADDI $zero $t0 430
-ADDI $zero $t2 0
-ADD $zero $t2 $t2
-SW $t2 $t0 1
-ADDI $zero $t0 449
-ADDI $zero $t2 1
-ADD $zero $t2 $t2
-SW $t2 $t0 1
-ADDI $zero $t0 468
-ADDI $zero $t2 2
-ADD $zero $t2 $t2
-SW $t2 $t0 1
-ADDI $zero $t0 494
-ADDI $zero $t2 3
-ADD $zero $t2 $t2
-SW $t2 $t0 1
+ADDI $zero $t0 420
+ADDI $zero $t1 0
+ADD $zero $t1 $t1
+SW $t1 $t0 1
+ADDI $zero $t0 439
+ADDI $zero $t1 1
+ADD $zero $t1 $t1
+SW $t1 $t0 1
+ADDI $zero $t0 458
+ADDI $zero $t1 2
+ADD $zero $t1 $t1
+SW $t1 $t0 1
+ADDI $zero $t0 477
+ADDI $zero $t1 3
+ADD $zero $t1 $t1
+SW $t1 $t0 1
 ADDI $zero $t0 200
-ADDI $zero $t2 0
-ADD $zero $t2 $t2
-SW $t2 $t0 31
+ADDI $zero $t1 0
+ADD $zero $t1 $t1
+SW $t1 $t0 31
 ADDI $zero $t0 400
-ADDI $zero $t2 1
-ADD $zero $t2 $t2
-SW $t2 $t0 31
+ADDI $zero $t1 1
+ADD $zero $t1 $t1
+SW $t1 $t0 31
 ADDI $zero $t0 600
-ADDI $zero $t2 2
-ADD $zero $t2 $t2
-SW $t2 $t0 31
+ADDI $zero $t1 2
+ADD $zero $t1 $t1
+SW $t1 $t0 31
 ADDI $zero $t0 800
-ADDI $zero $t2 3
-ADD $zero $t2 $t2
-SW $t2 $t0 31
-ADDI $zero $t0 430
-ADDI $zero $t2 0
-ADD $zero $t2 $t2
-SW $t2 $t0 41
-ADDI $zero $t0 449
-ADDI $zero $t2 1
-ADD $zero $t2 $t2
-SW $t2 $t0 41
-ADDI $zero $t0 468
-ADDI $zero $t2 2
-ADD $zero $t2 $t2
-SW $t2 $t0 41
-ADDI $zero $t0 494
-ADDI $zero $t2 3
-ADD $zero $t2 $t2
-SW $t2 $t0 41
-IN $t0
+ADDI $zero $t1 3
+ADD $zero $t1 $t1
+SW $t1 $t0 31
+ADDI $zero $t0 420
+ADDI $zero $t1 0
+ADD $zero $t1 $t1
+SW $t1 $t0 41
+ADDI $zero $t0 439
+ADDI $zero $t1 1
+ADD $zero $t1 $t1
+SW $t1 $t0 41
+ADDI $zero $t0 458
+ADDI $zero $t1 2
+ADD $zero $t1 $t1
+SW $t1 $t0 41
+ADDI $zero $t0 477
+ADDI $zero $t1 3
+ADD $zero $t1 $t1
+SW $t1 $t0 41
+IN $t0 $t0 0
 SW $sp $t0 5
 LW $sp $t0 5
-ADDI $zero $t2 1
-COMP $t0 $t2 $t3
-IFF $t3 12
-IN $t0
+ADDI $zero $t1 1
+COMP $t0 $t1 $t2
+IFF $t2 12
+IN $t0 $t0 0
 SW $sp $t0 8
-ADDI $zero $t0 10
+ADDI $zero $t0 15
 SET_QUANTUM_VALUE $t0
 LW $sp $t0 8
-ADDI $zero $t2 0
-COMP $t0 $t2 $t3
-IFF $t3 3
+ADDI $zero $t1 0
+COMP $t0 $t1 $t2
+IFF $t2 3
 ADDI $zero $t0 9999
 SET_QUANTUM_VALUE $t0
 JUMP 190
 JUMP 191
 LW $sp $t0 5
-ADDI $zero $t2 2
-COMP $t0 $t2 $t3
-IFF $t3 91
-IN $t0
+ADDI $zero $t1 2
+COMP $t0 $t1 $t2
+IFF $t2 87
+IN $t0 $t0 0
 SW $sp $t0 1
 ADDI $zero $t0 0
 SW $sp $t0 2
 LW $sp $t0 2
-ADDI $zero $t2 4
-LESSTHAN $t0 $t2 $t3
-IFF $t3 9
+ADDI $zero $t1 4
+LESSTHAN $t0 $t1 $t2
+IFF $t2 9
 ADDI $zero $t0 0
-LW $sp $t2 2
-ADD $zero $t2 $t2
-SW $t2 $t0 11
+LW $sp $t1 2
+ADD $zero $t1 $t1
+SW $t1 $t0 11
 LW $sp $t0 2
-ADDI $zero $t2 1
-PLUS $t0 $t2 $t3
-SW $sp $t3 2
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 2
 JUMP 199
 ADDI $zero $t0 0
 SW $sp $t0 2
 LW $sp $t0 2
-LW $sp $t2 1
-LESSTHAN $t0 $t2 $t3
-IFF $t3 34
-IN $t0
+LW $sp $t1 1
+LESSTHAN $t0 $t1 $t2
+IFF $t2 30
+IN $t0 $t0 0
 SW $sp $t0 7
 LW $sp $t0 7
 SW $sz $t0 0
-ADDI $sz $sz 1
-SW $sz $t1 0
 ADDI $sz $sz 1
 SW $sz $sp 0
 ADDI $sz $sp 0
@@ -231,69 +229,65 @@ JAL 35
 ADDI $sp $sz 0
 LW $sp $sp 0
 SUBI $sz $sz 1
-LW $sz $t1 0
-SUBI $sz $sz 1
 LW $sz $t0 0
 ADDI $RR $t0 0
 SW $sp $t0 7
 LW $sp $t0 7
-ADDI $zero $t2 4
-LESSTHAN $t0 $t2 $t3
-IFF $t3 9
+ADDI $zero $t1 4
+LESSTHAN $t0 $t1 $t2
+IFF $t2 9
 ADDI $zero $t0 1
-LW $sp $t2 7
-ADD $zero $t2 $t2
-SW $t2 $t0 11
+LW $sp $t1 7
+ADD $zero $t1 $t1
+SW $t1 $t0 11
 LW $sp $t0 2
-ADDI $zero $t2 1
-PLUS $t0 $t2 $t3
-SW $sp $t3 2
-JUMP 251
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 2
+JUMP 247
 JUMP 214
 ADDI $zero $t0 0
 SW $sp $t0 2
 LW $sp $t0 2
-ADDI $zero $t2 4
-LESSTHAN $t0 $t2 $t3
-IFF $t3 16
+ADDI $zero $t1 4
+LESSTHAN $t0 $t1 $t2
+IFF $t2 16
 LW $sp $t0 2
 ADD $zero $t0 $t0
-LW $t0 $t2 11
+LW $t0 $t1 11
 ADDI $zero $t0 1
-DFT $t2 $t0 $t3
-IFF $t3 5
+DFT $t1 $t0 $t2
+IFF $t2 5
 ADDI $zero $t0 0
-LW $sp $t2 2
-ADD $zero $t2 $t2
-SW $t2 $t0 1
-JUMP 269
+LW $sp $t1 2
+ADD $zero $t1 $t1
+SW $t1 $t0 1
+JUMP 265
 LW $sp $t0 2
-ADDI $zero $t2 1
-PLUS $t0 $t2 $t3
-SW $sp $t3 2
-JUMP 254
-IN $t0
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SW $sp $t2 2
+JUMP 250
+IN $t0 $t0 0
 SW $sp $t0 8
-ADDI $zero $t0 10
+ADDI $zero $t0 15
 SET_QUANTUM_VALUE $t0
 LW $sp $t0 8
-ADDI $zero $t2 0
-COMP $t0 $t2 $t3
-IFF $t3 3
+ADDI $zero $t1 0
+COMP $t0 $t1 $t2
+IFF $t2 3
 ADDI $zero $t0 9999
 SET_QUANTUM_VALUE $t0
-JUMP 285
-JUMP 286
+JUMP 281
+JUMP 282
 LW $sp $t0 5
-ADDI $zero $t2 3
-COMP $t0 $t2 $t3
-IFF $t3 30
-IN $t0
+ADDI $zero $t1 3
+COMP $t0 $t1 $t2
+IFF $t2 28
+IN $t0 $t0 0
 SW $sp $t0 7
 LW $sp $t0 7
 SW $sz $t0 0
-ADDI $sz $sz 1
-SW $sz $t1 0
 ADDI $sz $sz 1
 SW $sz $sp 0
 ADDI $sz $sp 0
@@ -303,21 +297,21 @@ JAL 35
 ADDI $sp $sz 0
 LW $sp $sp 0
 SUBI $sz $sz 1
-LW $sz $t1 0
-SUBI $sz $sz 1
 LW $sz $t0 0
 ADDI $RR $t0 0
 SW $sp $t0 7
 LW $sp $t0 7
-ADDI $zero $t2 10
-LESSTHAN $t0 $t2 $t3
-IFF $t3 5
-IN $t0
-LW $sp $t2 7
-ADD $zero $t2 $t2
-SW $t2 $t0 21
-JUMP 319
-JUMP 320
+ADDI $zero $t1 10
+LESSTHAN $t0 $t1 $t2
+IFF $t2 5
+IN $t0 $t0 0
+LW $sp $t1 7
+ADD $zero $t1 $t1
+SW $t1 $t0 21
+JUMP 313
+ADDI $zero $t0 11111
+OUTPUT $t0 $t0 0
+JUMP 314
 ADDI $zero $t0 0
 SW $sp $t0 2
 ADDI $zero $t0 0
@@ -325,38 +319,38 @@ SW $sp $t0 3
 ADDI $zero $t0 0
 SET_PROCESS_BCD $t0 $t0 0
 LW $sp $t0 5
-ADDI $zero $t2 3
-LESSTHAN $t0 $t2 $t3
-IFF $t3 96
+ADDI $zero $t1 3
+LESSTHAN $t0 $t1 $t2
+IFF $t2 92
 LW $sp $t0 3
-ADDI $zero $t2 1
-DFT $t0 $t2 $t3
-IFF $t3 91
+ADDI $zero $t1 1
+DFT $t0 $t1 $t2
+IFF $t2 87
 LW $sp $t0 2
-ADDI $zero $t2 4
-LESSTHAN $t0 $t2 $t3
-IFF $t3 64
+ADDI $zero $t1 4
+LESSTHAN $t0 $t1 $t2
+IFF $t2 64
 LW $sp $t0 2
 ADD $zero $t0 $t0
-LW $t0 $t2 1
+LW $t0 $t1 1
 ADDI $zero $t0 0
-DFT $t2 $t0 $t3
-IFF $t3 53
+DFT $t1 $t0 $t2
+IFF $t2 53
 LW $sp $t0 2
-ADDI $zero $t2 1
-PLUS $t0 $t2 $t3
-SET_PROCESS_BCD $t3 $t3 0
-LW $sp $t0 2
-ADD $zero $t0 $t0
-LW $t0 $t2 1
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t2
+SET_PROCESS_BCD $t2 $t2 0
 LW $sp $t0 2
 ADD $zero $t0 $t0
-LW $t0 $t3 31
+LW $t0 $t1 1
 LW $sp $t0 2
 ADD $zero $t0 $t0
-LW $t0 $t4 41
-SET_JP_ADDRESS $t4
-SET_HD_TRACK $t3 0
+LW $t0 $t2 31
+LW $sp $t0 2
+ADD $zero $t0 $t0
+LW $t0 $t3 41
+SET_JP_ADDRESS $t3
+SET_HD_TRACK $t2 0
 LW $zero $t13 0
 LW $zero $t14 1
 LW $zero $t15 2
@@ -370,10 +364,10 @@ LW $zero $t22 9
 LW $zero $t23 10
 LW $zero $t24 11
 LW $zero $t25 12
-SET_HD_TRACK $t3 32
-CHANGE_CONTEXT $t2
+SET_HD_TRACK $t2 32
+CHANGE_CONTEXT $t1
 SET_JP_ADDRESS $zero
-SET_HD_TRACK $t3 0
+SET_HD_TRACK $t2 0
 SW $zero $t13 0
 SW $zero $t14 1
 SW $zero $t15 2
@@ -389,24 +383,22 @@ SW $zero $t24 11
 SW $zero $t25 12
 SET_HD_TRACK $zero 0
 LAST_PC $zero $t0 0
-LW $sp $t2 2
-ADD $zero $t2 $t2
-SW $t2 $t0 1
+LW $sp $t1 2
+ADD $zero $t1 $t1
+SW $t1 $t0 1
 ADDI $zero $t0 0
 SET_PROCESS_BCD $t0 $t0 0
-JUMP 397
+JUMP 391
 LW $sp $t0 2
-ADDI $zero $t2 1
-PLUS $t0 $t2 $t5
-SW $sp $t5 2
-JUMP 334
+ADDI $zero $t1 1
+PLUS $t0 $t1 $t4
+SW $sp $t4 2
+JUMP 328
 ADDI $zero $t0 0
 SW $sp $t0 2
-SW $sz $t1 0
+SW $sz $t2 0
 ADDI $sz $sz 1
 SW $sz $t3 0
-ADDI $sz $sz 1
-SW $sz $t4 0
 ADDI $sz $sz 1
 SW $sz $sp 0
 ADDI $sz $sp 0
@@ -415,16 +407,14 @@ JAL 6
 ADDI $sp $sz 0
 LW $sp $sp 0
 SUBI $sz $sz 1
-LW $sz $t4 0
-SUBI $sz $sz 1
 LW $sz $t3 0
 SUBI $sz $sz 1
-LW $sz $t1 0
+LW $sz $t2 0
 ADDI $RR $t0 0
 SW $sp $t0 3
-JUMP 330
-JUMP 426
+JUMP 324
+JUMP 416
 ADDI $zero $t0 9999
-OUTPUT $t0
+OUTPUT $t0 $t0 0
 JUMP 92
 HALT

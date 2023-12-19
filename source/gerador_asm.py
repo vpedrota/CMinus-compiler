@@ -257,21 +257,21 @@ def asm_to_binary(assembly_instructions):
     }
 
 
-#     registers  = {
-#     '$t13': '01101',
-#     '$t14': '01110',
-#     '$t15': '01111',
-#     '$t16': '10000',
-#     '$t17': '10001',
-#     '$t18': '10010',
-#     '$t19': '10011',
-#     '$t20': '10100',
-#     '$sz': '10101', 
-#     '$sp': '10110', 
-#     '$ra' :'10111',
-#     '$zero': '11000',
-#     '$RR' : '11001'
-# }
+    # registers  = {
+    #     '$t13': '01101',
+    #     '$t14': '01110',
+    #     '$t15': '01111',
+    #     '$t16': '10000',
+    #     '$t17': '10001',
+    #     '$t18': '10010',
+    #     '$t19': '10011',
+    #     '$t20': '10100',
+    #     '$sz': '10101', 
+    #     '$sp': '10110', 
+    #     '$ra' :'10111',
+    #     '$zero': '11000',
+    #     '$RR' : '11001'
+    # }
     
 
 
@@ -290,9 +290,9 @@ def asm_to_binary(assembly_instructions):
         "DFT": "011111"
     }
 
-    operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI", "LAST_PC", "SET_LCD_MESSAGE"]
+    operations_16bits_imediate = ["ADDI", "SW", "LW", "SUBI", "LAST_PC", "IN", "OUTPUT", "SET_LCD_MESSAGE"]
         
-    operations_26bits_imediate = ["IN", "OUTPUT", "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE" ]
+    operations_26bits_imediate = [ "JR", "SET_QUANTUM_VALUE", "CHANGE_CONTEXT", "STACK_SIZE"]
 
 
     for instruction in assembly_instructions:
@@ -382,26 +382,26 @@ registradores_parametros = []
 jump_main = True
 
 # Registradores para processos
-registers = {
-        '$t0': '00000',
-        '$t1': '00001',
-        '$t2': '00010',
-        '$t3': '00011',
-        '$t4': '00100',
-        '$t5': '00101',
-        '$t6': '00110',
-        '$t7': '00111',
-        '$t8': '01000',
-        '$t9': '01001',
-        '$t10': '01010',
-        '$t11': '01011',
-        '$t12': '01100',
-        '$sz': '11110', 
-        '$sp': '11101', 
-        '$ra' :'11111',
-        '$zero': '11011',
-        '$RR' : '11100'
-    }
+# registers = {
+#         '$t0': '00000',
+#         '$t1': '00001',
+#         '$t2': '00010',
+#         '$t3': '00011',
+#         '$t4': '00100',
+#         '$t5': '00101',
+#         '$t6': '00110',
+#         '$t7': '00111',
+#         '$t8': '01000',
+#         '$t9': '01001',
+#         '$t10': '01010',
+#         '$t11': '01011',
+#         '$t12': '01100',
+#         '$sz': '11110', 
+#         '$sp': '11101', 
+#         '$ra' :'11111',
+#         '$zero': '11011',
+#         '$RR' : '11100'
+#     }
 
 register_process = {
     '$t13': '01101',
@@ -581,7 +581,7 @@ for quads_index, quad in enumerate(quads):
         # assembly.append("----------------\n")
         if quad[2].strip() == "input":
             registrador = return_register_position(registradores, quad[1])
-            assembly.append("IN {}\n".format(registrador))
+            assembly.append("IN {} {} 0\n".format(registrador, registrador))
 
         elif quad[2].strip() == "PC_INTERRUPTION":
             registrador = return_register_position(registradores, quad[1])
@@ -596,7 +596,7 @@ for quads_index, quad in enumerate(quads):
 
         elif quad[2].strip() == "output":
             registrador = return_register_position(registradores, registradores_parametros[0])
-            assembly.append("OUTPUT {}\n".format(registrador))
+            assembly.append("OUTPUT {} {} 0\n".format(registrador, registrador))
             liberar_registrador(registradores,  registradores_parametros[0])
             registradores_parametros = []
 
@@ -638,7 +638,7 @@ for quads_index, quad in enumerate(quads):
         elif quad[2].strip() == "set_lcd_message":
             registrador = return_register_position(registradores, registradores_parametros[0])
             # registrador2 = return_register_position(registradores, registradores_parametros[1])
-            assembly.append("SET_LCD_MESSAGE {} {} 0\n".format(registrador, registrador2))
+            assembly.append("SET_LCD_MESSAGE {} {} 0\n".format(registrador, registrador))
             liberar_registrador(registradores,  registradores_parametros[0])
             # liberar_registrador(registradores,  registradores_parametros[1])
             registradores_parametros = []
@@ -653,7 +653,7 @@ for quads_index, quad in enumerate(quads):
 
             assembly.append("SET_HD_TRACK {} {}\n".format("$zero", 0))
             
-            #liberar_registrador(registradores,  registradores_parametros[0])
+            liberar_registrador(registradores,  registradores_parametros[0])
             # liberar_registrador(registradores,  registradores_parametros[1])
             registradores_parametros = []
 
@@ -671,7 +671,7 @@ for quads_index, quad in enumerate(quads):
                 assembly.append("LW {} {} {}\n".format("$zero", valor, indice_registrador))
 
             
-
+            
             assembly.append("SET_HD_TRACK {} {}\n".format(registrador2, 32))
         
             assembly.append("CHANGE_CONTEXT {}\n".format(registrador))

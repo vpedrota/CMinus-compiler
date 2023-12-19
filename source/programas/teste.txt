@@ -81,10 +81,10 @@ void main(void){
         Determinando início de cada processo na rom
         */
         
-        pc_processes[0] = 430;
-        pc_processes[1] = 449;
-        pc_processes[2] = 468;
-        pc_processes[3] = 494;
+        pc_processes[0] = 420;
+        pc_processes[1] = 439;
+        pc_processes[2] = 458;
+        pc_processes[3] = 477;
 
 
         /*
@@ -100,10 +100,10 @@ void main(void){
             Determinadno início de cada processo na rom para salto em instruções do tipo J
         */
 
-        init_pc[0] = 430;
-        init_pc[1] = 449;
-        init_pc[2] = 468;
-        init_pc[3] = 494;
+        init_pc[0] = 420;
+        init_pc[1] = 439;
+        init_pc[2] = 458;
+        init_pc[3] = 477;
 
         /*
             Iniciando posições com zero
@@ -120,7 +120,7 @@ void main(void){
 
             preempcao = input();
         
-            set_quantum_value(10);
+            set_quantum_value(15);
 
             if(preempcao == 0){
                 set_quantum_value(9999);
@@ -157,7 +157,7 @@ void main(void){
 
             preempcao = input();
         
-            set_quantum_value(10);
+            set_quantum_value(15);
 
             if(preempcao == 0){
                 set_quantum_value(9999);

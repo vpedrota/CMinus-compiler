@@ -1,7 +1,8 @@
 void main(void) {
-    int a;
-    int b;
-    a = 4;
-    b = 8;
-    output(a*b);
+   int i;
+   i = 0;
+   while(i < 20){
+    output(i);
+    i = i+1;
+   }
 }
